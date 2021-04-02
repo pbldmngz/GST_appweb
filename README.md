@@ -1,2 +1,2 @@
 # GST_appweb
-Pagina web de GST
+Para trabajar con esto necesitan descargar [Node.js](https://nodejs.org/en/).
