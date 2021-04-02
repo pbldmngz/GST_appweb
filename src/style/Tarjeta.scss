@@ -1,0 +1,73 @@
+.Tarjeta {
+    position:relative;
+    background-color: #fff;
+    padding: 10px;
+    margin: 30px 15px 30px 15px;
+    width: 300px;
+    height: 180px;
+    display: inline-block;
+    border-radius: 4px;
+    cursor: pointer;
+	&:before {
+		content: '';
+		display: block;
+		position: absolute;
+		background-color: #ccc;
+		left: 20px;
+		right: 20px;
+		bottom: 0;
+		top: 50%;
+		z-index: -1;
+		box-shadow: 0 0 40px lighten(#000, 60%);
+		transition: box-shadow .2s ease-in-out;
+	}
+	&.level-3 {
+		&:hover {
+			&:before {
+				box-shadow: 0 0 80px lighten(#000, 60%);
+			}
+		}
+	}
+}
+
+* {
+	box-sizing: border-box;
+}
+
+.Tarjeta-superior {
+    background-color:rgb(206, 116, 31);
+    padding: 10px;
+    height: 30%;
+    display: flex;
+}
+
+.Tarjeta-superior-izq {
+    background-color:rgb(10, 77, 54);
+    padding-left: 10px;
+    flex: 0 0 65%;
+}
+
+.Tarjeta-superior-der {
+    background-color:rgb(49, 138, 108);
+    padding-left: 10px;
+    margin-left: 10px;
+    flex: 1;
+}
+
+.Tarjeta-inferior {
+    padding: 10px;
+    background-color:brown;
+    height: 70%;
+}
+
+.Tarjeta-inferior-auditor {
+    background-color:rgb(138, 56, 19);
+    padding: 10px 5px 10px 5px;
+    margin-bottom: 10px;
+}
+
+.Tarjeta-inferior-fecha {
+    background-color:rgb(226, 198, 43);
+    padding: 10px 5px 10px 5px;
+    margin-bottom: 10px;
+}
