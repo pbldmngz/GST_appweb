@@ -1,3 +1,6 @@
+//Traté de implementar eso, no parece que funcione
+//https://codepen.io/mattgordils/pen/vGQPbe
+
 .Tarjeta {
     position:relative;
     background-color: #fff;
@@ -8,6 +11,8 @@
     display: inline-block;
     border-radius: 4px;
     cursor: pointer;
+
+    //No lo gro que funcione esta animación de iluminado al pasar el ratón por arriba
 	&:before {
 		content: '';
 		display: block;
@@ -32,6 +37,17 @@
 
 * {
 	box-sizing: border-box;
+}
+
+.TarjetaArea {
+    text-align: center;
+    //Tengo que encontrar una forma de valign válida para esto
+    //vertical-align: middle;
+    // display: block;
+    // margin-left: auto;
+    // margin-right: auto;
+    font-size: 25px;
+    // width: 40%;
 }
 
 .Tarjeta-superior {
