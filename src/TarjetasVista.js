@@ -5,7 +5,7 @@ const TarjetasVista = ({tarjetas}) => {
   const tarjetasLista = tarjetas.map(
     tarjeta => {
       return (
-        <Tarjeta props={ tarjeta }/>
+        <Tarjeta key={tarjeta.id} props={ tarjeta }/>
       )
     }
   )

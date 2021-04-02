@@ -1,6 +1,6 @@
 import './style/App.css';
 import TarjetasVista from './TarjetasVista';
-import MongoCon from './MongoCon';
+import MongoCon from './MongoCon.js';
 import React, { Component } from 'react';
 
 class App extends Component {
@@ -26,7 +26,8 @@ class App extends Component {
 				alerta: "PW",
 				auditor: "Red John",
 				fecha: "6 de Junio"
-			}, {
+			}, 
+			{
 				id: 6,
 				titulo: "Morado",
 				alerta: "!!",

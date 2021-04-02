@@ -3,16 +3,16 @@
 
 const MongoCon = () => {
     console.log("Parece que fallóFIRST");
+    var conn = require('./MongoLib');
 
-    var conn = require('./MongoLib').test;
-    console.log(conn);
+    console.log(conn.test);
 
 
     //const doc = document()
     console.log("Parece que fallóRETURN");
     return (
         <div className="MongoCon">
-            {conn}
+            {/* { doc} */}
         </div>
     );
 }
