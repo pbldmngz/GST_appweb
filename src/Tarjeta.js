@@ -7,7 +7,7 @@ const Tarjeta = ({props}) => {
 
     //Aparentemente por el padding de la tarjeta, se desnivela a cada linea de texto que entra
     //Pero en realidad no importa porque no se planea mezclarlas
-    if (props.titulo == null){
+    if (props.nombre == null){
         console.log("Creando tarjeta de Área");
         return (
             <div className="Tarjeta" key={props.id}>
@@ -17,14 +17,14 @@ const Tarjeta = ({props}) => {
     } else {
         console.log("Creando tarjeta de Auditoría");
         return (
-            <div className="Tarjeta" key={props.id}>
+            <div className="Tarjeta" key={props._id}>
                 <div className="Tarjeta-superior">
-                    <div className="Tarjeta-superior-izq">{props.titulo}</div>
-                    <div className="Tarjeta-superior-der">{props.alerta}</div>
+                    <div className="Tarjeta-superior-izq">{props.nombre}</div>
+                    <div className="Tarjeta-superior-der">#</div>
                 </div>
                 <div className="Tarjeta-inferior">
                     <div className="Tarjeta-inferior-auditor"> Auditor: {props.auditor}</div>
-                    <div className="Tarjeta-inferior-fecha">Fecha: {props.fecha}</div>
+                    <div className="Tarjeta-inferior-fecha">Fecha: {props.fecha_fin}</div>
                 </div>
             </div>
         );
