@@ -1,5 +1,5 @@
-import './style/TarjetasVista.css';
-import Tarjeta from './Tarjeta'
+import '../style/TarjetasVista.css';
+import Tarjeta from '../components/Tarjeta'
 
 const TarjetasVista = ({tarjetas}) => {
   const tarjetasLista = tarjetas.map(

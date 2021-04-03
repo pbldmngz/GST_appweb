@@ -1,4 +1,4 @@
-import './style/Tarjeta.scss';
+import '../style/Tarjeta.scss';
 import React from 'react';
 
 const Tarjeta = ({props}) => {

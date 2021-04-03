@@ -1,5 +1,5 @@
 import './style/App.css';
-import TarjetasVista from './TarjetasVista';
+import TarjetasVista from './views/TarjetasVista';
 import React, { Component } from 'react';
 import axios from 'axios'
 
