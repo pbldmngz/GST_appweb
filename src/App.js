@@ -38,10 +38,26 @@ class App extends Component {
 	}
 
 	changeParams = (params) => {
-		this.setState({
-			params: params
+		let change = new Promise((resolve, reject) => {
+			this.setState({
+				params: params
+			})
+			resolve("OK200");
 		})
-		console.log("changeParams", params)
+		change.then(res => {
+			axios.post('http://127.0.0.1:5000/', this.state.params)
+				.then(res => {
+					console.log("cdm.res.data", res.data);
+					this.setState({
+						posts: res.data
+					});
+					console.log("then.state.params: ", this.state.params)
+					// console.log("then.state.posts: ", this.state.posts)
+				})
+
+			console.log("changeParams", params)
+		})
+		
 
 		//componentDidMount()
 		//this.changeView()
