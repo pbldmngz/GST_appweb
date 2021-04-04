@@ -26,7 +26,7 @@ class App extends Component {
 	componentDidMount = () => {
 		// console.log("before.cdm.state.params: ", this.state.params)
 		// console.log("before.cdm.state.posts: ", this.state.posts)
-		axios.post('http://127.0.0.1:5000/', this.state.params)
+		axios.post('https://gst-server.herokuapp.com/', this.state.params)
 			.then(res => {
 				console.log("cdm.res.data", res.data);
 				this.setState({
@@ -47,7 +47,7 @@ class App extends Component {
 			resolve("OK200");
 		})
 		change.then(res => {
-			axios.post('http://127.0.0.1:5000/', this.state.params)
+			axios.post('https://gst-server.herokuapp.com/', this.state.params)
 				.then(res => {
 					console.log("cdm.res.data", res.data);
 					this.setState({
