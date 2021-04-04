@@ -7,6 +7,7 @@ import AuditoriasVista from './views/AuditoriasVista'
 import { Route, BrowserRouter } from 'react-router-dom'
 
 class App extends Component {
+
 	state = {
 		posts : [
 			{
@@ -17,7 +18,8 @@ class App extends Component {
 		params: {
 			collection: "areas",
 			filter: {}
-		}
+		},
+		old_params: {} //Planeo usar esto para darle funcionalidad al return
 	}
 
 	//Usa otra función para actualizar el componente que quieres
@@ -70,12 +72,12 @@ class App extends Component {
 	// 	}
 	// }
 
-	componentWillReceiveProps(nextProps) {
-		console.log('componentWillReceiveProps', nextProps);
-		if (this.props !== nextProps) {
-			this.setState(nextProps);
-		}
-	}
+	// componentWillReceiveProps(nextProps) {
+	// 	console.log('componentWillReceiveProps', nextProps);
+	// 	if (this.props !== nextProps) {
+	// 		this.setState(nextProps);
+	// 	}
+	// }
 
 	routes = [
 		{
@@ -92,11 +94,16 @@ class App extends Component {
 		}
 	]
 
+	defaultFilter = {
+		collection: "areas",
+		filter: {}
+	}
+
 	render() {
 		return (
 			<BrowserRouter>
 				<div className="App">
-					<Navbar />
+					<Navbar defaultFilter={this.defaultFilter} changeParams={this.changeParams}/>
 					{/* <Route exact path='/' component={AreasVista} /> */}
 					{this.routes.map(({path, component: C, changeParams}) => (
 						<Route

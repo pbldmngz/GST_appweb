@@ -7,14 +7,18 @@ const Tarjeta = ({ props, changeParams}) => {
 
     //Aparentemente por el padding de la tarjeta, se desnivela a cada linea de texto que entra
     //Pero en realidad no importa porque no se planea mezclarlas
-    if (props.nombre == null){
+    if (props.area){
         console.log("Creando tarjeta de Área");
         return (
             <div onClick={() => {
                 console.log("Clicked on ID:", props._id);
                 changeParams({
                     collection: "auditorias",
-                    filter: {}
+                    filter: {
+                        "_id": {
+                            "$in": props.auditorias
+                        }
+                    }
             })}} className="Tarjeta" key={props.id}>
                 <div className="TarjetaArea">{props.area}</div>
             </div>
@@ -24,7 +28,7 @@ const Tarjeta = ({ props, changeParams}) => {
         return (
             <div className="Tarjeta" key={props._id}>
                 <div className="Tarjeta-superior">
-                    <div className="Tarjeta-superior-izq">{props.nombre}</div>
+                    <div className="Tarjeta-superior-izq">{props.auditoria}</div>
                     <div className="Tarjeta-superior-der">#</div>
                 </div>
                 <div className="Tarjeta-inferior">
