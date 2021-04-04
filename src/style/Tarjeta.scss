@@ -39,6 +39,43 @@
 	box-sizing: border-box;
 }
 
+.TarjetaPregunta {
+    position:relative;
+    background-color: #fff;
+    padding: 10px;
+    margin: 30px 15px 30px 15px;
+    width: 80%;
+    min-height: 225px;
+    max-height: 500px;
+    display: inline-block;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.TarjetaPregunta-container {
+    display: flex;
+}
+
+.TarjetaPregunta-izq {
+    padding-left: 10px;
+    flex: 0 0 90%;
+    min-width: 400px;
+}
+
+.TarjetaPregunta-der {
+    padding-left: 10px;
+    margin-left: 10px;
+    flex: 1;
+    background-color: antiquewhite;
+}
+
+.TarjetaPregunta .Tarjeta-inferior {
+    margin-bottom: 5px;
+    //min-height: 220px;
+    //max-height: 450px;
+    //Conviene comprobar el padding
+}
+
 .TarjetaArea {
     text-align: center;
     //Tengo que encontrar una forma de valign válida para esto

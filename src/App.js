@@ -91,6 +91,12 @@ class App extends Component {
 			component: AreasVista,
 			changeParams: this.changeParams,
 			data: this.state.posts
+		},
+		{
+			path: "/",
+			component: AreasVista,
+			changeParams: this.changeParams,
+			data: this.state.posts
 		}
 	]
 
@@ -107,7 +113,7 @@ class App extends Component {
 					{/* <Route exact path='/' component={AreasVista} /> */}
 					{this.routes.map(({path, component: C, changeParams}) => (
 						<Route
-							path={path}
+							exact path={path}
 							render={
 								(props) => <C {...props} 
 								changeView={this.changeView} 
