@@ -1,11 +1,11 @@
 import '../style/TarjetasVista.css';
 import Tarjeta from '../components/Tarjeta'
 
-const TarjetasVista = ({tarjetas}) => {
+const TarjetasVista = ({ tarjetas, changeParams}) => {
   const tarjetasLista = tarjetas.map(
     tarjeta => {
       return (
-        <Tarjeta key={tarjeta.id} props={ tarjeta }/>
+        <Tarjeta key={tarjeta.id} changeParams={changeParams} props={ tarjeta }/>
       )
     }
   )

@@ -1,7 +1,7 @@
 import '../style/Tarjeta.scss';
 import React from 'react';
 
-const Tarjeta = ({props}) => {
+const Tarjeta = ({ props, changeParams}) => {
     //Warning: Each child in a list should have a unique "key" prop.
     //console.log(props.area)
 
@@ -10,7 +10,12 @@ const Tarjeta = ({props}) => {
     if (props.nombre == null){
         console.log("Creando tarjeta de Área");
         return (
-            <div className="Tarjeta" key={props.id}>
+            <div onClick={() => {
+                console.log("Clicked on ID:", props._id);
+                changeParams({
+                    collection: "auditorias",
+                    filter: {}
+            })}} className="Tarjeta" key={props.id}>
                 <div className="TarjetaArea">{props.area}</div>
             </div>
         );
