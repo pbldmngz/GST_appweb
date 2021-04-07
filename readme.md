@@ -7,9 +7,9 @@ Para evitar contratiempos por módulos que instale o desinstale (tardan mucho en
 1. Abran un CMD en la carpeta de /gst-myapp
 2. Peguen todo esto y denle enter.
 
-`npm i react-router-dom redux react-redux redux-thunk firebase redux-firestore react-redux@5.1.1 react-redux-firebase@2.2.4 moment`
+```npm i react-router-dom redux react-redux redux-thunk firebase redux-firestore react-redux@5.1.1 react-redux-firebase@2.2.4 moment```
 
-3. Ya pueden darle a npm start
+3. Ya pueden darle a `npm start`
 
 
 Si no les funciona prueben de uno en uno:
