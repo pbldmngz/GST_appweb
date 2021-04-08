@@ -10,8 +10,11 @@ config.path = {
     responder_auditoria: "/auditoria",
     auditorias_area: "/area/:id",
     preguntas: "/preguntas",
+    preguntas_detalles: "/detalles-pregunta",
+    preguntas_detalles_redirect: "/detalles-pregunta/:id",
     crear_pregunta: "/crear-pregunta",
-    pregunta_detalles: "preguntas/:id"
+    // pregunta_reponder: "/responder-pregunta",
+    // pregunta_reponder_redirect: "/responder-pregunta/:id"
 }
 
 config.pathName = {
@@ -24,7 +27,8 @@ config.pathName = {
     responder_auditoria: "Responder auditoria",
     preguntas: "Preguntas",
     crear_pregunta: "Crear pregunta",
-    pregunta_detalles: "Pregunta detalles"
+    pregunta_detalles: "Detalles de pregunta",
+    pregunta_responder: "Responder pregunta"
 }
 
 module.exports = config;

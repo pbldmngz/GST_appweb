@@ -6,8 +6,9 @@ import moment from 'moment'
 import { Redirect } from 'react-router';
 
 const DetallesPregunta = (props) => {
-    console.log("Esto es pregunta", pregunta)
+    
     const { pregunta, auth } = props
+    console.log("Esto es pregunta", pregunta)
     //Esto puede servir de filtro para la búsqueda de preguntas
     if (!auth.uid) return <Redirect to="/signin" />
     
@@ -15,7 +16,7 @@ const DetallesPregunta = (props) => {
         return (
             <div className="container section responder-pregunta">
                 <div className="card-content grey-text text-darken-3">
-                    <span className="card-title">{pregunta.lang.english}</span>
+                    <span className="card-title">{pregunta.english}</span>
                     <p>{pregunta.description}</p>
                 </div>
             </div>

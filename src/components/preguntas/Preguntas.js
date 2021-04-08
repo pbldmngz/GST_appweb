@@ -14,7 +14,8 @@ export default function Preguntas(preguntas) {
         <div className="pregunta-list section">
             {pre && pre.map(pregunta => {
                 return (
-                    <Link to={path.preguntas + "/" + pregunta.id} key={pregunta.id}>
+                    <Link to={path.preguntas_detalles + "/" + pregunta.id} key={pregunta.id}>
+                        {console.log("Clicked here, going to: ")}
                         <TarjetaPregunta
                             pregunta={pregunta}
                         />
