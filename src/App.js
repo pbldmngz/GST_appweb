@@ -9,6 +9,7 @@ import DashboardPreguntas from './components/preguntas/DashboardPreguntas'
 import CrearPregunta from './components/preguntas/CrearPregunta'
 import DetallesPregunta from './components/preguntas/DetallesPregunta';
 import DetallesAuditoria from './components/auditorias/DetallesAuditoria'
+import ResponderAuditoria from './components/auditorias/ResponderAuditoria'
 
 class App extends Component {
   render() {
@@ -23,7 +24,7 @@ class App extends Component {
             <Route path={path.auditoria} component={DetallesAuditoria} />
             <Route path={path.sign_in} component={SignIn} />
             <Route path={path.sign_up} component={SignUp} />
-            {/* <Route path={path.responder_auditoria_redirect} component={ResponderAuditoria} /> */}
+            <Route path={path.responder_auditoria_redirect} component={ResponderAuditoria} />
             <Route path={path.crear_auditoria} component={CrearAuditoria} />
             <Route path={path.preguntas} component={DashboardPreguntas} />
             <Route path={path.crear_pregunta} component={CrearPregunta} />

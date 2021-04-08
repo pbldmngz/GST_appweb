@@ -4,6 +4,8 @@ import moment from 'moment'
 export default function TarjetaAuditoria(auditoria) {
     // Si las tarjetas no tienen las mismas "líneas" de contenido
     // se rompe la tabla
+    // Para arreglar esto se limitó el límite de carácteres para el título, 
+    // quizás sea necesario para el resto de atributos
 
     // Se tienen que añadir:
     // - Función que regrese un botón de color y texto correspondiente al tiempo que falte
@@ -14,7 +16,10 @@ export default function TarjetaAuditoria(auditoria) {
     return (
         <div className="card x-depth-0 tarjeta-auditoria" key={audit.id}>
             <div className="card-content grey-text text-darken-3">
-                <span className="card-title">{audit.auditoria}</span>
+                {/* {console.log(audit.auditoria.length)} */}
+                <span className="card-title">{
+                    (audit.auditoria.length > 20) ? audit.auditoria.substr(0, 20) + "..." : audit.auditoria
+                }</span>
                 <p>Auditor: {audit.auditor}</p>
                 {date}
             </div>

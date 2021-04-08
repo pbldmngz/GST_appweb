@@ -48,7 +48,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   height: 180px;
   cursor: pointer;
   display: inline-block;
-  margin: 30px 15px 30px 15px;
+  margin: 15px 15px 15px 15px;
 }
 
 .date {
@@ -58,4 +58,16 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 
 .date-container {
   display:inline-block;
+}
+
+.radio-button {
+  float: right;
+}
+
+.radio-group {
+  margin: 20px 0px 0px 20px;
+}
+
+.pregunta {
+  margin: 40px;
 }
