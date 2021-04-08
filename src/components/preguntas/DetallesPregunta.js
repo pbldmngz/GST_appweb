@@ -8,16 +8,22 @@ import { Redirect } from 'react-router';
 const DetallesPregunta = (props) => {
     
     const { pregunta, auth } = props
-    console.log("Esto es pregunta", pregunta)
+    // console.log("Esto es pregunta", pregunta)
     //Esto puede servir de filtro para la búsqueda de preguntas
     if (!auth.uid) return <Redirect to="/signin" />
     
     if (pregunta) {
         return (
-            <div className="container section responder-pregunta">
-                <div className="card-content grey-text text-darken-3">
-                    <span className="card-title">{pregunta.english}</span>
-                    <p>{pregunta.description}</p>
+            <div className="container responder-pregunta">
+                <div className="card-content card x-depth-0 section grey-text text-darken-3">
+                    <div className="container">
+                            <span className="card-title">{pregunta.english}</span>
+                            <p>Descripción: {pregunta.description}</p>
+                            <p>Categoría: {pregunta.category}</p>
+                            <p>Plan de reacción: {pregunta.reaction_plan}</p>
+                            <p>Creado por: {pregunta.createdBy}</p>
+                            <p>Creado: {moment(pregunta.createdAt.toDate()).fromNow()}</p>
+                    </div>
                 </div>
             </div>
         )

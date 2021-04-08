@@ -8,7 +8,7 @@ class CrearPregunta extends Component {
     state = {
         category: "",
         description: "",
-        action_plan: "",
+        reaction_plan: "",
         english: "",
         spanish: ""
     }
@@ -46,7 +46,7 @@ class CrearPregunta extends Component {
                     </div>
                     <div className="input-field">
                         <label htmlFor="action_plan">Plan de acción</label>
-                        <input type="text" id='action_plan' onChange={this.handleChange} />
+                        <input type="text" id='reaction_plan' onChange={this.handleChange} />
                     </div>
 
                     <button className="btn blue lighten-1 z-depth-0">Crear</button>
