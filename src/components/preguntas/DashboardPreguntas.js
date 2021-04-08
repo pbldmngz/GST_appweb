@@ -17,12 +17,20 @@ class DashboardPreguntas extends Component {
         const { preguntas, auth } = this.props
 
         if (!auth.uid) return <Redirect to="/signin" />
-        
-        return (
-            <div className="dashboard container">
-                <Preguntas preguntas={preguntas} />
-            </div>
-        )
+
+        if (preguntas){
+            return (
+                <div className="dashboard container">
+                    <Preguntas preguntas={preguntas} />
+                </div>
+            )
+        } else {
+            return (
+                <div className="container center">
+                    <p>Cargando...</p>
+                </div>
+            )
+        }
     }
 }
 
@@ -36,5 +44,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps),
-    firestoreConnect([{ collection: "preguntas" }])
+    firestoreConnect([{ collection: "preguntas", orderBy: ["createdAt", "desc"] }])
 )(DashboardPreguntas)

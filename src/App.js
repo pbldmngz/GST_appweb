@@ -1,14 +1,14 @@
 import Navbar from './components/layout/Navbar';
 import React, { Component } from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import Dashboard from './components/layout/Dashboard'
+import DashboardAuditorias from './components/auditorias/DashboardAuditorias'
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
-import ResponderAuditoria from './components/auditorias/ResponderAuditoria'
 import CrearAuditoria from './components/auditorias/CrearAuditoria'
 import DashboardPreguntas from './components/preguntas/DashboardPreguntas'
 import CrearPregunta from './components/preguntas/CrearPregunta'
 import DetallesPregunta from './components/preguntas/DetallesPregunta';
+import DetallesAuditoria from './components/auditorias/DetallesAuditoria'
 
 class App extends Component {
   render() {
@@ -19,10 +19,11 @@ class App extends Component {
         <div className="App">
           <Navbar />
           <Switch>
-            <Route exact path={path.auditorias} component={Dashboard}/>
-            <Route path={path.auditoria} component={ResponderAuditoria} />
+            <Route exact path={path.auditorias} component={DashboardAuditorias}/>
+            <Route path={path.auditoria} component={DetallesAuditoria} />
             <Route path={path.sign_in} component={SignIn} />
             <Route path={path.sign_up} component={SignUp} />
+            {/* <Route path={path.responder_auditoria_redirect} component={ResponderAuditoria} /> */}
             <Route path={path.crear_auditoria} component={CrearAuditoria} />
             <Route path={path.preguntas} component={DashboardPreguntas} />
             <Route path={path.crear_pregunta} component={CrearPregunta} />
