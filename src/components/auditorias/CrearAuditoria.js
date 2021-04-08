@@ -1,14 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import {createAuditoria} from '../../store/actions/auditoriaActions'
 import {connect} from 'react-redux'
 import { Redirect } from 'react-router'
+import DatePicker from "react-datepicker";
+//import DatePicker from 'react-datepicker/dist/react-datepicker'
+
+import "react-datepicker/dist/react-datepicker.css";
 
 class CrearAuditoria extends Component {
     state = {
         auditoria: "",
         auditor: "",
-        fecha_inicio: "",
-        fecha_fin: "",
+        fecha_inicio: new Date(),
+        fecha_fin: new Date(),
         preguntas: []
     }
     handleChange = (e) => {
@@ -38,11 +42,26 @@ class CrearAuditoria extends Component {
                         <label htmlFor="auditor">Auditor</label>
                         <input type="text" id='auditor' onChange={this.handleChange} />
                     </div>
+                    <div className="date-field">
+                        
+                        <div className="date-container">
+                            <div className="date">
+                                <span className="grey-text"> y termina el </span>
+                                <DatePicker id="fecha_fin" selected={this.state.fecha_fin} onChange={(date) => this.setState({
+                                    fecha_fin: date
+                                })} />
+                            </div>
+                            <div className="date">
+                                <span className="grey-text">Inicia el </span>
+                                <DatePicker id="fecha_inicio" selected={this.state.fecha_inicio} onChange={(date) => this.setState({
+                                    fecha_inicio: date
+                                })} />
+                            </div>
+                        </div>
+                        
+                    </div>
 
                     <button className="btn blue lighten-1 z-depth-0">Crear</button>
-                    <div className="center red-text">
-                        {/* {authError ? <p>{authError}</p> : null} */}
-                    </div>
                 </form>
             </div>
         )

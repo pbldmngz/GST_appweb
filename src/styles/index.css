@@ -51,3 +51,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   margin: 30px 15px 30px 15px;
 }
 
+.date {
+  /* width: 45% */
+  float: right;
+}
+
+.date-container {
+  display:inline-block;
+}
