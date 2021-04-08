@@ -11,6 +11,7 @@ class CrearAuditoria extends Component {
     state = {
         auditoria: "",
         auditor: "",
+        area: "",
         fecha_inicio: new Date(),
         fecha_fin: new Date(),
         preguntas: []
@@ -41,6 +42,10 @@ class CrearAuditoria extends Component {
                     <div className="input-field">
                         <label htmlFor="auditor">Auditor</label>
                         <input type="text" id='auditor' onChange={this.handleChange} />
+                    </div>
+                    <div className="input-field">
+                        <label htmlFor="area">Area</label>
+                        <input type="text" id='area' onChange={this.handleChange} />
                     </div>
                     <div className="date-field">
                         

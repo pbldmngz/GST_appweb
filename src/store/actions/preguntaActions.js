@@ -1,22 +1,22 @@
 import { firebase } from "react-redux-firebase";
 
-export const createAuditoria = (auditoria) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
+export const createPregunta = (pregunta) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
         const firestore = getFirestore();
         const profile = getState().firebase.profile;
         const authorId = getState().firebase.auth.uid;
-        
-        firestore.collection("auditorias").add({
-            ...auditoria,
+
+        firestore.collection("preguntas").add({
+            ...pregunta,
             createdBy: profile.firstName + " " + profile.lastName,
             createdAt: new Date()
             //FechaInicio y FechaFin
             //Trataré de hacerlo con un componente
             //de calendario
         }).then(() => {
-            dispatch({ type: "CREATE_AUDITORIA" }, auditoria)
+            dispatch({ type: "CREATE_PREGUNTA" }, pregunta)
         }).catch((err) => {
-            dispatch({type: "CREATE_AUDITORIA_ERROR"}, err)
+            dispatch({ type: "CREATE_PREGUNTA_ERROR" }, err)
         })
 
     }

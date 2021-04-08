@@ -9,9 +9,9 @@ const SignedInLinks = (props) => {
     
     return (
         <ul className="right">
-            <li><NavLink to={path.areas} className="waves-effect waves-light">{pathName.areas}</NavLink></li>
+            <li><NavLink to={path.auditorias} className="waves-effect waves-light">{pathName.auditorias}</NavLink></li>
             <li><NavLink to={path.crear_auditoria} className="waves-effect waves-light">{pathName.crear_auditoria}</NavLink></li>
-            <li><NavLink to={path.crear_pregunta} className="waves-effect waves-light">{pathName.crear_pregunta}</NavLink></li>
+            <li><NavLink to={path.preguntas} className="waves-effect waves-light">{pathName.preguntas}</NavLink></li>
             <li><a onClick={props.signOut}>Log Out</a></li>
         </ul>
     )

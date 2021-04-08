@@ -9,10 +9,10 @@ export default function TarjetaAuditoria(auditoria) {
     // - Función que regrese un botón de color y texto correspondiente al tiempo que falte
     // - Añadir botones para borrar/editar una auditoría, con un "¿estás seguro?"
     const audit = auditoria.auditoria
-    console.log("fecha_fin", audit)
+
     const date = audit.fecha_fin ? <p className="grey-text">Due date: {moment(audit.fecha_fin.toDate()).fromNow()}</p> : null
     return (
-        <div className="card x-depth-0 tarjeta-auditoria" key={audit._id}>
+        <div className="card x-depth-0 tarjeta-auditoria" key={audit.id}>
             <div className="card-content grey-text text-darken-3">
                 <span className="card-title">{audit.auditoria}</span>
                 <p>Auditor: {audit.auditor}</p>
