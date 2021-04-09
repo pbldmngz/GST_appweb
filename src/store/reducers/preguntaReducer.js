@@ -10,6 +10,11 @@ const preguntaReducer = (state = initState, action) => {
         case 'CREATE_PREGUNTA_ERROR':
             console.log('create pregunta error', action.err);
             return state;
+        case 'CREATE_RESPUESTA_PREGUNTA':
+            return state;
+        case 'CREATE_RESPUESTA_PREGUNTA_ERROR':
+            console.log('create respuesta pregunta error', action.err);
+            return state;
         default:
             return state;
     }

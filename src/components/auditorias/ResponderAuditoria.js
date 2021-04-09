@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react'
 import { createAuditoria, preguntasAuditoria } from '../../store/actions/auditoriaActions'
+import { respuestaPregunta } from '../../store/actions/preguntaActions'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
 import { firestoreConnect } from 'react-redux-firebase'
@@ -19,27 +20,80 @@ import "react-datepicker/dist/react-datepicker.css";
 
 class ResponderAuditoria extends Component {
     state = {
-        auditoria: "",
-        auditor: "",
-        area: "",
-        fecha_inicio: new Date(),
-        fecha_fin: new Date(),
-        preguntas: []
+        preguntas: [],
+        auditoria: ""
     }
     handleChange = (e) => {
+        // console.log("this is E", e)
+
         this.setState({
-            [e.target.id]: e.target.value
+            [e.target.name]: e.target.value
         })
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log("State:", this.state)
-        console.log("Props:", this.props)
-        // this.props.createAuditoria(this.state)
+        const key = Object.keys(this.state)
+        // console.log(key)
+
+        var arrID = []
+        var arrJU = []
+        var arrRE = []
+
+        // Quiero crear un arr de objetos tal que así:
+        // [{id: ###, justification:######, respuesta:##}]
+
+        //const keyCeption = key
+        const validKN = ["just-", "resp-"]
+        var keys = {}
+
+        for (let k of key) {
+            var header = k.substring(5, 25)
+            // console.log(header.length)
+            if (header.length === 20) {
+                keys[header] = true
+            }
+            
+        }
+
+        keys = Object.keys(keys)
+        var results = []
+        for (let ks of keys) {
+            //ks es la ID
+            var dict = { pregunta: ks, auditoria: this.props.match.params.id};
+            // var id, just, resp;
+            for (let k of key) {
+                var header = k.substring(0, 5)
+                var cont = k.substring(5, 25)
+                // console.log("pre-if", validKN.includes(header), header)
+                // console.log("pre-if-2", cont === ks, cont, ks)
+                if (validKN.includes(header) && cont === ks) {
+                    if (header == "just-") {
+                        dict["justificacion"] = this.state[k]
+                    } else {
+                        dict["respuesta"] = this.state[k]
+                    }
+                    
+                    // console.log("this is dict-header", dict[header])
+                }
+            }
+            results.push(dict)
+        }
+
+        // console.log(results)
+
+
+        // if (validKN.includes(header)) {
+
+        // }
+        // console.log("Props:", this.props)
+        this.props.respuestaPregunta(results)
         this.props.history.push("/"); //Esto se cambiará según el contexto
     }
     componentWillMount() {
         const id = this.props.match.params.id
+        this.setState({
+            auditoria: id
+        })
 
         const pregID = this.props.preguntasAuditoria({ id: id }).then((res) => {
             this.setState({
@@ -50,9 +104,7 @@ class ResponderAuditoria extends Component {
     render() {
         const { auth, preguntas } = this.props;
 
-        console.log(this.props)
-
-        
+        // console.log(this.props)
 
         if (!auth.uid) return <Redirect to="/signin" />
 
@@ -92,12 +144,12 @@ class ResponderAuditoria extends Component {
                                 <div className="myspan pregunta container" key={pregunta.id}>
                                 {/* card x-depth-0 para ver los limites fácilmente*/}
                                     <FormControl className="width100" component="fieldset">
-                                        {console.log("antes de que truene, esto es pregunta", pregunta)}
+                                        {/* {console.log("antes de que truene, esto es pregunta", pregunta)} */}
                                         <FormLabel className="legend-pregunta grey-text text-darken-3" component="legend">{pregunta.english}</FormLabel>
                                         <div className="campos">
-                                            <TextField id="standard-basic" label="Justificación" className="date label70" />
-
-                                            <RadioGroup className="radio-group date" row aria-label="gender" name="gender1" id={"radio-" + pregunta.id} onChange={this.handleChange}>
+                                            <TextField label="Justificación" className="date label70" name={"just-" + pregunta.id} onChange={this.handleChange}/>
+                                            {/* {console.log("Este es un intento: ", "radio-" + pregunta.id)} */}
+                                            <RadioGroup className="radio-group date" row aria-label="gender" name={"resp-" + pregunta.id} onChange={this.handleChange}>
                                                 <FormControlLabel className="radio-button grey-text text-darken-3" value="Sí" control={<Radio />} label="Sí" />
                                                 <FormControlLabel className="radio-button grey-text text-darken-3" value="No" control={<Radio />} label="No" />
                                             </RadioGroup>
@@ -119,7 +171,7 @@ class ResponderAuditoria extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
+    // console.log(state)
     return {
         auth: state.firebase.auth,
         preguntas: state.firestore.ordered.preguntas,
@@ -129,7 +181,8 @@ const mapStateToProps = (state) => {
 const mapDispatchtoProps = (dispatch) => {
     return {
         createAuditoria: (auditoria) => dispatch(createAuditoria(auditoria)),
-        preguntasAuditoria: (auditoria) => dispatch(preguntasAuditoria(auditoria))
+        preguntasAuditoria: (auditoria) => dispatch(preguntasAuditoria(auditoria)),
+        respuestaPregunta: (pregunta) => dispatch(respuestaPregunta(pregunta))
     }
 }
 

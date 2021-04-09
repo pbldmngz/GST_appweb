@@ -32,7 +32,7 @@ const asyncCall = async (dispatch, getFirestore, collection, id) => {
         .then((doc) => {
             if (doc.exists) {
                 //console.log("this: ", doc.data())
-                return doc.data()
+                return {...doc.data(), id}
             }
         }).catch((err) => {
             console.log(err)
