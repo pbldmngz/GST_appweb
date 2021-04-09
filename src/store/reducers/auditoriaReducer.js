@@ -10,6 +10,11 @@ const auditoriaReducer = (state = initState, action) => {
         case 'CREATE_AUDITORIA_ERROR':
             console.log('create auditoria error', action.err);
             return state;
+        case 'SUCCESSFULLY_EXTRACTED_PREGUNTAS_FROM_AUDITORIA':
+            return state;
+        case 'FAILED_EXTRACT_PREGUNTAS_FROM_AUDITORIA':
+            console.log('create pregunta error', action.err);
+            return state;
         default:
             return state;
     }

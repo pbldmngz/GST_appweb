@@ -21,3 +21,28 @@ export const createAuditoria = (auditoria) => {
 
     }
 }
+
+export const preguntasAuditoria = (auditoria) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firestore = getFirestore();
+
+        //console.log("this is auditoria here: ", auditoria)
+        var docRef = firestore.collection("auditorias").doc(auditoria.id);
+
+        docRef.get()//FIND() //.add()
+            .then((doc) => {
+                if (doc.exists) {
+                    return doc.data()
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            }).then((data) => {
+                const preguntas = data.preguntas //Esto es un array
+                console.log(preguntas)
+                dispatch({ type: "SUCCESSFULLY_EXTRACTED_PREGUNTAS_FROM_AUDITORIA" }, preguntas)
+            }).catch((error) => {
+                dispatch({ type: "FAILED_EXTRACT_PREGUNTAS_FROM_AUDITORIA" }, error)
+            });
+    }
+}
