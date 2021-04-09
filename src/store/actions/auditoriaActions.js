@@ -22,27 +22,34 @@ export const createAuditoria = (auditoria) => {
     }
 }
 
-export const preguntasAuditoria = (auditoria) => {
-    return (dispatch, getState, { getFirebase, getFirestore }) => {
-        const firestore = getFirestore();
+const asyncCall = async (dispatch, getFirestore, collection, id) => {
+    const firestore = getFirestore();
 
-        //console.log("this is auditoria here: ", auditoria)
-        var docRef = firestore.collection("auditorias").doc(auditoria.id);
+    //console.log("this is auditoria here: ", auditoria)
+    var docRef = firestore.collection(collection).doc(id);
 
-        docRef.get()//FIND() //.add()
-            .then((doc) => {
-                if (doc.exists) {
-                    return doc.data()
-                } else {
-                    // doc.data() will be undefined in this case
-                    console.log("No such document!");
-                }
-            }).then((data) => {
-                const preguntas = data.preguntas //Esto es un array
-                console.log(preguntas)
-                dispatch({ type: "SUCCESSFULLY_EXTRACTED_PREGUNTAS_FROM_AUDITORIA" }, preguntas)
-            }).catch((error) => {
-                dispatch({ type: "FAILED_EXTRACT_PREGUNTAS_FROM_AUDITORIA" }, error)
-            });
+    return docRef.get()//FIND() //.add()
+        .then((doc) => {
+            if (doc.exists) {
+                //console.log("this: ", doc.data())
+                return doc.data()
+            }
+        }).catch((err) => {
+            console.log(err)
+        });
+}
+
+export function preguntasAuditoria (auditoria) {
+    return async (dispatch, getState, { getFirebase, getFirestore }) => {
+        // dispatch({ type: "SUCCESSFULLY_EXTRACTED_PREGUNTAS_FROM_AUDITORIA" }, preguntas)
+        let x = await asyncCall(dispatch, getFirestore, "auditorias", auditoria.id);
+
+        const result = await Promise.all(x.preguntas.map(async (id) => {
+            return await asyncCall(dispatch, getFirestore, "preguntas", id)
+        }))
+
+        //console.log(result)
+
+        return await result
     }
 }

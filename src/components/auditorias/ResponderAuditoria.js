@@ -38,7 +38,7 @@ class ResponderAuditoria extends Component {
     render() {
         const { auth, preguntas } = this.props;
 
-        console.log(preguntas)
+        //console.log(preguntas)
 
         const id = this.props.match.params.id
 
@@ -47,11 +47,12 @@ class ResponderAuditoria extends Component {
 
         //Se tiene que buscar preguntas por ID, 
         // estas ID están en auditorias.preguntas en un array
-        const pregID = this.props.preguntasAuditoria({ id: id })
-        console.log(pregID)
+        
+        // const pregID = preguntasID.preguntas
+        // console.log(pregID)
         //const pre = this.props.preguntasAuditoria({ id: id })
 
-        const pre = [
+        let pre = [
             {
                 english: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident?",
                 id: "1"
@@ -62,10 +63,15 @@ class ResponderAuditoria extends Component {
             }
         ]
 
+        const pregID = this.props.preguntasAuditoria({ id: id })
+
         return (
             <div className="container">
             <div className="test">
-                    {pregID && pregID.map(pregunta => { return <p>{pregunta}</p>})}
+                    {console.log(pregID)}
+                    {/* {pregID && pregID.map(pregunta => { 
+                        console.log(pregunta)
+                        return <p>{pregunta}</p>})} */}
             </div>
                 <div className="card x-depth-0">
                     <form className="white section" onSubmit={this.handleSubmit}>
