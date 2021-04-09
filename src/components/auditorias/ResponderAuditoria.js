@@ -2,6 +2,8 @@ import React, { Component, useState } from 'react'
 import { createAuditoria, preguntasAuditoria } from '../../store/actions/auditoriaActions'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
 import DatePicker from "react-datepicker";
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -31,16 +33,26 @@ class ResponderAuditoria extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state)
-        this.props.createAuditoria(this.state)
+        console.log("State:", this.state)
+        console.log("Props:", this.props)
+        // this.props.createAuditoria(this.state)
         this.props.history.push("/"); //Esto se cambiará según el contexto
+    }
+    componentWillMount() {
+        const id = this.props.match.params.id
+
+        const pregID = this.props.preguntasAuditoria({ id: id }).then((res) => {
+            this.setState({
+                preguntas: res
+            })
+        })
     }
     render() {
         const { auth, preguntas } = this.props;
 
-        //console.log(preguntas)
+        console.log(this.props)
 
-        const id = this.props.match.params.id
+        
 
         if (!auth.uid) return <Redirect to="/signin" />
 
@@ -52,23 +64,18 @@ class ResponderAuditoria extends Component {
         // console.log(pregID)
         //const pre = this.props.preguntasAuditoria({ id: id })
 
-        let pre = [
-            {
-                english: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident?",
-                id: "1"
-            },
-            {
-                english: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam?",
-                id: "2"
-            }
-        ]
+        //Esto ya sirve pero se buclea
+        // const id = this.props.match.params.id
 
-        const pregID = this.props.preguntasAuditoria({ id: id })
+        // const pregID = this.props.preguntasAuditoria({ id: id }).then((res) => {
+        //     this.setState({
+        //         preguntas: res
+        //     })
+        // })
 
         return (
             <div className="container">
             <div className="test">
-                    {console.log(pregID)}
                     {/* {pregID && pregID.map(pregunta => { 
                         console.log(pregunta)
                         return <p>{pregunta}</p>})} */}
@@ -76,11 +83,16 @@ class ResponderAuditoria extends Component {
                 <div className="card x-depth-0">
                     <form className="white section" onSubmit={this.handleSubmit}>
                         <h5 className="grey-text text-darken-3 center">Responder auditoria</h5>
-                        {pre && pre.map(pregunta => {
+                        {/* Esto se puede convertir a un operador ? : para que muestre un cargando o algo así */}
+                        {/* {console.log("esto es preguntaSSS", this.state.preguntas)} */}
+
+                        {/* Ponganle una animación al height para que en el momento que cargue vaya de 0% a 100%*/}
+                        {this.state.preguntas && this.state.preguntas.map(pregunta => {
                             return (
-                                <div className="pregunta" key={pregunta.id}> 
+                                <div className="myspan pregunta container" key={pregunta.id}>
                                 {/* card x-depth-0 para ver los limites fácilmente*/}
-                                    <FormControl component="fieldset">
+                                    <FormControl className="width100" component="fieldset">
+                                        {console.log("antes de que truene, esto es pregunta", pregunta)}
                                         <FormLabel className="legend-pregunta grey-text text-darken-3" component="legend">{pregunta.english}</FormLabel>
                                         <div className="campos">
                                             <TextField id="standard-basic" label="Justificación" className="date label70" />
@@ -107,6 +119,7 @@ class ResponderAuditoria extends Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state)
     return {
         auth: state.firebase.auth,
         preguntas: state.firestore.ordered.preguntas,
@@ -120,4 +133,7 @@ const mapDispatchtoProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchtoProps)(ResponderAuditoria)
+export default compose(
+    connect(mapStateToProps, mapDispatchtoProps),
+    // firestoreConnect([{ collection: "preguntas", orderBy: ["createdAt", "asc"] }])
+    )(ResponderAuditoria)

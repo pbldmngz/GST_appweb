@@ -39,17 +39,23 @@ const asyncCall = async (dispatch, getFirestore, collection, id) => {
         });
 }
 
-export function preguntasAuditoria (auditoria) {
+export const preguntasAuditoria = (auditoria) => {
     return async (dispatch, getState, { getFirebase, getFirestore }) => {
         // dispatch({ type: "SUCCESSFULLY_EXTRACTED_PREGUNTAS_FROM_AUDITORIA" }, preguntas)
         let x = await asyncCall(dispatch, getFirestore, "auditorias", auditoria.id);
 
         const result = await Promise.all(x.preguntas.map(async (id) => {
             return await asyncCall(dispatch, getFirestore, "preguntas", id)
-        }))
+        })).then((values) => {
+            // console.log("Values: ", values)
+            // dispatch({ type: "SUCCESSFULLY_EXTRACTED_PREGUNTAS_FROM_AUDITORIA" }, values)
+            return values
+        }).catch((err) => {
+            console.log(err)
+        });
 
         //console.log(result)
-
-        return await result
+        dispatch({ type: "SUCCESSFULLY_EXTRACTED_PREGUNTAS_FROM_AUDITORIA" }, result)
+        return result
     }
 }

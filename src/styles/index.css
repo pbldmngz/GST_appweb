@@ -78,6 +78,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   margin-bottom: 20px;
 }
 
+.red-test-color {
+  background-color: #ec407a;
+  /* width:100%; */
+}
+
 .campos {
   margin-top: 20px;
   /* margin-bottom: 20px; */
@@ -91,8 +96,44 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   width:75%
 }
 
+.width100 {
+  width:100%
+}
+
 .big-button {
   width: 120px;
   height: 45px;
   font-size: 20px;
 }
+
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 1s;
+}
+
+.animation-from-left {
+  animation: 1s ease-out 0s 1 slideInFromLeft;
+  overflow: hidden;
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
