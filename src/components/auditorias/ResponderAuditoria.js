@@ -95,7 +95,7 @@ class ResponderAuditoria extends Component {
             auditoria: id
         })
 
-        const pregID = this.props.preguntasAuditoria({ id: id }).then((res) => {
+        this.props.preguntasAuditoria({ id: id }).then((res) => {
             this.setState({
                 preguntas: res
             })

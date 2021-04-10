@@ -36,7 +36,14 @@ export const signUp = (newUser) => {
             return firestore.collection('users').doc(resp.user.uid).set({
                 firstName: newUser.firstName,
                 lastName: newUser.lastName,
-                initials: newUser.firstName[0] + newUser.lastName[0]
+                initials: newUser.firstName[0] + newUser.lastName[0],
+                //userLevel: 0 // Se pretende que haya Admin, A, B, C, D, E (o los necesarios)
+                // Pero por facilidades técnicas, esto se hará numéricamente
+                // Cuando ya se esté trabajando en esto puedes descomentar la userLevel
+                // Para incluír el ID del usuario en las preguntas resueltas creo que puedes 
+                // Sacarlo de .auth, no necesariamente de profile, aunque sería práctico poder sacarlo de
+                // Profile para usarlo en todos lados
+
             });
         }).then(() => {
             dispatch({ type: 'SIGNUP_SUCCESS' });
