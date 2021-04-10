@@ -24,6 +24,7 @@ Para evitar contratiempos por módulos que instale o desinstale (tardan mucho en
 * Botón de **return**, probablemente se haga usando el atributo de **props.history** o con alguna configuración de redireccionamientos con un archivo similar a `/config/config.js`.
 * Una mejor forma de crear usuarios, esto de preferencia cuando ya se establezca **userLevel**, así ya podemos quitar el SignUp de la lista de direcciones.
 * Se necesita una forma de saber si un usuario ya realizó cierta auditoría, lo más fácil es consultar en la colección de **respuestas** por algo que tenga la *id* de la auditoria y el del usuario, con que haya uno basta, no se necesitan ver las respuestas que publicó.
+* Agregar el logo de la empresa al login y al NavBar.
 
 **Diseño a.k.a. "suavizar lo veo que está algo"**
 * Cambiar los estilos del Login.
