@@ -60,10 +60,12 @@ class ResponderAuditoria extends Component {
         for (let ks of keys) {
             //ks es la ID
             var dict = { pregunta: ks, auditoria: this.props.match.params.id};
+            dict["auditoria_pregunta"] = this.props.match.params.id + "_" + ks
             // var id, just, resp;
             for (let k of key) {
                 var header = k.substring(0, 5)
                 var cont = k.substring(5, 25)
+                // Esto es para poder hacer búsquedas, firebase es moleto para filtrar
                 // console.log("pre-if", validKN.includes(header), header)
                 // console.log("pre-if-2", cont === ks, cont, ks)
                 if (validKN.includes(header) && cont === ks) {

@@ -10,7 +10,7 @@ import CrearPregunta from './components/preguntas/CrearPregunta'
 import DetallesPregunta from './components/preguntas/DetallesPregunta';
 import DetallesAuditoria from './components/auditorias/DetallesAuditoria'
 import ResponderAuditoria from './components/auditorias/ResponderAuditoria'
-import PreguntaGrafica from './components/preguntas/PreguntaGrafica'
+import DetallesPreguntasAuditoria from './components/preguntas/DetallesPreguntasAuditoria'
 
 class App extends Component {
   render() {
@@ -30,7 +30,7 @@ class App extends Component {
             <Route path={path.preguntas} component={DashboardPreguntas} />
             <Route path={path.crear_pregunta} component={CrearPregunta} />
             <Route path={path.preguntas_detalles_redirect} component={DetallesPregunta} />
-            <Route path="/pregunta-grafica" component={PreguntaGrafica} />
+            <Route path="/detalles-preguntas-auditoria/:id" component={DetallesPreguntasAuditoria} />
           </Switch>
         </div>
       </BrowserRouter>

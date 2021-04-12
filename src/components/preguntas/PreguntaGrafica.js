@@ -5,22 +5,29 @@ import React from 'react';
 import Plotly from "plotly.js-basic-dist";
 import createPlotlyComponent from "react-plotly.js/factory";
 
-const PreguntaGrafica = () => {
+const PreguntaGrafica = (props) => {
     const Plot = createPlotlyComponent(Plotly);
+    const {count} = props
 
     return (
         <Plot
             data={[
                 {
-                    x: [1, 2, 3],
-                    y: [2, 6, 3],
-                    type: 'scatter',
-                    mode: 'lines+markers',
-                    marker: { color: 'red' },
+                    values: [count.no, count.yes],
+                    labels: ['No', 'Yes'],
+                    type: 'pie',
+                    marker: {
+                        colors: ["blue", "#eeeeee"]
+                    },
                 },
-                { type: 'bar', x: [1, 2, 3], y: [2, 5, 3] },
             ]}
-            layout={{ width: 320, height: 240, title: 'A Fancy Plot' }}
+            layout={{
+                width: 200, height: 200, //title: 'Plot Name', //Prueba a comentar esta linea
+                paper_bgcolor:'rgba(0,0,0,0)',
+                plot_bgcolor:'rgba(0,0,0,0)',
+                showlegend: false,
+                margin: {t:0, b:0, l:0, r:0} //dict(t = 0, b = 0, l = 0, r = 0)
+                }}
         />
     );
 }

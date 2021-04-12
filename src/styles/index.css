@@ -56,6 +56,22 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   float: right;
 }
 
+.graph {
+  /* float: right;
+  position:relative;
+  display: inline-block ; */
+  flex: 0 0 15%;
+  margin-left: 50px;
+}
+
+.card-cont {
+  flex: 1;
+}
+
+.main-container {
+  display:flex;
+}
+
 .date-container {
   display:inline-block;
 }
@@ -137,3 +153,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 	}
 }
 
+.modebar{
+      display: none !important;
+}
+
+.detalles-preguntas-auditoria {
+  padding: 10px
+}
