@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router'
+import { deletePregunta, editPregunta } from '../../store/actions/preguntaActions'
 // CSS class "container" centers content
 
 // Para cuando se esté creado una auditoría debería 
@@ -21,7 +22,11 @@ class DashboardPreguntas extends Component {
         if (preguntas){
             return (
                 <div className="dashboard container">
-                    <Preguntas preguntas={preguntas} />
+                    <Preguntas 
+                        preguntas={preguntas} 
+                        editPregunta={this.props.editPregunta} 
+                        deletePregunta={this.props.deletePregunta}
+                    />
                 </div>
             )
         } else {
@@ -42,7 +47,14 @@ const mapStateToProps = (state) => {
     }
 }
 
+const mapDispatchtoProps = (dispatch) => {
+    return {
+        deletePregunta: (id) => dispatch(deletePregunta(id)),
+        editPregunta: (pregunta) => dispatch(editPregunta(pregunta)),
+    }
+}
+
 export default compose(
-    connect(mapStateToProps),
-    firestoreConnect([{ collection: "preguntas", orderBy: ["createdAt", "desc"] }])
+    connect(mapStateToProps, mapDispatchtoProps),
+    firestoreConnect([{ collection: "preguntas", orderBy: ["createdAt", "desc"]}])
 )(DashboardPreguntas)

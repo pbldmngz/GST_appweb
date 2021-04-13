@@ -11,6 +11,8 @@ import DetallesPregunta from './components/preguntas/DetallesPregunta';
 import DetallesAuditoria from './components/auditorias/DetallesAuditoria'
 import ResponderAuditoria from './components/auditorias/ResponderAuditoria'
 import DetallesPreguntasAuditoria from './components/preguntas/DetallesPreguntasAuditoria'
+import EditarPregunta from './components/preguntas/EditarPregunta';
+import DetallesPreguntaIndividual from './components/preguntas/DetallesPreguntaIndividual';
 
 class App extends Component {
   render() {
@@ -31,6 +33,8 @@ class App extends Component {
             <Route path={path.crear_pregunta} component={CrearPregunta} />
             <Route path={path.preguntas_detalles_redirect} component={DetallesPregunta} />
             <Route path={path.detalles_preguntas_auditoria_redirect} component={DetallesPreguntasAuditoria} />
+            <Route path={path.editar_pregunta_redirect} component={EditarPregunta} />
+            <Route path={path.detalles_pregunta_auditoria_redirect} component={DetallesPreguntaIndividual} />
           </Switch>
         </div>
       </BrowserRouter>

@@ -1,24 +1,33 @@
 import React from 'react'
 import moment from 'moment'
+import { Link, NavLink } from 'react-router-dom'
 
-export default function TarjetaPregunta(pregunta) {
-
+export default function TarjetaPregunta(props) {
+    var { path, pathName } = require('../../config/config');
     // Se tienen que añadir:
     // - Añadir botones para borrar/editar una pregunta, con un "¿estás seguro?"
     // Pueden hacerlo haciendo unos divs | ----- | - | flex, no soy el experto
-    const pre = pregunta.pregunta
+    const {pregunta} = props
     
     return (
-        <div className="card x-depth-0 tarjeta-pregunta card-content" key={pre.id}>
+        <div className="card x-depth-0 tarjeta-pregunta card-content" key={pregunta.id}>
             <div className="center-grid">
-                <div className="grey-text text-darken-3 card-cont">
-                    <span className="card-title">{pre.english}</span>
-                    <p>{pre.description}</p>
-                    <p>Reaction Plan: {pre.reaction_plan}</p>
-                </div>
+                <Link to={path.detalles_pregunta_auditoria + "/" + pregunta.id}>
+                    <div className="grey-text text-darken-3 card-cont">
+                        <span className="card-title">{pregunta.english}</span>
+                        <p>{pregunta.description}</p>
+                        <p>Reaction Plan: {pregunta.reaction_plan}</p>
+                    </div>
+                </Link>
                 <div className="card-extra">
-                    <button className="boton">Editar</button>
-                    <button className="boton">Eliminar</button>
+                    <Link to={path.editar_pregunta + "/" + pregunta.id}>
+                        <button className="boton">Editar</button>
+                    </Link>
+                    <Link to={path.preguntas}>
+                        <button className="boton" onClick={() => {
+                            props.deletePregunta(pregunta.id)
+                        }}>Eliminar</button>
+                    </Link>
                 </div>
             </div>
         </div>

@@ -2,9 +2,9 @@ import React from 'react'
 import TarjetaPregunta from './TarjetaPregunta'
 import { Link, NavLink } from 'react-router-dom'
 
-export default function Preguntas(preguntas) {
+export default function Preguntas(props) {
     var { path, pathName } = require('../../config/config');
-    const pre = preguntas.preguntas
+    const { preguntas, editPregunta, deletePregunta } = props
 
     //Center the + icon pls
     // Considerándolo, no tiene caso, va a haber más de 5 preguntas y se va a perder
@@ -12,13 +12,15 @@ export default function Preguntas(preguntas) {
     return (
 
         <div className="pregunta-list section">
-            {pre && pre.map(pregunta => {
+            {preguntas && preguntas.map(pregunta => {
                 return (
-                    <Link to={path.preguntas_detalles + "/" + pregunta.id} key={pregunta.id}>
+                    <div key={pregunta.id}>
                         <TarjetaPregunta
                             pregunta={pregunta}
+                            editPregunta={editPregunta}
+                            deletePregunta={deletePregunta}
                         />
-                    </Link>
+                    </div>
                 )
             })}
             <NavLink to={path.crear_pregunta} className="btn-floating btn-large waves-effect waves-light blue">

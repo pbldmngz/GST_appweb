@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react'
-import { createPregunta } from '../../store/actions/preguntaActions'
+import { editPregunta, getPregunta } from '../../store/actions/preguntaActions'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
 import Select from '@material-ui/core/Select';
@@ -7,13 +7,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 
 
-class CrearPregunta extends Component {
+class EditarPregunta extends Component {
     state = {
         category: 5,
         description: "",
         reaction_plan: "",
         english: "",
-        spanish: ""
+        spanish: "",
     }
     handleChange = (e) => {
         this.setState({
@@ -21,36 +21,56 @@ class CrearPregunta extends Component {
         })
     }
     handleChangeSelect = (e) => {
-        console.log(e)
+        // console.log(e)
         this.setState({
             category: e.target.value
         })
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state)
-        this.props.createPregunta(this.state)
+        // console.log("se supone que se envió", this.state)
+        this.props.editPregunta(this.props.match.params.id, this.state)
         this.props.history.push("/preguntas"); //Esto se cambiará según el contexto
     }
+
+    componentWillMount() {
+        const id = this.props.match.params.id
+        this.props.getPregunta(id).then((res) => {
+            // console.log("RES is working", res)
+            this.setState({
+                category: res.category,
+                description: res.description,
+                reaction_plan: res.reaction_plan,
+                english: res.english,
+                spanish: res.spanish,
+            })
+            // console.log("This is Res", res)
+        })
+        // console.log("Falta que el texto de los inputs se cambie a lo del state", this.state)
+        //Checa el state en la consola, no sale nada
+
+    }
+
     render() {
+        // console.log(this.state)
         const { auth } = this.props;
         if (!auth.uid) return <Redirect to="/signin" />
 
         return (
             <div className="container">
                 <form className="white" onSubmit={this.handleSubmit}>
-                    <h5 className="grey-text text-darken-3">Crear pregunta</h5>
-                    <div className="input-field">
+                    <h5 className="grey-text text-darken-3">Editar pregunta</h5>
+                    <div className="">
                         <label htmlFor="lang.english">Pregunta</label>
-                        <input type="text" id='english' onChange={this.handleChange} />
+                        <input type="text" id='english' value={this.state.english} onChange={this.handleChange} />
                     </div>
-                    <div className="input-field">
+                    <div className="">
                         <label htmlFor="descripcion">Descripción</label>
-                        <input type="text" id='description' onChange={this.handleChange} />
+                        <input type="text" id='description' value={this.state.description} onChange={this.handleChange} />
                     </div>
-                    <div className="input-field">
+                    <div className="">
                         <label htmlFor="action_plan">Plan de reacción</label>
-                        <input type="text" id='reaction_plan' onChange={this.handleChange} />
+                        <input type="text" id='reaction_plan' value={this.state.reaction_plan} onChange={this.handleChange} />
                     </div>
                     <div className="">
                         <InputLabel id="select-level">Categroría</InputLabel>
@@ -63,7 +83,7 @@ class CrearPregunta extends Component {
                         </Select>
                     </div>
 
-                    <button className="btn blue lighten-1 z-depth-0">Crear</button>
+                    <button className="btn blue lighten-1 z-depth-0">Editar</button>
                 </form>
             </div>
         )
@@ -78,8 +98,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchtoProps = (dispatch) => {
     return {
-        createPregunta: (pregunta) => dispatch(createPregunta(pregunta))
+        editPregunta: (id, pregunta) => dispatch(editPregunta(id, pregunta)),
+        getPregunta: (id) => dispatch(getPregunta(id))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchtoProps)(CrearPregunta)
+export default connect(mapStateToProps, mapDispatchtoProps)(EditarPregunta)

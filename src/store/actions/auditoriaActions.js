@@ -9,7 +9,8 @@ export const createAuditoria = (auditoria) => {
         firestore.collection("auditorias").add({
             ...auditoria,
             createdBy: profile.firstName + " " + profile.lastName,
-            createdAt: new Date()
+            createdAt: new Date(),
+            authorId,
             //FechaInicio y FechaFin
             //Trataré de hacerlo con un componente
             //de calendario
@@ -49,8 +50,11 @@ export const preguntasAuditoria = (auditoria) => {
             return await asyncCall(dispatch, getFirestore, "preguntas", id)
         })).then((values) => {
             // console.log("Values: ", values)
+            // if (values.exist) {
+                return values
+            // }
             // dispatch({ type: "SUCCESSFULLY_EXTRACTED_PREGUNTAS_FROM_AUDITORIA" }, values)
-            return values
+            
         }).catch((err) => {
             console.log(err)
         });
