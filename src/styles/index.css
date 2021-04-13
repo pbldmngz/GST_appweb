@@ -88,9 +88,16 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   width:10%;
 }
 
+.button-group {
+  /* background-color: #ec407a; */
+  display: table-cell;
+}
+
 .boton {
-  height: 60px;
-  width: 80px;
+  /* height: 90px;
+  width: 80px; */
+  margin-right: 12px;
+  display: inline-block;
   text-align: center;
 }
 

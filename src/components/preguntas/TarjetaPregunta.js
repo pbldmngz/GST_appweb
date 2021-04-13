@@ -20,14 +20,16 @@ export default function TarjetaPregunta(props) {
                     </div>
                 </Link>
                 <div className="card-extra">
-                    <Link to={path.editar_pregunta + "/" + pregunta.id}>
-                        <button className="boton">Editar</button>
-                    </Link>
-                    <Link to={path.preguntas}>
-                        <button className="boton" onClick={() => {
-                            props.deletePregunta(pregunta.id)
-                        }}>Eliminar</button>
-                    </Link>
+                    <div className="button-group">
+                        <Link to={path.editar_pregunta + "/" + pregunta.id}>
+                            <div className="boton"><i className="material-icons">edit</i></div>
+                        </Link>
+                        <Link to={path.preguntas}>
+                            <div className="boton" onClick={() => {
+                                props.deletePregunta(pregunta.id)
+                            }}><i className="material-icons">delete</i></div>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>
