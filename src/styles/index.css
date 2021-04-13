@@ -64,8 +64,24 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   margin-left: 50px;
 }
 
+.card-extra {
+  /* flex: 0 0 30%; */
+  float: left;
+  /* background-color: #ec407a; */
+  width:10%;
+}
+
+.suavizar-borde {
+  border-radius: 5px;
+  /* background-color: #ec407a; */
+  text-align: center;
+  color:white;
+}
+
 .card-cont {
-  flex: 1;
+  float:left;
+  width:90%;
+  /* background-color: aqua; */
 }
 
 .main-container {

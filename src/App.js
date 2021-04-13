@@ -30,7 +30,7 @@ class App extends Component {
             <Route path={path.preguntas} component={DashboardPreguntas} />
             <Route path={path.crear_pregunta} component={CrearPregunta} />
             <Route path={path.preguntas_detalles_redirect} component={DetallesPregunta} />
-            <Route path="/detalles-preguntas-auditoria/:id" component={DetallesPreguntasAuditoria} />
+            <Route path={path.detalles_preguntas_auditoria_redirect} component={DetallesPreguntasAuditoria} />
           </Switch>
         </div>
       </BrowserRouter>
