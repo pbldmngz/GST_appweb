@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router';
 import { signUp } from '../../store/actions/authActions'
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
 
 
 class SignUp extends Component {
@@ -10,16 +13,27 @@ class SignUp extends Component {
         password: '',
         firstName: '',
         lastName: '',
+        level: 5,
     }
     handleChange = (e) => {
+        console.log(e)
         this.setState({
             [e.target.id]: e.target.value
         })
     }
+
+    handleChangeSelect = (e) => {
+        console.log(e)
+        this.setState({
+            level: e.target.value
+        })
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.signUp(this.state)
     }
+
     render() {
         const { auth, authError } = this.props;
 
@@ -44,6 +58,17 @@ class SignUp extends Component {
                     <div className="input-field">
                         <label htmlFor="lastName">Last Name</label>
                         <input type="text" id='lastName' onChange={this.handleChange} />
+                    </div>
+                    <div className="">
+                        <InputLabel id="select-level">Level</InputLabel>
+                        <Select labelId="select-level" id="level" value={this.state.level} onChange={this.handleChangeSelect}>
+                            <MenuItem value={5}>E</MenuItem>
+                            <MenuItem value={4}>D</MenuItem>
+                            <MenuItem value={3}>C</MenuItem>
+                            <MenuItem value={2}>B</MenuItem>
+                            <MenuItem value={1}>A</MenuItem>
+                            <MenuItem value={0}>Admin</MenuItem>
+                        </Select>
                     </div>
                     <button className="btn blue lighten-1 z-depth-0">Sign Up</button>
                     <div className="center red-text">

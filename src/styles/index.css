@@ -34,7 +34,24 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   color: #ec407a !important;
 }
 
-.right-container {
+.card-content {
+  /* background-color: aqua; */
+  min-height: 165px;
+  /* height: 300px; */
+  padding: 20px;;
+  padding-bottom: 50px;
+}
+
+.center-grid {
+  /* grid: center; */
+}
+
+.extra-padding {
+  padding: 25px;
+  padding-right: 0px;
+}
+
+.right-container{
   float: right;
 }
 
@@ -69,6 +86,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   float: left;
   /* background-color: #ec407a; */
   width:10%;
+}
+
+.boton {
+  height: 60px;
+  width: 80px;
+  text-align: center;
 }
 
 .suavizar-borde {

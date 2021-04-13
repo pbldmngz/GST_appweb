@@ -9,10 +9,17 @@ export default function TarjetaPregunta(pregunta) {
     const pre = pregunta.pregunta
     
     return (
-        <div className="card x-depth-0 tarjeta-pregunta" key={pre.id}>
-            <div className="card-content grey-text text-darken-3">
-                <span className="card-title">{pre.english}</span>
-                <p>{pre.description}</p>
+        <div className="card x-depth-0 tarjeta-pregunta card-content" key={pre.id}>
+            <div className="center-grid">
+                <div className="grey-text text-darken-3 card-cont">
+                    <span className="card-title">{pre.english}</span>
+                    <p>{pre.description}</p>
+                    <p>Reaction Plan: {pre.reaction_plan}</p>
+                </div>
+                <div className="card-extra">
+                    <button className="boton">Editar</button>
+                    <button className="boton">Eliminar</button>
+                </div>
             </div>
         </div>
     )
