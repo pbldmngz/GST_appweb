@@ -39,3 +39,4 @@ Para evitar contratiempos por módulos que instale o desinstale (tardan mucho en
 * [Materialize](https://materializecss.com/), muy útil para no involucrarse mucho con el CSS, solo ponen algo como `<div className="blue container"></div>` y listo, tienen un container azul.
 * [Material-UI](https://material-ui.com/es/), ya tienen la librería instalada, esta cosa trae componentes HTML adaptados a REACT.
 * [Códigos hexadecimales seguros para programadores](https://htmlcolorcodes.com/color-chart/)
+* [Íconos estilo google fáciles de implementar](https://fonts.google.com/icons). Ya hice todo lo necesario, solo necesitan copiar y pegar la línea de código que los representa.
