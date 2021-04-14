@@ -8,14 +8,15 @@ import { Redirect } from 'react-router'
 
 class DashboardAuditorias extends Component {
     render() {
-        const { auditorias, auth } = this.props
+        const { auditorias, auth, userLevel } = this.props
 
         if (!auth.uid) return <Redirect to="/signin"/>
+        if (userLevel != 0) return <Redirect to="/" />
 
         if (auditorias) {
             return (
                 <div className="dashboard container">
-                    <Auditorias auditorias={auditorias} />
+                    <Auditorias auditorias={auditorias} userLevel={userLevel} />
                 </div>
             )
         } else {
@@ -32,7 +33,8 @@ const mapStateToProps = (state) => {
     //console.log(state)
     return {
         auditorias: state.firestore.ordered.auditorias,
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        userLevel: state.firebase.profile.userLevel
     }
 }
 

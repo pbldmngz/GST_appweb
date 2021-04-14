@@ -15,9 +15,11 @@ import { deletePregunta, editPregunta } from '../../store/actions/preguntaAction
 
 class DashboardPreguntas extends Component {
     render() {
-        const { preguntas, auth } = this.props
+        const { preguntas, auth, userLevel } = this.props
+        // console.log(userLevel)
 
         if (!auth.uid) return <Redirect to="/signin" />
+        if (userLevel != 0) return <Redirect to="/" />
 
         if (preguntas){
             return (
@@ -26,6 +28,7 @@ class DashboardPreguntas extends Component {
                         preguntas={preguntas} 
                         editPregunta={this.props.editPregunta} 
                         deletePregunta={this.props.deletePregunta}
+                        userLevel={userLevel}
                     />
                 </div>
             )
@@ -43,7 +46,8 @@ const mapStateToProps = (state) => {
     //console.log(state)
     return {
         preguntas: state.firestore.ordered.preguntas,
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        userLevel: state.firebase.profile.userLevel
     }
 }
 

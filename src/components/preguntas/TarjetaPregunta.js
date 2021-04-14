@@ -7,9 +7,25 @@ export default function TarjetaPregunta(props) {
     // Se tienen que añadir:
     // - Añadir botones para borrar/editar una pregunta, con un "¿estás seguro?"
     // Pueden hacerlo haciendo unos divs | ----- | - | flex, no soy el experto
-    const {pregunta} = props
+    const {pregunta, userLevel} = props
+
+    console.log("userLevel on tarjeta", userLevel)
     
-    return (
+    // En cierto modo, ni siquiera tiene caso esto, los usuarios normales no llegarían aquí
+    const botones = (userLevel == 0) ? (
+        <div className="button-group">
+            <Link to={path.editar_pregunta + "/" + pregunta.id}>
+                <div className="boton"><i className="material-icons">edit</i></div>
+            </Link>
+            <Link to={path.preguntas}>
+                <div className="boton" onClick={() => {
+                    props.deletePregunta(pregunta.id)
+                }}><i className="material-icons">delete</i></div>
+            </Link>
+        </div>
+    ) : null
+    
+    return ( 
         <div className="card x-depth-0 tarjeta-pregunta card-content" key={pregunta.id}>
             <div className="center-grid">
                 <Link to={path.detalles_pregunta_auditoria + "/" + pregunta.id}>
@@ -20,16 +36,7 @@ export default function TarjetaPregunta(props) {
                     </div>
                 </Link>
                 <div className="card-extra">
-                    <div className="button-group">
-                        <Link to={path.editar_pregunta + "/" + pregunta.id}>
-                            <div className="boton"><i className="material-icons">edit</i></div>
-                        </Link>
-                        <Link to={path.preguntas}>
-                            <div className="boton" onClick={() => {
-                                props.deletePregunta(pregunta.id)
-                            }}><i className="material-icons">delete</i></div>
-                        </Link>
-                    </div>
+                    {botones}
                 </div>
             </div>
         </div>

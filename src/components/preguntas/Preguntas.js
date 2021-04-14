@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom'
 
 export default function Preguntas(props) {
     var { path, pathName } = require('../../config/config');
-    const { preguntas, editPregunta, deletePregunta } = props
+    const { preguntas, editPregunta, deletePregunta, userLevel } = props
 
     //Center the + icon pls
     // Considerándolo, no tiene caso, va a haber más de 5 preguntas y se va a perder
@@ -19,6 +19,7 @@ export default function Preguntas(props) {
                             pregunta={pregunta}
                             editPregunta={editPregunta}
                             deletePregunta={deletePregunta}
+                            userLevel={userLevel}
                         />
                     </div>
                 )

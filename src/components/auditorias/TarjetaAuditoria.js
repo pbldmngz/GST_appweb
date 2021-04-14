@@ -3,7 +3,7 @@ import moment from 'moment'
 
 
 
-export default function TarjetaAuditoria(auditoria) {
+export default function TarjetaAuditoria(props) {
     // Si las tarjetas no tienen las mismas "líneas" de contenido
     // se rompe la tabla
     // Para arreglar esto se limitó el límite de carácteres para el título, 
@@ -19,13 +19,13 @@ export default function TarjetaAuditoria(auditoria) {
         return date;
     }
 
-    const audit = auditoria.auditoria
+    const {auditoria, userLevel} = props
 
     var color = "white";
     var text = "!!";
 
     var checkDate = new Date();
-    var fecha_fin = audit.fecha_fin.toDate().addDays(0)
+    var fecha_fin = auditoria.fecha_fin.toDate().addDays(0)
 
     if (fecha_fin < checkDate){
         color = "black";
@@ -44,24 +44,33 @@ export default function TarjetaAuditoria(auditoria) {
         text = "R";
     } 
 
-    const date = audit.fecha_fin ? <p className="grey-text">Due date: {moment(audit.fecha_fin.toDate()).fromNow()}</p> : null
+    const graphOrWarn = (userLevel == 0) ? (
+        <div>
+            <i className="material-icons">analytics</i>
+        </div>
+    ) : (
+        <div style={{ backgroundColor: color }} className="card-extra suavizar-borde">
+            <p>{text}</p>
+        </div>
+    );
+    
+
+    const date = auditoria.fecha_fin ? <p className="grey-text">Due date: {moment(auditoria.fecha_fin.toDate()).fromNow()}</p> : null
     return (
-        <div className="card x-depth-0 tarjeta-auditoria" key={audit.id}>
+        <div className="card x-depth-0 tarjeta-auditoria" key={auditoria.id}>
             <div className="card-content grey-text text-darken-3">
                 {/* {console.log(audit.auditoria.length)} */}
                 <div className="card-title-all">
                     {/* card-title */}
                     <span className="card-cont card-title">{
-                            (audit.auditoria.length > 18) ? audit.auditoria.substr(0, 18) + "..." : audit.auditoria
+                            (auditoria.auditoria.length > 18) ? auditoria.auditoria.substr(0, 18) + "..." : auditoria.auditoria
                         }</span>
 
-                    <div style={{ backgroundColor: color }} className="card-extra suavizar-borde">
-                        <p>{text}</p>
-                    </div>
+                    {graphOrWarn}
                 </div>
                 
                 
-                <p>Auditor: {audit.auditor}</p>
+                <p>Auditor: {auditoria.auditor}</p>
                 {date}
             </div>
         </div>

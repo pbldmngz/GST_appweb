@@ -28,8 +28,9 @@ class CrearAuditoria extends Component {
         this.props.history.push("/"); //Esto se cambiará según el contexto
     }
     render() {
-        const {auth} = this.props;
+        const {auth, userLevel} = this.props;
         if (!auth.uid) return <Redirect to="/signin" />
+        if (userLevel != 0) return <Redirect to="/" />
 
         return (
             <div className="container">
@@ -75,7 +76,8 @@ class CrearAuditoria extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        userLevel: state.firebase.profile.userLevel
     }
 }
 
