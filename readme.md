@@ -27,7 +27,7 @@ Para evitar contratiempos por módulos que instale o desinstale (tardan mucho en
 * Agregar el logo de la empresa al login y al NavBar.
 * ~~En este momento, al hacer click en una auditoria nos lleva a `/responder-auditoria/:id/`, pero ya está disponible `/detalles-preguntas-auditoria/:id`, hacer que según el tipo de usuario se vaya a una u otra.~~
 
-**Diseño a.k.a. "suavizar lo veo que está algo"**
+**Diseño a.k.a. "suavizar lo feo que está algo"**
 * Cambiar los estilos del Login.
 * En general, en este momento se están usando estilos sacados de [Materialize](materializecss.com/), al final lo suyo es que estén en un directorio del proyecto. Materialize se puede descargar con `npm install materialize-css@next` pero no tengo garantía que el JS venga incluído, me gustaría que la mayoría estuviera en nuestro repositorio (pueden copiar u pegar la mayoría, está disponible [aquí](https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css)).
 * Si las tarjetas (al menos las de auditoría) no tienen el mismo contenido, se rompe la Grid, de momento lo que hice es cortar el título, pero no creo que sea lo único que se pueda hacer.
