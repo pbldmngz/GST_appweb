@@ -18,7 +18,7 @@ Para evitar contratiempos por módulos que instale o desinstale (tardan mucho en
 * ~~Al crear pregunta, seleccionar la categoría a la que pertenecerá usando **RadioButtons** o un **Select**, procuren utilizar [esta página](material-ui.com/) para tener elementos HTML más "modernos". Los **radioButtons** que he usado han sido clases instaladas de aquí, ya descargué la librería, solo tienen que importarla, no descargan nada.~~
 * ~~Añadir en las **preguntas** botones para editar y eliminar.~~
 * Crear un "segundo NavBar", que en realidad es para poner los títulos de cada sección, y los botones correspondientes, para más detalle checken el [documento del Drive](https://drive.google.com/file/d/1i8QxAv7rpu3QY9a8UCQw_CLSR4c-5Kex/view?usp=sharing).
-* Las ventanas de diálogo al completar una acción o al estar a punto de realizar algo irremediable, en este momento solo estoy usando redirects.
+* Las ventanas de diálogo al completar una acción o al estar a punto de realizar algo irremediable, en este momento solo estoy usando redirects. [Se me había pasado poner el link la última vez](https://material-ui.com/es/components/dialogs/#alerts).
 * ~~Añadir el ícono de urgencia dentro de `/componentes/auditoria/TarjetaAuditoria.js`.~~
 * ~~Cuando se tenga uso del atributo **userLevel**, si el nivel es 0 (admin) se debe cambiar el ícono de "urgencia" al de "gráfica".~~
 * Botón de **return**, probablemente se haga usando el atributo de **props.history** o con alguna configuración de redireccionamientos con un archivo similar a `/config/config.js`.
