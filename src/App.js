@@ -8,11 +8,12 @@ import CrearAuditoria from './components/auditorias/CrearAuditoria'
 import DashboardPreguntas from './components/preguntas/DashboardPreguntas'
 import CrearPregunta from './components/preguntas/CrearPregunta'
 import DetallesPregunta from './components/preguntas/DetallesPregunta';
-import DetallesAuditoria from './components/auditorias/DetallesAuditoria'
-import ResponderAuditoria from './components/auditorias/ResponderAuditoria'
-import DetallesPreguntasAuditoria from './components/preguntas/DetallesPreguntasAuditoria'
+import DetallesAuditoria from './components/auditorias/DetallesAuditoria';
+import ResponderAuditoria from './components/auditorias/ResponderAuditoria';
+import DetallesPreguntasAuditoria from './components/preguntas/DetallesPreguntasAuditoria';
 import EditarPregunta from './components/preguntas/EditarPregunta';
 import DetallesPreguntaIndividual from './components/preguntas/DetallesPreguntaIndividual';
+import ChangePassword from './components/auth/ChangePassword';
 
 class App extends Component {
   render() {
@@ -35,6 +36,7 @@ class App extends Component {
             <Route path={path.detalles_preguntas_auditoria_redirect} component={DetallesPreguntasAuditoria} />
             <Route path={path.editar_pregunta_redirect} component={EditarPregunta} />
             <Route path={path.detalles_pregunta_auditoria_redirect} component={DetallesPreguntaIndividual} />
+            <Route path={path.change_password} component={ChangePassword} />
           </Switch>
         </div>
       </BrowserRouter>

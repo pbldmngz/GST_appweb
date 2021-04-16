@@ -8,12 +8,13 @@ import { Redirect } from 'react-router'
 
 class DashboardAuditorias extends Component {
     render() {
+        // console.log(this.props)
         const { auditorias, respuestas, auth, userLevel } = this.props
 
         if (!auth.uid) return <Redirect to="/signin"/>
         // if (userLevel != 0) return <Redirect to="/" />
-        console.log("userLevel: ", userLevel)
-        console.log("respuestas", respuestas)
+        // console.log("userLevel: ", userLevel)
+        // console.log("respuestas", respuestas)
 
 
         // ---> Con esto los usuarios no ven las que ya respondieron <---
@@ -30,7 +31,7 @@ class DashboardAuditorias extends Component {
 
             var filtID = {}
             for (let fA in filtRespuestas){
-                console.log("fA", filtRespuestas[fA])
+                // console.log("fA", filtRespuestas[fA])
                 filtID[filtRespuestas[fA].auditoria] = true
             }
             

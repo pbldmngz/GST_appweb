@@ -20,6 +20,7 @@ config.path = {
     detalles_pregunta_auditoria_redirect: "/detalles-pregunta-auditoria/:id",
     editar_pregunta: "/editar-pregunta",
     editar_pregunta_redirect: "/editar-pregunta/:id",
+    change_password: "/change_password",
     // pregunta_reponder: "/responder-pregunta",
     // pregunta_reponder_redirect: "/responder-pregunta/:id"
 }
@@ -37,6 +38,7 @@ config.pathName = {
     pregunta_detalles: "Detalles de pregunta",
     pregunta_responder: "Responder pregunta",
     detalles_preguntas_auditoria: "Detalles de las preguntas de la auditoría",
+    change_password: "Cambiar contraseña",
 }
 
 module.exports = config;
