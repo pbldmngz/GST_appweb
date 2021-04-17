@@ -64,7 +64,15 @@ class CrearAuditoria extends Component {
             openB: true
         })
     };
-
+    handleCancel = () => {
+        this.props.history.push("/");
+    }
+    handleDelete = (id) => {
+        const newPreguntas = this.state.preguntas.filter(pregunta => pregunta.id !== id)
+        this.setState({
+            preguntas: newPreguntas
+        })
+    }
     handleClose = () => {
         this.setState({
             openB: false
@@ -123,19 +131,21 @@ class CrearAuditoria extends Component {
                             </div>
                         </form>
                     </div>
-                    <div className="agregar-pregunta card crear-auditoria-views">
-                        <div className="white ">
+                    <div className="agregar-pregunta card crear-auditoria-views destroy-overflow">
+                        <div className="white">
                             <h5 className="grey-text text-darken-3">Agregar preguntas</h5>
                             <div className="preguntas-creadas">
                                 {
                                 this.state.preguntas && this.state.preguntas.map((pregunta, index) => {
                                     return (
                                         <div className="grid-main" key={index}>
-                                            <div className="grid-component-left">
+                                            <div className="grid-component-left card">
                                                 {index + 1}. {pregunta.english}
                                             </div>
-                                            <div className="grid-component-right">
-                                                <button>Delete</button>
+                                            <div className="grid-component-right card hover-click" onClick={() => {
+                                                this.handleDelete(pregunta.id)
+                                            }}>
+                                                <i className="material-icons">delete</i>
                                             </div>
                                         </div>
                                         
@@ -159,7 +169,7 @@ class CrearAuditoria extends Component {
                                         onChange={this.handleChangeAutocomplete}
                                         getOptionLabel={(option) => option.english}
                                         style={{ width: 300 }}
-                                        renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                                        renderInput={(params) => <TextField {...params} label="Preguntas" variant="outlined" />}
                                     />
                                 </DialogContent>
                                 <DialogActions>
@@ -168,17 +178,13 @@ class CrearAuditoria extends Component {
                                 </DialogActions>
                             </Dialog>
                         </div>
-                        
                     </div>
+                    
                 </div>
                 
                 <div className="final-button container">
                     <button className="btn blue lighten-1 z-depth-0" onClick={this.handleSubmit}>Crear auditoría</button>
-                    <button className="btn lighten-1 z-depth-0">
-                        <NavLink to={path.auditorias} className="final-button-NavLink">
-                            Cancelar
-                        </NavLink>
-                    </button>
+                    <button className="btn lighten-1 z-depth-0" onClick={this.handleCancel}>Cancelar</button>
                 </div>
                 
             </div>
