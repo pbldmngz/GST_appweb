@@ -82,7 +82,7 @@ class CrearAuditoria extends Component {
         // console.log("Y aquí debo de sacar una forma de registrar una pregunta nueva", e)
         this.setState(prevState => ({
             openB: false,
-            preguntas: [...prevState.preguntas, this.state.valueB]
+            preguntas: [...new Set([...prevState.preguntas, this.state.valueB])]
         }))
     };
 
