@@ -34,13 +34,22 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   color: #ec407a !important;
 }
 
-.card-content {
+.card-content-custom {
+  /* background-color: aqua; */
+  /* min-height: 165px; */
+  /* height: 300px; */
+  padding: 20px;
+  padding-bottom: 0px;
+}
+
+.card-content{
   /* background-color: aqua; */
   min-height: 165px;
   /* height: 300px; */
-  padding: 20px;;
+  padding: 20px;
   padding-bottom: 50px;
 }
+
 
 .center-grid {
   /* grid: center; */
@@ -78,8 +87,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   /* float: right;
   position:relative;
   display: inline-block ; */
-  flex: 0 0 15%;
-  margin-left: 50px;
+  /* flex: 0 0 15%; */
+  margin-left: 25px;
 }
 
 .card-extra {
@@ -342,4 +351,15 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 
 .hover-click {
   cursor: pointer;
+}
+
+.ver-respuestas {
+  padding: 10px;
+  padding-bottom: 0px;
+  text-align: center;
+  width: 100%;
+}
+
+.detalles-pregunta {
+  height: 40vh;
 }

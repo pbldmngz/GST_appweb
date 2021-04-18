@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react'
 import {createAuditoria} from '../../store/actions/auditoriaActions'
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import {connect} from 'react-redux'
 import { Redirect } from 'react-router'
 import DatePicker from "react-datepicker";
@@ -14,6 +14,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import Slide from '@material-ui/core/Slide';
 //import DatePicker from 'react-datepicker/dist/react-datepicker'
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -92,6 +93,10 @@ class CrearAuditoria extends Component {
         if (!auth.uid) return <Redirect to="/signin" />
         if (userLevel != 0) return <Redirect to="/" />
 
+        const Transition = React.forwardRef(function Transition(props, ref) {
+            return <Slide direction="up" ref={ref} {...props} />;
+        });
+
         console.log(this.state.preguntas)
         return (
             <div className="just-width-100 white">
@@ -156,11 +161,18 @@ class CrearAuditoria extends Component {
                             <button className="btn-floating btn-small waves-effect waves-light blue button-margin" onClick={this.handleClickOpen}>
                                 <i className="material-icons">add</i>
                             </button>
-                            <Dialog open={this.state.openB} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+                            <Dialog 
+                                open={this.state.openB} 
+                                onClose={this.handleClose} 
+                                aria-labelledby="form-dialog-title"
+                                TransitionComponent={Transition}
+                                >
                                 <DialogTitle id="form-dialog-title">Seleccionar pregunta</DialogTitle>
                                 <DialogContent>
                                     <DialogContentText>
-                                        Busca y selecciona las preguntas que desees añadir.
+                                        Busca y selecciona las preguntas que desees añadir o 
+                                        <Link to="/crear-pregunta" target="_blank" rel="noopener noreferrer"> crea una pregunta nueva, </Link>
+                                        una vez creada la podrás seleccionar en esta lista.
                                     </DialogContentText>
                                     <Autocomplete
                                         id="valueB"
@@ -168,13 +180,13 @@ class CrearAuditoria extends Component {
                                         options={this.props.preguntas}
                                         onChange={this.handleChangeAutocomplete}
                                         getOptionLabel={(option) => option.english}
-                                        style={{ width: 300 }}
+                                        
                                         renderInput={(params) => <TextField {...params} label="Preguntas" variant="outlined" />}
                                     />
                                 </DialogContent>
                                 <DialogActions>
                                     <Button onClick={this.handleCloseSave} color="primary">Agregar</Button>
-                                    <Button onClick={this.handleClose} color="primary">Cancelar</Button>
+                                    <Button onClick={this.handleClose} color="secondary">Cancelar</Button>
                                 </DialogActions>
                             </Dialog>
                         </div>

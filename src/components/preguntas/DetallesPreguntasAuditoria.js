@@ -21,7 +21,7 @@ class DetallesPreguntasAuditoria extends Component {
         auditoria: ""
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         const id = this.props.match.params.id
         this.setState({
             auditoria: id
@@ -44,7 +44,7 @@ class DetallesPreguntasAuditoria extends Component {
         if (!auth.uid) return <Redirect to="/signin" />
 
         return (
-            <div className="container ">
+            <div className="container extra-margin">
                 <div className="card x-depth-0 detalles-preguntas-auditoria">
                         <h5 className="grey-text text-darken-3 center">Respuestas de la auditoría</h5>
                         {/* Esto se puede convertir a un operador ? : para que muestre un cargando o algo así */}

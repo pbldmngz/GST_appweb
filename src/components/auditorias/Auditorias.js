@@ -6,7 +6,7 @@ export default function Auditorias(props) {
     const { auditorias, userLevel } = props
     var { path } = require('../../config/config');
 
-    const refLink = (userLevel == 0) ? path.detalles_preguntas_auditoria : path.responder_auditoria;
+    const refLink = (userLevel === 0) ? path.detalles_preguntas_auditoria : path.responder_auditoria;
 
     return (
         

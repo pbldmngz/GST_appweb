@@ -33,7 +33,7 @@ class EditarPregunta extends Component {
         this.props.history.push("/preguntas"); //Esto se cambiará según el contexto
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         const id = this.props.match.params.id
         this.props.getPregunta(id).then((res) => {
             // console.log("RES is working", res)

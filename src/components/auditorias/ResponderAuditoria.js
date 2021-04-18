@@ -91,7 +91,7 @@ class ResponderAuditoria extends Component {
         this.props.respuestaPregunta(results)
         this.props.history.push("/"); //Esto se cambiará según el contexto
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         const id = this.props.match.params.id
         this.setState({
             auditoria: id
