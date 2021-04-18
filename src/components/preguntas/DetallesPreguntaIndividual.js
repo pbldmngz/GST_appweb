@@ -16,6 +16,13 @@ const DetallesPregunta = (props) => {
     // const pregunta = {}
     // const preguntaRespuestas = [] //Array de diccionarios
     // { console.log("login pregunta --> DePre", pregunta) }
+    const categoria = {
+        1: "A",
+        2: "B",
+        3: "C",
+        4: "D",
+        5: "E",
+    }
     if (pregunta) {
         return (
             <div className="container">
@@ -23,7 +30,7 @@ const DetallesPregunta = (props) => {
                     <div className="container card-cont">
                             <span className="card-title">{pregunta.english}</span>
                             <p>Descripción: {pregunta.description}</p>
-                            <p>Categoría: {pregunta.category}</p>
+                            <p>Categoría: {categoria[pregunta.category]}</p>
                             <p>Plan de reacción: {pregunta.reaction_plan}</p>
                             <p>Creado por: {pregunta.createdBy}</p>
                             <p>Creado: {moment(pregunta.createdAt.toDate()).fromNow()}</p>

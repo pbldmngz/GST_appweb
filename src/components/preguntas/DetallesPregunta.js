@@ -53,7 +53,13 @@ const DetallesPregunta = (props) => {
         )
     })
 
-    
+    const categoria = {
+        1: "A",
+        2: "B",
+        3: "C",
+        4: "D",
+        5: "E",
+    }
 
     // console.log("Esto son la respuestas:", justificaciones)
     // const pregunta = {}
@@ -68,7 +74,7 @@ const DetallesPregunta = (props) => {
                         <div className="">
                             <span className="card-title">{pregunta.english}</span>
                             <p><b>Descripción: </b>{pregunta.description}</p>
-                            <p><b>Categoría: </b>{pregunta.category}</p>
+                            <p><b>Categoría: </b>{categoria[pregunta.category]}</p>
                             <p><b>Plan de reacción: </b>{pregunta.reaction_plan}</p>
                             <p><b>Creado por: </b>{pregunta.createdBy}</p>
                             <p><b>Creado: </b>{moment(pregunta.createdAt.toDate()).fromNow()}</p>
