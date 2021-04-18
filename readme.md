@@ -12,8 +12,8 @@ Para evitar contratiempos por módulos que instale o desinstale (tardan mucho en
 * La vista principal (la de auditorias) necesita poder filtrarse/ordenarse, en principio tanto para administradores como usuarios normales.
 * ~~Se debe incluír un nivel al momento de crear los usuarios (dejé más info en `/store/actions/authActions.js`).~~
 * ~~Se debe empezar a limitar las vistas según el nivel del usuario.~~
-* Al crear la auditoría aún falta poder seleccionar preguntas, y de preferencia, si no existe la pregunta que se quiere, se puede crear y añadir al momento sin perder lo que ya se tenía hecho, haganlo a medias para empezar.
-* ~~Empezar a crear el componente de **preguntaGrafica** para el admin, donde además de la información va a poder ver una gráfica de pastel con la proporción de SI vs NO, esto también incluye otra~~ vista para las **respuestas.justificación** correspondientes a esa pregunta, ya hay un archivo `/componentes/preguntas/DetallesPregunta.js`~~, aún no empecé con las gráficas.~~
+* ~~Al crear la auditoría aún falta poder seleccionar preguntas, y de preferencia, si no existe la pregunta que se quiere, se puede crear y añadir al momento sin perder lo que ya se tenía hecho, haganlo a medias para empezar.~~
+* ~~Empezar a crear el componente de **preguntaGrafica** para el admin, donde además de la información va a poder ver una gráfica de pastel con la proporción de SI vs NO, esto también incluye otra vista para las **respuestas.justificación** correspondientes a esa pregunta, ya hay un archivo `/componentes/preguntas/DetallesPregunta.js`, aún no empecé con las gráficas.~~
 * ~~A su vez, se necesita la vista de las **preguntaGrafica** correspondientes a una auditoria específica.~~
 * ~~Al crear pregunta, seleccionar la categoría a la que pertenecerá usando **RadioButtons** o un **Select**, procuren utilizar [esta página](material-ui.com/) para tener elementos HTML más "modernos". Los **radioButtons** que he usado han sido clases instaladas de aquí, ya descargué la librería, solo tienen que importarla, no descargan nada.~~
 * ~~Añadir en las **preguntas** botones para editar y eliminar.~~
