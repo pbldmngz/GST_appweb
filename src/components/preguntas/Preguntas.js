@@ -12,6 +12,11 @@ export default function Preguntas(props) {
     return (
 
         <div className="pregunta-list section">
+            <div className="center extra-padding-button">
+                <NavLink to={path.crear_pregunta} className="btn-floating btn-large waves-effect waves-light blue">
+                    <i className="material-icons">add</i>
+                </NavLink>
+            </div>
             {preguntas && preguntas.map(pregunta => {
                 return (
                     <div key={pregunta.id}>
@@ -24,9 +29,6 @@ export default function Preguntas(props) {
                     </div>
                 )
             })}
-            <NavLink to={path.crear_pregunta} className="btn-floating btn-large waves-effect waves-light blue">
-                <i className="material-icons">add</i>
-            </NavLink>
         </div>
     )
 }

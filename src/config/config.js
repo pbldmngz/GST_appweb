@@ -31,7 +31,7 @@ config.pathName = {
     crear_auditoria: "Crear auditoría",
     areas: "Areas",
     auditorias: "Auditorias",
-    auditorias: "Auditoria",
+    auditoria: "Auditoria",
     responder_auditoria: "Responder auditoria",
     preguntas: "Preguntas",
     crear_pregunta: "Crear pregunta",

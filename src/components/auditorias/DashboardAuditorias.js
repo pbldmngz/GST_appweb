@@ -4,11 +4,31 @@ import { connect } from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import { Redirect } from 'react-router'
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+
 // CSS class "container" centers content
 
 class DashboardAuditorias extends Component {
+    state = {
+        filter: 0
+    }
+
+    handleChangeSelect = (e) => {
+        // console.log(e)
+        this.setState({
+            filter: e.target.value
+        })
+    }
+
+    getKeyByValue = (object, value) => {
+        return Object.keys(object).find(key => object[key] === value);
+    }
+
     render() {
         // console.log(this.props)
+        
         const { auditorias, respuestas, auth, userLevel } = this.props
 
         if (!auth.uid) return <Redirect to="/signin"/>
@@ -24,11 +44,11 @@ class DashboardAuditorias extends Component {
         var filteredAuditorias = auditorias;
 
         if (userLevel != 0 && respuestas) {
-            // console.log("0", respuestas, auth.uid)
-            const filtRespuestas = respuestas.filter(res => auth.uid == res.answeredById)
+            // console.log("0", this.state.filter, respuestas)
+            const filtRespuestas = respuestas.filter(res => auth.uid === res.answeredById)
 
-            // console.log("1", filtRespuestas)
-
+            // console.log("After Filter", this.state.filter, filtRespuestas)
+            
             var filtID = {}
             for (let fA in filtRespuestas){
                 // console.log("fA", filtRespuestas[fA])
@@ -41,13 +61,44 @@ class DashboardAuditorias extends Component {
 
             // console.log("3", alreadyDone)
 
-            filteredAuditorias = auditorias.filter(aud => !alreadyDone.includes(aud.id))
+            filteredAuditorias = (this.state.filter === 2) ? (
+                auditorias.filter(aud => alreadyDone.includes(aud.id))
+            ) : (
+                auditorias.filter(aud => !alreadyDone.includes(aud.id))
+            );
         }
+        var { path, pathName } = require('../../config/config');
+
+        const menuItems = (userLevel === 0) ? (
+            <Select labelId="select-filter" id="filter" value={this.state.filter} onChange={this.handleChangeSelect}>
+                <MenuItem value={0}>Ordenar por fecha</MenuItem>
+                <MenuItem value={1}>Agrupar por áreas</MenuItem>
+            </Select>
+        ) : (
+                <Select labelId="select-filter" id="filter" value={this.state.filter} onChange={this.handleChangeSelect}>
+                    <MenuItem value={0}>Ordenar por fecha</MenuItem>
+                    <MenuItem value={2}>Mostrar realizados</MenuItem>
+                </Select>
+        );
 
         if (filteredAuditorias) {
             return (
                 <div className="dashboard container">
-                    <Auditorias auditorias={filteredAuditorias} userLevel={userLevel} />
+                    <div className="second-navbar">
+                        <div className="filter">
+                            <InputLabel id="select-filter">Vista</InputLabel>
+                            {menuItems}
+                        </div>
+                        <div className="dashboard-title">
+                            {pathName[this.getKeyByValue(path, this.props.match.path)]}
+                        </div>
+                        <div className="dashboard-extra-space">Return?</div>
+                    </div>
+                    <Auditorias 
+                        auditorias={filteredAuditorias} 
+                        userLevel={userLevel} 
+                        alreadyDone={(this.state.filter === 2)}
+                    />
                 </div>
             )
         } else {

@@ -3,7 +3,7 @@ import TarjetaAuditoria from './TarjetaAuditoria'
 import {Link} from 'react-router-dom'
 
 export default function Auditorias(props) {
-    const { auditorias, userLevel } = props
+    const { userLevel, auditorias, alreadyDone } = props
     var { path } = require('../../config/config');
 
     const refLink = (userLevel === 0) ? path.detalles_preguntas_auditoria : path.responder_auditoria;
@@ -12,14 +12,22 @@ export default function Auditorias(props) {
         
         <div className="auditoria-list section">
             {auditorias && auditorias.map(auditoria => {
-                return (
-                    <Link to={refLink + "/" + auditoria.id} key={auditoria.id}>
-                        <TarjetaAuditoria 
+                const retThis = (alreadyDone) ? (
+                    <TarjetaAuditoria
                         auditoria={auditoria}
                         userLevel={userLevel}
+                        alreadyDone={alreadyDone}
+                    />
+                ) : (
+                    <Link to={refLink + "/" + auditoria.id} key={auditoria.id} >
+                        <TarjetaAuditoria
+                            auditoria={auditoria}
+                            userLevel={userLevel}
+                            alreadyDone={alreadyDone}
                         />
                     </Link>
                 )
+                return retThis
             })}
 
             

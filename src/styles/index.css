@@ -42,6 +42,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   padding-bottom: 0px;
 }
 
+.extra-padding-button {
+  /* margin-bottom: 15px; */
+  /* background-color: #CB4335; */
+  padding: 5px;
+}
+
 .card-content{
   /* background-color: aqua; */
   min-height: 165px;
@@ -362,4 +368,30 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 
 .detalles-pregunta {
   height: 40vh;
+}
+
+
+.second-navbar {
+  /* background-color: #CB4335; */
+  margin-top: 15px;
+  overflow: hidden;
+}
+
+.filter {
+  width: 25%;
+  float: left;
+}
+
+.dashboard-title {
+  width: 50%;
+  float: left;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.dashboard-extra-space {
+  width: 25%;
+  float: left;
+  text-align: right;
 }

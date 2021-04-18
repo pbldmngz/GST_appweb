@@ -8,11 +8,11 @@ const Navbar = (props) => {
     const {auth, profile} = props
     const links = auth.uid ? <SignedInLinks /> : <SignedOutLinks />;
     const initials = auth.uid ? profile.initials : "GST";
-
+    //<Link to="/" className="brand-logo"> para centrarlo
     return (
         <nav className="nav-wrapper blue darken-3">
             <div className="">
-                <Link to="/" className="brand-logo">
+                <Link to="/" className="">
                     <button className="btn-floating btn-large waves-effect waves-light blue gst-logo">{initials}</button>
                 </Link>
                 <div className="right-container">{links}</div>

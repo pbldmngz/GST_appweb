@@ -53,7 +53,7 @@ class CrearPregunta extends Component {
                         <input type="text" id='reaction_plan' onChange={this.handleChange} />
                     </div>
                     <div className="">
-                        <InputLabel id="select-level">Categroría</InputLabel>
+                        <InputLabel id="select-level">Categoría</InputLabel>
                         <Select labelId="select-level" id="level" value={this.state.category} onChange={this.handleChangeSelect}>
                             <MenuItem value={5}>E</MenuItem>
                             <MenuItem value={4}>D</MenuItem>

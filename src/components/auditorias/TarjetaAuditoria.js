@@ -19,7 +19,7 @@ export default function TarjetaAuditoria(props) {
         return date;
     }
 
-    const {auditoria, userLevel} = props
+    const {auditoria, userLevel, alreadyDone} = props
 
     var color = "white";
     var text = "!!";
@@ -44,6 +44,14 @@ export default function TarjetaAuditoria(props) {
         text = "R";
     } 
 
+    var style = {}
+
+    if (alreadyDone) {
+        color = "grey";
+        text = "D";
+        style = { backgroundColor: "#D5D8DC" }
+    }
+
     const graphOrWarn = (userLevel == 0) ? (
         <div>
             <i className="material-icons">analytics</i>
@@ -57,7 +65,7 @@ export default function TarjetaAuditoria(props) {
 
     const date = auditoria.fecha_fin ? <p className="grey-text">Due date: {moment(auditoria.fecha_fin.toDate()).fromNow()}</p> : null
     return (
-        <div className="card x-depth-0 tarjeta-auditoria" key={auditoria.id}>
+        <div style={style} className="card x-depth-0 tarjeta-auditoria" key={auditoria.id}>
             <div className="card-content grey-text text-darken-3">
                 {/* {console.log(audit.auditoria.length)} */}
                 <div className="card-title-all">
