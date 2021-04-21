@@ -19,6 +19,10 @@ import Slide from '@material-ui/core/Slide';
 
 import "react-datepicker/dist/react-datepicker.css";
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
 class CrearAuditoria extends Component {
     state = {
         auditoria: "",
@@ -92,10 +96,6 @@ class CrearAuditoria extends Component {
         const {auth, userLevel} = this.props;
         if (!auth.uid) return <Redirect to="/signin" />
         if (userLevel != 0) return <Redirect to="/" />
-
-        const Transition = React.forwardRef(function Transition(props, ref) {
-            return <Slide direction="up" ref={ref} {...props} />;
-        });
 
         console.log(this.state.preguntas)
         return (
