@@ -51,6 +51,9 @@ class CrearPregunta extends Component {
 
                     <button className="btn blue lighten-1 z-depth-0">Crear</button>
                 </form>
+
+                <div className="regreso"><button className="return">Return</button></div>
+                
             </div>
         )
     }
