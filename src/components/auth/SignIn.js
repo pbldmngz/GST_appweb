@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {signIn} from '../../store/actions/authActions'
 import { Redirect } from 'react-router';
+import Logo_GST from '../../styles/imgs/Logo-GST.png'
+
 
 class SignIn extends Component {
     state = {
@@ -17,6 +19,7 @@ class SignIn extends Component {
         e.preventDefault();
         this.props.signIn(this.state)
     }
+    
     render() {
         const {authError, auth} = this.props;
 
@@ -24,10 +27,11 @@ class SignIn extends Component {
         
         return (
             <div className="container">
+                <img className="logo"src = {Logo_GST} alt= "gst logo"></img>
                 <form className="white" onSubmit={this.handleSubmit}>
-                    <h5 className="grey-text text-darken-3">Log in</h5>
-                    <div className="input-field">
-                        <label htmlFor="email">Email</label>
+                <i class="far fa-user"></i>
+                    <div className="username">
+                        <label htmlFor="email">Username</label>
                         <input type="email" id='email' onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
@@ -35,7 +39,7 @@ class SignIn extends Component {
                         <input type="password" id='password' onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
-                        <button className="btn blue lighten-1 z-depth-0">Login</button>
+                        <button className="Login">Login</button>
                         <div className="center red-text">
                             {authError ? <p>{authError}</p> : null}
                         </div>
