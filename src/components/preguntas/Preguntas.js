@@ -11,13 +11,13 @@ export default function Preguntas(preguntas) {
     // Considerándolo, no tiene caso, va a haber más de 5 preguntas y se va a perder
 
     return (
-        <div className="pregunta-list section">
+        <div className="content">
             <div className="cabecera">
-            <button className="return"><NavLink to={path.crear_pregunta}>
+            <button className="boton"><NavLink to={path.crear_pregunta}>
                 <text>New Question</text>
             </NavLink></button>
             <text className="title">Audit Creation</text>
-            <button className="return"><NavLink to={path.crear_pregunta}>
+            <button className="boton"><NavLink to={path.crear_pregunta}>
                 <text>Saved Questions</text>
             </NavLink></button>
             </div>
@@ -31,8 +31,10 @@ export default function Preguntas(preguntas) {
                     </Link>
                 )
             })}
+            <button className="return"><NavLink to={path.crear_pregunta}>
+                <text>Return</text>
+            </NavLink></button>
             </div>
-            <div className="regreso"><button className="return">Return</button></div>
         </div>
     )
 }
