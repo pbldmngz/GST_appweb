@@ -199,7 +199,10 @@ class CrearAuditoria extends Component {
                     <button className="btn lighten-1 z-depth-0" onClick={this.handleCancel}>Cancelar</button>
                 </div>
                 
+                <button className="regreso">Return</button>
+                
             </div>
+            
         )
     }
 }

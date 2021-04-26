@@ -10,7 +10,7 @@ const Navbar = (props) => {
     const initials = auth.uid ? profile.initials : "GST";
     //<Link to="/" className="brand-logo"> para centrarlo
     return (
-        <nav className="nav-wrapper blue darken-3">
+        <nav className="navbar">
             <div className="">
                 <Link to="/" className="">
                     <button className="btn-floating btn-large waves-effect waves-light blue gst-logo">{initials}</button>

@@ -29,6 +29,7 @@ export default function Preguntas(props) {
                     </div>
                 )
             })}
+            <button className="regreso">Return</button>
         </div>
     )
 }

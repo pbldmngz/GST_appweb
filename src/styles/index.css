@@ -1,13 +1,28 @@
-html{
-  min-height: 100%;
+body {
+  font-family: 'Montserrat', sans-serif;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  background-color: #eeeeee;
-  min-height: 100%;
+/*NAVBAR*/
+.navbar{
+  background-color: #002D73;
+}
+
+/*BOTONES*/
+.regreso{
+  border: 2px solid #707070;
+  padding: 6px 9px;
+  text-align: center;
+  font-size: 18px;
+  color: #707070;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.regreso:hover{
+  background-color: #707070;
+  color: white;
 }
 
 form{

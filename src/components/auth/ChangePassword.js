@@ -108,6 +108,8 @@ class ChangePassword extends Component {
                         {this.state.authError ? <p>{this.state.authError.message}</p> : null}
                     </div>
                 </form>
+
+                <button className="regreso">Return</button>
             </div>
         )
     }
