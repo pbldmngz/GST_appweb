@@ -29,10 +29,6 @@ export default function Auditorias(props) {
                 )
                 return retThis
             })}
-
-            <button className="regreso">Return</button>
-
-            
         </div>
     )
 }

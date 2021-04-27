@@ -80,6 +80,9 @@ class DashboardAuditorias extends Component {
                     <MenuItem value={2}>Mostrar realizados</MenuItem>
                 </Select>
         );
+        const botonReturn = (userLevel === 0) ? (
+            <div className="dashboard-extra-space">Return?</div>
+        ): null;
 
         if (filteredAuditorias) {
             return (
@@ -92,7 +95,7 @@ class DashboardAuditorias extends Component {
                         <div className="dashboard-title">
                             {pathName[this.getKeyByValue(path, this.props.match.path)]}
                         </div>
-                        <div className="dashboard-extra-space">Return?</div>
+                        {botonReturn}
                     </div>
                     <Auditorias 
                         auditorias={filteredAuditorias} 

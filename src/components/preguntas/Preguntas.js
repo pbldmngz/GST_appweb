@@ -11,6 +11,7 @@ export default function Preguntas(props) {
 
     return (
 
+    <div>
         <div className="pregunta-list section">
             <div className="center extra-padding-button">
                 <NavLink to={path.crear_pregunta} className="btn-floating btn-large waves-effect waves-light blue">
@@ -29,7 +30,11 @@ export default function Preguntas(props) {
                     </div>
                 )
             })}
-            <button className="regreso">Return</button>
         </div>
+        <div>
+        <button className="regreso">Return</button>
+        </div>
+    </div>
+
     )
 }
