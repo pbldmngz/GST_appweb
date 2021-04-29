@@ -104,7 +104,7 @@ class ResponderAuditoria extends Component {
             })
         })
     }
-   /* Seguro:function Seguro(event) {
+  /* onClick: function Seguro(e) {
         Swal.fire({
             title: 'Do you want to save the changes?',
             showDenyButton: true,
@@ -112,14 +112,14 @@ class ResponderAuditoria extends Component {
             confirmButtonText: `Save`,
             denyButtonText: `Don't save`,
           }).then((result) => {
-            /* Read more about isConfirmed, isDenied below 
+            /* Read more about isConfirmed, isDenied below
             if (result.isConfirmed) {
               Swal.fire('Saved!', '', 'success')
             } else if (result.isDenied) {
               Swal.fire('Changes are not saved', '', 'info')
             }
           })
-    },*/
+    }*/
     render() {
         const { auth, preguntas } = this.props;
 
@@ -179,7 +179,7 @@ class ResponderAuditoria extends Component {
                             )
                         })}
                         <div className="center">
-                            <button className="btn blue lighten-1 z-depth-0 big-button" onClick={this.Seguro}>Enviar</button>
+                            <button id='Enviar' className="btn blue lighten-1 z-depth-0 big-button" onClick={this.Seguro}>Enviar</button>
                         </div>
                         
                     </form>
@@ -209,4 +209,19 @@ export default compose(
     connect(mapStateToProps, mapDispatchtoProps),
     // firestoreConnect([{ collection: "preguntas", orderBy: ["createdAt", "asc"] }])
     )(ResponderAuditoria)
-   
+/*$("#Enviar").click(funtion(){
+    Swal.fire({
+        title: 'Do you want to save the changes?',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: `Save`,
+        denyButtonText: `Don't save`,
+     }).then((result) => {
+        /* Read more about isConfirmed, isDenied below
+        if (result.isConfirmed) {
+          Swal.fire('Saved!', '', 'success')
+        } else if (result.isDenied) {
+          Swal.fire('Changes are not saved', '', 'info')
+        }
+      })
+}); */   
