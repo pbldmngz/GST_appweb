@@ -12,6 +12,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import TextField from '@material-ui/core/TextField';
+import Swal from 'sweetalert2';
 //import DatePicker from 'react-datepicker/dist/react-datepicker'
 
 //Esta madre no sirve, adáptenlo
@@ -192,3 +193,17 @@ export default compose(
     connect(mapStateToProps, mapDispatchtoProps),
     // firestoreConnect([{ collection: "preguntas", orderBy: ["createdAt", "asc"] }])
     )(ResponderAuditoria)
+    Swal.fire({
+        title: 'Do you want to save the changes?',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: `Save`,
+        denyButtonText: `Don't save`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire('Saved!', '', 'success')
+        } else if (result.isDenied) {
+          Swal.fire('Changes are not saved', '', 'info')
+        }
+      })
