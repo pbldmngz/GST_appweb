@@ -77,9 +77,9 @@ export const editPregunta = (id, pregunta) => {
             updatedBy: profile.firstName + " " + profile.lastName,
             editorId: authorId
         }).then(() => {
-            dispatch({ type: "CREATE_PREGUNTA" }, pregunta)
+            dispatch({ type: "EDIT_PREGUNTA" }, pregunta)
         }).catch((err) => {
-            dispatch({ type: "CREATE_PREGUNTA_ERROR" }, err)
+            dispatch({ type: "EDIT_PREGUNTA_ERROR" }, err)
         })
 
     }

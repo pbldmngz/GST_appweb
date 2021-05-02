@@ -100,7 +100,7 @@ class ResponderAuditoria extends Component {
 
         this.props.preguntasAuditoria({ id: id }).then((res) => {
             this.setState({
-                preguntas: res
+                preguntas: res.filter(r => r)
             })
         })
     }
@@ -143,6 +143,7 @@ class ResponderAuditoria extends Component {
         //         preguntas: res
         //     })
         // })
+        console.log("estas son las preguntas", this.state.preguntas)
 
         return (
             <div className="container">

@@ -58,7 +58,10 @@ class CrearAuditoria extends Component {
             fecha_fin: this.state.fecha_fin,
             preguntas: this.state.preguntas.map((pre) => {
                 return pre.id
-            })
+            }),
+            minCategory: Math.max(...this.state.preguntas.map((pre) => {
+                return pre.category
+            })),
         })
         
         this.props.history.push("/"); //Esto se cambiará según el contexto

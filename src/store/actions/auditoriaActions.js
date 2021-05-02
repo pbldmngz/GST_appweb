@@ -23,6 +23,26 @@ export const createAuditoria = (auditoria) => {
     }
 }
 
+export const editAuditoria = (id, auditoria) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firestore = getFirestore();
+        const profile = getState().firebase.profile;
+        const authorId = getState().firebase.auth.uid;
+
+        firestore.collection("auditorias").doc(id).update({
+            ...auditoria,
+            updatedAt: new Date(),
+            updatedBy: profile.firstName + " " + profile.lastName,
+            editorId: authorId
+        }).then(() => {
+            dispatch({ type: "EDIT_AUDITORIA" }, auditoria)
+        }).catch((err) => {
+            dispatch({ type: "EDIT_AUDITORIA_ERROR" }, err)
+        })
+
+    }
+}
+
 const asyncCall = async (dispatch, getFirestore, collection, id) => {
     const firestore = getFirestore();
 

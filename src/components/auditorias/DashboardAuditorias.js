@@ -66,6 +66,8 @@ class DashboardAuditorias extends Component {
             ) : (
                 auditorias.filter(aud => !alreadyDone.includes(aud.id))
             );
+
+            filteredAuditorias = filteredAuditorias.filter(aud => aud.minCategory >= userLevel)
         }
         var { path, pathName } = require('../../config/config');
 
