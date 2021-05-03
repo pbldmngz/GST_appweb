@@ -11,12 +11,14 @@ const Navbar = (props) => {
     //<Link to="/" className="brand-logo"> para centrarlo
     return (
         <nav className="navbar">
-            <div className="">
-                <Link to="/" className="">
-                    <button className="btn-floating btn-large waves-effect waves-light blue gst-logo">{initials}</button>
+            <ul>
+                <div className="">
+                <Link to="/" className="center-box">
+                    <li><div className="perfil">{initials}</div></li>
                 </Link>
-                <div className="right-container">{links}</div>
-            </div>
+                <div className="options"><li>{links}</li></div>
+                </div>
+            </ul>
         </nav>
     )
 }

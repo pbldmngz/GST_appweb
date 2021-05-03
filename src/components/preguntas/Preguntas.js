@@ -10,29 +10,44 @@ export default function Preguntas(props) {
     // Considerándolo, no tiene caso, va a haber más de 5 preguntas y se va a perder
 
     return (
+    <div className="width">
+        <div className="cabecera">
+                <div className="titulo">
+                    <NavLink to={path.crear_pregunta} className="">
+                        <button className="boton-generico">New Question</button>
+                    </NavLink>
+                </div>
+
+                <div className="titulo">
+                    <h2>Audit Creation</h2>
+                </div>
+
+                <div className="titulo">
+                    <NavLink to={path.crear_pregunta} className="">
+                        <button className="boton-generico">Saved Questions</button>
+                    </NavLink>
+                </div>
+        </div>
 
     <div>
-        <div className="pregunta-list section">
-            <div className="center extra-padding-button">
-                <NavLink to={path.crear_pregunta} className="btn-floating btn-large waves-effect waves-light blue">
-                    <i className="material-icons">add</i>
-                </NavLink>
+            <div className="carta">
+                {preguntas && preguntas.map(pregunta => {
+                    return (
+                        <div className="box" key={pregunta.id}>
+                            <TarjetaPregunta
+                                pregunta={pregunta}
+                                editPregunta={editPregunta}
+                                deletePregunta={deletePregunta}
+                                userLevel={userLevel}
+                            />
+                        </div>
+                    )
+                })}
             </div>
-            {preguntas && preguntas.map(pregunta => {
-                return (
-                    <div key={pregunta.id}>
-                        <TarjetaPregunta
-                            pregunta={pregunta}
-                            editPregunta={editPregunta}
-                            deletePregunta={deletePregunta}
-                            userLevel={userLevel}
-                        />
-                    </div>
-                )
-            })}
-        </div>
-        <div>
-        <button className="regreso">Return</button>
+    </div>
+
+        <div className="width">
+            <button className="regreso">Return</button>
         </div>
     </div>
 

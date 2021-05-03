@@ -37,9 +37,9 @@ class CrearPregunta extends Component {
         if (!auth.uid) return <Redirect to="/signin" />
 
         return (
-            <div className="container">
+            <div className="">
                 <form className="white" onSubmit={this.handleSubmit}>
-                    <h5 className="grey-text text-darken-3">Crear pregunta</h5>
+                    <h5 className="">Crear pregunta</h5>
                     <div className="input-field">
                         <label htmlFor="lang.english">Pregunta</label>
                         <input type="text" id='english' onChange={this.handleChange} />
@@ -63,7 +63,7 @@ class CrearPregunta extends Component {
                         </Select>
                     </div>
 
-                    <button className="btn blue lighten-1 z-depth-0">Crear</button>
+                    <button className="">Crear</button>
                 </form>
             </div>
         )
