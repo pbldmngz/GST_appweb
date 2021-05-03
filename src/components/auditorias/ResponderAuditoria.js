@@ -104,22 +104,22 @@ class ResponderAuditoria extends Component {
             })
         })
     }
-  /* onClick: function Seguro(e) {
+    Seguro(e) {
         Swal.fire({
             title: 'Do you want to save the changes?',
             showDenyButton: true,
             showCancelButton: false,
             confirmButtonText: `Save`,
             denyButtonText: `Don't save`,
-          }).then((result) => {
-            /* Read more about isConfirmed, isDenied below
+            }).then((result) => {
+            //  Read more about isConfirmed, isDenied below
             if (result.isConfirmed) {
-              Swal.fire('Saved!', '', 'success')
+                Swal.fire('Saved!', '', 'success')
             } else if (result.isDenied) {
-              Swal.fire('Changes are not saved', '', 'info')
+                Swal.fire('Changes are not saved', '', 'info')
             }
-          })
-    }*/
+            })
+    }
     render() {
         const { auth, preguntas } = this.props;
 
@@ -180,7 +180,7 @@ class ResponderAuditoria extends Component {
                             )
                         })}
                         <div className="center">
-                            <button id='Enviar' className="btn blue lighten-1 z-depth-0 big-button" onClick={this.Seguro}>Enviar</button>
+                            <button id='Enviar' className="btn blue lighten-1 z-depth-0 big-button" onClick={() => {this.Seguro()}}>Enviar</button>
                         </div>
                         
                     </form>
