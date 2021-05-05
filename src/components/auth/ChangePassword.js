@@ -80,7 +80,9 @@ class ChangePassword extends Component {
 
     render() {
         
-        const {auth} = this.props
+        const {auth, lang} = this.props
+        const bText = require('../../config/language');
+        if (!lang) return null;
 
         // console.log("Rednder State", this.state)
 
@@ -89,27 +91,27 @@ class ChangePassword extends Component {
         return (
             <div className="container extra-margin">
                 <form className="white" onSubmit={this.handleSubmit}>
-                    <h5 className="grey-text text-darken-3">Cambiar contraseña</h5>
+                    <h5 className="grey-text text-darken-3">{bText[lang].auth.changePassword.cambiar_contrasena}</h5>
                     <div className="input-field">
-                        <label htmlFor="currentPassword">Contraseña actual</label>
+                        <label htmlFor="currentPassword">{bText[lang].auth.changePassword.contrasena_actual}</label>
                         <input type="password" id='currentPassword' name='currentPassword' onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="newPassword">Contraseña nueva</label>
+                        <label htmlFor="newPassword">{bText[lang].auth.changePassword.contrasena_nueva}</label>
                         <input type="password" id='newPassword' name='newPassword' onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="newPasswordConfirm">Repite la contraseña nueva</label>
+                        <label htmlFor="newPasswordConfirm">{bText[lang].auth.changePassword.repite_contrasena}</label>
                         <input type="password" id='newPasswordConfirm' name='newPasswordConfirm' onChange={this.handleChange} />
                     </div>
 
-                    <button className="btn blue lighten-1 z-depth-0">Aceptar</button>
+                    <button className="btn blue lighten-1 z-depth-0">{bText[lang].auth.changePassword.aceptar}</button>
                     <div className="center red-text">
                         {this.state.authError ? <p>{this.state.authError.message}</p> : null}
                     </div>
                 </form>
 
-                <button className="regreso">Return</button>
+                <button className="regreso">{bText[lang].return}</button>
             </div>
         )
     }
@@ -118,6 +120,7 @@ class ChangePassword extends Component {
 const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
+        lang: state.firebase.profile.lang,
     }
 }
 

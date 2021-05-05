@@ -96,7 +96,13 @@ class CrearAuditoria extends Component {
 
     render() {
         var { path, pathName } = require('../../config/config');
-        const {auth, userLevel} = this.props;
+        const text = require('../../config/language');
+
+        const {auth, userLevel, lang} = this.props;
+        if (!lang) return null;
+
+        // console.log("this is lang: ", lang)
+
         if (!auth.uid) return <Redirect to="/signin" />
         if (userLevel != 0) return <Redirect to="/" />
 
@@ -106,30 +112,30 @@ class CrearAuditoria extends Component {
                 <div className="main-crear-auditoria container">
                     <div className="crear-auditoria-views card">
                         <form className="white" onSubmit={this.handleSubmit}>
-                            <h5 className="grey-text text-darken-3">Crear auditoria</h5>
+                            <h5 className="grey-text text-darken-3">{text[lang].auditorias.crearAuditoria.crear_auditoria}</h5>
                             <div className="input-field">
-                                <label htmlFor="auditoria">Nombre de la auditoria</label>
+                                <label htmlFor="auditoria">{text[lang].auditorias.crearAuditoria.nombre_auditoria}</label>
                                 <input type="text" id='auditoria' onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                <label htmlFor="auditor">Auditor</label>
+                                <label htmlFor="auditor">{text[lang].auditorias.crearAuditoria.auditor}</label>
                                 <input type="text" id='auditor' onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                <label htmlFor="area">Area</label>
+                                <label htmlFor="area">{text[lang].auditorias.crearAuditoria.area}</label>
                                 <input type="text" id='area' onChange={this.handleChange} />
                             </div>
                             <div className="date-field">
 
                                 <div className="date-container">
                                     <div className="date">
-                                        <span className="grey-text"> y termina el </span>
+                                        <span className="grey-text">{text[lang].auditorias.crearAuditoria.termina_el}</span>
                                         <DatePicker id="fecha_fin" selected={this.state.fecha_fin} onChange={(date) => this.setState({
                                             fecha_fin: date
                                         })} />
                                     </div>
                                     <div className="date">
-                                        <span className="grey-text">Inicia el </span>
+                                        <span className="grey-text">{text[lang].auditorias.crearAuditoria.inicia_el}</span>
                                         <DatePicker id="fecha_inicio" selected={this.state.fecha_inicio} onChange={(date) => this.setState({
                                             fecha_inicio: date
                                         })} />
@@ -148,7 +154,7 @@ class CrearAuditoria extends Component {
                                     return (
                                         <div className="grid-main" key={index}>
                                             <div className="grid-component-left card">
-                                                {index + 1}. {pregunta.english}
+                                                {index + 1}. {pregunta[lang]}
                                             </div>
                                             <div className="grid-component-right card hover-click" onClick={() => {
                                                 this.handleDelete(pregunta.id)
@@ -182,7 +188,7 @@ class CrearAuditoria extends Component {
                                         name="valueB"
                                         options={this.props.preguntas}
                                         onChange={this.handleChangeAutocomplete}
-                                        getOptionLabel={(option) => option.english}
+                                        getOptionLabel={(option) => option[lang]}
                                         
                                         renderInput={(params) => <TextField {...params} label="Preguntas" variant="outlined" />}
                                     />
@@ -214,6 +220,7 @@ const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
         userLevel: state.firebase.profile.userLevel,
+        lang: state.firebase.profile.lang,
         preguntas: state.firestore.ordered.preguntas
     }
 }

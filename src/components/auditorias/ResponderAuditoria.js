@@ -121,7 +121,9 @@ class ResponderAuditoria extends Component {
             })
     }
     render() {
-        const { auth, preguntas } = this.props;
+        const { auth, preguntas, lang } = this.props;
+        const text = require('../../config/language');
+        if (!lang) return null;
 
         // console.log(this.props)
 
@@ -143,7 +145,7 @@ class ResponderAuditoria extends Component {
         //         preguntas: res
         //     })
         // })
-        console.log("estas son las preguntas", this.state.preguntas)
+        // console.log("estas son las preguntas", this.state.preguntas)
 
         return (
             <div className="container">
@@ -154,7 +156,7 @@ class ResponderAuditoria extends Component {
             </div>
                 <div className="card x-depth-0">
                     <form className="white section" onSubmit={this.handleSubmit}>
-                        <h5 className="grey-text text-darken-3 center">Responder auditoria</h5>
+                        <h5 className="grey-text text-darken-3 center">{text[lang].auditorias.responderAuditoria.responder_auditoria}</h5>
                         {/* Esto se puede convertir a un operador ? : para que muestre un cargando o algo así */}
                         {/* {console.log("esto es preguntaSSS", this.state.preguntas)} */}
 
@@ -165,13 +167,13 @@ class ResponderAuditoria extends Component {
                                 {/* card x-depth-0 para ver los limites fácilmente*/}
                                     <FormControl className="width100" component="fieldset">
                                         {/* {console.log("antes de que truene, esto es pregunta", pregunta)} */}
-                                        <FormLabel className="legend-pregunta grey-text text-darken-3" component="legend">{pregunta.english}</FormLabel>
+                                        <FormLabel className="legend-pregunta grey-text text-darken-3" component="legend">{pregunta[lang]}</FormLabel>
                                         <div className="campos">
-                                            <TextField label="Justificación" className="date label70" name={"just-" + pregunta.id} onChange={this.handleChange}/>
+                                            <TextField label={text[lang].auditorias.responderAuditoria.justificacion} className="date label70" name={"just-" + pregunta.id} onChange={this.handleChange}/>
                                             {/* {console.log("Este es un intento: ", "radio-" + pregunta.id)} */}
                                             <RadioGroup className="radio-group date" row aria-label="gender" name={"resp-" + pregunta.id} onChange={this.handleChange}>
-                                                <FormControlLabel className="radio-button grey-text text-darken-3" value="Sí" control={<Radio />} label="Sí" />
-                                                <FormControlLabel className="radio-button grey-text text-darken-3" value="No" control={<Radio />} label="No" />
+                                                <FormControlLabel className="radio-button grey-text text-darken-3" value="Sí" control={<Radio />} label={text[lang].auditorias.responderAuditoria.si} />
+                                                <FormControlLabel className="radio-button grey-text text-darken-3" value="No" control={<Radio />} label={text[lang].auditorias.responderAuditoria.no} />
                                             </RadioGroup>
                                         </div>
                                         
@@ -180,7 +182,7 @@ class ResponderAuditoria extends Component {
                             )
                         })}
                         <div className="center">
-                            <button id='Enviar' className="btn blue lighten-1 z-depth-0 big-button" onClick={() => {this.Seguro()}}>Enviar</button>
+                            <button id='Enviar' className="btn blue lighten-1 z-depth-0 big-button" onClick={() => { this.Seguro() }}>{text[lang].auditorias.responderAuditoria.enviar}</button>
                         </div>
                         
                     </form>
@@ -194,6 +196,7 @@ const mapStateToProps = (state) => {
     // console.log(state)
     return {
         auth: state.firebase.auth,
+        lang: state.firebase.profile.lang,
         preguntas: state.firestore.ordered.preguntas,
     }
 }

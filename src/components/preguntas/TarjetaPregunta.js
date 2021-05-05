@@ -7,9 +7,9 @@ export default function TarjetaPregunta(props) {
     // Se tienen que añadir:
     // - Añadir botones para borrar/editar una pregunta, con un "¿estás seguro?"
     // Pueden hacerlo haciendo unos divs | ----- | - | flex, no soy el experto
-    const {pregunta, userLevel} = props
+    const {pregunta, userLevel, lang} = props
 
-    console.log("userLevel on tarjeta", userLevel)
+    // console.log("userLevel on tarjeta", userLevel)
     
     // En cierto modo, ni siquiera tiene caso esto, los usuarios normales no llegarían aquí
     const botones = (userLevel == 0) ? (
@@ -30,9 +30,8 @@ export default function TarjetaPregunta(props) {
             <div className="center-grid">
                 <Link to={path.detalles_pregunta_auditoria + "/" + pregunta.id}>
                     <div className="grey-text text-darken-3 card-cont">
-                        <span className="card-title">{pregunta.english}</span>
+                        <span className="card-title">{pregunta[lang]}</span>
                         <p>{pregunta.description}</p>
-                        <p>Reaction Plan: {pregunta.reaction_plan}</p>
                     </div>
                 </Link>
                 <div className="card-extra">

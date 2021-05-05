@@ -14,16 +14,17 @@ class SignUp extends Component {
         firstName: '',
         lastName: '',
         level: 5,
+        lang: "spanish",
     }
     handleChange = (e) => {
-        console.log(e)
+        // console.log(e)
         this.setState({
             [e.target.id]: e.target.value
         })
     }
 
     handleChangeSelect = (e) => {
-        console.log(e)
+        // console.log(e)
         this.setState({
             level: e.target.value
         })
@@ -62,7 +63,6 @@ class SignUp extends Component {
                     <div className="">
                         <InputLabel id="select-level">Level</InputLabel>
                         <Select labelId="select-level" id="level" value={this.state.level} onChange={this.handleChangeSelect}>
-                            <MenuItem value={5}>E</MenuItem>
                             <MenuItem value={4}>D</MenuItem>
                             <MenuItem value={3}>C</MenuItem>
                             <MenuItem value={2}>B</MenuItem>
