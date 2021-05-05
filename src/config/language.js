@@ -15,6 +15,13 @@ lang.spanish = {
             area: "Area",
             termina_el: " y termina el ",
             inicia_el: "Inicia el ",
+            agregar: "Agregar",
+            cancelar: "Cancelar",
+            seleccionar_pregunta: "Seleccionar pregunta",
+            text1: "Busca y selecciona las preguntas que desees añadir o ",
+            text2: " crea una pregunta nueva, ",
+            text3: "una vez creada la podrás seleccionar en esta lista.",
+            crear: "Crear",
         },
         dashboardAuditorias: {
             ordenar_fecha: "Ordenar por fecha",
@@ -51,6 +58,7 @@ lang.spanish = {
             contrasena_nueva: "Contraseña nueva",
             repite_contrasena: "Repite la contraseña nueva",
             aceptar: "Aceptar",
+            cancelar: "Cancelar",
         },
         signIn: {
 
