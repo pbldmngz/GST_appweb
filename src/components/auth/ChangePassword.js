@@ -95,16 +95,16 @@ class ChangePassword extends Component {
                     <div className="cambiar-cont">
                         <div className="contrasena">
                             <div className="input-field">
-                                <label htmlFor="currentPassword">Contraseña actual</label>
-                                <input type="password" id='currentPassword' name='currentPassword' onChange={this.handleChange} />
+                                <input type="password" id='currentPassword' name='currentPassword'
+                                placeholder="Current Password" onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                <label htmlFor="newPassword">Contraseña nueva</label>
-                                <input type="password" id='newPassword' name='newPassword' onChange={this.handleChange} />
+                                <input type="password" id='newPassword' name='newPassword'
+                                placeholder="New Password" onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                <label htmlFor="newPasswordConfirm">Repite la contraseña nueva</label>
-                            <input type="password" id='newPasswordConfirm' name='newPasswordConfirm' onChange={this.handleChange} />
+                            <input type="password" id='newPasswordConfirm' name='newPasswordConfirm' 
+                            placeholder="Repeat New Password" onChange={this.handleChange} />
                             </div>
                         </div>
                     </div>

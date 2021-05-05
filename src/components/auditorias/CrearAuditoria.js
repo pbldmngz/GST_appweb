@@ -110,28 +110,25 @@ class CrearAuditoria extends Component {
                     <div className="crear-auditoria-views card">
                         <form className="white" onSubmit={this.handleSubmit}>
                             <div className="input-field">
-                                <label htmlFor="auditoria">Nombre de la auditoria</label>
-                                <input type="text" id='auditoria' onChange={this.handleChange} />
+                                <input type="text" id='auditoria' placeholder="Auditor" onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                <label htmlFor="auditor">Auditor</label>
-                                <input type="text" id='auditor' onChange={this.handleChange} />
+                                <input type="text" id='auditor' placeholder="Priority" onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                <label htmlFor="area">Area</label>
-                                <input type="text" id='area' onChange={this.handleChange} />
+                                <input type="text" id='area' placeholder="Area" onChange={this.handleChange} />
                             </div>
                             <div className="date-field">
 
                                 <div className="date-container">
                                     <div className="date">
-                                        <span className="grey-text"> y termina el </span>
+                                        <span className="" placeholder="Start"> y termina el </span>
                                         <DatePicker id="fecha_fin" selected={this.state.fecha_fin} onChange={(date) => this.setState({
                                             fecha_fin: date
                                         })} />
                                     </div>
                                     <div className="date">
-                                        <span className="grey-text">Inicia el </span>
+                                        <span className="">Inicia el </span>
                                         <DatePicker id="fecha_inicio" selected={this.state.fecha_inicio} onChange={(date) => this.setState({
                                             fecha_inicio: date
                                         })} />
