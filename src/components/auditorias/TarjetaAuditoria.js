@@ -67,12 +67,12 @@ export default function TarjetaAuditoria(props) {
     // console.log(moment.locale("es"))
     const date = auditoria.fecha_fin ? <p className="grey-text">{bText[lang].auditorias.tarjetaAuditoria.fecha_limite}: {moment(auditoria.fecha_fin.toDate()).fromNow()}</p> : null
     return (
-        <div style={style} className="card x-depth-0 tarjeta-auditoria" key={auditoria.id}>
-            <div className="card-content grey-text text-darken-3">
+        <div style={style} className="box" key={auditoria.id}>
+            <div className="">
                 {/* {console.log(audit.auditoria.length)} */}
-                <div className="card-title-all">
+                <div className="">
                     {/* card-title */}
-                    <span className="card-cont card-title">{
+                    <span className="">{
                             (auditoria.auditoria.length > 18) ? auditoria.auditoria.substr(0, 18) + "..." : auditoria.auditoria
                         }</span>
 

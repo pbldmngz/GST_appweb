@@ -10,7 +10,7 @@ export default function Auditorias(props) {
 
     return (
         
-        <div className="box">
+        <div className="">
             {auditorias && auditorias.map(auditoria => {
                 const retThis = (alreadyDone) ? (
                     <TarjetaAuditoria
