@@ -131,7 +131,7 @@ class ResponderAuditoria extends Component {
         // console.log(this.props)
 
         if (!auth.uid) return <Redirect to="/signin" />
-
+        
 
         //Se tiene que buscar preguntas por ID, 
         // estas ID están en auditorias.preguntas en un array
