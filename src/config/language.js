@@ -135,6 +135,13 @@ lang.english = {
             area: "Area",
             termina_el: " Due date ",
             inicia_el: "Start date ",
+            agregar: "Add",
+            cancelar: "Cancel",
+            seleccionar_pregunta: "Select question",
+            text1: "Search and select the question you wish to add, or ",
+            text2: " create a new question, ",
+            text3: "once created, you will find it within this list.",
+            crear: "Create",
         },
         dashboardAuditorias: {
             ordenar_fecha: "Order by date",
@@ -171,6 +178,7 @@ lang.english = {
             contrasena_nueva: "New password",
             repite_contrasena: "Repeat new password",
             aceptar: "Accept",
+            cancelar: "Cancel",
         },
         signIn: {
 
