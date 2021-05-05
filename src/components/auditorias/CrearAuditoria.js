@@ -108,8 +108,11 @@ class CrearAuditoria extends Component {
 
         console.log(this.state.preguntas)
         return (
-            <div className="just-width-100 white">
-                <div className="main-crear-auditoria container">
+            <div className="">
+                <div className="cabecera">
+                    <h2 className="">{text[lang].auditorias.crearAuditoria.crear_auditoria}</h2>
+                </div>
+                <div className="box">
                     <div className="crear-auditoria-views card">
                         <form className="white" onSubmit={this.handleSubmit}>
                             <h5 className="grey-text text-darken-3">{text[lang].auditorias.crearAuditoria.crear_auditoria}</h5>
@@ -176,12 +179,12 @@ class CrearAuditoria extends Component {
                                 aria-labelledby="form-dialog-title"
                                 TransitionComponent={Transition}
                                 >
-                                <DialogTitle id="form-dialog-title">Seleccionar pregunta</DialogTitle>
+                                <DialogTitle id="form-dialog-title">{text[lang].auditorias.crearAuditoria.seleccionar_pregunta}</DialogTitle>
                                 <DialogContent>
                                     <DialogContentText>
-                                        Busca y selecciona las preguntas que desees añadir o 
-                                        <Link to="/crear-pregunta" target="_blank" rel="noopener noreferrer"> crea una pregunta nueva, </Link>
-                                        una vez creada la podrás seleccionar en esta lista.
+                                        {text[lang].auditorias.crearAuditoria.text1}
+                                        <Link to="/crear-pregunta" target="_blank" rel="noopener noreferrer">{text[lang].auditorias.crearAuditoria.text2}</Link>
+                                        {text[lang].auditorias.crearAuditoria.text3}
                                     </DialogContentText>
                                     <Autocomplete
                                         id="valueB"
@@ -194,8 +197,8 @@ class CrearAuditoria extends Component {
                                     />
                                 </DialogContent>
                                 <DialogActions>
-                                    <Button onClick={this.handleCloseSave} color="primary">Agregar</Button>
-                                    <Button onClick={this.handleClose} color="secondary">Cancelar</Button>
+                                    <Button onClick={this.handleCloseSave} color="primary">{text[lang].auditorias.crearAuditoria.agregar}</Button>
+                                    <Button onClick={this.handleClose} color="secondary">{text[lang].auditorias.crearAuditoria.cancelar}</Button>
                                 </DialogActions>
                             </Dialog>
                         </div>
@@ -203,12 +206,12 @@ class CrearAuditoria extends Component {
                     
                 </div>
                 
-                <div className="final-button container">
-                    <button className="btn blue lighten-1 z-depth-0" onClick={this.handleSubmit}>Crear auditoría</button>
-                    <button className="btn lighten-1 z-depth-0" onClick={this.handleCancel}>Cancelar</button>
+                <div className="botones">
+                    <button className="cancel" onClick={this.handleSubmit}>{text[lang].auditorias.crearAuditoria.cancelar}</button>
+                    <button className="aceptar" onClick={this.handleCancel}>{text[lang].auditorias.crearAuditoria.crear}</button>
                 </div>
                 
-                <button className="regreso">Return</button>
+                <button className="regreso">{text[lang].return}</button>
                 
             </div>
             

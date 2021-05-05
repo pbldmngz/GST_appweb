@@ -89,23 +89,33 @@ class ChangePassword extends Component {
         if (!auth.uid) return <Redirect to="/signin" />
 
         return (
-            <div className="container extra-margin">
-                <form className="white" onSubmit={this.handleSubmit}>
-                    <h5 className="grey-text text-darken-3">{bText[lang].auth.changePassword.cambiar_contrasena}</h5>
-                    <div className="input-field">
-                        <label htmlFor="currentPassword">{bText[lang].auth.changePassword.contrasena_actual}</label>
-                        <input type="password" id='currentPassword' name='currentPassword' onChange={this.handleChange} />
+            <div className="">
+                <form className="" onSubmit={this.handleSubmit}>
+                    <div className="cabecera">
+                        <h2 className="title">{bText[lang].auth.changePassword.cambiar_contrasena}</h2>
                     </div>
-                    <div className="input-field">
-                        <label htmlFor="newPassword">{bText[lang].auth.changePassword.contrasena_nueva}</label>
-                        <input type="password" id='newPassword' name='newPassword' onChange={this.handleChange} />
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="newPasswordConfirm">{bText[lang].auth.changePassword.repite_contrasena}</label>
-                        <input type="password" id='newPasswordConfirm' name='newPasswordConfirm' onChange={this.handleChange} />
+                    <div className="cambiar-cont">
+                        <div className="contrasena">
+                            <div className="input-field">
+                                <label htmlFor="currentPassword">{bText[lang].auth.changePassword.contrasena_actual}</label>
+                                <input type="password" id='currentPassword' name='currentPassword' onChange={this.handleChange} />
+                            </div>
+                            <div className="input-field">
+                                        <label htmlFor="newPassword">{bText[lang].auth.changePassword.contrasena_nueva}</label>
+                                <input type="password" id='newPassword' name='newPassword' onChange={this.handleChange} />
+                            </div>
+                            <div className="input-field">
+                                        <label htmlFor="newPasswordConfirm">{bText[lang].auth.changePassword.repite_contrasena}</label>
+                            <input type="password" id='newPasswordConfirm' name='newPasswordConfirm' onChange={this.handleChange} />
+                            </div>
+                        </div>
                     </div>
 
-                    <button className="btn blue lighten-1 z-depth-0">{bText[lang].auth.changePassword.aceptar}</button>
+                    <div className="botones">
+                                <button className="">{bText[lang].auth.changePassword.cancelar}</button>
+                                <button className="aceptar">{bText[lang].auth.changePassword.aceptar}</button>
+                    </div>
+
                     <div className="center red-text">
                         {this.state.authError ? <p>{this.state.authError.message}</p> : null}
                     </div>
