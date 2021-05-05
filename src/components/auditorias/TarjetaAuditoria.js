@@ -1,7 +1,5 @@
 import React from 'react'
-import moment from 'moment'
-
-
+import moment from 'moment/min/moment-with-locales';
 
 export default function TarjetaAuditoria(props) {
     // Si las tarjetas no tienen las mismas "líneas" de contenido
@@ -19,7 +17,9 @@ export default function TarjetaAuditoria(props) {
         return date;
     }
 
-    const {auditoria, userLevel, alreadyDone} = props
+    const {auditoria, userLevel, alreadyDone, lang} = props
+    const bText = require('../../config/language');
+    // if (!lang) return null;
 
     var color = "white";
     var text = "!!";
@@ -62,15 +62,17 @@ export default function TarjetaAuditoria(props) {
         </div>
     );
     
-
-    const date = auditoria.fecha_fin ? <p className="grey-text">Due date: {moment(auditoria.fecha_fin.toDate()).fromNow()}</p> : null
+    
+    moment.locale(bText[lang].locale)
+    // console.log(moment.locale("es"))
+    const date = auditoria.fecha_fin ? <p className="grey-text">{bText[lang].auditorias.tarjetaAuditoria.fecha_limite}: {moment(auditoria.fecha_fin.toDate()).fromNow()}</p> : null
     return (
-        <div style={style} className="card x-depth-0 tarjeta-auditoria" key={auditoria.id}>
-            <div className="card-content grey-text text-darken-3">
+        <div style={style} className="box" key={auditoria.id}>
+            <div className="">
                 {/* {console.log(audit.auditoria.length)} */}
-                <div className="card-title-all">
+                <div className="">
                     {/* card-title */}
-                    <span className="card-cont card-title">{
+                    <span className="">{
                             (auditoria.auditoria.length > 18) ? auditoria.auditoria.substr(0, 18) + "..." : auditoria.auditoria
                         }</span>
 
@@ -78,9 +80,16 @@ export default function TarjetaAuditoria(props) {
                 </div>
                 
                 
-                <p>Auditor: {auditoria.auditor}</p>
+                <p>{bText[lang].auditorias.tarjetaAuditoria.auditor}: {auditoria.auditor}</p>
                 {date}
             </div>
         </div>
     )
+}
+
+const mapStateToProps = (state) => {
+    // console.log(state)
+    return {
+        lang: state.firebase.profile.lang,
+    }
 }

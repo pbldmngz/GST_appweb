@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom'
 
 export default function Preguntas(props) {
     var { path, pathName } = require('../../config/config');
-    const { preguntas, editPregunta, deletePregunta, userLevel } = props
+    const { preguntas, editPregunta, deletePregunta, userLevel, lang } = props
 
     //Center the + icon pls
     // Considerándolo, no tiene caso, va a haber más de 5 preguntas y se va a perder
@@ -31,22 +31,20 @@ export default function Preguntas(props) {
 
     <div>
             <div className="carta">
-                {preguntas && preguntas.map(pregunta => {
-                    return (
-                        <div className="box" key={pregunta.id}>
-                            <TarjetaPregunta
-                                pregunta={pregunta}
-                                editPregunta={editPregunta}
-                                deletePregunta={deletePregunta}
-                                userLevel={userLevel}
-                            />
-                        </div>
-                    )
-                })}
-            </div>
-    </div>
-
-        <div className="width">
+            {preguntas && preguntas.map(pregunta => {
+                return (
+                    <div key={pregunta.id}>
+                        <TarjetaPregunta
+                            pregunta={pregunta}
+                            editPregunta={editPregunta}
+                            deletePregunta={deletePregunta}
+                            userLevel={userLevel}
+                            lang={lang}
+                        />
+                    </div>
+                )
+            })}
+        </div>
             <button className="regreso">Return</button>
         </div>
     </div>

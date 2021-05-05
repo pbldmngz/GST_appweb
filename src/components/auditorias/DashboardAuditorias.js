@@ -29,12 +29,15 @@ class DashboardAuditorias extends Component {
     render() {
         // console.log(this.props)
         
-        const { auditorias, respuestas, auth, userLevel } = this.props
+        const { auditorias, respuestas, auth, userLevel, lang } = this.props
+        const text = require('../../config/language');
+        if (!lang) return null;
 
         if (!auth.uid) return <Redirect to="/signin"/>
         // if (userLevel != 0) return <Redirect to="/" />
         // console.log("userLevel: ", userLevel)
         // console.log("respuestas", respuestas)
+        // if (!lang) return null;
 
 
         // ---> Con esto los usuarios no ven las que ya respondieron <---
@@ -73,17 +76,17 @@ class DashboardAuditorias extends Component {
 
         const menuItems = (userLevel === 0) ? (
             <Select labelId="select-filter" id="filter" value={this.state.filter} onChange={this.handleChangeSelect}>
-                <MenuItem value={0}>Ordenar por fecha</MenuItem>
-                <MenuItem value={1}>Agrupar por áreas</MenuItem>
+                <MenuItem value={0}>{text[lang].auditorias.dashboardAuditorias.ordenar_fecha}</MenuItem>
+                <MenuItem value={1}>{text[lang].auditorias.dashboardAuditorias.agrupar_areas}</MenuItem>
             </Select>
         ) : (
                 <Select labelId="select-filter" id="filter" value={this.state.filter} onChange={this.handleChangeSelect}>
-                    <MenuItem value={0}>Ordenar por fecha</MenuItem>
-                    <MenuItem value={2}>Mostrar realizados</MenuItem>
+                    <MenuItem value={0}>{text[lang].auditorias.dashboardAuditorias.ordenar_fecha}</MenuItem>
+                    <MenuItem value={2}>{text[lang].auditorias.dashboardAuditorias.mostrar_realizados}</MenuItem>
                 </Select>
         );
         const botonReturn = (userLevel === 0) ? (
-            <div className="dashboard-extra-space">Return?</div>
+            <div className="dashboard-extra-space">{text[lang].return}</div>
         ): null;
 
         if (filteredAuditorias) {
@@ -91,11 +94,11 @@ class DashboardAuditorias extends Component {
                 <div className="dashboard container">
                     <div className="second-navbar">
                         <div className="filter">
-                            <InputLabel id="select-filter">Vista</InputLabel>
+                            <InputLabel id="select-filter">{text[lang].auditorias.dashboardAuditorias.vista}</InputLabel>
                             {menuItems}
                         </div>
                         <div className="dashboard-title">
-                            {pathName[this.getKeyByValue(path, this.props.match.path)]}
+                            {text[lang].auditorias.dashboardAuditorias.auditorias}
                         </div>
                         {botonReturn}
                     </div>
@@ -103,13 +106,14 @@ class DashboardAuditorias extends Component {
                         auditorias={filteredAuditorias} 
                         userLevel={userLevel} 
                         alreadyDone={(this.state.filter === 2)}
+                        lang={lang}
                     />
                 </div>
             )
         } else {
             return (
                 <div className="container center">
-                    <p>Cargando...</p>
+                    <p>{text[lang].cargando}</p>
                 </div>
             )
         }
@@ -117,10 +121,11 @@ class DashboardAuditorias extends Component {
 }
 
 const mapStateToProps = (state) => {
-    //console.log(state)
+    // console.log("Status", state)
     return {
         auditorias: state.firestore.ordered.auditorias,
         respuestas: state.firestore.ordered.respuestas,
+        lang: state.firebase.profile.lang,
         auth: state.firebase.auth,
         userLevel: state.firebase.profile.userLevel
     }

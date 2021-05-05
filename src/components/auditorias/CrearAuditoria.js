@@ -96,7 +96,13 @@ class CrearAuditoria extends Component {
 
     render() {
         var { path, pathName } = require('../../config/config');
-        const {auth, userLevel} = this.props;
+        const text = require('../../config/language');
+
+        const {auth, userLevel, lang} = this.props;
+        if (!lang) return null;
+
+        // console.log("this is lang: ", lang)
+
         if (!auth.uid) return <Redirect to="/signin" />
         if (userLevel != 0) return <Redirect to="/" />
 
@@ -104,31 +110,32 @@ class CrearAuditoria extends Component {
         return (
             <div className="">
                 <div className="cabecera">
-                <h2 className="">Crear auditoria</h2>
+                    <h2 className="">{text[lang].auditorias.crearAuditoria.crear_auditoria}</h2>
                 </div>
                 <div className="box">
                     <div className="crear-auditoria-views card">
                         <form className="white" onSubmit={this.handleSubmit}>
+                            <h5 className="grey-text text-darken-3">{text[lang].auditorias.crearAuditoria.crear_auditoria}</h5>
                             <div className="input-field">
-                                <input type="text" id='auditoria' placeholder="Auditor" onChange={this.handleChange} />
+                                <input type="text" id='auditoria' placeholder={text[lang].auditorias.crearAuditoria.nombre_auditoria} onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                <input type="text" id='auditor' placeholder="Priority" onChange={this.handleChange} />
+                                <input type="text" id='auditor' placeholder={text[lang].auditorias.crearAuditoria.auditor} onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                <input type="text" id='area' placeholder="Area" onChange={this.handleChange} />
+                                <input type="text" id='area' placeholder={text[lang].auditorias.crearAuditoria.area} onChange={this.handleChange} />
                             </div>
                             <div className="date-field">
 
                                 <div className="date-container">
                                     <div className="date">
-                                        <span className="" placeholder="Start"> y termina el </span>
+                                        <span className="" placeholder={text[lang].auditorias.crearAuditoria.termina_el}> y termina el </span>
                                         <DatePicker id="fecha_fin" selected={this.state.fecha_fin} onChange={(date) => this.setState({
                                             fecha_fin: date
                                         })} />
                                     </div>
                                     <div className="date">
-                                        <span className="">Inicia el </span>
+                                        <span className="grey-text">{text[lang].auditorias.crearAuditoria.inicia_el}</span>
                                         <DatePicker id="fecha_inicio" selected={this.state.fecha_inicio} onChange={(date) => this.setState({
                                             fecha_inicio: date
                                         })} />
@@ -138,14 +145,70 @@ class CrearAuditoria extends Component {
                             </div>
                         </form>
                     </div>
+                    <div className="agregar-pregunta card crear-auditoria-views destroy-overflow">
+                        <div className="white">
+                            <h5 className="grey-text text-darken-3">Agregar preguntas</h5>
+                            <div className="preguntas-creadas">
+                                {
+                                this.state.preguntas && this.state.preguntas.map((pregunta, index) => {
+                                    return (
+                                        <div className="grid-main" key={index}>
+                                            <div className="grid-component-left card">
+                                                {index + 1}. {pregunta[lang]}
+                                            </div>
+                                            <div className="grid-component-right card hover-click" onClick={() => {
+                                                this.handleDelete(pregunta.id)
+                                            }}>
+                                                <i className="material-icons">delete</i>
+                                            </div>
+                                        </div>
+                                        
+                                        )
+                                    })
+                                }
+                            </div>
+                            <button className="btn-floating btn-small waves-effect waves-light blue button-margin" onClick={this.handleClickOpen}>
+                                <i className="material-icons">add</i>
+                            </button>
+                            <Dialog 
+                                open={this.state.openB} 
+                                onClose={this.handleClose} 
+                                aria-labelledby="form-dialog-title"
+                                TransitionComponent={Transition}
+                                >
+                                <DialogTitle id="form-dialog-title">{text[lang].auditorias.crearAuditoria.seleccionar_pregunta}</DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText>
+                                        {text[lang].auditorias.crearAuditoria.text1}
+                                        <Link to="/crear-pregunta" target="_blank" rel="noopener noreferrer">{text[lang].auditorias.crearAuditoria.text2}</Link>
+                                        {text[lang].auditorias.crearAuditoria.text3}
+                                    </DialogContentText>
+                                    <Autocomplete
+                                        id="valueB"
+                                        name="valueB"
+                                        options={this.props.preguntas}
+                                        onChange={this.handleChangeAutocomplete}
+                                        getOptionLabel={(option) => option[lang]}
+                                        
+                                        renderInput={(params) => <TextField {...params} label="Preguntas" variant="outlined" />}
+                                    />
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={this.handleCloseSave} color="primary">{text[lang].auditorias.crearAuditoria.agregar}</Button>
+                                    <Button onClick={this.handleClose} color="secondary">{text[lang].auditorias.crearAuditoria.cancelar}</Button>
+                                </DialogActions>
+                            </Dialog>
+                        </div>
+                    </div>
+                    
                 </div>
                 
                 <div className="botones">
-                    <button className="cancel" onClick={this.handleSubmit}>Cancelar</button>
-                    <button className="aceptar" onClick={this.handleCancel}>Create</button>
+                    <button className="cancel" onClick={this.handleSubmit}>{text[lang].auditorias.crearAuditoria.cancelar}</button>
+                    <button className="aceptar" onClick={this.handleCancel}>{text[lang].auditorias.crearAuditoria.crear}</button>
                 </div>
                 
-                <button className="regreso">Return</button>
+                <button className="regreso">{text[lang].return}</button>
                 
             </div>
             
@@ -157,6 +220,7 @@ const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
         userLevel: state.firebase.profile.userLevel,
+        lang: state.firebase.profile.lang,
         preguntas: state.firestore.ordered.preguntas
     }
 }
