@@ -104,16 +104,19 @@ class ResponderAuditoria extends Component {
             })
         })
     }
-    Seguro(e) {
+    Seguro = (e) => {
+        // console.log(e)
+        e.preventDefault();
         Swal.fire({
             title: 'Do you want to save the changes?',
             showDenyButton: true,
             showCancelButton: false,
-            confirmButtonText: `Save`,
-            denyButtonText: `Don't save`,
+            confirmButtonText: 'Save',
+            denyButtonText: "Don't save",
             }).then((result) => {
             //  Read more about isConfirmed, isDenied below
             if (result.isConfirmed) {
+                this.handleSubmit(e)
                 Swal.fire('Saved!', '', 'success')
             } else if (result.isDenied) {
                 Swal.fire('Changes are not saved', '', 'info')
@@ -155,7 +158,7 @@ class ResponderAuditoria extends Component {
                         return <p>{pregunta}</p>})} */}
             </div>
                 <div className="card x-depth-0">
-                    <form className="white section" onSubmit={this.handleSubmit}>
+                    <form className="white section" onSubmit={this.Seguro}>
                         <h5 className="grey-text text-darken-3 center">{text[lang].auditorias.responderAuditoria.responder_auditoria}</h5>
                         {/* Esto se puede convertir a un operador ? : para que muestre un cargando o algo así */}
                         {/* {console.log("esto es preguntaSSS", this.state.preguntas)} */}
@@ -182,7 +185,7 @@ class ResponderAuditoria extends Component {
                             )
                         })}
                         <div className="center">
-                            <button id='Enviar' className="btn blue lighten-1 z-depth-0 big-button" onClick={() => { this.Seguro() }}>{text[lang].auditorias.responderAuditoria.enviar}</button>
+                            <button id='Enviar' className="btn blue lighten-1 z-depth-0 big-button">{text[lang].auditorias.responderAuditoria.enviar}</button>
                         </div>
                         
                     </form>
