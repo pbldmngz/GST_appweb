@@ -106,7 +106,12 @@ lang.spanish = {
 
         },
         editarPregunta: {
-
+            editar_pregunta: "Editar pregunta",
+            pregunta: "Pregunta",
+            descripcion: "Descripción",
+            plan_reaccion: "Plan de reacción",
+            categoria: "Categoría",
+            editar: "Editar",
         },
         preguntaGrafica: {
 
