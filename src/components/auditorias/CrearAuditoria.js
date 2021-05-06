@@ -117,22 +117,19 @@ class CrearAuditoria extends Component {
                         <form className="white" onSubmit={this.handleSubmit}>
                             <h5 className="grey-text text-darken-3">{text[lang].auditorias.crearAuditoria.crear_auditoria}</h5>
                             <div className="input-field">
-                                <label htmlFor="auditoria">{text[lang].auditorias.crearAuditoria.nombre_auditoria}</label>
-                                <input type="text" id='auditoria' onChange={this.handleChange} />
+                                <input type="text" id='auditoria' placeholder={text[lang].auditorias.crearAuditoria.nombre_auditoria} onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                <label htmlFor="auditor">{text[lang].auditorias.crearAuditoria.auditor}</label>
-                                <input type="text" id='auditor' onChange={this.handleChange} />
+                                <input type="text" id='auditor' placeholder={text[lang].auditorias.crearAuditoria.auditor} onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                <label htmlFor="area">{text[lang].auditorias.crearAuditoria.area}</label>
-                                <input type="text" id='area' onChange={this.handleChange} />
+                                <input type="text" id='area' placeholder={text[lang].auditorias.crearAuditoria.area} onChange={this.handleChange} />
                             </div>
                             <div className="date-field">
 
                                 <div className="date-container">
                                     <div className="date">
-                                        <span className="grey-text">{text[lang].auditorias.crearAuditoria.termina_el}</span>
+                                        <span className="" placeholder={text[lang].auditorias.crearAuditoria.termina_el}> y termina el </span>
                                         <DatePicker id="fecha_fin" selected={this.state.fecha_fin} onChange={(date) => this.setState({
                                             fecha_fin: date
                                         })} />

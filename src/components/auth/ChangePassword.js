@@ -97,16 +97,16 @@ class ChangePassword extends Component {
                     <div className="cambiar-cont">
                         <div className="contrasena">
                             <div className="input-field">
-                                <label htmlFor="currentPassword">{bText[lang].auth.changePassword.contrasena_actual}</label>
-                                <input type="password" id='currentPassword' name='currentPassword' onChange={this.handleChange} />
+                                <input type="password" id='currentPassword' name='currentPassword'
+                                placeholder={bText[lang].auth.changePassword.contrasena_actual} onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                        <label htmlFor="newPassword">{bText[lang].auth.changePassword.contrasena_nueva}</label>
-                                <input type="password" id='newPassword' name='newPassword' onChange={this.handleChange} />
+                                <input type="password" id='newPassword' name='newPassword'
+                                placeholder={bText[lang].auth.changePassword.contrasena_nueva} onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                        <label htmlFor="newPasswordConfirm">{bText[lang].auth.changePassword.repite_contrasena}</label>
-                            <input type="password" id='newPasswordConfirm' name='newPasswordConfirm' onChange={this.handleChange} />
+                            <input type="password" id='newPasswordConfirm' name='newPasswordConfirm' 
+                            placeholder={bText[lang].auth.changePassword.repite_contrasena} onChange={this.handleChange} />
                             </div>
                         </div>
                     </div>
