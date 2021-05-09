@@ -123,7 +123,7 @@ class DashboardAuditorias extends Component {
 const mapStateToProps = (state) => {
     // console.log("Status", state)
     return {
-        auditorias: state.firestore.ordered.auditorias,
+        auditorias: state.firestore.ordered.auditorias, //Copia esto para lo de responder auditoría
         respuestas: state.firestore.ordered.respuestas,
         lang: state.firebase.profile.lang,
         auth: state.firebase.auth,

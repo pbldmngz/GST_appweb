@@ -200,6 +200,7 @@ const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
         lang: state.firebase.profile.lang,
+        auditorias: state.firestore.ordered.auditorias,
         preguntas: state.firestore.ordered.preguntas,
     }
 }

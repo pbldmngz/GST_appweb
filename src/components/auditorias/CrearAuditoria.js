@@ -204,8 +204,8 @@ class CrearAuditoria extends Component {
                 </div>
                 
                 <div className="botones">
-                    <button className="cancel" onClick={this.handleSubmit}>{text[lang].auditorias.crearAuditoria.cancelar}</button>
-                    <button className="aceptar" onClick={this.handleCancel}>{text[lang].auditorias.crearAuditoria.crear}</button>
+                    <button className="cancel" onClick={this.handleCancel}>{text[lang].auditorias.crearAuditoria.cancelar}</button>
+                    <button className="aceptar" onClick={this.handleSubmit}>{text[lang].auditorias.crearAuditoria.crear}</button>
                 </div>
                 
                 <button className="regreso">{text[lang].return}</button>
