@@ -22,7 +22,8 @@ import "react-datepicker/dist/react-datepicker.css";
 class ResponderAuditoria extends Component {
     state = {
         preguntas: [],
-        auditoria: ""
+        auditoria: "",
+        _mounted: false,
     }
     handleChange = (e) => {
         // console.log("this is E", e)
@@ -92,16 +93,20 @@ class ResponderAuditoria extends Component {
         this.props.respuestaPregunta(results)
         this.props.history.push("/"); //Esto se cambiará según el contexto
     }
-    UNSAFE_componentWillMount() {
+    componentDidMount() {
+        console.log("Mounted!")
+        // this._ismounted = true
         const id = this.props.match.params.id
-        this.setState({
-            auditoria: id
-        })
+        // this.setState({
+        //     auditoria: id,
+        // })
 
         this.props.preguntasAuditoria({ id: id }).then((res) => {
             this.setState({
-                preguntas: res.filter(r => r)
-            })
+                preguntas: res.filter(r => r),
+                auditoria: id,
+                _mounted: true,
+            }, console.log("Updated!"))
         })
     }
     Seguro = (e) => {
@@ -124,13 +129,20 @@ class ResponderAuditoria extends Component {
             })
     }
     render() {
-        const { auth, preguntas, lang } = this.props;
+        const { auth, preguntas, proceed, lang } = this.props;
         const text = require('../../config/language');
-        if (!lang) return null;
+        
 
+        
+        // console.log("Status", this.state)
         // console.log(this.props)
-
+        if (!lang) return null;
         if (!auth.uid) return <Redirect to="/signin" />
+        // console.log("Mounted?", this.state._mounted, "Proceed?", !proceed)
+        if (this.state._mounted && !proceed) return <Redirect to="/" />
+        
+
+        
         
 
         //Se tiene que buscar preguntas por ID, 
@@ -195,12 +207,17 @@ class ResponderAuditoria extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    // console.log(state)
+const mapStateToProps = (state, ownProps) => {
+
     return {
         auth: state.firebase.auth,
         lang: state.firebase.profile.lang,
-        auditorias: state.firestore.ordered.auditorias,
+        proceed: (
+            (state.firestore.ordered.respuestas && state.firestore.ordered.respuestas.filter(res =>
+                (res.answeredById === state.firebase.auth.uid) &&
+                (res.auditoria === ownProps.match.params.id)).length
+            ) > 0 ? (false) : (true)
+        ),
         preguntas: state.firestore.ordered.preguntas,
     }
 }
@@ -215,7 +232,7 @@ const mapDispatchtoProps = (dispatch) => {
 
 export default compose(
     connect(mapStateToProps, mapDispatchtoProps),
-    // firestoreConnect([{ collection: "preguntas", orderBy: ["createdAt", "asc"] }])
+    firestoreConnect([{ collection: "respuestas", orderBy: ["answeredAt", "asc"] }])
     )(ResponderAuditoria)
 /*$("#Enviar").click(funtion(){
     Swal.fire({
