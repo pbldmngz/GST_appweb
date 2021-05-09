@@ -13,10 +13,13 @@ const Navbar = (props) => {
         <nav className="navbar">
             <ul>
                 <div className="">
-                <Link to="/" className="center-box">
-                    <li><div className="perfil">{initials}</div></li>
-                </Link>
-                <div className="options"><li>{links}</li></div>
+                    <div className="perfil">
+                        <Link to="/" className="center-box">
+                            <li><div className="">{initials}</div></li>
+                        </Link>
+                    </div>
+                    
+                    <div className="options"><li>{links}</li></div>
                 </div>
             </ul>
         </nav>
