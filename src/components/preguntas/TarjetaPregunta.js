@@ -25,19 +25,22 @@ export default function TarjetaPregunta(props) {
         </div>
     ) : null
     
-    return ( 
-        <div className="card x-depth-0 tarjeta-pregunta card-content" key={pregunta.id}>
-            <div className="center-grid">
+    return (
+        <div className="center-box">
+        <div className="box" key={pregunta.id}>
+            <div className="">
                 <Link to={path.detalles_pregunta_auditoria + "/" + pregunta.id}>
-                    <div className="grey-text text-darken-3 card-cont">
-                        <span className="card-title">{pregunta[lang]}</span>
+                    <div className="">
+                        <span className="">{pregunta[lang]}</span>
                         <p>{pregunta.description}</p>
+                        <p>{pregunta.reaction_plan}</p>
                     </div>
                 </Link>
-                <div className="card-extra">
+                <div className="">
                     {botones}
                 </div>
             </div>
+        </div>
         </div>
     )
 }

@@ -58,7 +58,7 @@ button:hover{
 }
 
 .boton-generico{
-  width: 200px;
+  width: 180px;
 }
 
 .regreso{
@@ -92,6 +92,13 @@ button:hover{
 }
 
 /*CARD*/
+.center-box {
+  display: flex;
+  height: 100%;
+  justify-content: center; 
+  align-items: center;
+}
+
 .box {
   background-color: #F8F8F8;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -100,6 +107,7 @@ button:hover{
   margin: 2vw 15vw 4vw 15vw;
   padding: 1vw;
   overflow-y: hidden;
+  width: 77vw;
 }
 
 .box:hover {
@@ -118,6 +126,27 @@ button:hover{
 
 .contrasena:hover {
   box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
+}
+
+/*FOOTER*/
+.footer{
+  margin-top: 1vw;
+  width: 50%;
+  text-align: center;
+  float: left;
+}
+
+.footer-hermano{
+  margin-top: 1vw;
+  width: 25%;
+  text-align: center;
+  float: left;
+}
+
+.padre-footer{
+  width: 100vw;
+  text-align: center;
+  float: left;
 }
 
 /*CABECERA*/

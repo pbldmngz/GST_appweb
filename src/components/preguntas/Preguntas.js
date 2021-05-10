@@ -30,7 +30,7 @@ export default function Preguntas(props) {
         </div>
 
     <div>
-            <div className="carta">
+            <div className="">
             {preguntas && preguntas.map(pregunta => {
                 return (
                     <div key={pregunta.id}>
@@ -44,6 +44,24 @@ export default function Preguntas(props) {
                     </div>
                 )
             })}
+        <div className="padre-footer">
+            <div className="footer-hermano"></div>
+                <div className="footer">
+                    <div className="titulo">
+                        <NavLink to={path.crear_pregunta} className="">
+                            <button className="boton-generico">Asignar auditoría</button>
+                        </NavLink>
+                    </div>
+
+                    <div className="titulo">
+                        <NavLink to={path.crear_pregunta} className="">
+                            <button className="boton-generico">Guardar preguntas</button>
+                        </NavLink>
+                    </div>
+                </div>
+            <div className="footer-hermano"></div>
+        </div>
+        
         </div>
             <button className="regreso">Return</button>
         </div>
