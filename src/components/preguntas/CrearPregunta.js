@@ -6,7 +6,6 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 
-
 class CrearPregunta extends Component {
     state = {
         category: 4,
@@ -71,6 +70,7 @@ class CrearPregunta extends Component {
 
                     <button className="">{bText[lang].preguntas.crearPregunta.crear}</button>
                 </form>
+                <button className="regreso"><a href="/">{bText[lang].return}</a></button>
             </div>
         )
     }

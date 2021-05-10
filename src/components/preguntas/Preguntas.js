@@ -1,9 +1,12 @@
 import React from 'react'
 import TarjetaPregunta from './TarjetaPregunta'
 import { Link, NavLink } from 'react-router-dom'
+import CambiarIdioma from '../util/CambiarIdioma'
 
 export default function Preguntas(props) {
     var { path, pathName } = require('../../config/config');
+    const text = require('../../config/language');
+
     const { preguntas, editPregunta, deletePregunta, userLevel, lang } = props
 
     //Center the + icon pls
@@ -44,9 +47,9 @@ export default function Preguntas(props) {
                     </div>
                 )
             })}
-        </div>
-            <button className="regreso">Return</button>
-        </div>
+       </div>
+                <button className="regreso"><a href="/">{text[lang].return}</a></button>
+            </div>
     </div>
 
     )
