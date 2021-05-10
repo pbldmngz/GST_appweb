@@ -121,7 +121,7 @@ class ChangePassword extends Component {
                     </div>
                 </form>
 
-                <button className="regreso">{bText[lang].return}</button>
+                <button className="regreso"><a href="/">{bText[lang].return}</a></button>
             </div>
         )
     }

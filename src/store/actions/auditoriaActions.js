@@ -130,6 +130,26 @@ export const preguntasAuditoriaVoting = (auditoria) => {
     }
 }
 
+export const getAuditoria = (id) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firestore = getFirestore();
+
+        var docRef = firestore.collection("auditorias").doc(id);
+
+        return docRef.get()
+            .then((doc) => {
+                // console.log("did I get passes .then")
+                if (doc.exists) {
+                    //console.log("this: ", doc.data())
+                    return doc.data()
+                }
+            }).catch((err) => {
+                console.log(err)
+            });
+
+    }
+}
+
 // //Se recibe el ID
 // export const failedVersion = (auditoria) => {
 //     return async (dispatch, getState, { getFirebase, getFirestore }) => {

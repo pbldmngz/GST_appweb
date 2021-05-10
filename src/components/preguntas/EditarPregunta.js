@@ -9,7 +9,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 
 class EditarPregunta extends Component {
     state = {
-        category: 5,
+        category: 4,
         description: "",
         reaction_plan: "",
         english: "",
@@ -53,29 +53,35 @@ class EditarPregunta extends Component {
 
     render() {
         // console.log(this.state)
-        const { auth } = this.props;
+        const { auth, lang } = this.props;
+        const bText = require('../../config/language');
+        if (!lang) return null;
+
         if (!auth.uid) return <Redirect to="/signin" />
 
         return (
             <div className="container">
                 <form className="white" onSubmit={this.handleSubmit}>
-                    <h5 className="grey-text text-darken-3">Editar pregunta</h5>
+                    <h5 className="grey-text text-darken-3">{bText[lang].preguntas.editarPregunta.editar_pregunta}</h5>
                     <div className="">
-                        <label htmlFor="lang.english">Pregunta</label>
+                        <label htmlFor="lang.english">{bText[lang].preguntas.editarPregunta.pregunta}[EN]</label>
                         <input type="text" id='english' value={this.state.english} onChange={this.handleChange} />
                     </div>
                     <div className="">
-                        <label htmlFor="descripcion">Descripción</label>
+                        <label htmlFor="lang.english">{bText[lang].preguntas.editarPregunta.pregunta}[ES]</label>
+                        <input type="text" id='english' value={this.state.spanish} onChange={this.handleChange} />
+                    </div>
+                    <div className="">
+                        <label htmlFor="descripcion">{bText[lang].preguntas.editarPregunta.descripcion}</label>
                         <input type="text" id='description' value={this.state.description} onChange={this.handleChange} />
                     </div>
                     <div className="">
-                        <label htmlFor="action_plan">Plan de reacción</label>
+                        <label htmlFor="action_plan">{bText[lang].preguntas.editarPregunta.plan_reaccion}</label>
                         <input type="text" id='reaction_plan' value={this.state.reaction_plan} onChange={this.handleChange} />
                     </div>
                     <div className="">
-                        <InputLabel id="select-level">Categroría</InputLabel>
+                        <InputLabel id="select-level">{bText[lang].preguntas.editarPregunta.categoria}</InputLabel>
                         <Select labelId="select-level" id="level" value={this.state.category} onChange={this.handleChangeSelect}>
-                            <MenuItem value={5}>E</MenuItem>
                             <MenuItem value={4}>D</MenuItem>
                             <MenuItem value={3}>C</MenuItem>
                             <MenuItem value={2}>B</MenuItem>
@@ -83,7 +89,7 @@ class EditarPregunta extends Component {
                         </Select>
                     </div>
 
-                    <button className="btn blue lighten-1 z-depth-0">Editar</button>
+                    <button className="btn blue lighten-1 z-depth-0">{bText[lang].preguntas.editarPregunta.editar}</button>
                 </form>
             </div>
         )
@@ -92,7 +98,8 @@ class EditarPregunta extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        lang: state.firebase.profile.lang,
     }
 }
 

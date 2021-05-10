@@ -46,7 +46,7 @@ class DashboardAuditorias extends Component {
         // Que mandar al fondo. En todo caso puedo hacer una vista de auditorias YA HECHAS
         var filteredAuditorias = auditorias;
 
-        if (userLevel != 0 && respuestas) {
+        if (auditorias && userLevel != 0 && respuestas) {
             // console.log("0", this.state.filter, respuestas)
             const filtRespuestas = respuestas.filter(res => auth.uid === res.answeredById)
 
@@ -65,9 +65,9 @@ class DashboardAuditorias extends Component {
             // console.log("3", alreadyDone)
 
             filteredAuditorias = (this.state.filter === 2) ? (
-                auditorias.filter(aud => alreadyDone.includes(aud.id))
+                auditorias && auditorias.filter(aud => alreadyDone.includes(aud.id))
             ) : (
-                auditorias.filter(aud => !alreadyDone.includes(aud.id))
+                auditorias && auditorias.filter(aud => !alreadyDone.includes(aud.id))
             );
 
             filteredAuditorias = filteredAuditorias.filter(aud => aud.minCategory >= userLevel)

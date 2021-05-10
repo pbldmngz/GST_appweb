@@ -1,6 +1,7 @@
 var config = {}
 
 config.path = {
+    profile: "/profile",
     sign_in: "/signin",
     sign_up: "/signup",
     crear_auditoria: "/crear-auditoria",
@@ -26,6 +27,7 @@ config.path = {
 }
 
 config.pathName = {
+    profile: "Profile",
     sign_in: "Login",
     sign_up: "SignUp",
     crear_auditoria: "Crear auditoría",

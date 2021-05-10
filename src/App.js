@@ -14,6 +14,7 @@ import DetallesPreguntasAuditoria from './components/preguntas/DetallesPreguntas
 import EditarPregunta from './components/preguntas/EditarPregunta';
 import DetallesPreguntaIndividual from './components/preguntas/DetallesPreguntaIndividual';
 import ChangePassword from './components/auth/ChangePassword';
+import Profile from './components/util/Profile';
 
 class App extends Component {
   render() {
@@ -26,6 +27,7 @@ class App extends Component {
           <Switch>
             <Route exact path={path.auditorias} component={DashboardAuditorias}/>
             <Route path={path.auditoria} component={DetallesAuditoria} />
+            <Route path={path.profile} component={Profile} />
             <Route path={path.sign_in} component={SignIn} />
             <Route path={path.sign_up} component={SignUp} />
             <Route path={path.responder_auditoria_redirect} component={ResponderAuditoria} />

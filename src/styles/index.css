@@ -15,15 +15,24 @@ body {
   /* background-color: #CB4335; */
 }
 
+/* Esto es para que los links no tengan estilos propios */
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
 ul{
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-li{
+.options li{
   float: left;
   color: white;
+  text-decoration: none;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .options{
@@ -37,6 +46,8 @@ li{
   font-size: 30px;
   border: none;
   color: white;
+  max-width: 50px;
+  float: left;
 }
 
 /*BOTONES*/
@@ -158,6 +169,7 @@ h2{
 
 .width{
   width: 100%;
+  /* background-color: #F8F8F8; */
 }
 
 .cabecera{

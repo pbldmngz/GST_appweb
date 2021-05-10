@@ -5,6 +5,7 @@ import SignedOutLinks from './SignedOutLinks'
 import {connect} from 'react-redux'
 //<div className=""> ==> <div className="container"> to center
 const Navbar = (props) => {
+    var { path } = require('../../config/config');
     const {auth, profile} = props
     const links = auth.uid ? <SignedInLinks /> : <SignedOutLinks />;
     const initials = auth.uid ? profile.initials : "GST";
@@ -13,10 +14,13 @@ const Navbar = (props) => {
         <nav className="navbar">
             <ul>
                 <div className="">
-                <Link to="/" className="center-box">
-                    <li><div className="perfil">{initials}</div></li>
-                </Link>
-                <div className="options"><li>{links}</li></div>
+                    <div className="perfil">
+                        <Link to={path.profile} className="center-box">
+                            <li><div className="">{initials}</div></li>
+                        </Link>
+                    </div>
+                    
+                    <div className="options"><li>{links}</li></div>
                 </div>
             </ul>
         </nav>

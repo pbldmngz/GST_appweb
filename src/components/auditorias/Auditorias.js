@@ -36,8 +36,7 @@ export default function Auditorias(props) {
             })}
 
             <div className="width">
-                <button className="regreso">{text[lang].return}</button>
-                <CambiarIdioma/>
+                <button className="regreso"><a href="#">{text[lang].return}</a></button>
             </div>
         </div>
     )
