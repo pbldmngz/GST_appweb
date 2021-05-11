@@ -5,7 +5,7 @@ import { Redirect } from 'react-router'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
-
+import Swal from 'sweetalert2';
 
 class EditarPregunta extends Component {
     state = {
@@ -50,6 +50,25 @@ class EditarPregunta extends Component {
         //Checa el state en la consola, no sale nada
 
     }
+    Seguro = (e) => {
+        // console.log(e)
+        e.preventDefault();
+        Swal.fire({
+            title: 'Do you want to save the changes?',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Save',
+            denyButtonText: "Don't save",
+            }).then((result) => {
+            //  Read more about isConfirmed, isDenied below
+            if (result.isConfirmed) {
+                this.handleSubmit(e)
+                Swal.fire('Saved!', '', 'success')
+            } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info')
+            }
+            })
+    }
 
     render() {
         // console.log(this.state)
@@ -61,7 +80,7 @@ class EditarPregunta extends Component {
 
         return (
             <div className="container">
-                <form className="white" onSubmit={this.handleSubmit}>
+                <form className="white" onSubmit={this.Seguro}>
                     <h5 className="grey-text text-darken-3">{bText[lang].preguntas.editarPregunta.editar_pregunta}</h5>
                     <div className="">
                         <label htmlFor="lang.english">{bText[lang].preguntas.editarPregunta.pregunta}[EN]</label>

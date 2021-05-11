@@ -15,6 +15,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Slide from '@material-ui/core/Slide';
+import Swal from 'sweetalert2';
 //import DatePicker from 'react-datepicker/dist/react-datepicker'
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -93,7 +94,25 @@ class CrearAuditoria extends Component {
             preguntas: [...new Set([...prevState.preguntas, this.state.valueB])]
         }))
     };
-
+    Seguro = (e) => {
+        // console.log(e)
+        e.preventDefault();
+        Swal.fire({
+            title: 'Do you want to save the changes?',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Save',
+            denyButtonText: "Don't save",
+            }).then((result) => {
+            //  Read more about isConfirmed, isDenied below
+            if (result.isConfirmed) {
+                this.handleSubmit(e)
+                Swal.fire('Saved!', '', 'success')
+            } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info')
+            }
+            })
+    }
     render() {
         var { path, pathName } = require('../../config/config');
         const text = require('../../config/language');
@@ -107,6 +126,7 @@ class CrearAuditoria extends Component {
         if (userLevel != 0) return <Redirect to="/" />
 
         console.log(this.state.preguntas)
+        
         return (
             <div className="">
                 <div className="cabecera">
@@ -114,7 +134,7 @@ class CrearAuditoria extends Component {
                 </div>
                 <div className="box">
                     <div className="crear-auditoria-views card">
-                        <form className="white" onSubmit={this.handleSubmit}>
+                        <form className="white" onSubmit={this.Seguro}>
                             <h5 className="grey-text text-darken-3">{text[lang].auditorias.crearAuditoria.crear_auditoria}</h5>
                             <div className="input-field">
                                 <input type="text" id='auditoria' placeholder={text[lang].auditorias.crearAuditoria.nombre_auditoria} onChange={this.handleChange} />

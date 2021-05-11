@@ -5,7 +5,7 @@ import { Redirect } from 'react-router'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
-
+import Swal from 'sweetalert2';
 class CrearPregunta extends Component {
     state = {
         category: 4,
@@ -31,6 +31,25 @@ class CrearPregunta extends Component {
         this.props.createPregunta(this.state)
         this.props.history.push("/preguntas"); //Esto se cambiará según el contexto
     }
+    Seguro = (e) => {
+        // console.log(e)
+        e.preventDefault();
+        Swal.fire({
+            title: 'Do you want to save the changes?',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Save',
+            denyButtonText: "Don't save",
+            }).then((result) => {
+            //  Read more about isConfirmed, isDenied below
+            if (result.isConfirmed) {
+                this.handleSubmit(e)
+                Swal.fire('Saved!', '', 'success')
+            } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info')
+            }
+            })
+    }
     render() {
         const { auth, lang } = this.props;
         const bText = require('../../config/language');
@@ -40,7 +59,7 @@ class CrearPregunta extends Component {
 
         return (
             <div className="">
-                <form className="white" onSubmit={this.handleSubmit}>
+                <form className="white" onSubmit={this.Seguro}>
                     <h5 className="">{bText[lang].preguntas.crearPregunta.crear_pregunta}</h5>
                     <div className="input-field">
                         <label htmlFor="lang.english">{bText[lang].preguntas.crearPregunta.pregunta}[EN]</label>
