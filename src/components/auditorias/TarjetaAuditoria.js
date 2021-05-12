@@ -66,6 +66,7 @@ export default function TarjetaAuditoria(props) {
     moment.locale(bText[lang].locale)
     // console.log(moment.locale("es"))
     const date = auditoria.fecha_fin ? <p className="grey-text">{bText[lang].auditorias.tarjetaAuditoria.fecha_limite}: {moment(auditoria.fecha_fin.toDate()).fromNow()}</p> : null
+    
     return (
         <div style={style} className="box" key={auditoria.id}>
             <div className="">

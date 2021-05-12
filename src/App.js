@@ -15,7 +15,7 @@ import EditarPregunta from './components/preguntas/EditarPregunta';
 import DetallesPreguntaIndividual from './components/preguntas/DetallesPreguntaIndividual';
 import ChangePassword from './components/auth/ChangePassword';
 import Profile from './components/util/Profile';
-
+import EditarAuditoria from './components/auditorias/EditarAuditoria';
 class App extends Component {
   render() {
     var { path } = require('./config/config');
@@ -39,6 +39,7 @@ class App extends Component {
             <Route path={path.editar_pregunta_redirect} component={EditarPregunta} />
             <Route path={path.detalles_pregunta_auditoria_redirect} component={DetallesPreguntaIndividual} />
             <Route path={path.change_password} component={ChangePassword} />
+            <Route path={path.editarauditoria} component={EditarAuditoria} />
           </Switch>
         </div>
       </BrowserRouter>
