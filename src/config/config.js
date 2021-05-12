@@ -23,6 +23,7 @@ config.path = {
     editar_pregunta_redirect: "/editar-pregunta/:id",
     change_password: "/change_password",
     editarauditoria: "/editarauditoria",
+    mainproceso: "/mainproceso"
     // pregunta_reponder: "/responder-pregunta",
     // pregunta_reponder_redirect: "/responder-pregunta/:id"
 }
@@ -43,6 +44,7 @@ config.pathName = {
     detalles_preguntas_auditoria: "Detalles de las preguntas de la auditoría",
     change_password: "Cambiar contraseña",
     editarauditoria: "Editar Auditoria",
+    mainproceso: "Proceso principal"
 }
 
 module.exports = config;
