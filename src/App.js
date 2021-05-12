@@ -17,6 +17,7 @@ import ChangePassword from './components/auth/ChangePassword';
 import Profile from './components/util/Profile';
 import EditarAuditoria from './components/auditorias/EditarAuditoria';
 import MainProceso from './components/auditorias/MainProceso';
+import Areas from './components/auditorias/Areas';
 class App extends Component {
   render() {
     var { path } = require('./config/config');
@@ -28,6 +29,7 @@ class App extends Component {
           <Switch>
             <Route exact path={path.auditorias} component={DashboardAuditorias}/>
             <Route path={path.mainproceso} component={MainProceso}/>
+            <Route path={path.areas} component={Areas}/>
             <Route path={path.auditoria} component={DetallesAuditoria} />
             <Route path={path.profile} component={Profile} />
             <Route path={path.sign_in} component={SignIn} />
