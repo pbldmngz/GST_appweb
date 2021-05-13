@@ -43,7 +43,7 @@ class App extends Component {
             <Route path={path.editar_pregunta_redirect} component={EditarPregunta} />
             <Route path={path.detalles_pregunta_auditoria_redirect} component={DetallesPreguntaIndividual} />
             <Route path={path.change_password} component={ChangePassword} />
-            <Route path={path.editarauditoria} component={EditarAuditoria} />
+            <Route path={path.editar_auditoria_redirect} component={EditarAuditoria} />
           </Switch>
         </div>
       </BrowserRouter>

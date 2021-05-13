@@ -8,6 +8,8 @@ config.path = {
     areas: "/areas",
     auditoria: "/auditoria/:id",
     auditorias: "/",
+    editar_auditoria: "/editar-auditoria",
+    editar_auditoria_redirect: "/editar-auditoria/:id",
     responder_auditoria: "/responder-auditoria",
     responder_auditoria_redirect: "/responder-auditoria/:id",
     auditorias_area: "/area/:id",
@@ -22,7 +24,6 @@ config.path = {
     editar_pregunta: "/editar-pregunta",
     editar_pregunta_redirect: "/editar-pregunta/:id",
     change_password: "/change_password",
-    editarauditoria: "/editarauditoria",
     mainproceso: "/mainproceso",
     areas: "/areas"
     // pregunta_reponder: "/responder-pregunta",

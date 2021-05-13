@@ -10,6 +10,7 @@ lang.spanish = {
         },
         crearAuditoria: {
             crear_auditoria: "Crear auditoria",
+            editar_auditoria: "Editar auditoria",
             nombre_auditoria: "Nombre de la auditoria",
             auditor: "Auditor",
             area: "Area",
@@ -22,6 +23,7 @@ lang.spanish = {
             text2: " crea una pregunta nueva, ",
             text3: "una vez creada la podrás seleccionar en esta lista.",
             crear: "Crear",
+            edit: "Editar",
         },
         dashboardAuditorias: {
             ordenar_fecha: "Ordenar por fecha",
@@ -135,6 +137,7 @@ lang.english = {
         },
         crearAuditoria: {
             crear_auditoria: "Create new audit",
+            editar_auditoria: "Edit",
             nombre_auditoria: "Audit name",
             auditor: "Auditor",
             area: "Area",
@@ -147,6 +150,7 @@ lang.english = {
             text2: " create a new question, ",
             text3: "once created, you will find it within this list.",
             crear: "Create",
+            editar: "Edit",
         },
         dashboardAuditorias: {
             ordenar_fecha: "Order by date",

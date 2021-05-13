@@ -36,6 +36,7 @@ class EditarAuditoria extends Component {
         valueB: "",
     }
     handleChange = (e) => {
+        // console.log(this.state)
         this.setState({
             [e.target.id]: e.target.value
         })
@@ -46,11 +47,32 @@ class EditarAuditoria extends Component {
             category: e.target.value
         })
     }
+    handleChangeAutocomplete = (e, newValue) => {
+        // console.log("This is E and nV", e, newValue)
+        //Tengo que conseguir el ID
+        this.setState({
+            valueB: newValue
+        })
+    }
     handleSubmit = (e) => {
         e.preventDefault();
-        // console.log("se supone que se envió", this.state)
-        this.props.editAuditoria(this.props.match.params.id, this.state)
-        this.props.history.push("/auditorias"); //Esto se cambiará según el contexto
+        // console.log(this.state)
+        this.props.editAuditoria(this.props.match.params.id,
+            {
+            auditoria: this.state.auditoria,
+            auditor: this.state.auditor,
+            area: this.state.area,
+            fecha_inicio: this.state.fecha_inicio,
+            fecha_fin: this.state.fecha_fin,
+            preguntas: this.state.preguntas.map((pre) => {
+                return pre.id
+            }),
+            minCategory: Math.max(...this.state.preguntas.map((pre) => {
+                return pre.category
+            })),
+        })
+
+        this.props.history.push("/"); //Esto se cambiará según el contexto
     }
 
     UNSAFE_componentWillMount() {
@@ -61,11 +83,11 @@ class EditarAuditoria extends Component {
                 auditoria: res.auditoria,
                 auditor: res.auditor,
                 area: res.area,
-                fecha_inicio: res.fecha_inicio,
-                fecha_fin: res.fecha_fin,
-                preguntas:res.preguntas,
-                openB:res.openB,
-                valueB:res.valueB,
+                fecha_inicio: res.fecha_inicio.toDate(),
+                fecha_fin: res.fecha_fin.toDate(),
+                preguntas:res.preguntas.map((pre) => {
+                    return this.props.preguntas.filter(fil => fil.id === pre)[0]
+                }),
             })
             // console.log("This is Res", res)
         })
@@ -73,6 +95,33 @@ class EditarAuditoria extends Component {
         //Checa el state en la consola, no sale nada
 
     }
+
+    handleClickOpen = () => {
+        this.setState({
+            openB: true
+        })
+    };
+    handleCancel = () => {
+        this.props.history.push("/");
+    }
+    handleDelete = (id) => {
+        const newPreguntas = this.state.preguntas.filter(pregunta => pregunta.id !== id)
+        this.setState({
+            preguntas: newPreguntas
+        })
+    }
+    handleClose = () => {
+        this.setState({
+            openB: false
+        })
+    };
+    handleCloseSave = (e) => {
+        // console.log("Y aquí debo de sacar una forma de registrar una pregunta nueva", e)
+        this.setState(prevState => ({
+            openB: false,
+            preguntas: [...new Set([...prevState.preguntas, this.state.valueB])]
+        }))
+    };
     Seguro = (e) => {
         // console.log(e)
         e.preventDefault();
@@ -104,25 +153,25 @@ class EditarAuditoria extends Component {
         if (!auth.uid) return <Redirect to="/signin" />
         if (userLevel != 0) return <Redirect to="/" />
 
-        console.log(this.state.preguntas)
+        // console.log(this.state.preguntas)
         
         return (
             <div className="">
                 <div className="cabecera">
-                    <h2 className="">{text[lang].auditorias.crearAuditoria.crear_auditoria}</h2>
+                    <h2 className="">{text[lang].auditorias.crearAuditoria.editar_auditoria}</h2>
                 </div>
                 <div className="box">
                     <div className="crear-auditoria-views card">
                         <form className="white" onSubmit={this.Seguro}>
-                            <h5 className="grey-text text-darken-3">{text[lang].auditorias.crearAuditoria.crear_auditoria}</h5>
+                            <h5 className="grey-text text-darken-3">{text[lang].auditorias.crearAuditoria.editar_auditoria}</h5>
                             <div className="input-field">
-                                <input type="text" id='auditoria' placeholder={text[lang].auditorias.crearAuditoria.nombre_auditoria} onChange={this.handleChange} />
+                                <input type="text" id='auditoria' placeholder={this.state.auditoria} onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                <input type="text" id='auditor' placeholder={text[lang].auditorias.crearAuditoria.auditor} onChange={this.handleChange} />
+                                <input type="text" id='auditor' placeholder={this.state.auditor} onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                <input type="text" id='area' placeholder={text[lang].auditorias.crearAuditoria.area} onChange={this.handleChange} />
+                                <input type="text" id='area' placeholder={this.state.area} onChange={this.handleChange} />
                             </div>
                             <div className="date-field">
 
@@ -219,6 +268,8 @@ const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
         lang: state.firebase.profile.lang,
+        userLevel: state.firebase.profile.userLevel,
+        preguntas: state.firestore.ordered.preguntas,
     }
 }
 

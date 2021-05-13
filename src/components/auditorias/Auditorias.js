@@ -14,6 +14,7 @@ export default function Auditorias(props) {
     return (
         
         <div className="">
+        {/* Esto es muy mejorable */}
             {auditorias && auditorias.map(auditoria => {
                 const retThis = (alreadyDone) ? (
                     <TarjetaAuditoria
@@ -23,14 +24,13 @@ export default function Auditorias(props) {
                         lang={lang}
                     />
                 ) : (
-                    <Link to={refLink + "/" + auditoria.id} key={auditoria.id} >
-                        <TarjetaAuditoria
-                            auditoria={auditoria}
-                            userLevel={userLevel}
-                            alreadyDone={alreadyDone}
-                            lang={lang}
-                        />
-                    </Link>
+                    <TarjetaAuditoria
+                        key={auditoria.id}
+                        auditoria={auditoria}
+                        userLevel={userLevel}
+                        alreadyDone={alreadyDone}
+                        lang={lang}
+                    />
                 )
                 return retThis
             })}

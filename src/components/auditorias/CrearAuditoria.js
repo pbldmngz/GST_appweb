@@ -125,7 +125,7 @@ class CrearAuditoria extends Component {
         if (!auth.uid) return <Redirect to="/signin" />
         if (userLevel != 0) return <Redirect to="/" />
 
-        console.log(this.state.preguntas)
+        // console.log(this.state.preguntas)
         
         return (
             <div className="">
