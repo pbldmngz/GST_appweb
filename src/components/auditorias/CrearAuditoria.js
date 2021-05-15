@@ -124,46 +124,6 @@ class CrearAuditoria extends Component {
     const { auth, userLevel, lang } = this.props;
     if (!lang) return null;
 
-    // console.log("this is lang: ", lang)
-
-        // console.log(this.state.preguntas)
-        
-        return (
-            <div className="">
-                <div className="cabecera">
-                    <h2 className="">{text[lang].auditorias.crearAuditoria.crear_auditoria}</h2>
-                </div>
-                <div className="box-crear-audit">
-                    <div className="">
-                        <form className="white" onSubmit={this.handleSubmit}>
-                <div className="box">
-                    <div className="crear-auditoria-views card">
-                        <form className="white" onSubmit={this.Seguro}>
-                            <h5 className="grey-text text-darken-3">{text[lang].auditorias.crearAuditoria.crear_auditoria}</h5>
-                            <div className="input-field">
-                                <input type="text" id='auditoria' placeholder={text[lang].auditorias.crearAuditoria.nombre_auditoria} onChange={this.handleChange} />
-                            </div>
-                            <div className="input-field">
-                                <input type="text" id='auditor' placeholder={text[lang].auditorias.crearAuditoria.auditor} onChange={this.handleChange} />
-                            </div>
-                            <div className="input-field">
-                                <input type="text" id='area' placeholder={text[lang].auditorias.crearAuditoria.area} onChange={this.handleChange} />
-                            </div>
-                            <div className="date-field">
-
-                                <div className="date-container">
-                                    <div className="date">
-                                        <DatePicker id="fecha_fin" selected={this.state.fecha_fin} onChange={(date) => this.setState({
-                                            fecha_fin: date
-                                        })} />
-                                    </div>
-                                    <div className="date">
-                                        <span className="grey-text">{text[lang].auditorias.crearAuditoria.inicia_el}</span>
-                                        <DatePicker id="fecha_inicio" selected={this.state.fecha_inicio} onChange={(date) => this.setState({
-                                            fecha_inicio: date
-                                        })} />
-                                    </div>
-                                </div>
     if (!auth.uid) return <Redirect to="/signin" />;
     if (userLevel != 0) return <Redirect to="/" />;
 
