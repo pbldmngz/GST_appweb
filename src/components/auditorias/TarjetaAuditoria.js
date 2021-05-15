@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment/min/moment-with-locales';
+import { Link, NavLink } from 'react-router-dom'
 
 export default function TarjetaAuditoria(props) {
     // Si las tarjetas no tienen las mismas "líneas" de contenido
@@ -83,6 +84,18 @@ export default function TarjetaAuditoria(props) {
                 <p>{bText[lang].auditorias.tarjetaAuditoria.auditor}: {auditoria.auditor}</p>
                 {date}
             </div>
+
+            <div className="button-group">
+            <Link to="/">
+                <div className="boton"><i className="material-icons">edit</i></div>
+            </Link>
+
+                <div className="boton" onClick={() => {
+                   //props.deletePregunta(pregunta.id)//
+                }}><i className="material-icons">delete</i></div>
+       
+        </div>
+
         </div>
     )
 }

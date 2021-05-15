@@ -112,10 +112,9 @@ class CrearAuditoria extends Component {
                 <div className="cabecera">
                     <h2 className="">{text[lang].auditorias.crearAuditoria.crear_auditoria}</h2>
                 </div>
-                <div className="box">
-                    <div className="crear-auditoria-views card">
+                <div className="box-crear-audit">
+                    <div className="">
                         <form className="white" onSubmit={this.handleSubmit}>
-                            <h5 className="grey-text text-darken-3">{text[lang].auditorias.crearAuditoria.crear_auditoria}</h5>
                             <div className="input-field">
                                 <input type="text" id='auditoria' placeholder={text[lang].auditorias.crearAuditoria.nombre_auditoria} onChange={this.handleChange} />
                             </div>
@@ -129,7 +128,6 @@ class CrearAuditoria extends Component {
 
                                 <div className="date-container">
                                     <div className="date">
-                                        <span className="" placeholder={text[lang].auditorias.crearAuditoria.termina_el}> y termina el </span>
                                         <DatePicker id="fecha_fin" selected={this.state.fecha_fin} onChange={(date) => this.setState({
                                             fecha_fin: date
                                         })} />

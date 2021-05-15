@@ -9,7 +9,6 @@ export default function Preguntas(props) {
 
     const { preguntas, editPregunta, deletePregunta, userLevel, lang } = props
 
-    //Center the + icon pls
     // Considerándolo, no tiene caso, va a haber más de 5 preguntas y se va a perder
 
     return (
@@ -17,7 +16,7 @@ export default function Preguntas(props) {
         <div className="cabecera">
                 <div className="titulo">
                     <NavLink to={path.crear_pregunta} className="">
-                        <button className="boton-generico">New Question</button>
+                        <button className="boton-generico">New Question<i class="fas fa-plus"></i></button>
                     </NavLink>
                 </div>
 
@@ -52,13 +51,13 @@ export default function Preguntas(props) {
                 <div className="footer">
                     <div className="titulo">
                         <NavLink to={path.crear_pregunta} className="">
-                            <button className="boton-generico">Asignar auditoría</button>
+                            <button className="cancel">Asignar auditoría</button>
                         </NavLink>
                     </div>
 
                     <div className="titulo">
                         <NavLink to={path.crear_pregunta} className="">
-                            <button className="boton-generico">Guardar preguntas</button>
+                            <button className="cancel">Guardar preguntas</button>
                         </NavLink>
                     </div>
                 </div>
