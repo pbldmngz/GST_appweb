@@ -129,6 +129,7 @@ class CrearAuditoria extends Component {
         // console.log(this.state.preguntas)
         
         return (
+          <div>
             <div className="">
                 <div className="cabecera">
                     <h2 className="">{text[lang].auditorias.crearAuditoria.crear_auditoria}</h2>
@@ -164,6 +165,16 @@ class CrearAuditoria extends Component {
                                         })} />
                                     </div>
                                 </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+          </div>
+    );
     if (!auth.uid) return <Redirect to="/signin" />;
     if (userLevel != 0) return <Redirect to="/" />;
 
