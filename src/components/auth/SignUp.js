@@ -6,7 +6,6 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 
-
 class SignUp extends Component {
     state = {
         email: '',
@@ -36,9 +35,11 @@ class SignUp extends Component {
     }
 
     render() {
-        const { auth, authError } = this.props;
+        const { auth, authError, userLevel } = this.props;
 
-        if (auth.uid) return <Redirect to="/" />
+        if (!auth.uid) return <Redirect to="/" />
+        if (userLevel && userLevel !==0) return <Redirect to="/" />
+
 
         return (
             <div className="container extra-margin">
@@ -83,6 +84,7 @@ class SignUp extends Component {
 const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
+        userLevel: state.firebase.profile.userLevel,
         authError: state.auth.authError
     }
 }

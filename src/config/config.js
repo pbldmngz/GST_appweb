@@ -8,6 +8,8 @@ config.path = {
     areas: "/areas",
     auditoria: "/auditoria/:id",
     auditorias: "/",
+    editar_auditoria: "/editar-auditoria",
+    editar_auditoria_redirect: "/editar-auditoria/:id",
     responder_auditoria: "/responder-auditoria",
     responder_auditoria_redirect: "/responder-auditoria/:id",
     auditorias_area: "/area/:id",
@@ -22,6 +24,8 @@ config.path = {
     editar_pregunta: "/editar-pregunta",
     editar_pregunta_redirect: "/editar-pregunta/:id",
     change_password: "/change_password",
+    mainproceso: "/mainproceso",
+    areas: "/areas"
     // pregunta_reponder: "/responder-pregunta",
     // pregunta_reponder_redirect: "/responder-pregunta/:id"
 }
@@ -41,6 +45,9 @@ config.pathName = {
     pregunta_responder: "Responder pregunta",
     detalles_preguntas_auditoria: "Detalles de las preguntas de la auditoría",
     change_password: "Cambiar contraseña",
+    editarauditoria: "Editar Auditoria",
+    mainproceso: "Proceso principal",
+    areas: "Areas"
 }
 
 module.exports = config;

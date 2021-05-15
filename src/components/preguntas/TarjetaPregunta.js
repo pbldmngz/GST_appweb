@@ -1,6 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import { Link, NavLink } from 'react-router-dom'
+import Swal from 'sweetalert2';
 
 export default function TarjetaPregunta(props) {
     var { path, pathName } = require('../../config/config');
@@ -19,12 +20,27 @@ export default function TarjetaPregunta(props) {
             </Link>
             <Link to={path.preguntas}>
                 <div className="boton" onClick={() => {
-                    props.deletePregunta(pregunta.id)
+                    Swal.fire({
+            title: 'Do you want to save the changes?',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Save',
+            denyButtonText: "Don't save",
+            }).then((result) => {
+            //  Read more about isConfirmed, isDenied below
+            if (result.isConfirmed) {
+                props.deletePregunta(pregunta.id)
+                Swal.fire('Saved!', '', 'success')
+            } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info')
+            }
+            })
+                    //props.deletePregunta(pregunta.id)
                 }}><i className="material-icons">delete</i></div>
             </Link>
         </div>
     ) : null
-    
+   
     return (
         <div className="center-box">
         <div className="box" key={pregunta.id}>

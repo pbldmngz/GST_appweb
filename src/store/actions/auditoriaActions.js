@@ -43,6 +43,16 @@ export const editAuditoria = (id, auditoria) => {
     }
 }
 
+export const deleteAuditoria = (id) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firestore = getFirestore();
+        const profile = getState().firebase.profile;
+        const authorId = getState().firebase.auth.uid;
+
+        firestore.collection("auditorias").doc(id).delete()
+    }
+}
+
 const asyncCall = async (dispatch, getFirestore, collection, id) => {
     const firestore = getFirestore();
 

@@ -65,7 +65,7 @@ export default function Preguntas(props) {
         </div>
         
         </div>
-            <button className="regreso">Return</button>
+            <button className="regreso"><a href="/">{text[lang].return}</a></button>
         </div>
         
         </div>

@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react'
-import {createAuditoria} from '../../store/actions/auditoriaActions'
+import { editAuditoria, getAuditoria } from '../../store/actions/auditoriaActions'
 import { NavLink, Link } from 'react-router-dom';
 import {connect} from 'react-redux'
 import { Redirect } from 'react-router'
@@ -24,7 +24,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-class CrearAuditoria extends Component {
+class EditarAuditoria extends Component {
     state = {
         auditoria: "",
         auditor: "",
@@ -36,9 +36,15 @@ class CrearAuditoria extends Component {
         valueB: "",
     }
     handleChange = (e) => {
-        // console.log("This is E", e)
+        // console.log(this.state)
         this.setState({
             [e.target.id]: e.target.value
+        })
+    }
+    handleChangeSelect = (e) => {
+        // console.log(e)
+        this.setState({
+            category: e.target.value
         })
     }
     handleChangeAutocomplete = (e, newValue) => {
@@ -51,7 +57,8 @@ class CrearAuditoria extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         // console.log(this.state)
-        this.props.createAuditoria({
+        this.props.editAuditoria(this.props.match.params.id,
+            {
             auditoria: this.state.auditoria,
             auditor: this.state.auditor,
             area: this.state.area,
@@ -64,8 +71,29 @@ class CrearAuditoria extends Component {
                 return pre.category
             })),
         })
-        
+
         this.props.history.push("/"); //Esto se cambiará según el contexto
+    }
+
+    UNSAFE_componentWillMount() {
+        const id = this.props.match.params.id
+        this.props.getAuditoria(id).then((res) => {
+            // console.log("RES is working", res)
+            this.setState({
+                auditoria: res.auditoria,
+                auditor: res.auditor,
+                area: res.area,
+                fecha_inicio: res.fecha_inicio.toDate(),
+                fecha_fin: res.fecha_fin.toDate(),
+                preguntas:res.preguntas.map((pre) => {
+                    return this.props.preguntas.filter(fil => fil.id === pre)[0]
+                }),
+            })
+            // console.log("This is Res", res)
+        })
+        // console.log("Falta que el texto de los inputs se cambie a lo del state", this.state)
+        //Checa el state en la consola, no sale nada
+
     }
 
     handleClickOpen = () => {
@@ -130,28 +158,26 @@ class CrearAuditoria extends Component {
         return (
             <div className="">
                 <div className="cabecera">
-                    <h2 className="">{text[lang].auditorias.crearAuditoria.crear_auditoria}</h2>
+                    <h2 className="">{text[lang].auditorias.crearAuditoria.editar_auditoria}</h2>
                 </div>
-                <div className="box-crear-audit">
-                    <div className="">
-                        <form className="white" onSubmit={this.handleSubmit}>
                 <div className="box">
                     <div className="crear-auditoria-views card">
                         <form className="white" onSubmit={this.Seguro}>
-                            <h5 className="grey-text text-darken-3">{text[lang].auditorias.crearAuditoria.crear_auditoria}</h5>
+                            <h5 className="grey-text text-darken-3">{text[lang].auditorias.crearAuditoria.editar_auditoria}</h5>
                             <div className="input-field">
-                                <input type="text" id='auditoria' placeholder={text[lang].auditorias.crearAuditoria.nombre_auditoria} onChange={this.handleChange} />
+                                <input type="text" id='auditoria' placeholder={this.state.auditoria} onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                <input type="text" id='auditor' placeholder={text[lang].auditorias.crearAuditoria.auditor} onChange={this.handleChange} />
+                                <input type="text" id='auditor' placeholder={this.state.auditor} onChange={this.handleChange} />
                             </div>
                             <div className="input-field">
-                                <input type="text" id='area' placeholder={text[lang].auditorias.crearAuditoria.area} onChange={this.handleChange} />
+                                <input type="text" id='area' placeholder={this.state.area} onChange={this.handleChange} />
                             </div>
                             <div className="date-field">
 
                                 <div className="date-container">
                                     <div className="date">
+                                        <span className="" placeholder={text[lang].auditorias.crearAuditoria.termina_el}> y termina el </span>
                                         <DatePicker id="fecha_fin" selected={this.state.fecha_fin} onChange={(date) => this.setState({
                                             fecha_fin: date
                                         })} />
@@ -241,18 +267,19 @@ class CrearAuditoria extends Component {
 const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
-        userLevel: state.firebase.profile.userLevel,
         lang: state.firebase.profile.lang,
-        preguntas: state.firestore.ordered.preguntas
+        userLevel: state.firebase.profile.userLevel,
+        preguntas: state.firestore.ordered.preguntas,
     }
 }
 
 const mapDispatchtoProps = (dispatch) => {
     return {
-        createAuditoria: (auditoria) => dispatch(createAuditoria(auditoria))
+        editAuditoria: (id, auditoria) => dispatch(editAuditoria(id, auditoria)),
+        getAuditoria: (id) => dispatch(getAuditoria(id))
     }
 }
 
 export default compose(connect(mapStateToProps, mapDispatchtoProps),
     firestoreConnect([{ collection: "preguntas"}]))
-    (CrearAuditoria)
+    (EditarAuditoria)

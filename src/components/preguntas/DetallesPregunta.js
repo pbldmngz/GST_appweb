@@ -67,12 +67,13 @@ const DetallesPregunta = (props) => {
     // const preguntaRespuestas = [] //Array de diccionarios
     console.log("count:", open)
     // { console.log("login pregunta --> DePre", pregunta) }
-    if (pregunta) {
+    if (pregunta.createdAt) {
         return (
             <div className="container">
                 <div className=" card x-depth-0 detalles-pregunta destroy-overflow">
                     <div className="card-content-custom grey-text text-darken-3 main-container ">
                         <div className="">
+                        {console.log("This is pregunta", pregunta)}
                             <span className="card-title">{pregunta[lang]}</span>
                             <p><b>{bText[lang].preguntas.detallesPregunta.descripcion}: </b>{pregunta.description}</p>
                             <p><b>{bText[lang].preguntas.detallesPregunta.categoria}: </b>{categoria[pregunta.category]}</p>
