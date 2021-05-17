@@ -4,8 +4,122 @@ body {
   background-color: white;
 }
 
-/*-------------------------*/
+.logo{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 38%;
+  margin-top: 90px;
+}
+.username{
+ 
+  border-radius: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 45%;
+  height: 35px;
+  margin-top: 40px;
+ 
+}
+.email{
+  border-radius: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 45%;
+  height: 35px;
+  margin-top: 40px;
+}
+.passing{
+  border-radius: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 45%;
+  height: 35px;
+  margin-top: 40px;
 
+}
+.fname{
+  border-radius: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 45%;
+  height: 35px;
+  margin-top: 40px;
+
+}
+
+.password{
+  border-radius: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 45%;
+  height: 37px;
+  margin-top: 40px;
+}
+.lastname{
+  border-radius: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 45%;
+  height: 37px;
+  margin-top: 40px;
+}
+.Level{
+  border-radius: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 45%;
+  height: 37px;
+  margin-top: 40px;
+}
+.Signuptext{
+  margin-left: auto;
+  margin-right: auto;
+  width: 45%;
+  height: 37px;
+  margin-top: 20px;
+}
+.Sign:focus{
+  background-color: #002D73 !important;
+}
+.Sign{
+  border-radius: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 45%;
+  height: 37px;
+  margin-top: 50px;
+  color: white;
+  font-size: 17px;
+    border: 2px solid #002D73 ;
+    border-radius: 5px;
+    background-color: #002D73;
+}
+.Log:focus {     
+    background-color: #002D73 !important;    
+}
+.Log{
+  border-radius: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 45%;
+  height: 37px;
+  margin-top: 50px;
+  color: white;
+  font-size: 17px;
+    border: 2px solid #002D73 ;
+    border-radius: 5px;
+    background-color: #002D73;
+}
 /*NAVBAR*/
 .navbar{
   background-color: #002D73;
@@ -16,7 +130,51 @@ body {
   align-items: center; /* align vertical */
   /* background-color: #CB4335; */
 }
+/*BOTONES*/
+.regreso{
+  float: right;
+  border: 2px solid #707070;
+  padding: 6px 9px;
+  text-align: center;
+  font-size: 18px;
+  color: #707070;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  position: fixed;
+}
 
+.regreso:hover{
+  background-color: #707070;
+  color: white;
+}
+
+
+
+form{
+  padding: 20px;
+  /* margin-top: 60px; */
+}
+
+form button, form h5{
+  margin: 20px 0;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]){
+  border-color: #ec407a;
+  box-shadow: none;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]) + label,
+textarea.materialize-textarea:focus:not([readonly]) + label,
+input[type=email]:not(.browser-default):focus:not([readonly]) + label,
+input[type=password]:not(.browser-default):focus:not([readonly]) + label{
+  color: #ec407a !important;
+}
 /* Esto es para que los links no tengan estilos propios */
 a {
   color: inherit;
@@ -42,6 +200,11 @@ ul{
   text-decoration: none;
 }
 
+
+.center-grid {
+  grid: center; 
+
+}
 .perfil{
   background-color: violet;
   font-family: 'Montserrat', sans-serif;

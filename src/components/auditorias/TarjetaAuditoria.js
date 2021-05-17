@@ -43,18 +43,18 @@ class TarjetaAuditoria extends Component {
       color = "black";
       text = "!!!";
     } else if (fecha_fin < checkDate.addDays(7)) {
-      color = "red";
-      text = "!!";
+        color = "#C00000";
+        text = "!!";
     } else if (fecha_fin < checkDate.addDays(30)) {
-      color = "orange";
-      text = "!";
+        color = "#FF9900";
+        text = "!";
     } else if (fecha_fin < checkDate.addDays(60)) {
-      color = "yellow";
-      text = "M";
+        color = "#FFCC00";
+        text = "M";
     } else {
-      color = "green";
-      text = "R";
-    }
+        color = "#009900";
+        text = "R";
+    } 
 
     var style = {};
 
