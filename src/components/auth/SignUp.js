@@ -7,7 +7,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import Logo_GST from '../../styles/imgs/Logo-GST.png'
 
-
 class SignUp extends Component {
     state = {
         email: '',
@@ -15,16 +14,17 @@ class SignUp extends Component {
         firstName: '',
         lastName: '',
         level: 5,
+        lang: "spanish",
     }
     handleChange = (e) => {
-        console.log(e)
+        // console.log(e)
         this.setState({
             [e.target.id]: e.target.value
         })
     }
 
     handleChangeSelect = (e) => {
-        console.log(e)
+        // console.log(e)
         this.setState({
             level: e.target.value
         })
@@ -36,9 +36,11 @@ class SignUp extends Component {
     }
 
     render() {
-        const { auth, authError } = this.props;
+        const { auth, authError, userLevel } = this.props;
 
-        if (auth.uid) return <Redirect to="/" />
+        if (!auth.uid) return <Redirect to="/" />
+        if (userLevel && userLevel !==0) return <Redirect to="/" />
+
 
         return (
             
@@ -66,7 +68,6 @@ class SignUp extends Component {
                     <div className="Level">
                         <InputLabel id="select-level">Level</InputLabel>
                         <Select labelId="select-level" id="level" value={this.state.level} onChange={this.handleChangeSelect}>
-                            <MenuItem value={5}>E</MenuItem>
                             <MenuItem value={4}>D</MenuItem>
                             <MenuItem value={3}>C</MenuItem>
                             <MenuItem value={2}>B</MenuItem>
@@ -88,6 +89,7 @@ class SignUp extends Component {
 const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
+        userLevel: state.firebase.profile.userLevel,
         authError: state.auth.authError
     }
 }

@@ -1,23 +1,38 @@
 import React from 'react'
 import TarjetaPregunta from './TarjetaPregunta'
 import { Link, NavLink } from 'react-router-dom'
+import CambiarIdioma from '../util/CambiarIdioma'
 
 export default function Preguntas(props) {
     var { path, pathName } = require('../../config/config');
-    const { preguntas, editPregunta, deletePregunta, userLevel } = props
+    const text = require('../../config/language');
 
-    //Center the + icon pls
+    const { preguntas, editPregunta, deletePregunta, userLevel, lang } = props
+
     // Considerándolo, no tiene caso, va a haber más de 5 preguntas y se va a perder
 
     return (
+    <div className="padre-padre-titulo">
+        <div className="padre-titulo">
+                <div className="titulo">
+                    <NavLink to={path.crear_pregunta}>
+                        <button className="boton-arriba">New Question</button>
+                    </NavLink>
+                </div>
+
+                <div className="titulo">
+                    <h2>Creación de auditoría</h2>
+                </div>
+
+                <div className="titulo">
+                    <NavLink to={path.crear_pregunta} className="">
+                        <button className="boton-arriba">Saved Questions</button>
+                    </NavLink>
+                </div>
+        </div>
 
     <div>
-        <div className="pregunta-list section">
-            <div className="center extra-padding-button">
-                <NavLink to={path.crear_pregunta} className="btn-floating btn-large waves-effect waves-light blue">
-                    <i className="material-icons">add</i>
-                </NavLink>
-            </div>
+            <div className="">
             {preguntas && preguntas.map(pregunta => {
                 return (
                     <div key={pregunta.id}>
@@ -26,15 +41,33 @@ export default function Preguntas(props) {
                             editPregunta={editPregunta}
                             deletePregunta={deletePregunta}
                             userLevel={userLevel}
+                            lang={lang}
                         />
                     </div>
                 )
             })}
+        <div className="footer-padre-padre">
+            <div className="footer-padre"></div>
+                <div className="footer">
+                    <div className="width-botones-abajo">
+                        <NavLink to={path.crear_pregunta} className="">
+                            <button className="boton-abajo">Asignar auditoría</button>
+                        </NavLink>
+                    </div>
+
+                    <div className="width-botones-abajo">
+                        <NavLink to={path.crear_pregunta} className="">
+                            <button className="boton-abajo">Guardar preguntas</button>
+                        </NavLink>
+                    </div>
+                </div>
         </div>
-        <div>
-        <button className="regreso">Return</button>
+        
         </div>
-    </div>
+            <button className="return"><a href="/">{text[lang].return}</a></button>
+        </div>
+        
+        </div>
 
     )
 }

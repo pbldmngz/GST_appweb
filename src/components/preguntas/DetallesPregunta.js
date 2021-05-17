@@ -22,7 +22,8 @@ const DetallesPregunta = (props) => {
     // console.log("Esto es ID", id)
     //Esto puede servir de filtro para la búsqueda de preguntas
     // if (!auth.uid) return <Redirect to="/signin" />
-    const { pregunta } = props
+    const { pregunta, lang } = props
+    const bText = require('../../config/language');
 
     const [open, setOpen] = React.useState(false);
 
@@ -66,23 +67,24 @@ const DetallesPregunta = (props) => {
     // const preguntaRespuestas = [] //Array de diccionarios
     console.log("count:", open)
     // { console.log("login pregunta --> DePre", pregunta) }
-    if (pregunta) {
+    if (pregunta.createdAt) {
         return (
             <div className="container">
                 <div className=" card x-depth-0 detalles-pregunta destroy-overflow">
                     <div className="card-content-custom grey-text text-darken-3 main-container ">
                         <div className="">
-                            <span className="card-title">{pregunta.english}</span>
-                            <p><b>Descripción: </b>{pregunta.description}</p>
-                            <p><b>Categoría: </b>{categoria[pregunta.category]}</p>
-                            <p><b>Plan de reacción: </b>{pregunta.reaction_plan}</p>
-                            <p><b>Creado por: </b>{pregunta.createdBy}</p>
-                            <p><b>Creado: </b>{moment(pregunta.createdAt.toDate()).fromNow()}</p>
+                        {console.log("This is pregunta", pregunta)}
+                            <span className="card-title">{pregunta[lang]}</span>
+                            <p><b>{bText[lang].preguntas.detallesPregunta.descripcion}: </b>{pregunta.description}</p>
+                            <p><b>{bText[lang].preguntas.detallesPregunta.categoria}: </b>{categoria[pregunta.category]}</p>
+                            <p><b>{bText[lang].preguntas.detallesPregunta.plan_reaccion}: </b>{pregunta.reaction_plan}</p>
+                            <p><b>{bText[lang].preguntas.detallesPregunta.creado_por}: </b>{pregunta.createdBy}</p>
+                            <p><b>{bText[lang].preguntas.detallesPregunta.creado}: </b>{moment(pregunta.createdAt.toDate()).fromNow()}</p>
                         </div>
                         <div className="graph">
                             <PreguntaGrafica count={count} />
                             <div className="ver-respuestas">
-                                <button className="btn  blue lighten-1 z-depth-0" onClick={handleClickOpen}>Ver respuestas</button>
+                                <button className="btn  blue lighten-1 z-depth-0" onClick={handleClickOpen}>{bText[lang].preguntas.detallesPregunta.ver_respuestas}</button>
                             </div>
                         </div>
                     </div>
@@ -124,7 +126,8 @@ const mapStateToProps = (state) => {
     // const pregunta = preguntas ? preguntas[id] : null;
     return {
         // pregunta: pregunta,
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        lang: state.firebase.profile.lang,
     }
 }
 

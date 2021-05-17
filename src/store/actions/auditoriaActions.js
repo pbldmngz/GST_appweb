@@ -23,6 +23,36 @@ export const createAuditoria = (auditoria) => {
     }
 }
 
+export const editAuditoria = (id, auditoria) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firestore = getFirestore();
+        const profile = getState().firebase.profile;
+        const authorId = getState().firebase.auth.uid;
+
+        firestore.collection("auditorias").doc(id).update({
+            ...auditoria,
+            updatedAt: new Date(),
+            updatedBy: profile.firstName + " " + profile.lastName,
+            editorId: authorId
+        }).then(() => {
+            dispatch({ type: "EDIT_AUDITORIA" }, auditoria)
+        }).catch((err) => {
+            dispatch({ type: "EDIT_AUDITORIA_ERROR" }, err)
+        })
+
+    }
+}
+
+export const deleteAuditoria = (id) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firestore = getFirestore();
+        const profile = getState().firebase.profile;
+        const authorId = getState().firebase.auth.uid;
+
+        firestore.collection("auditorias").doc(id).delete()
+    }
+}
+
 const asyncCall = async (dispatch, getFirestore, collection, id) => {
     const firestore = getFirestore();
 
@@ -107,6 +137,26 @@ export const preguntasAuditoriaVoting = (auditoria) => {
         // console.log("this is X in the new fuction", result)
         dispatch({ type: 'SUCCESSFULLY_EXTRACTED_RESPUESTAS_PREGUNTAS_FROM_AUDITORIA' }, result)
         return result
+    }
+}
+
+export const getAuditoria = (id) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firestore = getFirestore();
+
+        var docRef = firestore.collection("auditorias").doc(id);
+
+        return docRef.get()
+            .then((doc) => {
+                // console.log("did I get passes .then")
+                if (doc.exists) {
+                    //console.log("this: ", doc.data())
+                    return doc.data()
+                }
+            }).catch((err) => {
+                console.log(err)
+            });
+
     }
 }
 

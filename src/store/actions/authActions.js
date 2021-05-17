@@ -37,7 +37,9 @@ export const signUp = (newUser) => {
                 firstName: newUser.firstName,
                 lastName: newUser.lastName,
                 initials: newUser.firstName[0] + newUser.lastName[0],
-                userLevel: newUser.level, // Se pretende que haya Admin, A, B, C, D, E (o los necesarios)
+                userLevel: newUser.level,
+                lang: newUser.lang,
+                // Se pretende que haya Admin, A, B, C, D, E (o los necesarios)
                 // Pero por facilidades técnicas, esto se hará numéricamente
                 // Cuando ya se esté trabajando en esto puedes descomentar la userLevel
                 // Para incluír el ID del usuario en las preguntas resueltas creo que puedes 

@@ -1,5 +1,8 @@
 import React, { Component, useState } from "react";
-import { createAuditoria } from "../../store/actions/auditoriaActions";
+import {
+  editAuditoria,
+  getAuditoria,
+} from "../../store/actions/auditoriaActions";
 import { NavLink, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
@@ -24,7 +27,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-class CrearAuditoria extends Component {
+class EditarAuditoria extends Component {
   state = {
     auditoria: "",
     auditor: "",
@@ -36,9 +39,15 @@ class CrearAuditoria extends Component {
     valueB: "",
   };
   handleChange = (e) => {
-    // console.log("This is E", e)
+    // console.log(this.state)
     this.setState({
       [e.target.id]: e.target.value,
+    });
+  };
+  handleChangeSelect = (e) => {
+    // console.log(e)
+    this.setState({
+      category: e.target.value,
     });
   };
   handleChangeAutocomplete = (e, newValue) => {
@@ -51,7 +60,7 @@ class CrearAuditoria extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     // console.log(this.state)
-    this.props.createAuditoria({
+    this.props.editAuditoria(this.props.match.params.id, {
       auditoria: this.state.auditoria,
       auditor: this.state.auditor,
       area: this.state.area,
@@ -69,6 +78,26 @@ class CrearAuditoria extends Component {
 
     this.props.history.push("/"); //Esto se cambiará según el contexto
   };
+
+  UNSAFE_componentWillMount() {
+    const id = this.props.match.params.id;
+    this.props.getAuditoria(id).then((res) => {
+      // console.log("RES is working", res)
+      this.setState({
+        auditoria: res.auditoria,
+        auditor: res.auditor,
+        area: res.area,
+        fecha_inicio: res.fecha_inicio.toDate(),
+        fecha_fin: res.fecha_fin.toDate(),
+        preguntas: res.preguntas.map((pre) => {
+          return this.props.preguntas.filter((fil) => fil.id === pre)[0];
+        }),
+      });
+      // console.log("This is Res", res)
+    });
+    // console.log("Falta que el texto de los inputs se cambie a lo del state", this.state)
+    //Checa el state en la consola, no sale nada
+  }
 
   handleClickOpen = () => {
     this.setState({
@@ -124,112 +153,119 @@ class CrearAuditoria extends Component {
     const { auth, userLevel, lang } = this.props;
     if (!lang) return null;
 
+    // console.log("this is lang: ", lang)
+
     if (!auth.uid) return <Redirect to="/signin" />;
     if (userLevel != 0) return <Redirect to="/" />;
 
     // console.log(this.state.preguntas)
 
     return (
-      <div className="padre-padre-titulo">
-        <div className="padre-titulo">
-          <h2 className="titulo">
-            {text[lang].auditorias.crearAuditoria.crear_auditoria}
+      <div className="">
+        <div className="cabecera">
+          <h2 className="">
+            {text[lang].auditorias.crearAuditoria.editar_auditoria}
           </h2>
         </div>
-        <div className="">
-          <div className="tarjeta-crear-auditoría">
-            <div className="center-box">
-              <form className="" onSubmit={this.Seguro}>
-                <div className="input-field">
-                  <input
-                    type="text"
-                    id="auditoria"
-                    placeholder={
-                      text[lang].auditorias.crearAuditoria.nombre_auditoria
-                    }
-                    onChange={this.handleChange}
-                  />
-                </div>
-                <div className="input-field">
-                  <input
-                    type="text"
-                    id="auditor"
-                    placeholder={text[lang].auditorias.crearAuditoria.auditor}
-                    onChange={this.handleChange}
-                  />
-                </div>
-                <div className="input-field">
-                  <input
-                    type="text"
-                    id="area"
-                    placeholder={text[lang].auditorias.crearAuditoria.area}
-                    onChange={this.handleChange}
-                  />
-                </div>
-                <div className="date-field">
-                  <div className="date-container">
-                    <div className="date">
-                      <span
-                        className="fecha"
-                        placeholder={
-                          text[lang].auditorias.crearAuditoria.termina_el
-                        }
-                      >
-                        {" "}
-                        y termina el{" "}
-                      </span>
-                      <DatePicker
-                        id="fecha_fin"
-                        selected={this.state.fecha_fin}
-                        onChange={(date) =>
-                          this.setState({
-                            fecha_fin: date,
-                          })
-                        }
-                      />
-                    </div>
-                    <div className="date">
-                      <span className="fecha">
-                        {text[lang].auditorias.crearAuditoria.inicia_el}
-                      </span>
-                      <DatePicker
-                        id="fecha_inicio"
-                        selected={this.state.fecha_inicio}
-                        onChange={(date) =>
-                          this.setState({
-                            fecha_inicio: date,
-                          })
-                        }
-                      />
-                    </div>
+        <div className="box">
+          <div className="crear-auditoria-views card">
+            <form className="white" onSubmit={this.Seguro}>
+              <h5 className="grey-text text-darken-3">
+                {text[lang].auditorias.crearAuditoria.editar_auditoria}
+              </h5>
+              <div className="input-field">
+                <input
+                  type="text"
+                  id="auditoria"
+                  placeholder={this.state.auditoria}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="input-field">
+                <input
+                  type="text"
+                  id="auditor"
+                  placeholder={this.state.auditor}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="input-field">
+                <input
+                  type="text"
+                  id="area"
+                  placeholder={this.state.area}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="date-field">
+                <div className="date-container">
+                  <div className="date">
+                    <span
+                      className=""
+                      placeholder={
+                        text[lang].auditorias.crearAuditoria.termina_el
+                      }
+                    >
+                      {" "}
+                      y termina el{" "}
+                    </span>
+                    <DatePicker
+                      id="fecha_fin"
+                      selected={this.state.fecha_fin}
+                      onChange={(date) =>
+                        this.setState({
+                          fecha_fin: date,
+                        })
+                      }
+                    />
+                  </div>
+                  <div className="date">
+                    <span className="grey-text">
+                      {text[lang].auditorias.crearAuditoria.inicia_el}
+                    </span>
+                    <DatePicker
+                      id="fecha_inicio"
+                      selected={this.state.fecha_inicio}
+                      onChange={(date) =>
+                        this.setState({
+                          fecha_inicio: date,
+                        })
+                      }
+                    />
                   </div>
                 </div>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
-          <div className="center-box">
-            <div className="">
-              <div className="">
+          <div className="agregar-pregunta card crear-auditoria-views destroy-overflow">
+            <div className="white">
+              <h5 className="grey-text text-darken-3">Agregar preguntas</h5>
+              <div className="preguntas-creadas">
                 {this.state.preguntas &&
                   this.state.preguntas.map((pregunta, index) => {
                     return (
-                      <div className="" key={index}>
-                        <div className="">
+                      <div className="grid-main" key={index}>
+                        <div className="grid-component-left card">
                           {index + 1}. {pregunta[lang]}
                         </div>
                         <div
-                          className=""
+                          className="grid-component-right card hover-click"
                           onClick={() => {
                             this.handleDelete(pregunta.id);
                           }}
                         >
-                          <i className="material-icons">Delete</i>
+                          <i className="material-icons">delete</i>
                         </div>
                       </div>
                     );
                   })}
               </div>
-              <button className="add-question" onClick={this.handleClickOpen}>Agregar pregunta</button>
+              <button
+                className="btn-floating btn-small waves-effect waves-light blue button-margin"
+                onClick={this.handleClickOpen}
+              >
+                <i className="material-icons">add</i>
+              </button>
               <Dialog
                 open={this.state.openB}
                 onClose={this.handleClose}
@@ -278,28 +314,19 @@ class CrearAuditoria extends Component {
             </div>
           </div>
         </div>
-      <div>
-        <div className="footer-padre-padre">
-            <div className="footer-padre"></div>
-                <div className="footer">
-                    <div className="width-botones-abajo">
-                      <button className="cancelar" onClick={this.handleCancel}>
-                        {text[lang].auditorias.crearAuditoria.cancelar}
-                      </button>
-                    </div>
-                    <div className="width-botones-abajo">
-                      <button className="aceptar" onClick={this.Seguro}>
-                        {text[lang].auditorias.crearAuditoria.crear}
-                      </button>
-                    </div>
-                    </div>
-                </div>
-            </div>
 
-        <button className="return">
+        <div className="botones">
+          <button className="cancel" onClick={this.handleCancel}>
+            {text[lang].auditorias.crearAuditoria.cancelar}
+          </button>
+          <button className="aceptar" onClick={this.Seguro}>
+            {text[lang].auditorias.crearAuditoria.crear}
+          </button>
+        </div>
+
+        <button className="regreso">
           <a href="/">{text[lang].return}</a>
         </button>
-        
       </div>
     );
   }
@@ -308,19 +335,20 @@ class CrearAuditoria extends Component {
 const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
-    userLevel: state.firebase.profile.userLevel,
     lang: state.firebase.profile.lang,
+    userLevel: state.firebase.profile.userLevel,
     preguntas: state.firestore.ordered.preguntas,
   };
 };
 
 const mapDispatchtoProps = (dispatch) => {
   return {
-    createAuditoria: (auditoria) => dispatch(createAuditoria(auditoria)),
+    editAuditoria: (id, auditoria) => dispatch(editAuditoria(id, auditoria)),
+    getAuditoria: (id) => dispatch(getAuditoria(id)),
   };
 };
 
 export default compose(
   connect(mapStateToProps, mapDispatchtoProps),
   firestoreConnect([{ collection: "preguntas" }])
-)(CrearAuditoria);
+)(EditarAuditoria);

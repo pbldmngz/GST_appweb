@@ -37,7 +37,9 @@ class DetallesPreguntasAuditoria extends Component {
     }
 
     render() {
-        const { auth } = this.props;
+        const { auth, lang } = this.props;
+        const bText = require('../../config/language');
+        if (!lang) return null;
 
         // console.log(this.props)
 
@@ -46,7 +48,7 @@ class DetallesPreguntasAuditoria extends Component {
         return (
             <div className="container extra-margin">
                 <div className="card x-depth-0 detalles-preguntas-auditoria">
-                        <h5 className="grey-text text-darken-3 center">Respuestas de la auditoría</h5>
+                    <h5 className="grey-text text-darken-3 center">{bText[lang].preguntas.detallesPreguntasAuditoria.respuestas_auditoria}</h5>
                         {/* Esto se puede convertir a un operador ? : para que muestre un cargando o algo así */}
                         {/* {console.log("esto es preguntaSSS", this.state.preguntas)} */}
 
@@ -55,7 +57,7 @@ class DetallesPreguntasAuditoria extends Component {
                             return (
                                 <div className="" key={pregunta.id}>
                                     {/* {console.log("login pregunta", pregunta)} */}
-                                    <DetallesPregunta pregunta={pregunta}/>
+                                    <DetallesPregunta pregunta={pregunta} lang={lang}/>
                                 </div>
                             )
                         })}
@@ -69,6 +71,7 @@ const mapStateToProps = (state) => {
     // console.log(state)
     return {
         auth: state.firebase.auth,
+        lang: state.firebase.profile.lang,
         // preguntas: state.firestore.ordered.preguntas,
     }
 }

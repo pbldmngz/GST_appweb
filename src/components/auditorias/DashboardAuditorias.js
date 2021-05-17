@@ -29,12 +29,15 @@ class DashboardAuditorias extends Component {
     render() {
         // console.log(this.props)
         
-        const { auditorias, respuestas, auth, userLevel } = this.props
+        const { auditorias, respuestas, auth, userLevel, lang } = this.props
+        const text = require('../../config/language');
+        if (!lang) return null;
 
         if (!auth.uid) return <Redirect to="/signin"/>
         // if (userLevel != 0) return <Redirect to="/" />
         // console.log("userLevel: ", userLevel)
         // console.log("respuestas", respuestas)
+        // if (!lang) return null;
 
 
         // ---> Con esto los usuarios no ven las que ya respondieron <---
@@ -43,7 +46,7 @@ class DashboardAuditorias extends Component {
         // Que mandar al fondo. En todo caso puedo hacer una vista de auditorias YA HECHAS
         var filteredAuditorias = auditorias;
 
-        if (userLevel != 0 && respuestas) {
+        if (auditorias && userLevel != 0 && respuestas) {
             // console.log("0", this.state.filter, respuestas)
             const filtRespuestas = respuestas.filter(res => auth.uid === res.answeredById)
 
@@ -62,52 +65,58 @@ class DashboardAuditorias extends Component {
             // console.log("3", alreadyDone)
 
             filteredAuditorias = (this.state.filter === 2) ? (
-                auditorias.filter(aud => alreadyDone.includes(aud.id))
+                auditorias && auditorias.filter(aud => alreadyDone.includes(aud.id))
             ) : (
-                auditorias.filter(aud => !alreadyDone.includes(aud.id))
+                auditorias && auditorias.filter(aud => !alreadyDone.includes(aud.id))
             );
+
+            filteredAuditorias = filteredAuditorias.filter(aud => aud.minCategory >= userLevel)
         }
         var { path, pathName } = require('../../config/config');
 
         const menuItems = (userLevel === 0) ? (
             <Select labelId="select-filter" id="filter" value={this.state.filter} onChange={this.handleChangeSelect}>
-                <MenuItem value={0}>Ordenar por fecha</MenuItem>
-                <MenuItem value={1}>Agrupar por áreas</MenuItem>
+                <MenuItem value={0}>{text[lang].auditorias.dashboardAuditorias.ordenar_fecha}</MenuItem>
+                <MenuItem value={1}>{text[lang].auditorias.dashboardAuditorias.agrupar_areas}</MenuItem>
             </Select>
         ) : (
                 <Select labelId="select-filter" id="filter" value={this.state.filter} onChange={this.handleChangeSelect}>
-                    <MenuItem value={0}>Ordenar por fecha</MenuItem>
-                    <MenuItem value={2}>Mostrar realizados</MenuItem>
+                    <MenuItem value={0}>{text[lang].auditorias.dashboardAuditorias.ordenar_fecha}</MenuItem>
+                    <MenuItem value={2}>{text[lang].auditorias.dashboardAuditorias.mostrar_realizados}</MenuItem>
                 </Select>
         );
         const botonReturn = (userLevel === 0) ? (
-            <div className="dashboard-extra-space">Return?</div>
+            <div className="dashboard-extra-space">{text[lang].return}</div>
         ): null;
 
         if (filteredAuditorias) {
             return (
-                <div className="dashboard container">
-                    <div className="second-navbar">
-                        <div className="filter">
-                            <InputLabel id="select-filter">Vista</InputLabel>
+                <div className="padre-padre-titulo">
+                    <div className="padre-titulo">
+                        <div className="titulo">
+                            <InputLabel id="select-filter">{text[lang].auditorias.dashboardAuditorias.vista}</InputLabel>
                             {menuItems}
                         </div>
-                        <div className="dashboard-title">
-                            {pathName[this.getKeyByValue(path, this.props.match.path)]}
+                        <div className="titulo">
+                            <h2>{text[lang].auditorias.dashboardAuditorias.auditorias}</h2>
                         </div>
-                        {botonReturn}
+                        <div className="titulo">
+                        </div>
+                        {/*botonReturn*/}
+                        <button className="return"><a href="#">{text[lang].return}</a></button>
                     </div>
                     <Auditorias 
                         auditorias={filteredAuditorias} 
                         userLevel={userLevel} 
                         alreadyDone={(this.state.filter === 2)}
+                        lang={lang}
                     />
                 </div>
             )
         } else {
             return (
                 <div className="container center">
-                    <p>Cargando...</p>
+                    <p>{text[lang].cargando}</p>
                 </div>
             )
         }
@@ -115,10 +124,11 @@ class DashboardAuditorias extends Component {
 }
 
 const mapStateToProps = (state) => {
-    //console.log(state)
+    // console.log("Status", state)
     return {
         auditorias: state.firestore.ordered.auditorias,
         respuestas: state.firestore.ordered.respuestas,
+        lang: state.firebase.profile.lang,
         auth: state.firebase.auth,
         userLevel: state.firebase.profile.userLevel
     }

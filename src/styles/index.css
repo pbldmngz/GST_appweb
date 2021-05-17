@@ -1,5 +1,7 @@
 body {
+  margin: 0;
   font-family: 'Montserrat', sans-serif;
+  background-color: white;
 }
 
 .logo{
@@ -121,6 +123,12 @@ body {
 /*NAVBAR*/
 .navbar{
   background-color: #002D73;
+  overflow: hidden;
+  height: 10vh;
+  display: flex;
+  /*justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+  /* background-color: #CB4335; */
 }
 /*BOTONES*/
 .regreso{
@@ -167,365 +175,381 @@ input[type=email]:not(.browser-default):focus:not([readonly]) + label,
 input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   color: #ec407a !important;
 }
-
-.card-content-custom {
-  /* background-color: aqua; */
-  /* min-height: 165px; */
-  /* height: 300px; */
-  padding: 20px;
-  padding-bottom: 0px;
+/* Esto es para que los links no tengan estilos propios */
+a {
+  color: inherit;
+  text-decoration: inherit;
 }
 
-.extra-padding-button {
-  /* margin-bottom: 15px; */
-  /* background-color: #CB4335; */
-  padding: 5px;
+ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
-.card-content{
-  /* background-color: aqua; */
-  min-height: 165px;
-  /* height: 300px; */
-  padding: 20px;
-  padding-bottom: 50px;
+.options li{
+  float: left;
+  color: white;
+  text-decoration: none;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.options{
+  float: right;
+  text-decoration: none;
 }
 
 
 .center-grid {
   grid: center; 
-}
 
-.extra-padding {
-  padding: 25px;
-  padding-right: 0px;
 }
-
-.right-container{
-  float: right;
-}
-
-.gst-logo {
-  margin-bottom: 6px;
-  margin-left: 5px;
-}
-
-.tarjeta-auditoria {
-  width: 300px;
-  height: 180px;
-  cursor: pointer;
-  display: inline-block;
-  margin: 15px 15px 15px 15px;
-  overflow: hidden; 
-}
-
-.date {
-  /* width: 45% */
-  float: right;
-}
-
-.graph {
-  /* float: right;
-  position:relative;
-  display: inline-block ; */
-  /* flex: 0 0 15%; */
-  margin-left: 25px;
-}
-
-.card-extra {
-  /* flex: 0 0 30%; */
+.perfil{
+  background-color: violet;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 30px;
+  border: none;
+  color: white;
+  max-width: 50px;
   float: left;
-  /* background-color: #ec407a; */
-  width:10%;
 }
 
-.button-group {
-  /* background-color: #ec407a; */
-  display: table-cell;
+/*-------------------------*/
+
+/*CABECERA*/
+.padre-padre-titulo{
+  width: 100%;
 }
 
-.boton {
-  /* height: 90px;
-  width: 80px; */
-  margin-right: 12px;
-  display: inline-block;
+.padre-titulo{
+  margin-top: 0.5vw;
+  width: 100%;
   text-align: center;
 }
 
-.suavizar-borde {
+.titulo{
+  display: inline-block;
+  width: 33%;
+}
+
+h2{
+  color: #002D73;
+  font-size: 30px;
+  width: 100%;
+  justify-content: center; 
+}
+
+/*-------------------------*/
+
+/*CENTER BOX*/
+.center-box {
+  display: flex;
+  justify-content: center; 
+  height: 100%;
+  align-items: center;
+}
+
+/*-------------------------*/
+
+/*VISTA PREGUNTAS*/
+.boton-arriba{
+  border: 2px solid #707070;
+  padding: 6px 9px;
+  text-align: center;
+  font-size: 16px;
+  color: #707070;
+  cursor: pointer;
   border-radius: 5px;
-  /* background-color: #ec407a; */
-  text-align: center;
-  color:white;
+  transition: 0.3s;
+  background-color: white;
+  font-family: 'Montserrat', sans-serif;
+  width: 15vw;
 }
 
-.card-cont {
-  float:left;
-  width:90%;
-  /* background-color: aqua; */
-}
-
-.main-container {
-  display:flex;
-}
-
-.date-container {
-  display:inline-block;
-}
-
-.radio-button {
-  float: right;
-}
-
-.radio-group {
-  margin: 20px 0px 0px 20px;
-  width: 20%;
-}
-
-.pregunta {
-  padding: 10px;
-  padding-bottom: 40px;
-  margin-top: 40px;
-  margin-left: 40px;
-  margin-right: 40px;
-  margin-bottom: 20px;
-}
-
-.red-test-color {
-  background-color: #ec407a;
-  /* width:100%; */
-}
-
-.campos {
-  margin-top: 20px;
-  /* margin-bottom: 20px; */
-}
-
-.legend-pregunta {
-  color:#ec407a
-}
-
-.label70 {
-  width:75%
-}
-
-.width100 {
-  width:100%
-}
-
-.big-button {
-  width: 120px;
-  height: 45px;
-  font-size: 20px;
-}
-
-.fade-in {
-	opacity: 1;
-	animation-name: fadeInOpacity;
-	animation-iteration-count: 1;
-	animation-timing-function: ease-in;
-	animation-duration: 1s;
-}
-
-.animation-from-left {
-  animation: 1s ease-out 0s 1 slideInFromLeft;
-  overflow: hidden;
-}
-
-@keyframes slideInFromLeft {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(0);
-    }
-}
-
-@keyframes fadeInOpacity {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
-}
-
-.modebar{
-      display: none !important;
-}
-
-.detalles-preguntas-auditoria {
-  padding: 10px
-}
-
-.main-crear-auditoria {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10px;
-  /* background-color: blue; */
-  width: 100%;
-  margin-top: 5vh;
-  padding: 20px;
-}
-
-.crear-auditoria-views {
-  display: inline-block;
-  max-height: 50vh;
-}
-
-.final-button {
-  /* margin-top: 20px; */
-  width: 100%;
-  padding: 10px;
-  text-align: center;
-}
-
-.final-button-NavLink {
+.boton-arriba:hover{
+  background-color: #707070;
   color: white;
 }
 
-.final-button button{
-  /* margin-top: 20px; */
-  width: 12vw;
-  height: 7vh;
-  margin-left: 5px;
-  margin-right: 5px;
-
+.tarjeta-pregunta {
+  background-color: #F8F8F8;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  transition: 0.3s;
+  margin: 1.5vw 0vw 1.2vw 0vw;
+  padding: 1vw;
+  overflow-y: hidden;
+  width: 70vw;
 }
 
-.just-width-100 {
-  width: 100%;
-  padding-bottom: 40px;
-  /* height: 80vh; */
+.tarjeta-pregunta:hover {
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
 }
 
-.agregar-pregunta {
-  padding: 20px;
-}
-
-.button-margin {
-  margin: 10px;
-}
-
-.preguntas-creadas {
-  width: 100%;
-  overflow-y: scroll;
-  overflow-x: auto;
-}
-
-.grid-main {
-  /* width: 100%; */
-  /* grid-auto-columns: auto; */
-  /* background-color: blue; */
-  display: grid;
-  grid-gap: 3px;
-  grid-template-columns: repeat(2, 1fr);
-
-}
-
-
-.grid-component-left {
-  /* width:85%; */
-  /* float: left; */
-  display: inline-block;
-  /* grid-row: 1 / 5; */
-  grid-column: 1 / 5;
-  align-items: center;
-  /* background-color: #2471A3; */
-  padding-top: 7px;
-  padding-bottom: 7px;
-  padding-left: 10px;
-  margin-left: 5px;
-}
-
-.grid-component-right {
-  /* width:15%;
-  float: right; */
-  /* text-align: center; */
-  /* padding: 5px; */
-  background-color: #CB4335;
-  display: inline-block;
-  /* grid-row: 6; */
-  grid-column: 6;
-  align-items: center;
-  padding-top: 5px;
-  padding-right: 5px;
-  padding-left: 5px;
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-  
-  
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  /* background: #f1f1f1; */
-  
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #2471A3;
-  border-radius: 4px;
-  
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #30b4ac;
-  
-}
-
-.extra-margin {
-  margin-top: 30px;
-}
-
-.ext-margin-boton {
-  margin-top: 5px;
-}
-
-.destroy-overflow {
-  overflow:scroll;
-}
-
-.hover-click {
+.boton-abajo{
+  border: 2px solid #002D73;
+  padding: 6px 9px;
+  text-align: center;
+  font-size: 16px;
+  color: white;
   cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  background-color: #002D73;
+  font-family: 'Montserrat', sans-serif;
+  width: 13vw;
 }
 
-.ver-respuestas {
-  padding: 10px;
-  padding-bottom: 0px;
-  text-align: center;
-  width: 100%;
+.boton-abajo:hover{
+  border: 2px solid #002D73;
+  background-color: white;
+  color: #002D73;
 }
 
-.detalles-pregunta {
-  height: 40vh;
-}
-
-
-.second-navbar {
-  /* background-color: #CB4335; */
-  margin-top: 15px;
-  overflow: hidden;
-}
-
-.filter {
-  width: 25%;
-  float: left;
-}
-
-.dashboard-title {
+.width-botones-abajo{
+  display: inline-block;
   width: 50%;
-  float: left;
-  font-size: 30px;
-  font-weight: bold;
-  text-align: center;
 }
 
-.dashboard-extra-space {
-  width: 25%;
-  float: left;
-  text-align: right;
+/*-------------------------*/
+
+/*VISTA CHANGE PASSWORD*/
+.aceptar{
+  border: 2px solid #002D73;
+  padding: 6px 9px;
+  text-align: center;
+  font-size: 16px;
+  color: #002D73;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  background-color: white;
+  font-family: 'Montserrat', sans-serif;
+  width: 7vw;
 }
+
+.aceptar:hover{
+  background-color: #002D73;
+  color: white;
+}
+
+.cancelar{
+  border: 2px solid #707070;
+  padding: 6px 9px;
+  text-align: center;
+  font-size: 16px;
+  color: #707070;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  background-color: white;
+  font-family: 'Montserrat', sans-serif;
+  width: 7vw;
+}
+
+.cancelar:hover{
+  background-color: #707070;
+  color: white;
+}
+
+.tarjeta-password{
+  background-color: #F8F8F8;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  transition: 0.3s;
+  margin: 1vw 27.9vw 1vw 27.9vw;
+  padding: 1vw;
+  overflow-y: hidden;
+}
+
+.tarjeta-password:hover {
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
+}
+
+/*-------------------------*/
+
+/*VISTA CREATE QUESTION*/
+.crear{
+  border: 2px solid #002D73;
+  padding: 6px 9px;
+  text-align: center;
+  font-size: 16px;
+  color: #002D73;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  background-color: white;
+  font-family: 'Montserrat', sans-serif;
+  width: 5vw;
+}
+
+.crear:hover{
+  background-color: #002D73;
+  color: white;
+}
+
+.tarjeta-crear-pregunta{
+  background-color: #F8F8F8;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  transition: 0.3s;
+  margin: 1vw 27.9vw 3vw 27.9vw;
+  padding: 1vw;
+  overflow-y: hidden;
+}
+
+.tarjeta-crear-pregunta:hover {
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
+}
+
+/*-------------------------*/
+
+/*VISTA CREAR AUDITORIA*/
+.add-question{
+  border: 2px solid #002D73;
+  padding: 6px 9px;
+  text-align: center;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  background-color: #002D73;
+  font-family: 'Montserrat', sans-serif;
+  width: 13vw;
+}
+
+.add-question:hover{
+  background-color: white;
+  color: #002D73;
+}
+
+.tarjeta-crear-auditoría{
+  background-color: #F8F8F8;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  transition: 0.3s;
+  margin: 1vw 27.9vw 3vw 27.9vw;
+  padding: 1vw;
+  overflow-y: hidden;
+}
+
+.tarjeta-crear-auditoría:hover {
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
+}
+
+.fecha{
+  color: #707070;
+}
+
+/*-------------------------*/
+
+/*VISTA AUDITORIA*/
+.tarjeta-auditoría{
+  background-color: #F8F8F8;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  transition: 0.3s;
+  margin: 1vw 27.9vw 3vw 27.9vw;
+  padding: 1vw;
+  overflow-y: hidden;
+}
+
+.tarjeta-auditoría:hover {
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
+}
+
+/*-------------------------*/
+
+/*BOTONES*/
+.return{
+  border: 2px solid #707070;
+  padding: 6px 9px;
+  text-align: center;
+  font-size: 16px;
+  color: #707070;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  background-color: white;
+  font-family: 'Montserrat', sans-serif;
+  position: fixed;
+    top: 90%;
+    left: 91%;
+}
+
+.return:hover{
+  background-color: #707070;
+  color: white;
+}
+
+/*-------------------------*/
+
+/*CARD*/
+/*Para que se apilen las tarjetas de box en el MainProcesses*/
+.container{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: 1px;
+}
+
+/*-------------------------*/
+
+/*FOOTER*/
+.footer{
+  margin-top: 2vw;
+  width: 50%;
+  text-align: center;
+  float: left;
+}
+
+.footer-padre{
+  margin-top: 4vw;
+  margin-bottom: 3.2vw;
+  width: 25%;
+  text-align: center;
+  float: left;
+}
+
+.footer-padre-padre{
+  width: 100%;
+  text-align: center;
+  float: left;
+}
+
+/*-------------------------*/
+
+/*TEXTS*/
+p{
+  font-size: 16px;
+  color: #707070;
+}
+
+label{
+  font-size: 16px;
+  margin-right: 20px;
+}
+
+input{
+  font-size: 16px;
+}
+
+.input-field{
+  margin: 20px;
+}
+
+.date-field{
+  margin: 20px;
+}
+
+input{
+  width: 37.6vw;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 5px;
+  padding: 10px;
+  border-style: none;
+  border: 2px solid rgba(0,0,0,0.2);
+}
+

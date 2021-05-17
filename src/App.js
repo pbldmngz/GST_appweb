@@ -14,7 +14,10 @@ import DetallesPreguntasAuditoria from './components/preguntas/DetallesPreguntas
 import EditarPregunta from './components/preguntas/EditarPregunta';
 import DetallesPreguntaIndividual from './components/preguntas/DetallesPreguntaIndividual';
 import ChangePassword from './components/auth/ChangePassword';
-
+import Profile from './components/util/Profile';
+import EditarAuditoria from './components/auditorias/EditarAuditoria';
+import MainProceso from './components/auditorias/MainProceso';
+import Areas from './components/auditorias/Areas';
 class App extends Component {
   render() {
     var { path } = require('./config/config');
@@ -25,7 +28,10 @@ class App extends Component {
           <Navbar />
           <Switch>
             <Route exact path={path.auditorias} component={DashboardAuditorias}/>
+            <Route path={path.mainproceso} component={MainProceso}/>
+            <Route path={path.areas} component={Areas}/>
             <Route path={path.auditoria} component={DetallesAuditoria} />
+            <Route path={path.profile} component={Profile} />
             <Route path={path.sign_in} component={SignIn} />
             <Route path={path.sign_up} component={SignUp} />
             <Route path={path.responder_auditoria_redirect} component={ResponderAuditoria} />
@@ -37,6 +43,7 @@ class App extends Component {
             <Route path={path.editar_pregunta_redirect} component={EditarPregunta} />
             <Route path={path.detalles_pregunta_auditoria_redirect} component={DetallesPreguntaIndividual} />
             <Route path={path.change_password} component={ChangePassword} />
+            <Route path={path.editar_auditoria_redirect} component={EditarAuditoria} />
           </Switch>
         </div>
       </BrowserRouter>
