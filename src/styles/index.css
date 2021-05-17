@@ -4,6 +4,8 @@ body {
   background-color: white;
 }
 
+/*-------------------------*/
+
 /*NAVBAR*/
 .navbar{
   background-color: #002D73;
@@ -50,163 +52,15 @@ ul{
   float: left;
 }
 
-/*BOTONES*/
-button{
-  border: 2px solid #707070;
-  padding: 6px 9px;
-  text-align: center;
-  font-size: 18px;
-  color: #707070;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: 0.3s;
-  background-color: white;
-  font-family: 'Montserrat', sans-serif;
-}
-
-button:hover{
-  background-color: #707070;
-  color: white;
-}
-
-.boton-generico{
-  width: 200px;
-}
-
-.regreso{
-  position: fixed;
-    top: 90%;
-    left: 92.3%;
-}
-
-.aceptar{
-  border: 2px solid #002D73;
-  padding: 6px 9px;
-  text-align: center;
-  font-size: 18px;
-  color: #002D73;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: 0.3s;
-  background-color: white;
-  width: 7.5%;
-  margin-left: 80px;
-}
-
-.aceptar:hover{
-  background-color: #002D73;
-  color: white;
-}
-
-.botones{
-  width: 100%;
-  text-align: center;
-}
-
-/*CARD*/
-.center-box {
-  display: flex;
-  height: 100%;
-  justify-content: center; 
-  align-items: center;
-}
-
-.box-crear-audit {
-  background-color: #F8F8F8;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  border-radius: 5px;
-  transition: 0.3s;
-  padding: 1vw;
-  overflow-y: hidden;
-  width: 42.3vw;
-}
-
-.box-crear-audit:hover {
-  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
-}
-
-.box {
-  background-color: #F8F8F8;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  border-radius: 5px;
-  transition: 0.3s;
-  margin: 2vw 15vw 4vw 15vw;
-  padding: 1vw;
-  overflow-y: hidden;
-  width: 77vw;
-}
-
-.box:hover {
-  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
-}
-
-.contrasena {
-  background-color: #F8F8F8;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  border-radius: 5px;
-  transition: 0.3s;
-  margin: 2vw 27.9vw 2vw 27.9vw;
-  padding: 1vw;
-  overflow-y: hidden;
-}
-
-.contrasena:hover {
-  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
-}
-/*Para que se apilen las tarjetas de box en el MainProcesses*/
-.container{
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  margin: 1px;
-}
-.boxs {
-
-  background-color: #F8F8F8;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  border-radius: 5px;
-  transition: 0.3s;
-  margin: 2vw 3vw 4vw 15vw;
-  padding: 1vw;
-  overflow-y: hidden;
-  width: 77vw;
-  text-align: center; 
-}
-/*FOOTER*/
-.footer{
-  margin-top: 1vw;
-  width: 50%;
-  text-align: center;
-  float: left;
-}
-
-.footer-hermano{
-  margin-top: 1vw;
-  width: 25%;
-  text-align: center;
-  float: left;
-}
-
-.padre-footer{
-  width: 100vw;
-  text-align: center;
-  float: left;
-}
+/*-------------------------*/
 
 /*CABECERA*/
-h2{
-  color: #002D73;
-  font-size: 30px;
+.padre-padre-titulo{
   width: 100%;
 }
 
-.width{
-  width: 100%;
-  /* background-color: #F8F8F8; */
-}
-
-.cabecera{
-  margin-top: 1vw;
+.padre-titulo{
+  margin-top: 0.5vw;
   width: 100%;
   text-align: center;
 }
@@ -216,22 +70,314 @@ h2{
   width: 33%;
 }
 
-.title{
+h2{
+  color: #002D73;
+  font-size: 30px;
   width: 100%;
-  text-align: center;
+  justify-content: center; 
 }
 
+/*-------------------------*/
+
+/*CENTER BOX*/
+.center-box {
+  display: flex;
+  justify-content: center; 
+  height: 100%;
+  align-items: center;
+}
+
+/*-------------------------*/
+
+/*VISTA PREGUNTAS*/
+.boton-arriba{
+  border: 2px solid #707070;
+  padding: 6px 9px;
+  text-align: center;
+  font-size: 16px;
+  color: #707070;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  background-color: white;
+  font-family: 'Montserrat', sans-serif;
+  width: 15vw;
+}
+
+.boton-arriba:hover{
+  background-color: #707070;
+  color: white;
+}
+
+.tarjeta-pregunta {
+  background-color: #F8F8F8;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  transition: 0.3s;
+  margin: 1.5vw 0vw 1.2vw 0vw;
+  padding: 1vw;
+  overflow-y: hidden;
+  width: 70vw;
+}
+
+.tarjeta-pregunta:hover {
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
+}
+
+.boton-abajo{
+  border: 2px solid #002D73;
+  padding: 6px 9px;
+  text-align: center;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  background-color: #002D73;
+  font-family: 'Montserrat', sans-serif;
+  width: 13vw;
+}
+
+.boton-abajo:hover{
+  border: 2px solid #002D73;
+  background-color: white;
+  color: #002D73;
+}
+
+.width-botones-abajo{
+  display: inline-block;
+  width: 50%;
+}
+
+/*-------------------------*/
+
+/*VISTA CHANGE PASSWORD*/
+.aceptar{
+  border: 2px solid #002D73;
+  padding: 6px 9px;
+  text-align: center;
+  font-size: 16px;
+  color: #002D73;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  background-color: white;
+  font-family: 'Montserrat', sans-serif;
+  width: 7vw;
+}
+
+.aceptar:hover{
+  background-color: #002D73;
+  color: white;
+}
+
+.cancelar{
+  border: 2px solid #707070;
+  padding: 6px 9px;
+  text-align: center;
+  font-size: 16px;
+  color: #707070;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  background-color: white;
+  font-family: 'Montserrat', sans-serif;
+  width: 7vw;
+}
+
+.cancelar:hover{
+  background-color: #707070;
+  color: white;
+}
+
+.tarjeta-password{
+  background-color: #F8F8F8;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  transition: 0.3s;
+  margin: 1vw 27.9vw 1vw 27.9vw;
+  padding: 1vw;
+  overflow-y: hidden;
+}
+
+.tarjeta-password:hover {
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
+}
+
+/*-------------------------*/
+
+/*VISTA CREATE QUESTION*/
+.crear{
+  border: 2px solid #002D73;
+  padding: 6px 9px;
+  text-align: center;
+  font-size: 16px;
+  color: #002D73;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  background-color: white;
+  font-family: 'Montserrat', sans-serif;
+  width: 5vw;
+}
+
+.crear:hover{
+  background-color: #002D73;
+  color: white;
+}
+
+.tarjeta-crear-pregunta{
+  background-color: #F8F8F8;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  transition: 0.3s;
+  margin: 1vw 27.9vw 3vw 27.9vw;
+  padding: 1vw;
+  overflow-y: hidden;
+}
+
+.tarjeta-crear-pregunta:hover {
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
+}
+
+/*-------------------------*/
+
+/*VISTA CREAR AUDITORIA*/
+.add-question{
+  border: 2px solid #002D73;
+  padding: 6px 9px;
+  text-align: center;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  background-color: #002D73;
+  font-family: 'Montserrat', sans-serif;
+  width: 13vw;
+}
+
+.add-question:hover{
+  background-color: white;
+  color: #002D73;
+}
+
+.tarjeta-crear-auditoría{
+  background-color: #F8F8F8;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  transition: 0.3s;
+  margin: 1vw 27.9vw 3vw 27.9vw;
+  padding: 1vw;
+  overflow-y: hidden;
+}
+
+.tarjeta-crear-auditoría:hover {
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
+}
+
+.fecha{
+  color: #707070;
+}
+
+/*-------------------------*/
+
+/*VISTA AUDITORIA*/
+.tarjeta-auditoría{
+  background-color: #F8F8F8;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  transition: 0.3s;
+  margin: 1vw 27.9vw 3vw 27.9vw;
+  padding: 1vw;
+  overflow-y: hidden;
+}
+
+.tarjeta-auditoría:hover {
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
+}
+
+/*-------------------------*/
+
+/*BOTONES*/
+.return{
+  border: 2px solid #707070;
+  padding: 6px 9px;
+  text-align: center;
+  font-size: 16px;
+  color: #707070;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  background-color: white;
+  font-family: 'Montserrat', sans-serif;
+  position: fixed;
+    top: 90%;
+    left: 91%;
+}
+
+.return:hover{
+  background-color: #707070;
+  color: white;
+}
+
+/*-------------------------*/
+
+/*CARD*/
+/*Para que se apilen las tarjetas de box en el MainProcesses*/
+.container{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: 1px;
+}
+
+/*-------------------------*/
+
+/*FOOTER*/
+.footer{
+  margin-top: 2vw;
+  width: 50%;
+  text-align: center;
+  float: left;
+}
+
+.footer-padre{
+  margin-top: 4vw;
+  margin-bottom: 3.2vw;
+  width: 25%;
+  text-align: center;
+  float: left;
+}
+
+.footer-padre-padre{
+  width: 100%;
+  text-align: center;
+  float: left;
+}
+
+/*-------------------------*/
+
 /*TEXTS*/
+p{
+  font-size: 16px;
+  color: #707070;
+}
+
 label{
-  font-size: 18px;
+  font-size: 16px;
   margin-right: 20px;
 }
 
 input{
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .input-field{
+  margin: 20px;
+}
+
+.date-field{
   margin: 20px;
 }
 

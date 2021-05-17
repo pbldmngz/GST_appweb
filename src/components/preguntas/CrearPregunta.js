@@ -32,7 +32,7 @@ class CrearPregunta extends Component {
     this.props.history.push("/preguntas"); //Esto se cambiará según el contexto
   };
   Seguro = (e) => {
-    // console.log(e)
+    console.log(e)
     e.preventDefault();
     Swal.fire({
       title: "Do you want to save the changes?",
@@ -58,64 +58,59 @@ class CrearPregunta extends Component {
     if (!auth.uid) return <Redirect to="/signin" />;
 
     return (
-      <div className="">
-        <form className="white" onSubmit={this.Seguro}>
-          <h5 className="">
-            {bText[lang].preguntas.crearPregunta.crear_pregunta}
-          </h5>
-          <div className="input-field">
-            <label htmlFor="lang.english">
-              {bText[lang].preguntas.crearPregunta.pregunta}[EN]
-            </label>
-            <input type="text" id="english" onChange={this.handleChange} />
+      <div>
+        <div className="padre-titulo">
+          <h2 className="titulo">Crear Pregunta</h2>
+        </div>
+        <div className="tarjeta-crear-pregunta">
+          <div className="center-box">
+            <form className="" onSubmit={this.Seguro}>
+              <div className="input-field">
+                <input type="text" id="english" placeholder="Pregunta en inglés [EN]" onChange={this.handleChange} />
+              </div>
+              <div className="input-field">
+                <input type="text" id="spanish" placeholder="Pregunta en español [ES]" onChange={this.handleChange} />
+              </div>
+              <div className="input-field">
+                <input type="text" id="description" placeholder="Descripción" onChange={this.handleChange} />
+              </div>
+              <div className="input-field">
+                <input
+                  type="text"
+                  id="reaction_plan"
+                  placeholder="Plan de reacción"
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="">
+                <InputLabel id="select-level">
+                  {bText[lang].preguntas.crearPregunta.categoria}
+                </InputLabel>
+                <Select
+                  labelId="select-level"
+                  id="level"
+                  value={this.state.category}
+                  onChange={this.handleChangeSelect}
+                >
+                  <MenuItem value={4}>D</MenuItem>
+                  <MenuItem value={3}>C</MenuItem>
+                  <MenuItem value={2}>B</MenuItem>
+                  <MenuItem value={1}>A</MenuItem>
+                </Select>
+                </div>
+            </form>
           </div>
-          <div className="input-field">
-            <label htmlFor="lang.english">
-              {bText[lang].preguntas.crearPregunta.pregunta}[ES]
-            </label>
-            <input type="text" id="spanish" onChange={this.handleChange} />
+        </div>
+            <div className="center-box">
+                  <button className="crear">
+                    {bText[lang].preguntas.crearPregunta.crear}
+                  </button>
+                </div>
+              <button className="return">
+                <a href="/">{bText[lang].return}</a>
+              </button>
+              
           </div>
-          <div className="input-field">
-            <label htmlFor="descripcion">
-              {bText[lang].preguntas.crearPregunta.descripcion}
-            </label>
-            <input type="text" id="description" onChange={this.handleChange} />
-          </div>
-          <div className="input-field">
-            <label htmlFor="action_plan">
-              {bText[lang].preguntas.crearPregunta.plan_reaccion}
-            </label>
-            <input
-              type="text"
-              id="reaction_plan"
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="">
-            <InputLabel id="select-level">
-              {bText[lang].preguntas.crearPregunta.categoria}
-            </InputLabel>
-            <Select
-              labelId="select-level"
-              id="level"
-              value={this.state.category}
-              onChange={this.handleChangeSelect}
-            >
-              <MenuItem value={4}>D</MenuItem>
-              <MenuItem value={3}>C</MenuItem>
-              <MenuItem value={2}>B</MenuItem>
-              <MenuItem value={1}>A</MenuItem>
-            </Select>
-          </div>
-
-          <button className="">
-            {bText[lang].preguntas.crearPregunta.crear}
-          </button>
-        </form>
-        <button className="regreso">
-          <a href="/">{bText[lang].return}</a>
-        </button>
-      </div>
     );
   }
 }

@@ -91,16 +91,19 @@ class DashboardAuditorias extends Component {
 
         if (filteredAuditorias) {
             return (
-                <div className="dashboard container">
-                    <div className="second-navbar">
-                        <div className="filter">
+                <div className="padre-padre-titulo">
+                    <div className="padre-titulo">
+                        <div className="titulo">
                             <InputLabel id="select-filter">{text[lang].auditorias.dashboardAuditorias.vista}</InputLabel>
                             {menuItems}
                         </div>
-                        <div className="dashboard-title">
-                            {text[lang].auditorias.dashboardAuditorias.auditorias}
+                        <div className="titulo">
+                            <h2>{text[lang].auditorias.dashboardAuditorias.auditorias}</h2>
                         </div>
-                        {botonReturn}
+                        <div className="titulo">
+                        </div>
+                        {/*botonReturn*/}
+                        <button className="return"><a href="#">{text[lang].return}</a></button>
                     </div>
                     <Auditorias 
                         auditorias={filteredAuditorias} 

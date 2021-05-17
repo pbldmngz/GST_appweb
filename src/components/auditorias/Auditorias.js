@@ -12,14 +12,8 @@ export default function Auditorias(props) {
     const refLink = (userLevel === 0) ? path.detalles_preguntas_auditoria : path.responder_auditoria;
 
     return (
+    <div>
         <div className="">
-            <div className="width">
-                <div className="cabecera">
-                    <div className="titulo">
-                        <h2>Auditoría</h2>
-                    </div>
-                </div>
-            </div>
         {/* Esto es muy mejorable */}
             {auditorias && auditorias.map(auditoria => {
                 const retThis = (alreadyDone) ? (
@@ -40,10 +34,7 @@ export default function Auditorias(props) {
                 )
                 return retThis
             })}
-
-            <div className="width">
-                <button className="regreso"><a href="#">{text[lang].return}</a></button>
-            </div>
         </div>
+    </div>
     )
 }

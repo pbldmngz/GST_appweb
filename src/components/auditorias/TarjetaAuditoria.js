@@ -63,7 +63,7 @@ class TarjetaAuditoria extends Component {
       text = "D";
       style = { backgroundColor: "#D5D8DC" };
     }
-
+<div className="a"></div>
     const graphOrWarn =
       userLevel == 0 ? (
         <div>
@@ -155,7 +155,7 @@ class TarjetaAuditoria extends Component {
     );
 
     return (
-      <div style={style} className="box" key={auditoria.id}>
+      <div style={style} className="tarjeta-auditoría" key={auditoria.id}>
         {linked}
         <div className="">{botones}</div>
       </div>

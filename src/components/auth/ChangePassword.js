@@ -91,37 +91,44 @@ class ChangePassword extends Component {
         return (
             <div className="">
                 <form className="" onSubmit={this.handleSubmit}>
-                    <div className="cabecera">
-                        <h2 className="title">{bText[lang].auth.changePassword.cambiar_contrasena}</h2>
+                    <div className="padre-titulo">
+                        <h2 className="titulo">{bText[lang].auth.changePassword.cambiar_contrasena}</h2>
                     </div>
-                    <div className="cambiar-cont">
-                        <div className="contrasena">
-                            <div className="input-field">
-                                <input type="password" id='currentPassword' name='currentPassword'
-                                placeholder={bText[lang].auth.changePassword.contrasena_actual} onChange={this.handleChange} />
-                            </div>
-                            <div className="input-field">
-                                <input type="password" id='newPassword' name='newPassword'
-                                placeholder={bText[lang].auth.changePassword.contrasena_nueva} onChange={this.handleChange} />
-                            </div>
-                            <div className="input-field">
-                            <input type="password" id='newPasswordConfirm' name='newPasswordConfirm' 
-                            placeholder={bText[lang].auth.changePassword.repite_contrasena} onChange={this.handleChange} />
+                        <div className="tarjeta-password">
+                            <div className="">
+                                <div className="input-field">
+                                    <input type="password" id='currentPassword' name='currentPassword'
+                                    placeholder={bText[lang].auth.changePassword.contrasena_actual} onChange={this.handleChange} />
+                                </div>
+                                <div className="input-field">
+                                    <input type="password" id='newPassword' name='newPassword'
+                                    placeholder={bText[lang].auth.changePassword.contrasena_nueva} onChange={this.handleChange} />
+                                </div>
+                                <div className="input-field">
+                                <input type="password" id='newPasswordConfirm' name='newPasswordConfirm' 
+                                placeholder={bText[lang].auth.changePassword.repite_contrasena} onChange={this.handleChange} />
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div className="botones">
-                                <button className="">{bText[lang].auth.changePassword.cancelar}</button>
+                    <div className="footer-padre-padre">
+                        <div className="footer-padre"></div>
+                            <div className="footer">
+                            <div className="width-botones-abajo">
+                                <button className="cancelar">{bText[lang].auth.changePassword.cancelar}</button>
+                            </div>
+                            <div className="width-botones-abajo">
                                 <button className="aceptar">{bText[lang].auth.changePassword.aceptar}</button>
-                    </div>
-
-                    <div className="center red-text">
-                        {this.state.authError ? <p>{this.state.authError.message}</p> : null}
+                            </div>
+                            </div>
+                            <div className="">
+                                {this.state.authError ? <p>{this.state.authError.message}</p> : null}
+                            </div>
                     </div>
                 </form>
 
-                <button className="regreso"><a href="/">{bText[lang].return}</a></button>
+                <button className="return"><a href="/">{bText[lang].return}</a></button>
+                
             </div>
         )
     }

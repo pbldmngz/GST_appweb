@@ -51,7 +51,7 @@ export default function TarjetaPregunta(props) {
 
   return (
     <div className="center-box">
-      <div className="box" key={pregunta.id}>
+      <div className="tarjeta-pregunta" key={pregunta.id}>
         <div className="">
           <Link to={path.detalles_pregunta_auditoria + "/" + pregunta.id}>
             <div className="">

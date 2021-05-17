@@ -130,113 +130,106 @@ class CrearAuditoria extends Component {
     // console.log(this.state.preguntas)
 
     return (
-      <div className="">
-        <div className="cabecera">
-          <h2 className="">
+      <div className="padre-padre-titulo">
+        <div className="padre-titulo">
+          <h2 className="titulo">
             {text[lang].auditorias.crearAuditoria.crear_auditoria}
           </h2>
         </div>
-        <div className="box">
-          <div className="crear-auditoria-views card">
-            <form className="white" onSubmit={this.Seguro}>
-              <h5 className="grey-text text-darken-3">
-                {text[lang].auditorias.crearAuditoria.crear_auditoria}
-              </h5>
-              <div className="input-field">
-                <input
-                  type="text"
-                  id="auditoria"
-                  placeholder={
-                    text[lang].auditorias.crearAuditoria.nombre_auditoria
-                  }
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="input-field">
-                <input
-                  type="text"
-                  id="auditor"
-                  placeholder={text[lang].auditorias.crearAuditoria.auditor}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="input-field">
-                <input
-                  type="text"
-                  id="area"
-                  placeholder={text[lang].auditorias.crearAuditoria.area}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="date-field">
-                <div className="date-container">
-                  <div className="date">
-                    <span
-                      className=""
-                      placeholder={
-                        text[lang].auditorias.crearAuditoria.termina_el
-                      }
-                    >
-                      {" "}
-                      y termina el{" "}
-                    </span>
-                    <DatePicker
-                      id="fecha_fin"
-                      selected={this.state.fecha_fin}
-                      onChange={(date) =>
-                        this.setState({
-                          fecha_fin: date,
-                        })
-                      }
-                    />
-                  </div>
-                  <div className="date">
-                    <span className="grey-text">
-                      {text[lang].auditorias.crearAuditoria.inicia_el}
-                    </span>
-                    <DatePicker
-                      id="fecha_inicio"
-                      selected={this.state.fecha_inicio}
-                      onChange={(date) =>
-                        this.setState({
-                          fecha_inicio: date,
-                        })
-                      }
-                    />
+        <div className="">
+          <div className="tarjeta-crear-auditoría">
+            <div className="center-box">
+              <form className="" onSubmit={this.Seguro}>
+                <div className="input-field">
+                  <input
+                    type="text"
+                    id="auditoria"
+                    placeholder={
+                      text[lang].auditorias.crearAuditoria.nombre_auditoria
+                    }
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="input-field">
+                  <input
+                    type="text"
+                    id="auditor"
+                    placeholder={text[lang].auditorias.crearAuditoria.auditor}
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="input-field">
+                  <input
+                    type="text"
+                    id="area"
+                    placeholder={text[lang].auditorias.crearAuditoria.area}
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="date-field">
+                  <div className="date-container">
+                    <div className="date">
+                      <span
+                        className="fecha"
+                        placeholder={
+                          text[lang].auditorias.crearAuditoria.termina_el
+                        }
+                      >
+                        {" "}
+                        y termina el{" "}
+                      </span>
+                      <DatePicker
+                        id="fecha_fin"
+                        selected={this.state.fecha_fin}
+                        onChange={(date) =>
+                          this.setState({
+                            fecha_fin: date,
+                          })
+                        }
+                      />
+                    </div>
+                    <div className="date">
+                      <span className="fecha">
+                        {text[lang].auditorias.crearAuditoria.inicia_el}
+                      </span>
+                      <DatePicker
+                        id="fecha_inicio"
+                        selected={this.state.fecha_inicio}
+                        onChange={(date) =>
+                          this.setState({
+                            fecha_inicio: date,
+                          })
+                        }
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
-          <div className="agregar-pregunta card crear-auditoria-views destroy-overflow">
-            <div className="white">
-              <h5 className="grey-text text-darken-3">Agregar preguntas</h5>
-              <div className="preguntas-creadas">
+          <div className="center-box">
+            <div className="">
+              <div className="">
                 {this.state.preguntas &&
                   this.state.preguntas.map((pregunta, index) => {
                     return (
-                      <div className="grid-main" key={index}>
-                        <div className="grid-component-left card">
+                      <div className="" key={index}>
+                        <div className="">
                           {index + 1}. {pregunta[lang]}
                         </div>
                         <div
-                          className="grid-component-right card hover-click"
+                          className=""
                           onClick={() => {
                             this.handleDelete(pregunta.id);
                           }}
                         >
-                          <i className="material-icons">delete</i>
+                          <i className="material-icons">Delete</i>
                         </div>
                       </div>
                     );
                   })}
               </div>
-              <button
-                className="btn-floating btn-small waves-effect waves-light blue button-margin"
-                onClick={this.handleClickOpen}
-              >
-                <i className="material-icons">add</i>
-              </button>
+              <button className="add-question" onClick={this.handleClickOpen}>Agregar pregunta</button>
               <Dialog
                 open={this.state.openB}
                 onClose={this.handleClose}
@@ -285,19 +278,28 @@ class CrearAuditoria extends Component {
             </div>
           </div>
         </div>
+      <div>
+        <div className="footer-padre-padre">
+            <div className="footer-padre"></div>
+                <div className="footer">
+                    <div className="width-botones-abajo">
+                      <button className="cancelar" onClick={this.handleCancel}>
+                        {text[lang].auditorias.crearAuditoria.cancelar}
+                      </button>
+                    </div>
+                    <div className="width-botones-abajo">
+                      <button className="aceptar" onClick={this.Seguro}>
+                        {text[lang].auditorias.crearAuditoria.crear}
+                      </button>
+                    </div>
+                    </div>
+                </div>
+            </div>
 
-        <div className="botones">
-          <button className="cancel" onClick={this.handleCancel}>
-            {text[lang].auditorias.crearAuditoria.cancelar}
-          </button>
-          <button className="aceptar" onClick={this.Seguro}>
-            {text[lang].auditorias.crearAuditoria.crear}
-          </button>
-        </div>
-
-        <button className="regreso">
+        <button className="return">
           <a href="/">{text[lang].return}</a>
         </button>
+        
       </div>
     );
   }
