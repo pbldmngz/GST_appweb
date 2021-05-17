@@ -5,6 +5,7 @@ import { signUp } from '../../store/actions/authActions'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import Logo_GST from '../../styles/imgs/Logo-GST.png'
 
 
 class SignUp extends Component {
@@ -40,26 +41,29 @@ class SignUp extends Component {
         if (auth.uid) return <Redirect to="/" />
 
         return (
+            
             <div className="container extra-margin">
+                <img className="logo"src = {Logo_GST} alt= "gst logo"></img>
                 <form className="white" onSubmit={this.handleSubmit}>
-                    <h5 className="grey-text text-darken-3">Sign Up</h5>
-                    <div className="input-field">
+                    <div className="email">
+                
                         <label htmlFor="email">Email</label>
                         <input type="email" id='email' onChange={this.handleChange} />
                     </div>
-                    <div className="input-field">
+                    <div className="passing">
                         <label htmlFor="password">Password</label>
                         <input type="password" id='password' onChange={this.handleChange} />
                     </div>
-                    <div className="input-field">
+                    <div className="fname">
                         <label htmlFor="firstName">First Name</label>
                         <input type="text" id='firstName' onChange={this.handleChange} />
                     </div>
-                    <div className="input-field">
+                    <i class="lname"></i>
+                    <div className="lastname">
                         <label htmlFor="lastName">Last Name</label>
                         <input type="text" id='lastName' onChange={this.handleChange} />
                     </div>
-                    <div className="">
+                    <div className="Level">
                         <InputLabel id="select-level">Level</InputLabel>
                         <Select labelId="select-level" id="level" value={this.state.level} onChange={this.handleChangeSelect}>
                             <MenuItem value={5}>E</MenuItem>
@@ -70,10 +74,11 @@ class SignUp extends Component {
                             <MenuItem value={0}>Admin</MenuItem>
                         </Select>
                     </div>
-                    <button className="btn blue lighten-1 z-depth-0">Sign Up</button>
+                    <button className="Sign">Sign Up</button>
                     <div className="center red-text">
                         {authError ? <p>{authError}</p> : null}
                     </div>
+                    
                 </form>
             </div>
         )
