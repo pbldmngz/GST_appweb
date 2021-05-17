@@ -102,7 +102,7 @@ class CrearPregunta extends Component {
           </div>
         </div>
             <div className="center-box">
-                  <button className="crear">
+          <button className="crear" onClick={this.Seguro}>
                     {bText[lang].preguntas.crearPregunta.crear}
                   </button>
                 </div>
