@@ -73,7 +73,7 @@ class DashboardAuditorias extends Component {
             filteredAuditorias = filteredAuditorias.filter(aud => aud.minCategory >= userLevel)
         }
         var { path, pathName } = require('../../config/config');
-
+        
         const menuItems = (userLevel === 0) ? (
             <Select labelId="select-filter" id="filter" value={this.state.filter} onChange={this.handleChangeSelect}>
                 <MenuItem value={0}>{text[lang].auditorias.dashboardAuditorias.ordenar_fecha}</MenuItem>

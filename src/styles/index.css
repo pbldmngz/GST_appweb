@@ -291,11 +291,15 @@ h2{
   margin: 1vw 27.9vw 3vw 27.9vw;
   padding: 1vw;
   overflow-y: hidden;
+  width: 350px;
+  height: 180px;
+  display: inline-block;
 }
 
 .tarjeta-auditoría:hover {
   box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
 }
+
 
 /*-------------------------*/
 

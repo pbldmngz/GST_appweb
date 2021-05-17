@@ -13,7 +13,7 @@ export default function Auditorias(props) {
 
     return (
     <div>
-        <div className="">
+        <div className="arroz-chino">
         {/* Esto es muy mejorable */}
             {auditorias && auditorias.map(auditoria => {
                 const retThis = (alreadyDone) ? (
