@@ -105,12 +105,14 @@ class DashboardAuditorias extends Component {
                         {/*botonReturn*/}
                         <button className="return"><a href="#">{text[lang].return}</a></button>
                     </div>
-                    <Auditorias 
-                        auditorias={filteredAuditorias} 
-                        userLevel={userLevel} 
-                        alreadyDone={(this.state.filter === 2)}
-                        lang={lang}
-                    />
+                    <div className="">
+                        <Auditorias
+                            auditorias={filteredAuditorias}
+                            userLevel={userLevel}
+                            alreadyDone={(this.state.filter === 2)}
+                            lang={lang}
+                        />
+                    </div>
                 </div>
             )
         } else {

@@ -13,28 +13,20 @@ export default function Auditorias(props) {
 
     return (
     <div>
+            <div className="arroz-lil-brudah">_</div>
         <div className="arroz-chino">
         {/* Esto es muy mejorable */}
             {auditorias && auditorias.map(auditoria => {
-                const retThis = (alreadyDone) ? (
-                    <TarjetaAuditoria
-                        auditoria={auditoria}
-                        userLevel={userLevel}
-                        alreadyDone={alreadyDone}
-                        lang={lang}
-                    />
-                ) : (
-                    <TarjetaAuditoria
-                        key={auditoria.id}
-                        auditoria={auditoria}
-                        userLevel={userLevel}
-                        alreadyDone={alreadyDone}
-                        lang={lang}
-                    />
-                )
-                return retThis
+                
+                return <TarjetaAuditoria
+                    auditoria={auditoria}
+                    userLevel={userLevel}
+                    alreadyDone={alreadyDone}
+                    lang={lang}
+                />
             })}
         </div>
+        <div className="arroz-lil-brudah2">_</div>
     </div>
     )
 }
