@@ -45,8 +45,8 @@ class SignUp extends Component {
         return (
             
             <div className="container extra-margin">
-                <img className="logo"src = {Logo_GST} alt= "gst logo"></img>
-                <form className="white" onSubmit={this.handleSubmit}>
+
+                <form className="Sgup" onSubmit={this.handleSubmit}>
                     <div className="email">
                 
                         <label htmlFor="email">Email</label>
@@ -63,6 +63,7 @@ class SignUp extends Component {
                     <i class="lname"></i>
                     <div className="lastname">
                         <label htmlFor="lastName">Last Name</label>
+                        
                         <input type="text" id='lastName' onChange={this.handleChange} />
                     </div>
                     <div className="Level">
