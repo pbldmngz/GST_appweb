@@ -3,7 +3,12 @@ import {connect} from 'react-redux'
 import {signIn} from '../../store/actions/authActions'
 import { Redirect } from 'react-router';
 import Logo_GST from '../../styles/imgs/Logo-GST.png'
+import ReactDOM from 'react-dom'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
 
+library.add(fab, faCheckSquare, faCoffee)
 
 
 
@@ -29,13 +34,15 @@ class SignIn extends Component {
         if (auth.uid) return <Redirect to="/" />
         
         return (
+            
             <div className="container">
                 <img className="logo"src = {Logo_GST} alt= "gst logo"></img>
-                <form className="white" onSubmit={this.handleSubmit}>
+                <form className="upl" onSubmit={this.handleSubmit}>
               
                     <div className="username">
-                        <label htmlFor="email">Username</label>
-                        <input type="email" id='email' onChange={this.handleChange} />
+                        <label className="uname" htmlFor="email">Username</label>
+    
+                        <input  type="email" id='email' onChange={this.handleChange} />
                     </div>
                     <div className="password">
                         <label htmlFor="password">Password</label>
