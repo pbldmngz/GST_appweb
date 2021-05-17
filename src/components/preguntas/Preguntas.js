@@ -21,13 +21,10 @@ export default function Preguntas(props) {
                 </div>
 
                 <div className="titulo">
-                    <h2>Creación de auditoría</h2>
+                    <h2>Creación de preguntas</h2>
                 </div>
 
                 <div className="titulo">
-                    <NavLink to={path.crear_pregunta} className="">
-                        <button className="boton-arriba">Saved Questions</button>
-                    </NavLink>
                 </div>
         </div>
 
@@ -46,23 +43,6 @@ export default function Preguntas(props) {
                     </div>
                 )
             })}
-        <div className="footer-padre-padre">
-            <div className="footer-padre"></div>
-                <div className="footer">
-                    <div className="width-botones-abajo">
-                        <NavLink to={path.crear_pregunta} className="">
-                            <button className="boton-abajo">Asignar auditoría</button>
-                        </NavLink>
-                    </div>
-
-                    <div className="width-botones-abajo">
-                        <NavLink to={path.crear_pregunta} className="">
-                            <button className="boton-abajo">Guardar preguntas</button>
-                        </NavLink>
-                    </div>
-                </div>
-        </div>
-        
         </div>
             <button className="return"><a href="/">{text[lang].return}</a></button>
         </div>
