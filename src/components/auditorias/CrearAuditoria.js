@@ -143,16 +143,6 @@ class CrearAuditoria extends Component {
                 <div className="input-field">
                   <input
                     type="text"
-                    id="auditoria"
-                    placeholder={
-                      text[lang].auditorias.crearAuditoria.nombre_auditoria
-                    }
-                    onChange={this.handleChange}
-                  />
-                </div>
-                <div className="input-field">
-                  <input
-                    type="text"
                     id="auditor"
                     placeholder={text[lang].auditorias.crearAuditoria.auditor}
                     onChange={this.handleChange}

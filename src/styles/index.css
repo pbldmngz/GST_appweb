@@ -531,11 +531,6 @@ p{
   color: #707070;
 }
 
-label{
-  font-size: 16px;
-  margin-right: 20px;
-}
-
 input{
   font-size: 16px;
 }
@@ -549,7 +544,7 @@ input{
 }
 
 input{
-  width: 37.6vw;
+  width: 37vw;
   font-family: 'Montserrat', sans-serif;
   border-radius: 5px;
   padding: 10px;
