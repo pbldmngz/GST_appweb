@@ -7,7 +7,7 @@ import {
 } from "../../store/actions/auditoriaActions";
 import { Link, NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
-import PopUp from "../util/PopUp";
+
 
 class TarjetaAuditoria extends Component {
   render() {
@@ -97,6 +97,8 @@ class TarjetaAuditoria extends Component {
                 showCancelButton: false,
                 denyButtonText: "Don't save",
                 confirmButtonText: "Save",
+                confirmButtonColor:'#002D73',
+                denyButtonColor:'#707070',
               }).then((result) => {
                 //  Read more about isConfirmed, isDenied below
                 if (result.isConfirmed) {

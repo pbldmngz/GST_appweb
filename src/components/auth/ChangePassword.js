@@ -3,6 +3,7 @@ import { Redirect } from 'react-router';
 import { connect } from 'react-redux'
 import firebase from 'firebase'
 import { timeSaturday } from 'plotly.js-basic-dist';
+import Swal from "sweetalert2";
 require('firebase/auth')
 
 class ChangePassword extends Component {
@@ -77,6 +78,18 @@ class ChangePassword extends Component {
             authError: null
         })
     }
+    Exito = (e) => {
+        // console.log(e)
+        e.preventDefault();
+        this.handleSubmit(e);
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "password changed successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+      };
 
     render() {
         
@@ -90,7 +103,7 @@ class ChangePassword extends Component {
 
         return (
             <div className="">
-                <form className="" onSubmit={this.handleSubmit}>
+                <form className="" onSubmit={this.Exito}>
                     <div className="cabecera">
                         <h2 className="title">{bText[lang].auth.changePassword.cambiar_contrasena}</h2>
                     </div>

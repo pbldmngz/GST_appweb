@@ -58,6 +58,8 @@ class EditarPregunta extends Component {
       showCancelButton: false,
       confirmButtonText: "Save",
       denyButtonText: "Don't save",
+      confirmButtonColor:'#002D73',
+      denyButtonColor:'#707070',
     }).then((result) => {
       //  Read more about isConfirmed, isDenied below
       if (result.isConfirmed) {

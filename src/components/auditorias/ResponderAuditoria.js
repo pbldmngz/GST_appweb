@@ -16,7 +16,7 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import TextField from "@material-ui/core/TextField";
 import Swal from "sweetalert2";
-import PopUp from "../util/PopUp";
+
 //import DatePicker from 'react-datepicker/dist/react-datepicker'
 
 //Esta madre no sirve, adáptenlo
@@ -123,6 +123,9 @@ class ResponderAuditoria extends Component {
       showCancelButton: false,
       confirmButtonText: "Save",
       denyButtonText: "Don't save",
+      confirmButtonColor:'#002D73',
+      denyButtonColor:'#707070',
+
     }).then((result) => {
       //  Read more about isConfirmed, isDenied below
       if (result.isConfirmed) {
