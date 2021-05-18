@@ -17,6 +17,7 @@ class DashboardPreguntas extends Component {
     render() {
         const { preguntas, auth, userLevel, lang } = this.props
         // console.log(userLevel)
+        const bText = require("../../config/language");
 
         if (!auth.uid) return <Redirect to="/signin" />
         if (userLevel != 0) return <Redirect to="/" />
@@ -31,6 +32,7 @@ class DashboardPreguntas extends Component {
                         userLevel={userLevel}
                         lang={lang}
                     />
+                    <button className="return" onClick={() => { this.props.history.push("/") }}>{bText[lang].return}</button>
                 </div>
             )
         } else {

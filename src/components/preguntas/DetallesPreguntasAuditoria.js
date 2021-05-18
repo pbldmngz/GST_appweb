@@ -39,12 +39,13 @@ class DetallesPreguntasAuditoria extends Component {
     render() {
         const { auth, lang } = this.props;
         const bText = require('../../config/language');
-        if (!lang) return null;
+        
 
         // console.log(this.props)
 
         if (!auth.uid) return <Redirect to="/signin" />
-
+        if (!lang) return null;
+        
         return (
             <div className="container extra-margin">
                 <div className="card x-depth-0 detalles-preguntas-auditoria">
@@ -62,6 +63,7 @@ class DetallesPreguntasAuditoria extends Component {
                             )
                         })}
                 </div>
+                <button className="return" onClick={() => { this.props.history.push("/") }}>{bText[lang].return}</button>
             </div>
         )
     }

@@ -36,26 +36,28 @@ class SignIn extends Component {
         return (
             
             <div className="container">
-                <img className="logo"src = {Logo_GST} alt= "gst logo"></img>
-                <form className="upl" onSubmit={this.handleSubmit}>
-              
-                    <div className="username">
-                        <label className="uname" htmlFor="email">Username</label>
-    
-                        <input  type="email" id='email' onChange={this.handleChange} />
-                    </div>
-                    <div className="password">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" id='password' onChange={this.handleChange} />
-                    </div>
-                    <div className="Login">
-                        <button className="Log">Login</button>
-                        <i class="boton2"></i>
-                        <div className="center red-text">
-                            {authError ? <p>{authError}</p> : null}
+                <div className="login-container">
+                    <img className="logo" src={Logo_GST} alt="gst logo"></img>
+
+                    <form className="upl" onSubmit={this.handleSubmit}>
+
+                        <div className="username">
+                            <label className="uname" htmlFor="email"></label>
+                            <input type="email" id='email' placeholder="Email" onChange={this.handleChange} />
                         </div>
-                    </div>
-                </form>
+                        <div className="password">
+                            <label htmlFor="password"></label>
+                            <input type="password" id='password' placeholder="Password" onChange={this.handleChange} />
+                        </div>
+                        <div className="Login">
+                            <button className="Log">Login</button>
+                            <i class="boton2"></i>
+                            <div className="center red-text">
+                                {authError ? <p>{authError}</p> : null}
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         )
     }

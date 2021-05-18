@@ -139,8 +139,9 @@ class ResponderAuditoria extends Component {
 
     // console.log("Status", this.state)
     // console.log(this.props)
-    if (!lang) return null;
     if (!auth.uid) return <Redirect to="/signin" />;
+    if (!lang) return null;
+    
     // console.log("Mounted?", this.state._mounted, "Proceed?", !proceed)
     if (this.state._mounted && !proceed) return <Redirect to="/" />;
 
@@ -236,6 +237,7 @@ class ResponderAuditoria extends Component {
             </div>
           </form>
         </div>
+        <button className="return" onClick={() => { this.props.history.push("/") }}>{text[lang].return}</button>
       </div>
     );
   }

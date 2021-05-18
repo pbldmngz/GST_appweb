@@ -82,11 +82,13 @@ class ChangePassword extends Component {
         
         const {auth, lang} = this.props
         const bText = require('../../config/language');
+        if (!auth.uid) return <Redirect to="/signin" />
+
         if (!lang) return null;
 
         // console.log("Rednder State", this.state)
 
-        if (!auth.uid) return <Redirect to="/signin" />
+        
 
         return (
             <div className="">
@@ -127,7 +129,7 @@ class ChangePassword extends Component {
                     </div>
                 </form>
 
-                <button className="return"><a href="/">{bText[lang].return}</a></button>
+                <button className="return" onClick={() => { this.props.history.push("/") }}>{bText[lang].return}</button>
                 
             </div>
         )

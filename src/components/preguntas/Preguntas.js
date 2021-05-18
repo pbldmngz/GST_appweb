@@ -44,7 +44,6 @@ export default function Preguntas(props) {
                 )
             })}
         </div>
-            <button className="return"><a href="/">{text[lang].return}</a></button>
         </div>
         
         </div>

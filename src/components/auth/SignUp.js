@@ -13,7 +13,7 @@ class SignUp extends Component {
         password: '',
         firstName: '',
         lastName: '',
-        level: 5,
+        level: 4,
         lang: "spanish",
     }
     handleChange = (e) => {
@@ -38,7 +38,7 @@ class SignUp extends Component {
     render() {
         const { auth, authError, userLevel } = this.props;
 
-        if (!auth.uid) return <Redirect to="/" />
+        if (!auth.uid) return <Redirect to="/signin" />
         if (userLevel && userLevel !==0) return <Redirect to="/" />
 
 
@@ -49,22 +49,21 @@ class SignUp extends Component {
                 <form className="Sgup" onSubmit={this.handleSubmit}>
                     <div className="email">
                 
-                        <label htmlFor="email">Email</label>
-                        <input type="email" id='email' onChange={this.handleChange} />
+                        <label htmlFor="email"></label>
+                        <input type="email" id='email' placeholder="Email" onChange={this.handleChange} />
                     </div>
                     <div className="passing">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" id='password' onChange={this.handleChange} />
+                        <label htmlFor="password"></label>
+                        <input type="password" id='password' placeholder="Password"onChange={this.handleChange} />
                     </div>
                     <div className="fname">
-                        <label htmlFor="firstName">First Name</label>
-                        <input type="text" id='firstName' onChange={this.handleChange} />
+                        <label htmlFor="firstName"></label>
+                        <input type="text" id='firstName' placeholder="First Name"onChange={this.handleChange} />
                     </div>
                     <i class="lname"></i>
                     <div className="lastname">
-                        <label htmlFor="lastName">Last Name</label>
-                        
-                        <input type="text" id='lastName' onChange={this.handleChange} />
+                        <label htmlFor="lastName"></label>
+                        <input type="text" id='lastName' placeholder="Last Name" onChange={this.handleChange} />
                     </div>
                     <div className="Level">
                         <InputLabel id="select-level">Level</InputLabel>

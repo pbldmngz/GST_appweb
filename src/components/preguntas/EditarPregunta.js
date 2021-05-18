@@ -73,9 +73,11 @@ class EditarPregunta extends Component {
     // console.log(this.state)
     const { auth, lang } = this.props;
     const bText = require("../../config/language");
-    if (!lang) return null;
 
     if (!auth.uid) return <Redirect to="/signin" />;
+    if (!lang) return null;
+
+    
 
     return (
       <div className="container">
@@ -148,6 +150,7 @@ class EditarPregunta extends Component {
             {bText[lang].preguntas.editarPregunta.editar}
           </button>
         </form>
+        <button className="return" onClick={() => { this.props.history.push("/") }}>{bText[lang].return}</button>
       </div>
     );
   }

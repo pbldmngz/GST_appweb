@@ -12,7 +12,7 @@ lang.spanish = {
             crear_auditoria: "Crear auditoria",
             editar_auditoria: "Editar auditoria",
             nombre_auditoria: "Nombre de la auditoria",
-            auditor: "Auditor",
+            auditor: "Proceso",
             area: "Area",
             termina_el: " y termina el ",
             inicia_el: "Inicia el ",
@@ -50,7 +50,7 @@ lang.spanish = {
         },
         tarjetaAuditoria: {
             fecha_limite: "Fecha límite",
-            auditor: "Auditor",
+            auditor: "Proceso",
         },
     },
     auth: {
@@ -139,7 +139,7 @@ lang.english = {
             crear_auditoria: "Create new audit",
             editar_auditoria: "Edit",
             nombre_auditoria: "Audit name",
-            auditor: "Auditor",
+            auditor: "Process",
             area: "Area",
             termina_el: " Due date ",
             inicia_el: "Start date ",
@@ -177,7 +177,7 @@ lang.english = {
         },
         tarjetaAuditoria: {
             fecha_limite: "Due date",
-            auditor: "Auditor",
+            auditor: "Process",
         },
     },
     auth: {

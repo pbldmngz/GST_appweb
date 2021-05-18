@@ -70,27 +70,24 @@ const DetallesPregunta = (props) => {
     if (pregunta.createdAt) {
         return (
             <div className="container">
-                <div className=" card x-depth-0 detalles-pregunta destroy-overflow">
-                    <div className="card-content-custom grey-text text-darken-3 main-container ">
-                        <div className="">
-                        {console.log("This is pregunta", pregunta)}
-                            <span className="card-title">{pregunta[lang]}</span>
-                            <p><b>{bText[lang].preguntas.detallesPregunta.descripcion}: </b>{pregunta.description}</p>
-                            <p><b>{bText[lang].preguntas.detallesPregunta.categoria}: </b>{categoria[pregunta.category]}</p>
-                            <p><b>{bText[lang].preguntas.detallesPregunta.plan_reaccion}: </b>{pregunta.reaction_plan}</p>
-                            <p><b>{bText[lang].preguntas.detallesPregunta.creado_por}: </b>{pregunta.createdBy}</p>
-                            <p><b>{bText[lang].preguntas.detallesPregunta.creado}: </b>{moment(pregunta.createdAt.toDate()).fromNow()}</p>
-                        </div>
-                        <div className="graph">
-                            <PreguntaGrafica count={count} />
-                            <div className="ver-respuestas">
-                                <button className="btn  blue lighten-1 z-depth-0" onClick={handleClickOpen}>{bText[lang].preguntas.detallesPregunta.ver_respuestas}</button>
-                            </div>
+                <div className="detalles-pregunta">
+                    <div className="detalles-pregunta-text">
+                    {console.log("This is pregunta", pregunta)}
+                        <span className="card-title">{pregunta[lang]}</span>
+                        <p><b>{bText[lang].preguntas.detallesPregunta.descripcion}: </b>{pregunta.description}</p>
+                        <p><b>{bText[lang].preguntas.detallesPregunta.categoria}: </b>{categoria[pregunta.category]}</p>
+                        <p><b>{bText[lang].preguntas.detallesPregunta.plan_reaccion}: </b>{pregunta.reaction_plan}</p>
+                        <p><b>{bText[lang].preguntas.detallesPregunta.creado_por}: </b>{pregunta.createdBy}</p>
+                        <p><b>{bText[lang].preguntas.detallesPregunta.creado}: </b>{moment(pregunta.createdAt.toDate()).fromNow()}</p>
+                    </div>
+                    <div className="graph">
+                        <PreguntaGrafica count={count} />
+                        <div className="ver-respuestas">
+                            <button className="btn  blue lighten-1 z-depth-0" onClick={handleClickOpen}>{bText[lang].preguntas.detallesPregunta.ver_respuestas}</button>
                         </div>
                     </div>
-
-
                 </div>
+
                 <Dialog
                     open={open}
                     TransitionComponent={Transition}

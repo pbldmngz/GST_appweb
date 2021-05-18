@@ -150,12 +150,14 @@ class EditarAuditoria extends Component {
     var { path, pathName } = require("../../config/config");
     const text = require("../../config/language");
 
+    if (!auth.uid) return <Redirect to="/signin" />;
+
     const { auth, userLevel, lang } = this.props;
     if (!lang) return null;
 
     // console.log("this is lang: ", lang)
 
-    if (!auth.uid) return <Redirect to="/signin" />;
+    
     if (userLevel != 0) return <Redirect to="/" />;
 
     // console.log(this.state.preguntas)
@@ -324,9 +326,7 @@ class EditarAuditoria extends Component {
           </button>
         </div>
 
-        <button className="regreso">
-          <a href="/">{text[lang].return}</a>
-        </button>
+        <button className="return" onClick={() => { this.props.history.push("/") }}>{text[lang].return}</button>
       </div>
     );
   }

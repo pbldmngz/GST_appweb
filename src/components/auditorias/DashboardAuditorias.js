@@ -31,9 +31,10 @@ class DashboardAuditorias extends Component {
         
         const { auditorias, respuestas, auth, userLevel, lang } = this.props
         const text = require('../../config/language');
-        if (!lang) return null;
+        
 
         if (!auth.uid) return <Redirect to="/signin"/>
+        if (!lang) return null;
         // if (userLevel != 0) return <Redirect to="/" />
         // console.log("userLevel: ", userLevel)
         // console.log("respuestas", respuestas)
@@ -103,7 +104,7 @@ class DashboardAuditorias extends Component {
                         <div className="titulo">
                         </div>
                         {/*botonReturn*/}
-                        <button className="return"><a href="#">{text[lang].return}</a></button>
+                        <button className="return" onClick={() => {this.props.history.push("/")}}>{text[lang].return}</button>
                     </div>
                     <div className="">
                         <Auditorias

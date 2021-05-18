@@ -6,7 +6,8 @@ import CambiarIdioma from './CambiarIdioma'
 
 class Profile extends Component {
     render() {
-        const {profile} = this.props
+        const {profile, lang} = this.props
+        const bText = require("../../config/language");
         var { path } = require('../../config/config');
         // console.log("This is profile:", profile)
         return (
@@ -18,6 +19,7 @@ class Profile extends Component {
                         <Link to={path.change_password}>Cambiar contraseña</Link>
                     </center>
                 </div>
+                <button className="return" onClick={() => { this.props.history.push("/") }}>{bText[lang].return}</button>
             </div>
         )
     }
@@ -26,7 +28,8 @@ class Profile extends Component {
 const mapStateToProps = (state) => {
     //console.log(state)
     return {
-        profile: state.firebase.profile
+        profile: state.firebase.profile,
+        lang: state.firebase.profile.lang,
     }
 }
 
