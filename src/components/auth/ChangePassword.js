@@ -81,14 +81,18 @@ class ChangePassword extends Component {
     Exito = (e) => {
         // console.log(e)
         e.preventDefault();
-        this.handleSubmit(e);
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "password changed successfully",
-            showConfirmButton: false,
-            timer: 1500,
-          });
+        
+        if (this.handleSubmit.call) {
+            this.handleSubmit(e);
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "password changed successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+          } 
+      
       };
 
     render() {
