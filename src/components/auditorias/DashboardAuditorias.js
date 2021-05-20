@@ -7,6 +7,7 @@ import { Redirect } from 'react-router'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import Volver from '../util/Volver'
 
 // CSS class "container" centers content
 
@@ -86,25 +87,24 @@ class DashboardAuditorias extends Component {
                     <MenuItem value={2}>{text[lang].auditorias.dashboardAuditorias.mostrar_realizados}</MenuItem>
                 </Select>
         );
-        const botonReturn = (userLevel === 0) ? (
-            <div className="dashboard-extra-space">{text[lang].return}</div>
-        ): null;
+        // const botonReturn = (userLevel === 0) ? (
+        //     <div className="dashboard-extra-space">{text[lang].return}</div>
+        // ): null;
 
         if (filteredAuditorias) {
             return (
                 <div className="padre-padre-titulo">
                     <div className="padre-titulo">
                         <div className="titulo">
-                            <InputLabel id="select-filter">{text[lang].auditorias.dashboardAuditorias.vista}</InputLabel>
-                            {menuItems}
+                            <Volver/>
                         </div>
                         <div className="titulo">
                             <h2>{text[lang].auditorias.dashboardAuditorias.auditorias}</h2>
                         </div>
                         <div className="titulo">
+                            <InputLabel id="select-filter">{text[lang].auditorias.dashboardAuditorias.vista}</InputLabel>
+                            {menuItems}
                         </div>
-                        {/*botonReturn*/}
-                        <button className="return" onClick={() => {this.props.history.push("/")}}>{text[lang].return}</button>
                     </div>
                     <div className="">
                         <Auditorias

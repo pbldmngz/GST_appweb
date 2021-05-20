@@ -2,6 +2,7 @@ import React from 'react'
 import TarjetaPregunta from './TarjetaPregunta'
 import { Link, NavLink } from 'react-router-dom'
 import CambiarIdioma from '../util/CambiarIdioma'
+import Volver from '../util/Volver'
 
 export default function Preguntas(props) {
     var { path, pathName } = require('../../config/config');
@@ -14,15 +15,20 @@ export default function Preguntas(props) {
     return (
     <div className="padre-padre-titulo">
         <div className="padre-titulo">
+            
+                <div className="titulo">
+                    <Volver/>
+                </div>
+                <div className="titulo">
+                    <h2>Creación de preguntas</h2>
+                </div>
                 <div className="titulo">
                     <NavLink to={path.crear_pregunta}>
                         <button className="boton-arriba">New Question</button>
                     </NavLink>
                 </div>
 
-                <div className="titulo">
-                    <h2>Creación de preguntas</h2>
-                </div>
+                
 
                 <div className="titulo">
                 </div>

@@ -3,6 +3,8 @@ import { Redirect } from 'react-router';
 import { connect } from 'react-redux'
 import firebase from 'firebase'
 import { timeSaturday } from 'plotly.js-basic-dist';
+import Volver from '../util/Volver'
+
 require('firebase/auth')
 
 class ChangePassword extends Component {
@@ -94,7 +96,13 @@ class ChangePassword extends Component {
             <div className="">
                 <form className="" onSubmit={this.handleSubmit}>
                     <div className="padre-titulo">
+                    <div className="titulo">
+                        <Volver/>
+                    </div>
+                    <div className="titulo">
                         <h2 className="titulo">{bText[lang].auth.changePassword.cambiar_contrasena}</h2>
+                    </div>
+                        
                     </div>
                         <div className="tarjeta-password">
                             <div className="">
@@ -128,8 +136,6 @@ class ChangePassword extends Component {
                             </div>
                     </div>
                 </form>
-
-                <button className="return" onClick={() => { this.props.history.push("/") }}>{bText[lang].return}</button>
                 
             </div>
         )

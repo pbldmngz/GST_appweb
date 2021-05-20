@@ -6,6 +6,8 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import Swal from "sweetalert2";
+import Volver from '../util/Volver'
+
 class CrearPregunta extends Component {
   state = {
     category: 4,
@@ -63,7 +65,13 @@ class CrearPregunta extends Component {
     return (
       <div>
         <div className="padre-titulo">
-          <h2 className="titulo">Crear Pregunta</h2>
+          <div className="titulo">
+            <Volver/>
+          </div>
+          <div className="titulo">
+            <h2 className="titulo">Crear Pregunta</h2>
+          </div>
+          
         </div>
         <div className="tarjeta-crear-pregunta">
           <div className="center-box">

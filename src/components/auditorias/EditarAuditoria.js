@@ -19,6 +19,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import Slide from "@material-ui/core/Slide";
 import Swal from "sweetalert2";
+import Volver from '../util/Volver'
 //import DatePicker from 'react-datepicker/dist/react-datepicker'
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -150,9 +151,11 @@ class EditarAuditoria extends Component {
     var { path, pathName } = require("../../config/config");
     const text = require("../../config/language");
 
+    const { auth, userLevel, lang } = this.props;
+    
     if (!auth.uid) return <Redirect to="/signin" />;
 
-    const { auth, userLevel, lang } = this.props;
+    
     if (!lang) return null;
 
     // console.log("this is lang: ", lang)
@@ -164,11 +167,17 @@ class EditarAuditoria extends Component {
 
     return (
       <div className="">
-        <div className="cabecera">
-          <h2 className="">
-            {text[lang].auditorias.crearAuditoria.editar_auditoria}
-          </h2>
+        <div className="padre-titulo">
+          <div className="titulo">
+            <Volver/>
+          </div>
+          <div className="titulo">
+            <h2 className="">
+              {text[lang].auditorias.crearAuditoria.editar_auditoria}
+            </h2>
+          </div>
         </div>
+        
         <div className="box">
           <div className="crear-auditoria-views card">
             <form className="white" onSubmit={this.Seguro}>
@@ -198,6 +207,14 @@ class EditarAuditoria extends Component {
                   placeholder={this.state.area}
                   onChange={this.handleChange}
                 />
+              </div>
+              <div className="input-field">
+                  <input
+                    type="text"
+                    id="proceso"
+                    placeholder={text[lang].auditorias.crearAuditoria.proceso}
+                    onChange={this.handleChange}
+                  />
               </div>
               <div className="date-field">
                 <div className="date-container">

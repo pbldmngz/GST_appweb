@@ -16,6 +16,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import Slide from "@material-ui/core/Slide";
 import Swal from "sweetalert2";
+import Volver from '../util/Volver'
 //import DatePicker from 'react-datepicker/dist/react-datepicker'
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -133,43 +134,69 @@ class CrearAuditoria extends Component {
     return (
       <div className="padre-padre-titulo">
         <div className="padre-titulo">
-          <h2 className="titulo">
+        <div className="titulo">
+          <Volver/>
+        </div>
+        <div className="titulo">
+          <h2 className="">
             {text[lang].auditorias.crearAuditoria.crear_auditoria}
           </h2>
+        </div>
+          
         </div>
         <div className="">
           <div className="tarjeta-crear-auditoría">
             <div className="center-box">
               <form className="" onSubmit={this.Seguro}>
-                <div className="input-field">
-                  <input
-                    type="text"
-                    id="auditor"
-                    placeholder={text[lang].auditorias.crearAuditoria.auditor}
-                    onChange={this.handleChange}
-                  />
-                </div>
-                <div className="input-field">
-                  <input
-                    type="text"
-                    id="area"
-                    placeholder={text[lang].auditorias.crearAuditoria.area}
-                    onChange={this.handleChange}
-                  />
-                </div>
+                
                 <div className="date-field">
+                  <div className="input-field">
+                    <input
+                      type="text"
+                      id="auditor"
+                      placeholder={text[lang].auditorias.crearAuditoria.auditor}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div className="input-field">
+                    <input
+                      type="text"
+                      id="area"
+                      placeholder={text[lang].auditorias.crearAuditoria.area}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div className="input-field">
+                    <input
+                      type="text"
+                      id="proceso"
+                      placeholder={text[lang].auditorias.crearAuditoria.proceso}
+                      onChange={this.handleChange}
+                    />
+                  </div>
                   <div className="date-container">
-                    <div className="date">
-                      <span
-                        className="fecha"
-                        placeholder={
-                          text[lang].auditorias.crearAuditoria.termina_el
-                        }
-                      >
-                        {" "}
-                        y termina el{" "}
+
+                        <span className="fecha">
+                          {text[lang].auditorias.crearAuditoria.inicia_el}
+                        </span>
+                        <div className="datePicker-container">
+                          <DatePicker
+                          id="fecha_inicio"
+                          selected={this.state.fecha_inicio}
+                          onChange={(date) =>
+                            this.setState({
+                              fecha_inicio: date,
+                            })
+                          }
+                        />
+                        </div>
+                  
+                      <span className="fecha">
+                        {text[lang].auditorias.crearAuditoria.termina_el}
+                        {console.log(text[lang].auditorias.crearAuditoria.termina_el)}
                       </span>
-                      <DatePicker
+                      <div className="datePicker-container">
+                        <DatePicker
                         id="fecha_fin"
                         selected={this.state.fecha_fin}
                         onChange={(date) =>
@@ -178,21 +205,8 @@ class CrearAuditoria extends Component {
                           })
                         }
                       />
-                    </div>
-                    <div className="date">
-                      <span className="fecha">
-                        {text[lang].auditorias.crearAuditoria.inicia_el}
-                      </span>
-                      <DatePicker
-                        id="fecha_inicio"
-                        selected={this.state.fecha_inicio}
-                        onChange={(date) =>
-                          this.setState({
-                            fecha_inicio: date,
-                          })
-                        }
-                      />
-                    </div>
+                      </div>
+                    
                   </div>
                 </div>
               </form>
@@ -270,24 +284,22 @@ class CrearAuditoria extends Component {
           </div>
         </div>
       <div>
-        <div className="footer-padre-padre">
-            <div className="footer-padre"></div>
+
                 <div className="footer">
-                    <div className="width-botones-abajo">
+                    <div className="center-box">
                       <button className="cancelar" onClick={this.handleCancel}>
                         {text[lang].auditorias.crearAuditoria.cancelar}
                       </button>
                     </div>
-                    <div className="width-botones-abajo">
+                    <div className="center-box">
                       <button className="aceptar" onClick={this.Seguro}>
                         {text[lang].auditorias.crearAuditoria.crear}
                       </button>
                     </div>
                     </div>
                 </div>
-            </div>
 
-        <button className="return" onClick={() => { this.props.history.push("/") }}>{text[lang].return}</button>
+
         
       </div>
     );

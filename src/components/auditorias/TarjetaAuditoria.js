@@ -9,6 +9,9 @@ import { Link, NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
 import PopUp from "../util/PopUp";
 
+import { faTrashAlt, faEdit, faChartBar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 class TarjetaAuditoria extends Component {
 	render() {
 		var { path, pathName } = require("../../config/config");
@@ -63,31 +66,34 @@ class TarjetaAuditoria extends Component {
 			text = "D";
 			style = { backgroundColor: "#D5D8DC" };
 		}
-		<div className="a"></div>
+		// <div className="a"></div>
+
 		const graphOrWarn =
 			userLevel == 0 ? (
-				<div>
-					<i className="material-icons">analytics</i>
+				<div className="boton extra-margin-botones">
+					<FontAwesomeIcon icon={faChartBar} />
 				</div>
 			) : (
 				<div
 					style={{ backgroundColor: color }}
-					className="card-extra suavizar-borde"
+					className="suavizar-borde"
 				>
 					<p>{text}</p>
+					{/* {console.log("graphWarn", color)} */}
 				</div>
 			);
 
 		const botones =
 			userLevel == 0 ? (
 				<div className="button-group">
+					{graphOrWarn}
 					<Link to={path.editar_auditoria + "/" + auditoria.id}>
-						<div className="boton">
-							<i className="material-icons">edit</i>
+						<div className="boton extra-margin-botones">
+							<FontAwesomeIcon icon={faEdit} />
 						</div>
 					</Link>
 					<div
-						className="boton"
+						className="boton extra-margin-botones"
 						onClick={() => {
 							/*<PopUp></PopUp>
 								  this.props.deleteAuditoria(auditoria.id)*/
@@ -109,10 +115,10 @@ class TarjetaAuditoria extends Component {
 							//props.deletePregunta(pregunta.id)
 						}}
 					>
-						<i className="material-icons">delete</i>
+						<FontAwesomeIcon icon={faTrashAlt} />
 					</div>
 				</div>
-			) : null;
+			) : graphOrWarn;
 
 		moment.locale(bText[lang].locale);
 		// console.log(moment.locale("es"))
@@ -138,12 +144,9 @@ class TarjetaAuditoria extends Component {
 							: auditoria.auditoria}
 					</span>
 
-					{graphOrWarn}
 				</div>
 
-				<p>
-					{bText[lang].auditorias.tarjetaAuditoria.auditor}: {auditoria.auditor}
-				</p>
+				{bText[lang].auditorias.tarjetaAuditoria.auditor}: {auditoria.auditor}
 				{date}
 			</div>
 		);
@@ -155,10 +158,17 @@ class TarjetaAuditoria extends Component {
 		);
 
 		return (
-			<div style={style} className="tarjeta-auditoría" key={auditoria.id}>
-				{linked}
-				<div className="">{botones}</div>
-			</div>
+			// <div className="center-box">
+				<div style={style} className="tarjeta-auditoría" key={auditoria.id}>
+					<div className="tarjeta-auditoría-half1">
+						{linked}
+					</div>
+					<div className="tarjeta-auditoría-half2">
+						{botones}
+					</div>
+				</div>
+			// </div>
+			
 		);
 	}
 }

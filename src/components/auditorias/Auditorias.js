@@ -13,7 +13,6 @@ export default function Auditorias(props) {
 
     return (
     <div>
-            <div className="arroz-lil-brudah">_</div>
         <div className="arroz-chino">
         {/* Esto es muy mejorable */}
             {auditorias && auditorias.map(auditoria => {
@@ -26,7 +25,6 @@ export default function Auditorias(props) {
                 />
             })}
         </div>
-        <div className="arroz-lil-brudah2">_</div>
     </div>
     )
 }

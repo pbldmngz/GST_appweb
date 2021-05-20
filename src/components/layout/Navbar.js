@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom'
 import SignedInLinks from './SignedInLinks'
 import SignedOutLinks from './SignedOutLinks'
 import {connect} from 'react-redux'
+
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+
 //<div className=""> ==> <div className="container"> to center
 const Navbar = (props) => {
     var { path } = require('../../config/config');
@@ -10,13 +15,14 @@ const Navbar = (props) => {
     const links = auth.uid ? <SignedInLinks /> : <SignedOutLinks />;
     const initials = auth.uid ? profile.initials : "GST";
     //<Link to="/" className="brand-logo"> para centrarlo
+
     return (
         <nav className="navbar">
             <ul>
-                <div className="">
+                <div className="navbar-list">
                     <div className="perfil">
                         <Link to={path.profile} className="center-box">
-                            <li><div className="">{initials}</div></li>
+                            <FontAwesomeIcon icon={faUser} />
                         </Link>
                     </div>
                     

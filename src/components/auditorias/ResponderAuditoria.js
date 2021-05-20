@@ -17,6 +17,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import TextField from "@material-ui/core/TextField";
 import Swal from "sweetalert2";
 import PopUp from "../util/PopUp";
+import Volver from '../util/Volver'
 //import DatePicker from 'react-datepicker/dist/react-datepicker'
 
 //Esta madre no sirve, adáptenlo
@@ -170,10 +171,20 @@ class ResponderAuditoria extends Component {
                         return <p>{pregunta}</p>})} */}
         </div>
         <div className="card x-depth-0">
+          <div className="padre-titulo">
+            <div className="titulo">
+                <Volver/>
+            </div>
+            <div className="titulo">
+                <h2>{text[lang].auditorias.responderAuditoria.responder_auditoria}</h2>
+            </div>
+            <div className="titulo">
+
+            </div>
+          </div>
+
           <form className="white section" onSubmit={this.Seguro}>
-            <h5 className="grey-text text-darken-3 center">
-              {text[lang].auditorias.responderAuditoria.responder_auditoria}
-            </h5>
+            
             {/* Esto se puede convertir a un operador ? : para que muestre un cargando o algo así */}
             {/* {console.log("esto es preguntaSSS", this.state.preguntas)} */}
 
@@ -181,7 +192,7 @@ class ResponderAuditoria extends Component {
             {this.state.preguntas &&
               this.state.preguntas.map((pregunta) => {
                 return (
-                  <div className="myspan pregunta container" key={pregunta.id}>
+                  <div className="extra-margin tarjeta-pregunta" key={pregunta.id}>
                     {/* card x-depth-0 para ver los limites fácilmente*/}
                     <FormControl className="width100" component="fieldset">
                       {/* {console.log("antes de que truene, esto es pregunta", pregunta)} */}
@@ -189,7 +200,7 @@ class ResponderAuditoria extends Component {
                         className="legend-pregunta grey-text text-darken-3"
                         component="legend"
                       >
-                        {pregunta[lang]}
+                        <h3>{pregunta[lang]}</h3>
                       </FormLabel>
                       <div className="campos">
                         <TextField
@@ -227,7 +238,7 @@ class ResponderAuditoria extends Component {
                   </div>
                 );
               })}
-            <div className="center">
+            <div className="center-box">
               <button
                 id="Enviar"
                 className="btn blue lighten-1 z-depth-0 big-button"
@@ -237,7 +248,7 @@ class ResponderAuditoria extends Component {
             </div>
           </form>
         </div>
-        <button className="return" onClick={() => { this.props.history.push("/") }}>{text[lang].return}</button>
+        
       </div>
     );
   }
