@@ -25,6 +25,13 @@ class ChangePassword extends Component {
             user.updatePassword(newPassword).then(() => {
                 console.log("Password updated!");
                 this.props.history.push('/')
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "password changed successfully",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
             }).catch((error) => { 
                 console.log(error); 
             });
@@ -78,22 +85,7 @@ class ChangePassword extends Component {
             authError: null
         })
     }
-    Exito = (e) => {
-        // console.log(e)
-        e.preventDefault();
-        
-        if (this.handleSubmit.call) {
-            this.handleSubmit(e);
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "password changed successfully",
-                showConfirmButton: false,
-                timer: 1500,
-              });
-          } 
-      
-      };
+    
 
     render() {
         
@@ -107,7 +99,7 @@ class ChangePassword extends Component {
 
         return (
             <div className="">
-                <form className="" onSubmit={this.Exito}>
+                <form className="" onSubmit={this.handleSubmit}>
                     <div className="cabecera">
                         <h2 className="title">{bText[lang].auth.changePassword.cambiar_contrasena}</h2>
                     </div>
