@@ -989,3 +989,6 @@ input{
   float: right;
 }
 
+.red-text {
+  color: #ec407a !important;
+}

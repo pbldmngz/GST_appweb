@@ -96,7 +96,7 @@ class ChangePassword extends Component {
             <div className="">
                 <div className="padre-titulo">
                     <div className="titulo">
-                        <Volver />
+                        <Volver where="/profile"/>
                     </div>
                     <div className="titulo">
                         <h2 className="titulo">{bText[lang].auth.changePassword.cambiar_contrasena}</h2>

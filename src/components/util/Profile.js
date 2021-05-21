@@ -9,7 +9,7 @@ import Volver from '../util/Volver'
 
 class Profile extends Component {
     render() {
-        const {profile, lang, auth} = this.props
+        const {profile, userLevel, lang, auth} = this.props
         const bText = require("../../config/language");
         var { path } = require('../../config/config');
         // console.log("This is profile:", profile)
@@ -35,9 +35,17 @@ class Profile extends Component {
                             <div className="input-field center-box">
                                 <Link to={path.change_password}>Cambiar contraseña###</Link>
                             </div>
-                            <div className="input-field center-box">
-                                <Link to={path.sign_up}>Registrar auditor###</Link>
-                            </div>
+                            {(userLevel === 0) ? (
+                                <div>
+                                    <div className="input-field center-box">
+                                        <Link to={path.sign_up}>Registrar auditor###</Link>
+                                    </div>
+                                    <div className="input-field center-box">
+                                        <Link to={path.preguntas}>Preguntas###</Link>
+                                    </div>
+                                </div>
+                                
+                            ) : null}
                         </div>
                     </div>
                 </div>
@@ -51,6 +59,7 @@ const mapStateToProps = (state) => {
     return {
         profile: state.firebase.profile,
         lang: state.firebase.profile.lang,
+        userLevel: state.firebase.profile.userLevel,
         auth: state.firebase.auth,
     }
 }

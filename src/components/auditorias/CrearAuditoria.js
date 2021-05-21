@@ -250,6 +250,7 @@ class CrearAuditoria extends Component {
 											to="/crear-pregunta"
 											target="_blank"
 											rel="noopener noreferrer"
+											className="red-text"
 										>
 											{text[lang].auditorias.crearAuditoria.text2}
 										</Link>
