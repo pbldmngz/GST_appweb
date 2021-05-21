@@ -24,7 +24,7 @@ lang.spanish = {
             text2: " crea una pregunta nueva, ",
             text3: "una vez creada la podrás seleccionar en esta lista.",
             crear: "Crear",
-            edit: "Editar",
+            editar: "Guardar",
         },
         dashboardAuditorias: {
             ordenar_fecha: "Ordenar por fecha",
@@ -65,10 +65,18 @@ lang.spanish = {
             cancelar: "Cancelar",
         },
         signIn: {
-
+            correo: "Correo",
+            contrasena: "Contraseña",
+            iniciar_sesion: "Iniciar sesión",
         },
         signUp: {
-
+            registrar: "Registrar",
+            correo: "Correo",
+            contrasena: "Contraseña",
+            nombre: "Nombre",
+            apellido: "Apellidos",
+            capa: "Capa",
+            registrar_auditor: "Registrar auditor",
         },
     },
     layout: {
@@ -88,19 +96,21 @@ lang.spanish = {
             pregunta: "Pregunta",
             descripcion: "Descripción",
             plan_reaccion: "Plan de reacción",
-            categoria: "Categoría",
+            categoria: "Capa",
             crear: "Crear",
+            editar: "Guardar",
+            editar_pregunta: "Editar pregunta",
         },
         dashboardPregunta: {
 
         },
         detallesPregunta: {
             descripcion: "Descripción",
-            categoria: "Categoría",
+            categoria: "Capa",
             plan_reaccion: "Plan de reacción",
             creado_por: "Creado por",
             creado: "Creado",
-            ver_respuestas: "Ver respuestas",
+            ver_respuestas: "Respuestas",
         },
         detallesPreguntaIndividual: {
 
@@ -108,14 +118,6 @@ lang.spanish = {
         detallesPreguntasAuditoria: {
             respuestas_auditoria: "Respuestas de la auditoría",
 
-        },
-        editarPregunta: {
-            editar_pregunta: "Editar pregunta",
-            pregunta: "Pregunta",
-            descripcion: "Descripción",
-            plan_reaccion: "Plan de reacción",
-            categoria: "Categoría",
-            editar: "Editar",
         },
         preguntaGrafica: {
 
@@ -153,7 +155,7 @@ lang.english = {
             text2: " create a new question, ",
             text3: "once created, you will find it within this list.",
             crear: "Create",
-            editar: "Edit",
+            editar: "Save",
         },
         dashboardAuditorias: {
             ordenar_fecha: "Order by date",
@@ -194,10 +196,18 @@ lang.english = {
             cancelar: "Cancel",
         },
         signIn: {
-
+            correo: "E-mail",
+            contrasena: "Password",
+            iniciar_sesion: "Log In",
         },
         signUp: {
-
+            registrar_auditor: "Register auditor",
+            correo: "E-mail",
+            contrasena: "Password",
+            nombre: "First name",
+            apellido: "Last name",
+            capa: "Layer",
+            registrar: "Register",
         },
     },
     layout: {
@@ -214,31 +224,30 @@ lang.english = {
     preguntas: {
         crearPregunta: {
             crear_pregunta: "Create question",
+            editar_pregunta: "Edit question",
             pregunta: "Question",
             descripcion: "Description",
             plan_reaccion: "Reaction plan",
-            categoria: "Category",
+            categoria: "Layer",
             crear: "Create",
+            editar: "Save",
         },
         dashboardPregunta: {
 
         },
         detallesPregunta: {
             descripcion: "Description",
-            categoria: "Category",
+            categoria: "Layer",
             plan_reaccion: "Reaction plan",
             creado_por: "Created by",
             creado: "Created",
-            ver_respuestas: "See answers",
+            ver_respuestas: "Answers",
         },
         detallesPreguntaIndividual: {
 
         },
         detallesPreguntasAuditoria: {
             respuestas_auditoria: "Audit answers",
-
-        },
-        editarPregunta: {
 
         },
         preguntaGrafica: {

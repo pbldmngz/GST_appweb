@@ -67,11 +67,18 @@ class TarjetaAuditoria extends Component {
 			style = { backgroundColor: "#D5D8DC" };
 		}
 		// <div className="a"></div>
+		const refLink =
+			userLevel === 0
+				? path.detalles_preguntas_auditoria
+				: path.responder_auditoria;
 
 		const graphOrWarn =
 			userLevel == 0 ? (
 				<div className="boton extra-margin-botones">
-					<FontAwesomeIcon icon={faChartBar} />
+					<Link to={path.detalles_preguntas_auditoria + "/" + auditoria.id}>
+						<FontAwesomeIcon icon={faChartBar} />
+					</Link>
+					
 				</div>
 			) : (
 				<div
@@ -128,10 +135,7 @@ class TarjetaAuditoria extends Component {
 				{moment(auditoria.fecha_fin.toDate()).fromNow()}
 			</p>
 		) : null;
-		const refLink =
-			userLevel === 0
-				? path.detalles_preguntas_auditoria
-				: path.responder_auditoria;
+		
 
 		const content = (
 			<div className="">
@@ -157,19 +161,31 @@ class TarjetaAuditoria extends Component {
 			<Link to={refLink + "/" + auditoria.id}>{content}</Link>
 		);
 
-		return (
-			// <div className="center-box">
-				<div style={style} className="tarjeta-auditoría" key={auditoria.id}>
-					<div className="tarjeta-auditoría-half1">
-						{linked}
-					</div>
-					<div className="tarjeta-auditoría-half2">
-						{botones}
-					</div>
+		const contentParent = (userLevel === 0) ? (
+			<div style={style} className="tarjeta-auditoría">
+				<div className="tarjeta-auditoría-half1">
+					{content}
 				</div>
-			// </div>
-			
+				<div className="tarjeta-auditoría-half2">
+					{botones}
+				</div>
+			</div>
+		) : (
+			<Link 
+				className="tarjeta-auditoría"
+				style={style}
+				to={path.responder_auditoria + "/" + auditoria.id}
+			>
+				<div className="tarjeta-auditoría-half1">
+					{content}
+				</div>
+				<div className="tarjeta-auditoría-half2">
+					{botones}
+				</div>
+			</Link>
 		);
+
+		return contentParent;
 	}
 }
 

@@ -21,19 +21,19 @@ class ChangePassword extends Component {
         // https://www.npmjs.com/package/react-csv
 
         this.reauthenticate(currentPassword)
-        .then(() => {
-            var user = firebase.auth().currentUser;
-            user.updatePassword(newPassword).then(() => {
-                console.log("Password updated!");
-                this.props.history.push('/')
-            }).catch((error) => { 
-                console.log(error); 
+            .then(() => {
+                var user = firebase.auth().currentUser;
+                user.updatePassword(newPassword).then(() => {
+                    console.log("Password updated!");
+                    this.props.history.push('/')
+                }).catch((error) => {
+                    console.log(error);
+                });
+            }).catch((error) => {
+                this.setState({
+                    authError: error
+                })
             });
-        }).catch((error) => {
-            this.setState({
-                authError: error
-            })
-        });
     }
     changeEmail = (currentPassword, newEmail) => {
         this.reauthenticate(currentPassword).then(() => {
@@ -70,7 +70,7 @@ class ChangePassword extends Component {
             // console.log("se tiró un error", this.state.authError)
         }
     }
-    
+
     componentWillMount() {
         this.setState({
             currentPassword: "",
@@ -81,8 +81,8 @@ class ChangePassword extends Component {
     }
 
     render() {
-        
-        const {auth, lang} = this.props
+
+        const { auth, lang } = this.props
         const bText = require('../../config/language');
         if (!auth.uid) return <Redirect to="/signin" />
 
@@ -90,53 +90,80 @@ class ChangePassword extends Component {
 
         // console.log("Rednder State", this.state)
 
-        
+
 
         return (
             <div className="">
-                <form className="" onSubmit={this.handleSubmit}>
-                    <div className="padre-titulo">
+                <div className="padre-titulo">
                     <div className="titulo">
-                        <Volver/>
+                        <Volver />
                     </div>
                     <div className="titulo">
                         <h2 className="titulo">{bText[lang].auth.changePassword.cambiar_contrasena}</h2>
                     </div>
-                        
-                    </div>
-                        <div className="tarjeta-password">
-                            <div className="">
-                                <div className="input-field">
-                                    <input type="password" id='currentPassword' name='currentPassword'
-                                    placeholder={bText[lang].auth.changePassword.contrasena_actual} onChange={this.handleChange} />
-                                </div>
-                                <div className="input-field">
-                                    <input type="password" id='newPassword' name='newPassword'
-                                    placeholder={bText[lang].auth.changePassword.contrasena_nueva} onChange={this.handleChange} />
-                                </div>
-                                <div className="input-field">
-                                <input type="password" id='newPasswordConfirm' name='newPasswordConfirm' 
-                                placeholder={bText[lang].auth.changePassword.repite_contrasena} onChange={this.handleChange} />
-                                </div>
-                            </div>
-                        </div>
 
-                    <div className="footer-padre-padre">
-                        <div className="footer-padre"></div>
-                            <div className="footer">
-                            <div className="width-botones-abajo">
-                                <button className="cancelar">{bText[lang].auth.changePassword.cancelar}</button>
+                </div>
+
+                <div className="form-1">
+                    <div className="">
+                        <form className="" onSubmit={this.handleSubmit}>
+
+                            <div className="form-2">
+                                <div className="input-field">
+                                    <input 
+                                        type="password" 
+                                        id='currentPassword' 
+                                        name='currentPassword'
+                                        placeholder={bText[lang].auth.changePassword.contrasena_actual}
+                                        onChange={this.handleChange} 
+                                    />
+                                </div>
+                                <div className="input-field">
+                                    <input
+                                        type="password"
+                                        id='newPassword'
+                                        name='newPassword'
+                                        placeholder={bText[lang].auth.changePassword.contrasena_nueva}
+                                        onChange={this.handleChange} 
+                                    />
+                                </div>
+                                <div className="input-field">
+                                    <input
+                                        type="password"
+                                        id='newPasswordConfirm'
+                                        name='newPasswordConfirm'
+                                        placeholder={bText[lang].auth.changePassword.repite_contrasena}
+                                        onChange={this.handleChange} 
+                                    />
+                                </div>
                             </div>
-                            <div className="width-botones-abajo">
-                                <button className="aceptar">{bText[lang].auth.changePassword.aceptar}</button>
-                            </div>
-                            </div>
-                            <div className="">
-                                {this.state.authError ? <p>{this.state.authError.message}</p> : null}
-                            </div>
+
+                        </form>
                     </div>
-                </form>
-                
+                </div>
+
+
+
+                <div className="footer">
+                    <div className="center-box">
+                        <button className="cancelar" onClick={() => {
+                            this.props.history.push("/")
+                        }}>
+                            {bText[lang].auth.changePassword.cancelar}
+                        </button>
+                    </div>
+                    <div className="center-box">
+                        <button className="aceptar" onClick={this.handleSubmit}>
+                            {bText[lang].auth.changePassword.aceptar}
+                        </button>
+                    </div>
+                </div>
+
+                <div className="footer-single">
+                    {this.state.authError ? <p>{this.state.authError.message}</p> : null}
+                </div>
+
+
             </div>
         )
     }

@@ -26,10 +26,20 @@ class Profile extends Component {
                             <h2>{profile.firstName + " " + profile.lastName}</h2>
                         </div>
                     </div>
-                    <center>
-                        <div>Idioma: <CambiarIdioma/></div>
-                        <Link to={path.change_password}>Cambiar contraseña</Link>
-                    </center>
+
+                    <div className="form-1">
+                        <div className="form-2">
+                            <div className="input-field center-box">
+                                Idioma###: <CambiarIdioma/>
+                            </div>
+                            <div className="input-field center-box">
+                                <Link to={path.change_password}>Cambiar contraseña###</Link>
+                            </div>
+                            <div className="input-field center-box">
+                                <Link to={path.sign_up}>Registrar auditor###</Link>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

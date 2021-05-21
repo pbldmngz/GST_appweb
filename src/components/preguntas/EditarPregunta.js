@@ -6,6 +6,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import Swal from "sweetalert2";
+import Volver from '../util/Volver'
 
 class EditarPregunta extends Component {
   state = {
@@ -80,78 +81,88 @@ class EditarPregunta extends Component {
     
 
     return (
-      <div className="container">
-        <form className="white" onSubmit={this.Seguro}>
-          <h5 className="grey-text text-darken-3">
-            {bText[lang].preguntas.editarPregunta.editar_pregunta}
-          </h5>
-          <div className="">
-            <label htmlFor="lang.english">
-              {bText[lang].preguntas.editarPregunta.pregunta}[EN]
-            </label>
-            <input
-              type="text"
-              id="english"
-              value={this.state.english}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="">
-            <label htmlFor="lang.english">
-              {bText[lang].preguntas.editarPregunta.pregunta}[ES]
-            </label>
-            <input
-              type="text"
-              id="english"
-              value={this.state.spanish}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="">
-            <label htmlFor="descripcion">
-              {bText[lang].preguntas.editarPregunta.descripcion}
-            </label>
-            <input
-              type="text"
-              id="description"
-              value={this.state.description}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="">
-            <label htmlFor="action_plan">
-              {bText[lang].preguntas.editarPregunta.plan_reaccion}
-            </label>
-            <input
-              type="text"
-              id="reaction_plan"
-              value={this.state.reaction_plan}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="">
-            <InputLabel id="select-level">
-              {bText[lang].preguntas.editarPregunta.categoria}
-            </InputLabel>
-            <Select
-              labelId="select-level"
-              id="level"
-              value={this.state.category}
-              onChange={this.handleChangeSelect}
-            >
-              <MenuItem value={4}>D</MenuItem>
-              <MenuItem value={3}>C</MenuItem>
-              <MenuItem value={2}>B</MenuItem>
-              <MenuItem value={1}>A</MenuItem>
-            </Select>
-          </div>
+      <div>
+				<div className="padre-titulo">
+					<div className="titulo">
+						<Volver where="/preguntas"/>
+					</div>
+					<div className="titulo">
+						<h2 className="titulo">
+							{bText[lang].preguntas.crearPregunta.editar_pregunta}
+						</h2>
+					</div>
 
-          <button className="btn blue lighten-1 z-depth-0">
-            {bText[lang].preguntas.editarPregunta.editar}
-          </button>
-        </form>
-        <button className="return" onClick={() => { this.props.history.push("/") }}>{bText[lang].return}</button>
-      </div>
+				</div>
+				<div className="form-1">
+					<div className="">
+						<form className="" onSubmit={this.Seguro}>
+							<div className="form-2">
+								<div className="input-field">
+									<input
+                    type="text"
+                    id="english"
+                    value={this.state.english}
+                    placeholder={bText[lang].preguntas.crearPregunta.crear_pregunta + " [EN]"}
+                    onChange={this.handleChange}
+                  />
+								</div>
+								<div className="input-field">
+									<input
+                    type="text"
+                    id="spanish"
+                    value={this.state.spanish}
+                    placeholder={bText[lang].preguntas.crearPregunta.crear_pregunta + " [ES]"}
+                    onChange={this.handleChange}
+                  />
+								</div>
+								<div className="input-field">
+									<input
+                    type="text"
+                    id="description"
+                    value={this.state.description}
+                    placeholder={bText[lang].preguntas.crearPregunta.descripcion}
+                    onChange={this.handleChange}
+                  />
+								</div>
+								<div className="input-field">
+									<input
+										type="text"
+										id="reaction_plan"
+                    value={this.state.reaction_plan}
+										placeholder={bText[lang].preguntas.crearPregunta.plan_reaccion}
+										onChange={this.handleChange}
+									/>
+								</div>
+								<div className="center-box">
+									<div className="footer-single-flex">
+										<InputLabel id="select-level">
+											{bText[lang].preguntas.crearPregunta.categoria}
+										</InputLabel>
+										<Select
+											labelId="select-level"
+											id="level"
+											value={this.state.category}
+											onChange={this.handleChangeSelect}
+											style={{width: `${100}px`}}
+										>
+											<MenuItem value={4}>D</MenuItem>
+											<MenuItem value={3}>C</MenuItem>
+											<MenuItem value={2}>B</MenuItem>
+											<MenuItem value={1}>A</MenuItem>
+										</Select>
+									</div>
+								</div>
+							</div>
+							
+						</form>
+					</div>
+				</div>
+				<div className="footer-single">
+					<button className="aceptar" onClick={this.Seguro}>
+						{bText[lang].preguntas.crearPregunta.editar}
+					</button>
+				</div>
+			</div>
     );
   }
 }

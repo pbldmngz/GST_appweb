@@ -21,19 +21,35 @@ const DetallesPregunta = (props) => {
         2: "B",
         3: "C",
         4: "D",
-        5: "E",
     }
     if (pregunta) {
         return (
-            <div className="container">
-                <div className="card-content card x-depth-0 grey-text text-darken-3 main-container">
-                    <div className="container card-cont">
-                            <span className="card-title">{pregunta.english}</span>
-                            <p>Descripción: {pregunta.description}</p>
-                            <p>Categoría: {categoria[pregunta.category]}</p>
-                            <p>Plan de reacción: {pregunta.reaction_plan}</p>
-                            <p>Creado por: {pregunta.createdBy}</p>
-                            <p>Creado: {moment(pregunta.createdAt.toDate()).fromNow()}</p>
+            <div className="">
+                <div className="form-1">
+                    <div className="form-2">
+                            <div className="input-field">
+                                <span className="card-title">{pregunta.english}</span>
+                            </div>
+                            <div className="input-field">
+                                <p>Descripción: {pregunta.description}</p>
+                            </div>
+                            <div className="input-field">
+                                <p>Categoría: {categoria[pregunta.category]}</p>
+                            </div>
+                            <div className="input-field">
+                                <p>Plan de reacción: {pregunta.reaction_plan}</p>
+                            </div>
+                            <div className="input-field">
+                                <p>Creado por: {pregunta.createdBy}</p>
+                            </div>
+                            <div className="input-field">
+                                <p>Creado: {moment(pregunta.createdAt.toDate()).fromNow()}</p>
+                            </div>
+                            
+                            
+                            
+                            
+                            
                     </div>
                 </div>
                 

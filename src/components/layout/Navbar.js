@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom'
 import SignedInLinks from './SignedInLinks'
 import SignedOutLinks from './SignedOutLinks'
 import {connect} from 'react-redux'
+import { NavLink } from 'react-router-dom';
 
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import {signOut} from '../../store/actions/authActions'
+
+import { faUser, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
@@ -14,24 +17,52 @@ const Navbar = (props) => {
     const {auth, profile} = props
     const links = auth.uid ? <SignedInLinks /> : <SignedOutLinks />;
     const initials = auth.uid ? profile.initials : "GST";
-    //<Link to="/" className="brand-logo"> para centrarlo
 
     return (
-        <nav className="navbar">
-            <ul>
-                <div className="navbar-list">
-                    <div className="perfil">
-                        <Link to={path.profile} className="center-box">
-                            <FontAwesomeIcon icon={faUser} />
-                        </Link>
-                    </div>
-                    
-                    <div className="options"><li>{links}</li></div>
+        <div className="padre-titulo nav">
+        {/* <ul> */}
+            <div className="titulo">
+                <div className="perfil">
+                    <Link to={path.profile} className="center-box">
+                        <FontAwesomeIcon icon={faUser} />
+                    </Link>
                 </div>
-            </ul>
-        </nav>
+            </div>
+            <div className="titulo">
+                <div className="">
+                    <NavLink to={path.auditorias} className="">
+                        <b>Global Safety Textiles</b>
+                    </NavLink>
+                </div>
+            </div>
+            <div className="titulo">
+                <div className="imout hover-cursor" onClick={() => {
+                    props.signOut();
+                }}>
+                    <FontAwesomeIcon icon={faSignOutAlt} />
+                </div>
+                
+                
+            </div>
+            {/* </ul> */}
+        </div>
     )
 }
+
+{/* <nav className="navbar">
+            <ul>
+                        
+                <div className="navbar-links">
+                    <div className="navbar-list">
+                        
+                        
+
+                        <div className="options"><li>{links}</li></div>
+
+                    </div>
+                </div>
+            </ul>
+        </nav> */}
 
 const mapStateToProps = (state) => {
     return {
@@ -40,4 +71,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Navbar);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signOut: () => dispatch(signOut())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

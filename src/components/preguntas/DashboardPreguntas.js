@@ -5,6 +5,10 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router'
 import { deletePregunta, editPregunta } from '../../store/actions/preguntaActions'
+
+import { Link, NavLink } from 'react-router-dom'
+import CambiarIdioma from '../util/CambiarIdioma'
+import Volver from '../util/Volver'
 // CSS class "container" centers content
 
 // Para cuando se esté creado una auditoría debería 
@@ -16,6 +20,7 @@ import { deletePregunta, editPregunta } from '../../store/actions/preguntaAction
 class DashboardPreguntas extends Component {
     render() {
         const { preguntas, auth, userLevel, lang } = this.props
+        var { path, pathName } = require('../../config/config');
         // console.log(userLevel)
         const bText = require("../../config/language");
 
@@ -24,14 +29,30 @@ class DashboardPreguntas extends Component {
 
         if (preguntas){
             return (
-                <div className="dashboard container">
-                    <Preguntas 
-                        preguntas={preguntas} 
-                        editPregunta={this.props.editPregunta} 
-                        deletePregunta={this.props.deletePregunta}
-                        userLevel={userLevel}
-                        lang={lang}
-                    />
+                <div className="padre-padre-titulo">
+                    <div className="padre-titulo">
+                        <div className="titulo">
+                            <Volver/>
+                        </div>
+                        <div className="titulo">
+                            <h2>Creación de preguntas</h2>
+                        </div>
+                        {/* <div className="titulo">
+                            <NavLink to={path.crear_pregunta}>
+                                <button className="boton-arriba">New Question</button>
+                            </NavLink>
+                        </div> */}
+                    </div>
+                    <div className="">
+                        <Preguntas 
+                            preguntas={preguntas} 
+                            editPregunta={this.props.editPregunta} 
+                            deletePregunta={this.props.deletePregunta}
+                            userLevel={userLevel}
+                            lang={lang}
+                        />
+                    </div>
+                    
                     <button className="return" onClick={() => { this.props.history.push("/") }}>{bText[lang].return}</button>
                 </div>
             )

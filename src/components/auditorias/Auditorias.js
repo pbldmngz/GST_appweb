@@ -3,6 +3,7 @@ import TarjetaAuditoria from './TarjetaAuditoria'
 import {Link} from 'react-router-dom'
 
 import CambiarIdioma from '../util/CambiarIdioma'
+import TarjetaAgregarAuditoria from './TarjetaAgregarAuditoria'
 
 export default function Auditorias(props) {
     const { userLevel, auditorias, alreadyDone, lang } = props
@@ -15,14 +16,19 @@ export default function Auditorias(props) {
     <div>
         <div className="arroz-chino">
         {/* Esto es muy mejorable */}
+            {(userLevel === 0) ? <TarjetaAgregarAuditoria/> : null}
             {auditorias && auditorias.map(auditoria => {
                 
-                return <TarjetaAuditoria
-                    auditoria={auditoria}
-                    userLevel={userLevel}
-                    alreadyDone={alreadyDone}
-                    lang={lang}
-                />
+                return (
+                    <div key={auditoria.id}>
+                        <TarjetaAuditoria
+                            auditoria={auditoria}
+                            userLevel={userLevel}
+                            alreadyDone={alreadyDone}
+                            lang={lang}
+                        />
+                    </div>
+                )
             })}
         </div>
     </div>

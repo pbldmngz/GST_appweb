@@ -6,6 +6,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import Logo_GST from '../../styles/imgs/Logo-GST.png'
+import Volver from '../util/Volver'
 
 class SignUp extends Component {
     state = {
@@ -36,52 +37,77 @@ class SignUp extends Component {
     }
 
     render() {
-        const { auth, authError, userLevel } = this.props;
+        const { auth, authError, lang, userLevel } = this.props;
+        
 
         if (!auth.uid) return <Redirect to="/signin" />
         if (userLevel && userLevel !==0) return <Redirect to="/" />
 
+        const bText = require('../../config/language');
 
         return (
-            
-            <div className="container extra-margin">
+            <div className="">
+                <div className="padre-titulo">
+                    <div className="titulo">
+                        <Volver where="/profile"/>
+                    </div>
+                    <div className="titulo">
+                        <h2 className="titulo">{bText[lang].auth.signUp.registrar_auditor}</h2>
+                    </div>
 
-                <form className="Sgup" onSubmit={this.handleSubmit}>
-                    <div className="email">
-                
-                        <label htmlFor="email"></label>
-                        <input type="email" id='email' placeholder="Email" onChange={this.handleChange} />
+                </div>
+                <div className="form-1">
+                    <div className="form-2">
+                        <form className="" onSubmit={this.handleSubmit}>
+                            <div className="date-container">
+                                <div className="input-field-1-2">
+                                    <label htmlFor="firstName"></label>
+                                    <input type="text" id='firstName' placeholder={bText[lang].auth.signUp.nombre} onChange={this.handleChange} />
+                                </div>
+                                {/* <i class="lname"></i> */}
+                                <div className="input-field-3-4">
+                                    <label htmlFor="lastName"></label>
+                                    <input type="text" id='lastName' placeholder={bText[lang].auth.signUp.apellido} onChange={this.handleChange} />
+                                </div>
+                            </div>
+                            
+                            <div className="input-field">
+                                <label htmlFor="email"></label>
+                                <input type="email" id='email' placeholder={bText[lang].auth.signUp.correo} onChange={this.handleChange} />
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="password"></label>
+                                <input type="password" id='password' placeholder={bText[lang].auth.signUp.contrasena} onChange={this.handleChange} />
+                            </div>
+                            <div className="center-box">
+                                <div className="footer-single-flex">
+                                    <InputLabel id="select-level">{bText[lang].auth.signUp.capa}</InputLabel>
+                                    <Select
+                                        labelId="select-level"
+                                        id="level"
+                                        value={this.state.level}
+                                        onChange={this.handleChangeSelect}
+                                        style={{width: `${100}px`}}
+                                    >
+                                        <MenuItem value={4}>A</MenuItem>
+                                        <MenuItem value={3}>B</MenuItem>
+                                        <MenuItem value={2}>C</MenuItem>
+                                        <MenuItem value={1}>D</MenuItem>
+                                        <MenuItem value={0}>Admin</MenuItem>
+                                    </Select>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div className="passing">
-                        <label htmlFor="password"></label>
-                        <input type="password" id='password' placeholder="Password"onChange={this.handleChange} />
-                    </div>
-                    <div className="fname">
-                        <label htmlFor="firstName"></label>
-                        <input type="text" id='firstName' placeholder="First Name"onChange={this.handleChange} />
-                    </div>
-                    <i class="lname"></i>
-                    <div className="lastname">
-                        <label htmlFor="lastName"></label>
-                        <input type="text" id='lastName' placeholder="Last Name" onChange={this.handleChange} />
-                    </div>
-                    <div className="Level">
-                        <InputLabel id="select-level">Level</InputLabel>
-                        <Select labelId="select-level" id="level" value={this.state.level} onChange={this.handleChangeSelect}>
-                            <MenuItem value={4}>D</MenuItem>
-                            <MenuItem value={3}>C</MenuItem>
-                            <MenuItem value={2}>B</MenuItem>
-                            <MenuItem value={1}>A</MenuItem>
-                            <MenuItem value={0}>Admin</MenuItem>
-                        </Select>
-                    </div>
-                    <button className="Sign">Sign Up</button>
-                    <div className="center red-text">
-                        {authError ? <p>{authError}</p> : null}
-                    </div>
-                    
-                </form>
+                </div>
+                <div className="footer-single">
+                    <button className="add-question">{bText[lang].auth.signUp.registrar}</button>
+                </div>
+                <div className="footer-single">
+                    {authError ? <p>{authError}</p> : null}
+                </div>
             </div>
+            
         )
     }
 }
@@ -90,7 +116,8 @@ const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
         userLevel: state.firebase.profile.userLevel,
-        authError: state.auth.authError
+        authError: state.auth.authError,
+        lang: state.firebase.profile.lang,
     }
 }
 

@@ -59,20 +59,19 @@ const DetallesPregunta = (props) => {
         2: "B",
         3: "C",
         4: "D",
-        5: "E",
     }
 
     // console.log("Esto son la respuestas:", justificaciones)
     // const pregunta = {}
     // const preguntaRespuestas = [] //Array de diccionarios
-    console.log("count:", open)
+    // console.log("count:", open)
     // { console.log("login pregunta --> DePre", pregunta) }
     if (pregunta.createdAt) {
         return (
             <div className="container">
                 <div className="detalles-pregunta">
-                    <div className="detalles-pregunta-text">
-                    {console.log("This is pregunta", pregunta)}
+                    <div className="input-field">
+                        {/* {console.log("This is pregunta", pregunta)} */}
                         <span className="card-title">{pregunta[lang]}</span>
                         <p><b>{bText[lang].preguntas.detallesPregunta.descripcion}: </b>{pregunta.description}</p>
                         <p><b>{bText[lang].preguntas.detallesPregunta.categoria}: </b>{categoria[pregunta.category]}</p>
@@ -80,10 +79,10 @@ const DetallesPregunta = (props) => {
                         <p><b>{bText[lang].preguntas.detallesPregunta.creado_por}: </b>{pregunta.createdBy}</p>
                         <p><b>{bText[lang].preguntas.detallesPregunta.creado}: </b>{moment(pregunta.createdAt.toDate()).fromNow()}</p>
                     </div>
-                    <div className="graph">
+                    <div className="footer-single">
                         <PreguntaGrafica count={count} />
-                        <div className="ver-respuestas">
-                            <button className="btn  blue lighten-1 z-depth-0" onClick={handleClickOpen}>{bText[lang].preguntas.detallesPregunta.ver_respuestas}</button>
+                        <div className="">
+                            <button className="aceptar responder" onClick={handleClickOpen}>{bText[lang].preguntas.detallesPregunta.ver_respuestas}</button>
                         </div>
                     </div>
                 </div>

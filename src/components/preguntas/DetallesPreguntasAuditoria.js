@@ -14,6 +14,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import TextField from '@material-ui/core/TextField';
 import "react-datepicker/dist/react-datepicker.css";
 import DetallesPregunta from './DetallesPregunta';
+import Volver from '../util/Volver'
 
 class DetallesPreguntasAuditoria extends Component {
     state = {
@@ -21,7 +22,7 @@ class DetallesPreguntasAuditoria extends Component {
         auditoria: ""
     }
 
-    UNSAFE_componentWillMount() {
+    componentDidMount() {
         const id = this.props.match.params.id
         this.setState({
             auditoria: id
@@ -47,13 +48,19 @@ class DetallesPreguntasAuditoria extends Component {
         if (!lang) return null;
         
         return (
-            <div className="container extra-margin">
-                <div className="card x-depth-0 detalles-preguntas-auditoria">
-                    <h5 className="grey-text text-darken-3 center">{bText[lang].preguntas.detallesPreguntasAuditoria.respuestas_auditoria}</h5>
-                        {/* Esto se puede convertir a un operador ? : para que muestre un cargando o algo así */}
-                        {/* {console.log("esto es preguntaSSS", this.state.preguntas)} */}
-
-                        {/* Ponganle una animación al height para que en el momento que cargue vaya de 0% a 100%*/}
+            <div className="">
+                <div className="padre-titulo">
+                    <div className="titulo">
+                        <Volver/>
+                    </div>
+                    <div className="titulo">
+                        <h2 className="">
+                            {bText[lang].preguntas.detallesPreguntasAuditoria.respuestas_auditoria}
+                        </h2>
+                    </div>
+                </div>
+                <div className="form-1 white">
+                    <div className="form-2">
                         {this.state.preguntas && this.state.preguntas.map(pregunta => {
                             return (
                                 <div className="" key={pregunta.id}>
@@ -62,8 +69,9 @@ class DetallesPreguntasAuditoria extends Component {
                                 </div>
                             )
                         })}
+                    </div>
                 </div>
-                <button className="return" onClick={() => { this.props.history.push("/") }}>{bText[lang].return}</button>
+
             </div>
         )
     }

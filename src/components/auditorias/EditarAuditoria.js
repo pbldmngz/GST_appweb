@@ -166,125 +166,109 @@ class EditarAuditoria extends Component {
     // console.log(this.state.preguntas)
 
     return (
-      <div className="">
+      <div className="padre-padre-titulo">
         <div className="padre-titulo">
-          <div className="titulo">
-            <Volver/>
-          </div>
-          <div className="titulo">
-            <h2 className="">
-              {text[lang].auditorias.crearAuditoria.editar_auditoria}
-            </h2>
-          </div>
+        <div className="titulo">
+          <Volver/>
         </div>
-        
-        <div className="box">
-          <div className="crear-auditoria-views card">
-            <form className="white" onSubmit={this.Seguro}>
-              <h5 className="grey-text text-darken-3">
-                {text[lang].auditorias.crearAuditoria.editar_auditoria}
-              </h5>
-              <div className="input-field">
-                <input
-                  type="text"
-                  id="auditoria"
-                  placeholder={this.state.auditoria}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="input-field">
-                <input
-                  type="text"
-                  id="auditor"
-                  placeholder={this.state.auditor}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="input-field">
-                <input
-                  type="text"
-                  id="area"
-                  placeholder={this.state.area}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="input-field">
-                  <input
-                    type="text"
-                    id="proceso"
-                    placeholder={text[lang].auditorias.crearAuditoria.proceso}
-                    onChange={this.handleChange}
-                  />
-              </div>
-              <div className="date-field">
-                <div className="date-container">
-                  <div className="date">
-                    <span
-                      className=""
-                      placeholder={
-                        text[lang].auditorias.crearAuditoria.termina_el
-                      }
-                    >
-                      {" "}
-                      y termina el{" "}
-                    </span>
-                    <DatePicker
-                      id="fecha_fin"
-                      selected={this.state.fecha_fin}
-                      onChange={(date) =>
-                        this.setState({
-                          fecha_fin: date,
-                        })
-                      }
+        <div className="titulo">
+          <h2 className="">
+            {text[lang].auditorias.crearAuditoria.editar_auditoria}
+          </h2>
+        </div>
+          
+        </div>
+        <div className="">
+          <div className="form-1">
+            <div className="">
+              <form className="" onSubmit={this.Seguro}>
+                
+                <div className="form-2">
+                  <div className="input-field">
+                    <input
+                      type="text"
+                      id="auditor"
+                      placeholder={text[lang].auditorias.crearAuditoria.auditor}
+                      onChange={this.handleChange}
                     />
                   </div>
-                  <div className="date">
-                    <span className="grey-text">
-                      {text[lang].auditorias.crearAuditoria.inicia_el}
-                    </span>
-                    <DatePicker
-                      id="fecha_inicio"
-                      selected={this.state.fecha_inicio}
-                      onChange={(date) =>
-                        this.setState({
-                          fecha_inicio: date,
-                        })
-                      }
+                  <div className="input-field">
+                    <input
+                      type="text"
+                      id="area"
+                      placeholder={text[lang].auditorias.crearAuditoria.area}
+                      onChange={this.handleChange}
                     />
+                  </div>
+                  <div className="input-field">
+                    <input
+                      type="text"
+                      id="proceso"
+                      placeholder={text[lang].auditorias.crearAuditoria.proceso}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div className="date-container">
+
+                        <span className="fecha">
+                          {text[lang].auditorias.crearAuditoria.inicia_el}
+                        </span>
+                        <div className="datePicker-container">
+                          <DatePicker
+                          id="fecha_inicio"
+                          selected={this.state.fecha_inicio}
+                          onChange={(date) =>
+                            this.setState({
+                              fecha_inicio: date,
+                            })
+                          }
+                        />
+                        </div>
+                  
+                      <span className="fecha">
+                        {text[lang].auditorias.crearAuditoria.termina_el}
+                        {console.log(text[lang].auditorias.crearAuditoria.termina_el)}
+                      </span>
+                      <div className="datePicker-container">
+                        <DatePicker
+                        id="fecha_fin"
+                        selected={this.state.fecha_fin}
+                        onChange={(date) =>
+                          this.setState({
+                            fecha_fin: date,
+                          })
+                        }
+                      />
+                      </div>
+                    
                   </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
-          <div className="agregar-pregunta card crear-auditoria-views destroy-overflow">
-            <div className="white">
-              <h5 className="grey-text text-darken-3">Agregar preguntas</h5>
-              <div className="preguntas-creadas">
+          <div className="center-box">
+            <div className="">
+              <div className="">
                 {this.state.preguntas &&
                   this.state.preguntas.map((pregunta, index) => {
                     return (
-                      <div className="grid-main" key={index}>
-                        <div className="grid-component-left card">
+                      <div className="" key={index}>
+                        <div className="">
                           {index + 1}. {pregunta[lang]}
                         </div>
                         <div
-                          className="grid-component-right card hover-click"
+                          className=""
                           onClick={() => {
                             this.handleDelete(pregunta.id);
                           }}
                         >
-                          <i className="material-icons">delete</i>
+                          <i className="material-icons">Delete</i>
                         </div>
                       </div>
                     );
                   })}
               </div>
-              <button
-                className="btn-floating btn-small waves-effect waves-light blue button-margin"
-                onClick={this.handleClickOpen}
-              >
-                <i className="material-icons">add</i>
-              </button>
+              <button className="add-question" onClick={this.handleClickOpen}>Agregar pregunta</button>
               <Dialog
                 open={this.state.openB}
                 onClose={this.handleClose}
@@ -333,17 +317,21 @@ class EditarAuditoria extends Component {
             </div>
           </div>
         </div>
+      <div>
 
-        <div className="botones">
-          <button className="cancel" onClick={this.handleCancel}>
-            {text[lang].auditorias.crearAuditoria.cancelar}
-          </button>
-          <button className="aceptar" onClick={this.Seguro}>
-            {text[lang].auditorias.crearAuditoria.crear}
-          </button>
-        </div>
-
-        <button className="return" onClick={() => { this.props.history.push("/") }}>{text[lang].return}</button>
+                <div className="footer">
+                    <div className="center-box">
+                      <button className="cancelar" onClick={this.handleCancel}>
+                        {text[lang].auditorias.crearAuditoria.cancelar}
+                      </button>
+                    </div>
+                    <div className="center-box">
+                      <button className="aceptar" onClick={this.Seguro}>
+                        {text[lang].auditorias.crearAuditoria.editar}
+                      </button>
+                    </div>
+                    </div>
+                </div>
       </div>
     );
   }

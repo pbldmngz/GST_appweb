@@ -31,33 +31,48 @@ class SignIn extends Component {
     render() {
         const {authError, auth} = this.props;
 
+        const lang = "spanish"
+
+        const bText = require('../../config/language');
+
         if (auth.uid) return <Redirect to="/" />
         
         return (
             
-            <div className="container">
-                <div className="login-container">
-                    <img className="logo" src={Logo_GST} alt="gst logo"></img>
+            <div className="">
+                <div className="padre-titulo">
+                    <div className="titulo">
+                        {/* <Volver /> */}
+                    </div>
+                    <div className="titulo">
+                        {/* <h2 className="titulo">##########</h2> */}
+                        <img className="logo" src={Logo_GST} alt="gst logo"></img>
+                    </div>
 
-                    <form className="upl" onSubmit={this.handleSubmit}>
-
-                        <div className="username">
-                            <label className="uname" htmlFor="email"></label>
-                            <input type="email" id='email' placeholder="Email" onChange={this.handleChange} />
-                        </div>
-                        <div className="password">
-                            <label htmlFor="password"></label>
-                            <input type="password" id='password' placeholder="Password" onChange={this.handleChange} />
-                        </div>
-                        <div className="Login">
-                            <button className="Log">Login</button>
-                            <i class="boton2"></i>
-                            <div className="center red-text">
-                                {authError ? <p>{authError}</p> : null}
-                            </div>
-                        </div>
-                    </form>
                 </div>
+                <div className="form-1 white">
+                    <div className="form-2">
+                        <form className="" onSubmit={this.handleSubmit}>
+
+                            <div className="input-field">
+                                <label className="uname" htmlFor="email"></label>
+                                <input type="email" id='email' placeholder={bText[lang].auth.signIn.correo} onChange={this.handleChange} />
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="password"></label>
+                                <input type="password" id='password' placeholder={bText[lang].auth.signIn.contrasena} onChange={this.handleChange} />
+                            </div>
+
+                        </form>
+                        <div className="footer-single">
+                            <button className="add-question" onClick={this.handleSubmit}>{bText[lang].auth.signIn.iniciar_sesion}</button>
+                        </div>
+                        <div className="footer-single">
+                            {authError ? <p>{authError}</p> : null}
+                        </div>
+                    </div>
+                </div>
+
             </div>
         )
     }
