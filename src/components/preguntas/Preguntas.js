@@ -16,9 +16,10 @@ export default function Preguntas(props) {
 
     return (
         <div className="">
-            <div className="center-box">
-                <TarjetaAgregarPregunta/>
-            </div>
+            <div className="preguntas">
+
+            <TarjetaAgregarPregunta/>
+
             {preguntas && preguntas.map(pregunta => {
                 return (
                     <div key={pregunta.id}>
@@ -32,6 +33,7 @@ export default function Preguntas(props) {
                     </div>
                 )
             })}
+            </div>
         </div>
     )
 }

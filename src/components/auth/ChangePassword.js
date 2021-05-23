@@ -94,8 +94,8 @@ class ChangePassword extends Component {
 
         return (
             <div className="">
-                <div className="padre-titulo">
-                    <div className="titulo">
+                <div className="padre-titulo mobile">
+                    <div className="titulo destroy-on-mobile">
                         <Volver where="/profile"/>
                     </div>
                     <div className="titulo">
@@ -147,7 +147,7 @@ class ChangePassword extends Component {
                 <div className="footer">
                     <div className="center-box">
                         <button className="cancelar" onClick={() => {
-                            this.props.history.push("/")
+                            this.props.history.push("/profile")
                         }}>
                             {bText[lang].auth.changePassword.cancelar}
                         </button>

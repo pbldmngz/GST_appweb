@@ -7,6 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import Logo_GST from '../../styles/imgs/Logo-GST.png'
 import Volver from '../util/Volver'
+import Swal from "sweetalert2";
 
 class SignUp extends Component {
     state = {
@@ -15,7 +16,7 @@ class SignUp extends Component {
         firstName: '',
         lastName: '',
         level: 4,
-        lang: "spanish",
+        lang: "english",
     }
     handleChange = (e) => {
         // console.log(e)
@@ -34,21 +35,44 @@ class SignUp extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.signUp(this.state)
+        this.props.history.push("/profile")
     }
+
+    Seguro = (e) => {
+		// console.log(e)
+		e.preventDefault();
+		Swal.fire({
+			title: "Do you want to save the changes?",
+			showDenyButton: true,
+			showCancelButton: false,
+			confirmButtonText: "Save",
+			denyButtonText: "Don't save",
+		}).then((result) => {
+			//  Read more about isConfirmed, isDenied below
+			if (result.isConfirmed) {
+				this.handleSubmit(e);
+				Swal.fire("Saved!", "", "success");
+			} else if (result.isDenied) {
+				Swal.fire("Changes are not saved", "", "info");
+			}
+		});
+	};
 
     render() {
         const { auth, authError, lang, userLevel } = this.props;
         
 
-        if (!auth.uid) return <Redirect to="/signin" />
+        if (!auth.uid) return <Redirect to="/" />
         if (userLevel && userLevel !==0) return <Redirect to="/" />
 
         const bText = require('../../config/language');
 
+        if (!lang) return null;
+
         return (
             <div className="">
-                <div className="padre-titulo">
-                    <div className="titulo">
+                <div className="padre-titulo mobile">
+                    <div className="titulo destroy-on-mobile">
                         <Volver where="/profile"/>
                     </div>
                     <div className="titulo">
@@ -58,26 +82,58 @@ class SignUp extends Component {
                 </div>
                 <div className="form-1">
                     <div className="form-2">
-                        <form className="" onSubmit={this.handleSubmit}>
+                        <form className="" onSubmit={this.Seguro}>
                             <div className="date-container">
                                 <div className="input-field-1-2">
                                     <label htmlFor="firstName"></label>
-                                    <input type="text" id='firstName' placeholder={bText[lang].auth.signUp.nombre} onChange={this.handleChange} />
+                                    <input
+                                        autoComplete="off"
+                                        autoCorrect="off"
+                                        spellCheck="off"
+                                        type="text"
+                                        id='firstName'
+                                        placeholder={bText[lang].auth.signUp.nombre}
+                                        onChange={this.handleChange}
+                                    />
                                 </div>
                                 {/* <i class="lname"></i> */}
                                 <div className="input-field-3-4">
                                     <label htmlFor="lastName"></label>
-                                    <input type="text" id='lastName' placeholder={bText[lang].auth.signUp.apellido} onChange={this.handleChange} />
+                                    <input
+                                        autoComplete="off"
+                                        autoCorrect="off"
+                                        spellCheck="off"
+                                        type="text"
+                                        id='lastName'
+                                        placeholder={bText[lang].auth.signUp.apellido}
+                                        onChange={this.handleChange} 
+                                    />
                                 </div>
                             </div>
                             
                             <div className="input-field">
                                 <label htmlFor="email"></label>
-                                <input type="email" id='email' placeholder={bText[lang].auth.signUp.correo} onChange={this.handleChange} />
+                                <input
+                                    autoComplete="off"
+                                    autoCorrect="off"
+                                    spellCheck="off"
+                                    type="email"
+                                    id='email'
+                                    placeholder={bText[lang].auth.signUp.correo}
+                                    onChange={this.handleChange}
+                                />
                             </div>
                             <div className="input-field">
                                 <label htmlFor="password"></label>
-                                <input type="password" id='password' placeholder={bText[lang].auth.signUp.contrasena} onChange={this.handleChange} />
+                                <input 
+                                    autoComplete="off"
+                                    autoCorrect="off"
+                                    spellCheck="off"
+                                    type="text"
+                                    id='password'
+                                    placeholder={bText[lang].auth.signUp.contrasena}
+                                    onChange={this.handleChange} 
+                                />
                             </div>
                             <div className="center-box">
                                 <div className="footer-single-flex">
@@ -100,8 +156,10 @@ class SignUp extends Component {
                         </form>
                     </div>
                 </div>
-                <div className="footer-single">
-                    <button className="add-question">{bText[lang].auth.signUp.registrar}</button>
+                <div className="footer-single margin-top">
+                    <button 
+                        onClick={this.Seguro}
+                        className="add-question">{bText[lang].auth.signUp.registrar}</button>
                 </div>
                 <div className="footer-single">
                     {authError ? <p>{authError}</p> : null}

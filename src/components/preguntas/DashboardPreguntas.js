@@ -27,12 +27,14 @@ class DashboardPreguntas extends Component {
         if (!auth.uid) return <Redirect to="/signin" />
         if (userLevel != 0) return <Redirect to="/" />
 
+        if (!lang) return null;
+
         if (preguntas){
             return (
                 <div className="padre-padre-titulo">
-                    <div className="padre-titulo">
-                        <div className="titulo">
-                            <Volver/>
+                    <div className="padre-titulo mobile">
+                        <div className="titulo destroy-on-mobile">
+                            <Volver where="/profile"/>
                         </div>
                         <div className="titulo">
                             <h2>Creación de preguntas</h2>
@@ -53,7 +55,6 @@ class DashboardPreguntas extends Component {
                         />
                     </div>
                     
-                    <button className="return" onClick={() => { this.props.history.push("/") }}>{bText[lang].return}</button>
                 </div>
             )
         } else {

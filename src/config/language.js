@@ -128,6 +128,13 @@ lang.spanish = {
         tarjetaPregunta: {
 
         }
+    },
+    opciones: {
+        opciones: "Opciones",
+        idioma: "Idioma",
+        cambiar_contrasena: "Cambiar contraseña",
+        registrar_auditor: "Registrar nuevo auditor",
+        preguntas: "Preguntas",
     }
 }
 
@@ -259,6 +266,13 @@ lang.english = {
         tarjetaPregunta: {
 
         }
+    },
+    opciones: {
+        opciones: "Settings",
+        idioma: "Language",
+        cambiar_contrasena: "Change password",
+        registrar_auditor: "Register new auditor",
+        preguntas: "Questions",
     }
 }
 

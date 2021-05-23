@@ -19,33 +19,34 @@ const Navbar = (props) => {
     const initials = auth.uid ? profile.initials : "GST";
 
     return (
-        <div className="padre-titulo nav">
-        {/* <ul> */}
-            <div className="titulo">
-                <div className="perfil">
-                    <Link to={path.profile} className="center-box">
-                        <FontAwesomeIcon icon={faUser} />
-                    </Link>
+        auth.uid ? (
+            <div className="padre-titulo nav">
+            {/* <ul> */}
+                <div className="titulo">
+                    <div className="perfil">
+                        <Link to={path.profile} className="center-box">
+                            <FontAwesomeIcon icon={faUser} />
+                        </Link>
+                    </div>
                 </div>
-            </div>
-            <div className="titulo">
-                <div className="">
-                    <NavLink to={path.auditorias} className="">
-                        <b>Global Safety Textiles</b>
-                    </NavLink>
-                </div>
-            </div>
-            <div className="titulo">
-                <div className="imout hover-cursor" onClick={() => {
-                    props.signOut();
-                }}>
-                    <FontAwesomeIcon icon={faSignOutAlt} />
+
+                <div className="titulo">
+                    <div className="">
+                        <NavLink to={path.auditorias} className="">
+                            <b>Global Safety Textiles</b>
+                        </NavLink>
+                    </div>
                 </div>
                 
-                
+                <div className="titulo">
+                    <div className="imout hover-cursor" onClick={() => {
+                        props.signOut();
+                    }}>
+                        <FontAwesomeIcon icon={faSignOutAlt} />
+                    </div>
+                </div>
             </div>
-            {/* </ul> */}
-        </div>
+        ) : null
     )
 }
 

@@ -24,6 +24,9 @@ import Volver from '../util/Volver'
 
 import "react-datepicker/dist/react-datepicker.css";
 
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -33,6 +36,7 @@ class EditarAuditoria extends Component {
     auditoria: "",
     auditor: "",
     area: "",
+    proceso: "",
     fecha_inicio: new Date(),
     fecha_fin: new Date(),
     preguntas: [],
@@ -65,6 +69,7 @@ class EditarAuditoria extends Component {
       auditoria: this.state.auditoria,
       auditor: this.state.auditor,
       area: this.state.area,
+      proceso: this.state.proceso,
       fecha_inicio: this.state.fecha_inicio,
       fecha_fin: this.state.fecha_fin,
       preguntas: this.state.preguntas.map((pre) => {
@@ -88,6 +93,7 @@ class EditarAuditoria extends Component {
         auditoria: res.auditoria,
         auditor: res.auditor,
         area: res.area,
+        proceso: res.proceso,
         fecha_inicio: res.fecha_inicio.toDate(),
         fecha_fin: res.fecha_fin.toDate(),
         preguntas: res.preguntas.map((pre) => {
@@ -167,8 +173,8 @@ class EditarAuditoria extends Component {
 
     return (
       <div className="padre-padre-titulo">
-        <div className="padre-titulo">
-        <div className="titulo">
+        <div className="padre-titulo mobile">
+        <div className="titulo destroy-on-mobile">
           <Volver/>
         </div>
         <div className="titulo">
@@ -188,6 +194,7 @@ class EditarAuditoria extends Component {
                     <input
                       type="text"
                       id="auditor"
+                      value={this.state.auditor}
                       placeholder={text[lang].auditorias.crearAuditoria.auditor}
                       onChange={this.handleChange}
                     />
@@ -196,6 +203,7 @@ class EditarAuditoria extends Component {
                     <input
                       type="text"
                       id="area"
+                      value={this.state.area}
                       placeholder={text[lang].auditorias.crearAuditoria.area}
                       onChange={this.handleChange}
                     />
@@ -204,6 +212,7 @@ class EditarAuditoria extends Component {
                     <input
                       type="text"
                       id="proceso"
+                      value={this.state.proceso}
                       placeholder={text[lang].auditorias.crearAuditoria.proceso}
                       onChange={this.handleChange}
                     />
@@ -227,7 +236,6 @@ class EditarAuditoria extends Component {
                   
                       <span className="fecha">
                         {text[lang].auditorias.crearAuditoria.termina_el}
-                        {console.log(text[lang].auditorias.crearAuditoria.termina_el)}
                       </span>
                       <div className="datePicker-container">
                         <DatePicker
@@ -246,78 +254,88 @@ class EditarAuditoria extends Component {
               </form>
             </div>
           </div>
-          <div className="center-box">
-            <div className="">
-              <div className="">
-                {this.state.preguntas &&
-                  this.state.preguntas.map((pregunta, index) => {
-                    return (
-                      <div className="" key={index}>
-                        <div className="">
-                          {index + 1}. {pregunta[lang]}
-                        </div>
-                        <div
-                          className=""
-                          onClick={() => {
-                            this.handleDelete(pregunta.id);
-                          }}
-                        >
-                          <i className="material-icons">Delete</i>
-                        </div>
-                      </div>
-                    );
-                  })}
-              </div>
-              <button className="add-question" onClick={this.handleClickOpen}>Agregar pregunta</button>
-              <Dialog
-                open={this.state.openB}
-                onClose={this.handleClose}
-                aria-labelledby="form-dialog-title"
-                TransitionComponent={Transition}
-              >
-                <DialogTitle id="form-dialog-title">
-                  {text[lang].auditorias.crearAuditoria.seleccionar_pregunta}
-                </DialogTitle>
-                <DialogContent>
-                  <DialogContentText>
-                    {text[lang].auditorias.crearAuditoria.text1}
-                    <Link
-                      to="/crear-pregunta"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {text[lang].auditorias.crearAuditoria.text2}
-                    </Link>
-                    {text[lang].auditorias.crearAuditoria.text3}
-                  </DialogContentText>
-                  <Autocomplete
-                    id="valueB"
-                    name="valueB"
-                    options={this.props.preguntas}
-                    onChange={this.handleChangeAutocomplete}
-                    getOptionLabel={(option) => option[lang]}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Preguntas"
-                        variant="outlined"
-                      />
-                    )}
-                  />
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={this.handleCloseSave} color="primary">
-                    {text[lang].auditorias.crearAuditoria.agregar}
-                  </Button>
-                  <Button onClick={this.handleClose} color="secondary">
-                    {text[lang].auditorias.crearAuditoria.cancelar}
-                  </Button>
-                </DialogActions>
-              </Dialog>
-            </div>
-          </div>
-        </div>
-      <div>
+          <div className="">
+						<div className="">
+							<div className="margin-bottom">
+								{this.state.preguntas &&
+									this.state.preguntas.map((pregunta, index) => {
+										return (
+											<div className="form-1 overwrite-margin" key={index}>
+												<div className="nueva-pregunta">
+													<div className="nueva-pregunta-index">
+														{index + 1}.
+													</div>
+
+													<div className="nueva-pregunta-main">
+														{pregunta[lang]}
+													</div>
+
+													<div
+														className="nueva-pregunta-delete"
+														onClick={() => {
+															this.handleDelete(pregunta.id);
+														}}
+													>
+														<FontAwesomeIcon icon={faTrashAlt} />
+													</div>
+												</div>
+											</div>
+										);
+									})}
+							</div>
+							
+							<Dialog
+								open={this.state.openB}
+								onClose={this.handleClose}
+								aria-labelledby="form-dialog-title"
+								TransitionComponent={Transition}
+							>
+								<DialogTitle id="form-dialog-title">
+									{text[lang].auditorias.crearAuditoria.seleccionar_pregunta}
+								</DialogTitle>
+								<DialogContent>
+									<DialogContentText>
+										{text[lang].auditorias.crearAuditoria.text1}
+										<Link
+											to="/crear-pregunta"
+											target="_blank"
+											rel="noopener noreferrer"
+											className="red-text"
+										>
+											{text[lang].auditorias.crearAuditoria.text2}
+										</Link>
+										{text[lang].auditorias.crearAuditoria.text3}
+									</DialogContentText>
+									<Autocomplete
+										id="valueB"
+										name="valueB"
+										options={this.props.preguntas}
+										onChange={this.handleChangeAutocomplete}
+										getOptionLabel={(option) => option[lang]}
+										renderInput={(params) => (
+											<TextField
+												{...params}
+												label="Preguntas"
+												variant="outlined"
+											/>
+										)}
+									/>
+								</DialogContent>
+								<DialogActions>
+									<Button onClick={this.handleCloseSave} color="primary">
+										{text[lang].auditorias.crearAuditoria.agregar}
+									</Button>
+									<Button onClick={this.handleClose} color="secondary">
+										{text[lang].auditorias.crearAuditoria.cancelar}
+									</Button>
+								</DialogActions>
+							</Dialog>
+						</div>
+					</div>
+
+				<div className="footer-single">
+					<button className="add-question" onClick={this.handleClickOpen}>Agregar pregunta</button>
+				</div>
 
                 <div className="footer">
                     <div className="center-box">

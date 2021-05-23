@@ -94,8 +94,8 @@ class DashboardAuditorias extends Component {
         if (filteredAuditorias) {
             return (
                 <div className="padre-padre-titulo">
-                    <div className="padre-titulo">
-                        <div className="titulo">
+                    <div className="padre-titulo mobile">
+                        <div className="titulo destroy-on-mobile">
                             <Volver/>
                         </div>
                         <div className="titulo">

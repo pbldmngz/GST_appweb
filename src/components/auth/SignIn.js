@@ -27,6 +27,12 @@ class SignIn extends Component {
         e.preventDefault();
         this.props.signIn(this.state)
     }
+
+    listenEnter = (event) => {
+        if (event.keyCode === 13) {
+            this.handleSubmit(event)
+        }
+    }
     
     render() {
         const {authError, auth} = this.props;
@@ -50,29 +56,35 @@ class SignIn extends Component {
                     </div>
 
                 </div>
-                <div className="form-1 white">
-                    <div className="form-2">
-                        <form className="" onSubmit={this.handleSubmit}>
 
-                            <div className="input-field">
-                                <label className="uname" htmlFor="email"></label>
-                                <input type="email" id='email' placeholder={bText[lang].auth.signIn.correo} onChange={this.handleChange} />
-                            </div>
-                            <div className="input-field">
-                                <label htmlFor="password"></label>
-                                <input type="password" id='password' placeholder={bText[lang].auth.signIn.contrasena} onChange={this.handleChange} />
-                            </div>
+                <form className="" onSubmit={this.handleSubmit}>
+                    <div className="form-1 white">
+                        <div className="form-2">
+                            
 
-                        </form>
-                        <div className="footer-single">
-                            <button className="add-question" onClick={this.handleSubmit}>{bText[lang].auth.signIn.iniciar_sesion}</button>
+                                <div className="input-field">
+                                    <label className="uname" htmlFor="email"></label>
+                                    <input onKeyDown={(e) => this.listenEnter(e)} type="email" id='email' placeholder={bText[lang].auth.signIn.correo} onChange={this.handleChange} />
+                                </div>
+                                <div className="input-field">
+                                    <label htmlFor="password"></label>
+                                    <input onKeyDown={(e) => this.listenEnter(e)} type="password" id='password' placeholder={bText[lang].auth.signIn.contrasena} onChange={this.handleChange} />
+                                </div>
+
+                            
+
                         </div>
                         <div className="footer-single">
                             {authError ? <p>{authError}</p> : null}
                         </div>
+                        <div className="footer-single">
+                            <button 
+                                className="add-question"
+                                >{bText[lang].auth.signIn.iniciar_sesion}</button>
+                        </div>
+                        
                     </div>
-                </div>
-
+                </form>
             </div>
         )
     }

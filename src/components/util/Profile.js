@@ -15,34 +15,39 @@ class Profile extends Component {
         // console.log("This is profile:", profile)
         if (!auth.uid) return <Redirect to="/signin"/>
 
+        if (!lang) return null;
+
         return (
             <div>
                 <div className="box">
-                    <div className="padre-titulo">
-                        <div className="titulo">
+                    <div className="padre-titulo mobile">
+                        <div className="titulo destroy-on-mobile">
                             <Volver/>
                         </div>
                         <div className="titulo">
-                            <h2>{profile.firstName + " " + profile.lastName}</h2>
+                            <h2>{bText[lang].opciones.opciones}</h2>
                         </div>
                     </div>
 
-                    <div className="form-1">
-                        <div className="form-2">
-                            <div className="input-field center-box">
-                                Idioma###: <CambiarIdioma/>
+                    <div className="">
+                        <div className="">
+                            <div className="form-1 overwrite-margin center-box default-height">
+                                {bText[lang].opciones.idioma + ":"} <CambiarIdioma/>
                             </div>
-                            <div className="input-field center-box">
-                                <Link to={path.change_password}>Cambiar contraseña###</Link>
-                            </div>
+                            <Link
+                                className="form-1 overwrite-margin center-box default-height" 
+                                to={path.change_password}>{bText[lang].opciones.cambiar_contrasena}
+                            </Link>
                             {(userLevel === 0) ? (
                                 <div>
-                                    <div className="input-field center-box">
-                                        <Link to={path.sign_up}>Registrar auditor###</Link>
-                                    </div>
-                                    <div className="input-field center-box">
-                                        <Link to={path.preguntas}>Preguntas###</Link>
-                                    </div>
+                                        <Link
+                                            className="form-1 overwrite-margin center-box default-height"
+                                            to={path.sign_up}>{bText[lang].opciones.registrar_auditor}
+                                        </Link>
+                                        <Link
+                                            className="form-1 overwrite-margin center-box default-height" 
+                                            to={path.preguntas}>{bText[lang].opciones.preguntas}
+                                        </Link>
                                 </div>
                                 
                             ) : null}

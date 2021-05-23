@@ -22,7 +22,13 @@ class CambiarIdioma extends Component {
     render() {
         // console.log(this.props)
         return (
-            <Select labelId="select-filter" id="filter" value={this.state.lang} onChange={this.handleChange}>
+            <Select
+                labelId="select-filter"
+                id="filter"
+                value={this.state.lang}
+                onChange={this.handleChange}
+                style={{marginLeft: `${10}px`}}
+            >
                 <MenuItem value={"english"}>English</MenuItem>
                 <MenuItem value={"spanish"}>Español</MenuItem>
             </Select>

@@ -21,6 +21,9 @@ import Volver from '../util/Volver'
 
 import "react-datepicker/dist/react-datepicker.css";
 
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -30,6 +33,7 @@ class CrearAuditoria extends Component {
 		auditoria: "",
 		auditor: "",
 		area: "",
+		proceso: "",
 		fecha_inicio: new Date(),
 		fecha_fin: new Date(),
 		preguntas: [],
@@ -56,6 +60,7 @@ class CrearAuditoria extends Component {
 			auditoria: this.state.auditoria,
 			auditor: this.state.auditor,
 			area: this.state.area,
+			proceso: this.state.proceso,
 			fecha_inicio: this.state.fecha_inicio,
 			fecha_fin: this.state.fecha_fin,
 			preguntas: this.state.preguntas.map((pre) => {
@@ -133,8 +138,8 @@ class CrearAuditoria extends Component {
 
 		return (
 			<div className="">
-				<div className="padre-titulo">
-					<div className="titulo">
+				<div className="padre-titulo mobile">
+					<div className="titulo destroy-on-mobile">
 						<Volver />
 					</div>
 					<div className="titulo">
@@ -143,6 +148,7 @@ class CrearAuditoria extends Component {
 						</h2>
 					</div>
 				</div>
+				
 				<div className="">
 					<div className="form-1">
 						<div className="">
@@ -211,29 +217,36 @@ class CrearAuditoria extends Component {
 							</form>
 						</div>
 					</div>
-					<div className="center-box">
+					<div className="">
 						<div className="">
-							<div className="">
+							<div className="margin-bottom">
 								{this.state.preguntas &&
 									this.state.preguntas.map((pregunta, index) => {
 										return (
-											<div className="" key={index}>
-												<div className="">
-													{index + 1}. {pregunta[lang]}
-												</div>
-												<div
-													className=""
-													onClick={() => {
-														this.handleDelete(pregunta.id);
-													}}
-												>
-													<i className="material-icons">Delete</i>
+											<div className="form-1 overwrite-margin" key={index}>
+												<div className="nueva-pregunta">
+													<div className="nueva-pregunta-index">
+														{index + 1}.
+													</div>
+
+													<div className="nueva-pregunta-main">
+														{pregunta[lang]}
+													</div>
+
+													<div
+														className="nueva-pregunta-delete"
+														onClick={() => {
+															this.handleDelete(pregunta.id);
+														}}
+													>
+														<FontAwesomeIcon icon={faTrashAlt} />
+													</div>
 												</div>
 											</div>
 										);
 									})}
 							</div>
-							<button className="add-question" onClick={this.handleClickOpen}>Agregar pregunta</button>
+							
 							<Dialog
 								open={this.state.openB}
 								onClose={this.handleClose}
@@ -283,6 +296,10 @@ class CrearAuditoria extends Component {
 						</div>
 					</div>
 				</div>
+				<div className="footer-single">
+					<button className="add-question" onClick={this.handleClickOpen}>Agregar pregunta</button>
+				</div>
+				
 				<div>
 
 					<div className="footer">

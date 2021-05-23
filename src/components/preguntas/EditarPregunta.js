@@ -82,8 +82,8 @@ class EditarPregunta extends Component {
 
     return (
       <div>
-				<div className="padre-titulo">
-					<div className="titulo">
+				<div className="padre-titulo mobile">
+					<div className="titulo destroy-on-mobile">
 						<Volver where="/preguntas"/>
 					</div>
 					<div className="titulo">

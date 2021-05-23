@@ -81,15 +81,29 @@ export default function TarjetaPregunta(props) {
 			setOpen(false);
 		};
 
+		const maxQuestionLength = 60;
+
 	return (
-		<div className="center-box">
-			<div className="tarjeta-pregunta text-wrap" key={pregunta.id}>
+		<div className="">
+			<div className="tarjeta-pregunta" key={pregunta.id}>
 
 				<div className="tarjeta-pregunta-half1 hover-cursor" onClick={handleClickOpen}>
 
-					<span className="">{pregunta[lang]}</span>
-					<p>{pregunta.description}</p>
-					<p>{pregunta.reaction_plan}</p>
+					<span className="">
+						{pregunta[lang].length > maxQuestionLength
+							? pregunta[lang].substr(0, maxQuestionLength) + "..."
+							: pregunta[lang]}
+					</span>
+					<p className="">
+						{pregunta.description.length > maxQuestionLength*2
+							? pregunta.description.substr(0, maxQuestionLength*2) + "..."
+							: pregunta.description}
+					</p>
+					<p className="">
+						{pregunta.reaction_plan.length > maxQuestionLength
+							? pregunta.reaction_plan.substr(0, maxQuestionLength) + "..."
+							: pregunta.reaction_plan}
+					</p>
 
 				</div>
 				<div className="tarjeta-pregunta-half2">
