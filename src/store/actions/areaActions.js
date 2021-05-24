@@ -1,9 +1,9 @@
-export const createProject = (area) => {
+export const createArea = (area) => {
     return (dispatch, getState, { getFirestore }) => {
         const firestore = getFirestore();
         const profile = getState().firebase.profile;
         const authorId = getState().firebase.auth.uid;
-        firestore.collection('projects').add({
+        firestore.collection('areas').add({
             ...area,
             authorFirstName: profile.firstName,
             authorLastName: profile.lastName,
@@ -16,4 +16,3 @@ export const createProject = (area) => {
         });
     }
 };
-

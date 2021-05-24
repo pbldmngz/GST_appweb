@@ -17,12 +17,16 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import Slide from "@material-ui/core/Slide";
 import Swal from "sweetalert2";
 import Volver from '../util/Volver'
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 //import DatePicker from 'react-datepicker/dist/react-datepicker'
 
 import "react-datepicker/dist/react-datepicker.css";
 
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import DatepickerInput from '../util/DatepickerInput'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
@@ -39,6 +43,7 @@ class CrearAuditoria extends Component {
 		preguntas: [],
 		openB: false,
 		valueB: "",
+		password: "",
 	};
 	handleChange = (e) => {
 		// console.log("This is E", e)
@@ -55,6 +60,15 @@ class CrearAuditoria extends Component {
 	};
 	handleSubmit = (e) => {
 		e.preventDefault();
+		var generator = require('generate-password');
+
+		var password = generator.generate({
+			length: 8,
+			numbers: true,
+			uppercase: false,
+			lowercase: false,
+		});
+
 		// console.log(this.state)
 		this.props.createAuditoria({
 			auditoria: this.state.auditoria,
@@ -71,6 +85,7 @@ class CrearAuditoria extends Component {
 					return pre.category;
 				})
 			),
+			password: password,
 		});
 
 		this.props.history.push("/"); //Esto se cambiará según el contexto
@@ -105,6 +120,8 @@ class CrearAuditoria extends Component {
 		}));
 	};
 	Seguro = (e) => {
+		// console.log(this.cantSend())
+		if (this.cantSend()) return null;
 		// console.log(e)
 		e.preventDefault();
 		Swal.fire({
@@ -123,10 +140,46 @@ class CrearAuditoria extends Component {
 			}
 		});
 	};
+
+	handleChangeSelectProceso = (e) => {
+		// console.log("This is E", e)
+		this.setState({
+			proceso: e.target.value,
+		});
+	};
+
+	handleChangeSelectArea = (e) => {
+		// console.log("This is E", e)
+		this.setState({
+			area: e.target.value,
+		});
+	};
+
+	handleChangeSelectAuditor = (e) => {
+		// console.log("This is E", e)
+		this.setState({
+			auditor: e.target.value,
+		});
+	};
+
+	sortByKey = (array, key) => {
+		return array.sort(function (a, b) {
+			//Check if they are timestamp
+
+
+			var x = a[key].toString(); var y = b[key].toString();
+			return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+		});
+	}
+
+	cantSend = () => {
+		return !(this.state.preguntas && (this.state.preguntas.length >= 5) && (this.state.preguntas.length <= 15));
+	}
+
 	render() {
 		var { path, pathName } = require("../../config/config");
 		const text = require("../../config/language");
-		const { auth, userLevel, lang } = this.props;
+		const { auth, userLevel, lang, procesos, areas, users } = this.props;
 
 		if (!auth.uid) return <Redirect to="/signin" />;
 
@@ -135,7 +188,6 @@ class CrearAuditoria extends Component {
 		if (userLevel != 0) return <Redirect to="/" />;
 
 		// console.log(this.state.preguntas)
-
 		return (
 			<div className="">
 				<div className="padre-titulo mobile">
@@ -155,29 +207,80 @@ class CrearAuditoria extends Component {
 							<form className="" onSubmit={this.Seguro}>
 								
 								<div className="form-2">
-									<div className="input-field">
-										<input
-											type="text"
+									<div className="limit-width">
+										{/* <span className="center-box">
+											{bText[lang].area_proceso.proceso_corresponde}
+										</span> */}
+										<Select
+											labelId="select-filter"
 											id="auditor"
-											placeholder={text[lang].auditorias.crearAuditoria.auditor}
-											onChange={this.handleChange}
-										/>
+											value={this.state.auditor}
+											onChange={this.handleChangeSelectAuditor}
+											// style={{width: `${100}%`}}
+											className="this-is-also-input"
+											displayEmpty
+											disableUnderline
+											// placeholder={<p>bText[lang].area_proceso.proceso_corresponde</p>}
+										>
+											<MenuItem value="" disabled>
+												<div className="placeholder-color">
+													{text[lang].auditorias.crearAuditoria.auditor}
+												</div>
+											</MenuItem>
+											{users && this.sortByKey([...users], "lastName").filter(u => u.userLevel !== 0).map(a => {
+												return <MenuItem className="text-color" key={a.id} value={a.id}>{a.lastName}, {a.firstName}</MenuItem>
+											})}
+										</Select>
 									</div>
-									<div className="input-field">
-										<input
-											type="text"
-											id="area"
-											placeholder={text[lang].auditorias.crearAuditoria.area}
-											onChange={this.handleChange}
-										/>
-									</div>
-									<div className="input-field">
-										<input
-											type="text"
+									<div className="limit-width">
+										{/* <span className="center-box">
+											{bText[lang].area_proceso.proceso_corresponde}
+										</span> */}
+										<Select
+											labelId="select-filter"
 											id="proceso"
-											placeholder={text[lang].auditorias.crearAuditoria.proceso}
-											onChange={this.handleChange}
-										/>
+											value={this.state.proceso}
+											onChange={this.handleChangeSelectProceso}
+											// style={{width: `${100}%`}}
+											className="this-is-also-input"
+											displayEmpty
+											disableUnderline
+											// placeholder={<p>bText[lang].area_proceso.proceso_corresponde</p>}
+										>
+											<MenuItem value="" disabled>
+												<div className="placeholder-color">
+													{text[lang].auditorias.crearAuditoria.proceso}
+												</div>
+											</MenuItem>
+											{procesos && this.sortByKey([...procesos], "proceso").map(p => {
+												return <MenuItem className="text-color" key={p.id} value={p.id}>{p.proceso}</MenuItem>
+											})}
+										</Select>
+									</div>
+									<div className="limit-width">
+										{/* <span className="center-box">
+											{bText[lang].area_proceso.proceso_corresponde}
+										</span> */}
+										<Select
+											labelId="select-filter"
+											id="area"
+											value={this.state.area}
+											onChange={this.handleChangeSelectArea}
+											// style={{width: `${100}%`}}
+											className="this-is-also-input"
+											displayEmpty
+											disableUnderline
+											// placeholder={<p>bText[lang].area_proceso.proceso_corresponde</p>}
+										>
+											<MenuItem value="" disabled>
+												<div className="placeholder-color">
+													{text[lang].auditorias.crearAuditoria.area}
+												</div>
+											</MenuItem>
+											{areas && this.sortByKey([...areas], "area").map(a => {
+												return <MenuItem className="text-color" key={a.id} value={a.id}>{a.area}</MenuItem>
+											})}
+										</Select>
 									</div>
 									<div className="date-container">
 
@@ -193,12 +296,14 @@ class CrearAuditoria extends Component {
 														fecha_inicio: date,
 													})
 												}
+												withPortal
+												customInput={<DatepickerInput />}
 											/>
 										</div>
 
 										<span className="fecha">
 											{text[lang].auditorias.crearAuditoria.termina_el}
-											{console.log(text[lang].auditorias.crearAuditoria.termina_el)}
+											{/* {console.log(text[lang].auditorias.crearAuditoria.termina_el)} */}
 										</span>
 										<div className="datePicker-container">
 											<DatePicker
@@ -209,6 +314,8 @@ class CrearAuditoria extends Component {
 														fecha_fin: date,
 													})
 												}
+												withPortal
+												customInput={<DatepickerInput />}
 											/>
 										</div>
 
@@ -329,6 +436,9 @@ const mapStateToProps = (state) => {
 		userLevel: state.firebase.profile.userLevel,
 		lang: state.firebase.profile.lang,
 		preguntas: state.firestore.ordered.preguntas,
+		areas: state.firestore.ordered.areas,
+		procesos: state.firestore.ordered.procesos,
+		users: state.firestore.ordered.users,
 	};
 };
 
@@ -340,5 +450,5 @@ const mapDispatchtoProps = (dispatch) => {
 
 export default compose(
 	connect(mapStateToProps, mapDispatchtoProps),
-	firestoreConnect([{ collection: "preguntas" }])
+	firestoreConnect([{ collection: "preguntas" }, { collection: "areas" }, { collection: "procesos" }, { collection: "users" }])
 )(CrearAuditoria);

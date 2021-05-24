@@ -37,7 +37,7 @@ class DashboardPreguntas extends Component {
                             <Volver where="/profile"/>
                         </div>
                         <div className="titulo">
-                            <h2>Creación de preguntas</h2>
+                            <h2>{bText[lang].preguntas.dashboardPreguntas.creacion_preguntas}</h2>
                         </div>
                         {/* <div className="titulo">
                             <NavLink to={path.crear_pregunta}>

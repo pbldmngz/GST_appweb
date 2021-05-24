@@ -12,6 +12,18 @@ export default function Preguntas(props) {
 
     const { preguntas, editPregunta, deletePregunta, userLevel, lang } = props
 
+    const sortByKey = (array, key) => {
+        return array.sort(function (a, b) {
+            //Check if they are timestamp
+
+
+            var x = a[key].toString(); var y = b[key].toString();
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        });
+    }
+
+    const sortedPreguntas = sortByKey([...preguntas], "createdAt")
+
     // Considerándolo, no tiene caso, va a haber más de 5 preguntas y se va a perder
 
     return (

@@ -52,6 +52,16 @@ class CrearPregunta extends Component {
 			}
 		});
 	};
+
+
+	handleChangeSelectRP = (e) => {
+		// console.log("This is E", e)
+		this.setState({
+			reaction_plan: e.target.value,
+		});
+	};
+
+
 	render() {
 		const { auth, lang } = this.props;
 		const bText = require("../../config/language");
@@ -88,13 +98,26 @@ class CrearPregunta extends Component {
 								<div className="input-field">
 									<input type="text" id="description" placeholder={bText[lang].preguntas.crearPregunta.descripcion} onChange={this.handleChange} />
 								</div>
-								<div className="input-field">
-									<input
-										type="text"
+								<div className="limit-width">
+									<Select
+										labelId="select-filter"
 										id="reaction_plan"
-										placeholder={bText[lang].preguntas.crearPregunta.plan_reaccion}
-										onChange={this.handleChange}
-									/>
+										value={this.state.reaction_plan}
+										onChange={this.handleChangeSelectRP}
+										className="this-is-also-input"
+										displayEmpty
+										disableUnderline
+									>
+										<MenuItem value="" disabled>
+											<div className="placeholder-color">
+												{bText[lang].preguntas.crearPregunta.plan_reaccion}
+											</div>
+										</MenuItem>
+										
+										<MenuItem value={0}>{bText[lang].preguntas.crearPregunta.fix}</MenuItem>
+										<MenuItem value={1}>{bText[lang].preguntas.crearPregunta.contramedidas_temporales}</MenuItem>
+										<MenuItem value={2}>{bText[lang].preguntas.crearPregunta.parar_produccion}</MenuItem>
+									</Select>
 								</div>
 								<div className="center-box">
 									<div className="footer-single-flex">
@@ -108,10 +131,10 @@ class CrearPregunta extends Component {
 											onChange={this.handleChangeSelect}
 											style={{width: `${100}px`}}
 										>
-											<MenuItem value={4}>D</MenuItem>
-											<MenuItem value={3}>C</MenuItem>
-											<MenuItem value={2}>B</MenuItem>
-											<MenuItem value={1}>A</MenuItem>
+											<MenuItem value={4}>A</MenuItem>
+											<MenuItem value={3}>B</MenuItem>
+											<MenuItem value={2}>C</MenuItem>
+											<MenuItem value={1}>D</MenuItem>
 										</Select>
 									</div>
 								</div>

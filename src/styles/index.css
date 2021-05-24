@@ -846,6 +846,14 @@ h2{
   margin: 20px;
 }
 
+.text-align-right {
+  text-align: right !important;
+}
+
+.text-align-left {
+  text-align: left !important;
+}
+
 .footer-single {
   text-align: center;
   /* background-color: coral; */
@@ -882,9 +890,56 @@ p{
   color: #707070;
 }
 
+input{
+  width: 100%;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 5px;
+  padding: 10px;
+  border-style: none;
+  border: 2px solid rgba(0,0,0,0.2);
+  font-size: 16px;
+}
+
+.this-is-also-input {
+  width: calc(100% - 15px);
+  display:inline-block;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 5px;
+  padding: 4px;
+  border-style: none;
+  border: 2px solid rgba(0,0,0,0.2);
+  font-size: 16px;
+  background-color: white;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.placeholder-color {
+  color: #707070;
+  font-family: 'Montserrat', sans-serif;
+  padding-left: 5px;
+}
+
+.text-color {
+  /* color: #707070; */
+  font-family: 'Montserrat', sans-serif;
+  padding-left: 5px;
+  /* margin-left: 5px; */
+}
+
 .input-field{
   margin: 20px;
   grid-column: 1/4;
+}
+
+.margin-left-20 {
+  margin-left: 20px;
+}
+
+.limit-width {
+  width:100%;
+  margin-bottom: 20px;
+  /* margin-top: 10px; */
 }
 
 .input-field-1-2{
@@ -900,15 +955,8 @@ p{
   grid-column: 3/5;
 }
 
-input{
-  width: 100%;
-  font-family: 'Montserrat', sans-serif;
-  border-radius: 5px;
-  padding: 10px;
-  border-style: none;
-  border: 2px solid rgba(0,0,0,0.2);
-  font-size: 16px;
-}
+
+
 
 .extra-margin {
   margin-bottom: 20px;
@@ -1092,3 +1140,4 @@ input{
 .default-height {
   height: 10vh;
 }
+

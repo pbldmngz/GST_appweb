@@ -25,6 +25,10 @@ export default function TarjetaPregunta(props) {
 	// Pueden hacerlo haciendo unos divs | ----- | - | flex, no soy el experto
 	const { pregunta, userLevel, lang } = props;
 
+	// if (!lang) return null;
+
+	const bText = require("../../config/language");
+
 	// console.log("userLevel on tarjeta", userLevel)
 
 	// En cierto modo, ni siquiera tiene caso esto, los usuarios normales no llegarían aquí
@@ -71,6 +75,12 @@ export default function TarjetaPregunta(props) {
 			4: "D",
 		}
 
+		const react_plan = {
+			0: bText[lang].preguntas.crearPregunta.fix,
+			1: bText[lang].preguntas.crearPregunta.contramedidas_temporales,
+			2: bText[lang].preguntas.crearPregunta.parar_produccion,
+		}
+
 		const [open, setOpen] = React.useState(false);
 
 		const handleClickOpen = () => {
@@ -100,9 +110,7 @@ export default function TarjetaPregunta(props) {
 							: pregunta.description}
 					</p>
 					<p className="">
-						{pregunta.reaction_plan.length > maxQuestionLength
-							? pregunta.reaction_plan.substr(0, maxQuestionLength) + "..."
-							: pregunta.reaction_plan}
+						{react_plan[pregunta.reaction_plan]}
 					</p>
 
 				</div>

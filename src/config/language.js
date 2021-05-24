@@ -4,9 +4,24 @@ lang.spanish = {
     locale: "es",
     return: "Volver",
     cargando: "Cargando...",
+    area_proceso: {
+        crear: "Crear",
+        area: "área",
+        Area: "Área",
+        proceso: "proceso",
+        Proceso: "Proceso",
+        urgencia: "Urgencia",
+        proceso_corresponde: "Proceso al que corresponde",
+        crear_area: "Crear nueva área",
+        crear_proceso: "Crear nuevo proceso",
+        regular: "Prioridad normal",
+        media: "Prioridad media",
+        prioridad: "Prioritario",
+        alta_prioridad: "Alta prioridad",
+    },
     auditorias: {
         auditorias: {
-
+            nada: "Parece que todo ha estado calmado últimamente",
         },
         crearAuditoria: {
             crear_auditoria: "Crear auditoria",
@@ -14,7 +29,7 @@ lang.spanish = {
             nombre_auditoria: "Nombre de la auditoria",
             auditor: "Auditor",
             proceso: "Proceso",
-            area: "Area",
+            area: "Área",
             termina_el: "Fin:",
             inicia_el: "Inicio:",
             agregar: "Agregar",
@@ -30,6 +45,12 @@ lang.spanish = {
             ordenar_fecha: "Ordenar por fecha",
             agrupar_areas: "Agrupar por áreas",
             mostrar_realizados: "Mostrar realizados",
+            fecha_inicio: "Fecha de inicio",
+            fecha_expiracion: "Fecha de expiración",
+            fecha_creacion: "Fecha de creación",
+            area: "Área",
+            proceso: "Proceso",
+            auditor: "Auditor",
             vista: "Vista",
             auditorias: "Auditorias",
         },
@@ -53,6 +74,7 @@ lang.spanish = {
             fecha_limite: "Fecha límite",
             auditor: "Auditor",
             proceso: "Proceso",
+            password: "Contraseña",
         },
     },
     auth: {
@@ -100,9 +122,12 @@ lang.spanish = {
             crear: "Crear",
             editar: "Guardar",
             editar_pregunta: "Editar pregunta",
+            fix: "Arreglar inmediatamente",
+            contramedidas_temporales: "Tomar contramedidas temporales",
+            parar_produccion: "Parar la producción",
         },
-        dashboardPregunta: {
-
+        dashboardPreguntas: {
+            creacion_preguntas: "Creación de preguntas",
         },
         detallesPregunta: {
             descripcion: "Descripción",
@@ -142,9 +167,24 @@ lang.english = {
     locale: "en",
     return: "Return",
     cargando: "Loading...",
+    area_proceso: {
+        crear: "Create",
+        area: "area",
+        Area: "Area",
+        proceso: "process",
+        Proceso: "Process",
+        urgencia: "Urgency",
+        proceso_corresponde: "Process where it belongs",
+        crear_area: "Create new area",
+        crear_proceso: "Create new process",
+        regular: "Regular priority",
+        media: "Medium priority",
+        prioridad: "Priority",
+        alta_prioridad: "High priority",
+    },
     auditorias: {
         auditorias: {
-
+            nada: "It seems that everything has been calm lately",
         },
         crearAuditoria: {
             crear_auditoria: "Create new audit",
@@ -168,6 +208,12 @@ lang.english = {
             ordenar_fecha: "Order by date",
             agrupar_areas: "Group by areas",
             mostrar_realizados: "Show already done",
+            fecha_inicio: "Start date",
+            fecha_expiracion: "Due date",
+            fecha_creacion: "Creation date",
+            area: "Area",
+            proceso: "Process",
+            auditor: "Auditor",
             vista: "View",
             auditorias: "Audits",
         },
@@ -191,6 +237,7 @@ lang.english = {
             fecha_limite: "Due date",
             auditor: "Auditor",
             proceso: "Process",
+            password: "Password",
         },
     },
     auth: {
@@ -238,9 +285,12 @@ lang.english = {
             categoria: "Layer",
             crear: "Create",
             editar: "Save",
+            fix: "Fix immediately",
+            contramedidas_temporales: "Temporary countermeasures",
+            parar_produccion: "Stop production",
         },
-        dashboardPregunta: {
-
+        dashboardPreguntas: {
+            creacion_preguntas: "Question creator",
         },
         detallesPregunta: {
             descripcion: "Description",

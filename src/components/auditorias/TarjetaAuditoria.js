@@ -8,6 +8,8 @@ import {
 import { Link, NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
 import PopUp from "../util/PopUp";
+import { compose } from "redux";
+import { firestoreConnect } from "react-redux-firebase";
 
 import { faTrashAlt, faEdit, faChartBar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -32,32 +34,52 @@ class TarjetaAuditoria extends Component {
 			return date;
 		};
 
-		const { auditoria, userLevel, alreadyDone, lang } = this.props;
+		const { auditoria, userLevel, alreadyDone, lang, users, areas, procesos } = this.props;
+
+		if (!lang) return null;
+		if (!users) return null;
+		if (!areas) return null;
+		if (!procesos) return null;
+
 		const bText = require("../../config/language");
 		// if (!lang) return null;
 
 		var color = "white";
-		var text = "!!";
+		var text = "";
+
+		const findUser = users.find(e => e.id === auditoria.auditor)
+		const findArea = areas.find(e => e.id === auditoria.area)
+		const findProceso = procesos.find(e => e.id === auditoria.proceso)
+
+		if (findArea) {
+			switch (findArea.urgencia) {
+				case 0:
+					color = "#009900";
+					text = "R";
+					break;
+				case 1:
+					color = "#FFCC00";
+					text = "M";
+					break;
+				case 2:
+					color = "#FF9900";
+					text = "!";
+					break;
+				case 3:
+					color = "#C00000";
+					text = "!!";
+					break;
+				default:
+					break;
+			}
+		}
 
 		var checkDate = new Date();
 		var fecha_fin = auditoria.fecha_fin.toDate().addDays(0);
 
-		if (fecha_fin < checkDate) {
-			color = "black";
-			text = "!!!";
-		} else if (fecha_fin < checkDate.addDays(7)) {
-			color = "#C00000";
-			text = "!!";
-		} else if (fecha_fin < checkDate.addDays(30)) {
-			color = "#FF9900";
-			text = "!";
-		} else if (fecha_fin < checkDate.addDays(60)) {
-			color = "#FFCC00";
-			text = "M";
-		} else {
-			color = "#009900";
-			text = "R";
-		}
+
+
+		
 
 		var style = {};
 
@@ -73,7 +95,7 @@ class TarjetaAuditoria extends Component {
 				: path.responder_auditoria;
 
 		const graphOrWarn =
-			userLevel == 0 ? (
+			userLevel === 0 ? (
 				<div className="boton extra-margin-botones">
 					<Link to={path.detalles_preguntas_auditoria + "/" + auditoria.id}>
 						<FontAwesomeIcon icon={faChartBar} />
@@ -82,11 +104,11 @@ class TarjetaAuditoria extends Component {
 				</div>
 			) : (
 				<div
-					style={{ backgroundColor: color }}
-					className="suavizar-borde"
+					style={{ backgroundColor: color, color: "white" }}
+					className="suavizar-borde center-box"
 				>
-					<p>{text}</p>
-					{/* {console.log("graphWarn", color)} */}
+					{text}
+					
 				</div>
 			);
 
@@ -136,6 +158,7 @@ class TarjetaAuditoria extends Component {
 			</p>
 		) : null;
 		
+		
 
 		const content = (
 			<div className="">
@@ -150,7 +173,10 @@ class TarjetaAuditoria extends Component {
 
 				</div>
 
-				{bText[lang].auditorias.tarjetaAuditoria.auditor}: {auditoria.auditor}
+				{bText[lang].auditorias.tarjetaAuditoria.auditor}: {findUser ? findUser.lastName + ", " + findUser.firstName : null}
+				
+				<p>{findArea && findProceso ? findProceso.proceso + ", " + findArea.area : null}</p>
+
 				{date}
 			</div>
 		);
@@ -161,10 +187,15 @@ class TarjetaAuditoria extends Component {
 			<Link to={refLink + "/" + auditoria.id}>{content}</Link>
 		);
 
+
 		const contentParent = (userLevel === 0) ? (
 			<div style={style} className="tarjeta-auditoría">
 				<div className="tarjeta-auditoría-half1">
 					{content}
+					{/* <p>{findArea && findProceso ? findProceso.proceso + ", " + findArea.area : null}</p> */}
+					<p>{bText[lang].auditorias.tarjetaAuditoria.password}: {auditoria.password}</p>
+					{/* <p>CreatedAt: {moment(auditoria.createdAt.toDate()).fromNow()}</p> */}
+					
 				</div>
 				<div className="tarjeta-auditoría-half2">
 					{botones}
@@ -193,6 +224,9 @@ const mapStateToProps = (state) => {
 	// console.log(state)
 	return {
 		lang: state.firebase.profile.lang,
+		areas: state.firestore.ordered.areas,
+		procesos: state.firestore.ordered.procesos,
+		users: state.firestore.ordered.users,
 	};
 };
 
@@ -203,4 +237,9 @@ const mapDispatchtoProps = (dispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchtoProps)(TarjetaAuditoria)
+// export default connect(mapStateToProps, mapDispatchtoProps)(TarjetaAuditoria)
+
+export default compose(
+	connect(mapStateToProps, mapDispatchtoProps),
+	firestoreConnect([{ collection: "areas" }, { collection: "procesos" }, { collection: "users" }])
+)(TarjetaAuditoria);

@@ -46,7 +46,63 @@ class DashboardAuditorias extends Component {
         // Se podría mejorar mandando un prop de que ya está resuelta
         // hacia la tarjeta, pero se me hace mucha bronca porque luego se tendrían
         // Que mandar al fondo. En todo caso puedo hacer una vista de auditorias YA HECHAS
-        var filteredAuditorias = auditorias;
+
+        const sortByKey = (array, key) => {
+            return array.sort(function (a, b) {
+                //Check if they are timestamp
+
+
+                var x = a[key].toString(); var y = b[key].toString();
+                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+            });
+        }
+    
+        var orderedAudit = auditorias ? [...auditorias] : [];
+
+        var filter_value = "fecha_fin";
+
+        switch (this.state.filter) {
+            case 0:
+                filter_value = "fecha_fin";
+                // console.log(filter_value)
+                break;
+            case 3:
+                filter_value = "createdAt";
+                // console.log(filter_value)
+                break;
+            case 4:
+                filter_value = "area";
+                // console.log(filter_value)
+                break;
+            case 5:
+                filter_value = "proceso";
+                // console.log(filter_value)
+                break;
+            case 6:
+                filter_value = "auditor";
+                // console.log(filter_value)
+                break;
+            case 7:
+                filter_value = "fecha_inicio";
+                // console.log(filter_value)
+                break;
+            default:
+                filter_value = "fecha_fin";
+                // console.log(filter_value)
+                break;
+        }
+    
+        orderedAudit = sortByKey(orderedAudit, filter_value)
+        
+
+        var filteredAuditorias = orderedAudit;
+
+        if (this.state.filter === 3) {
+            filteredAuditorias = filteredAuditorias.reverse()
+        }
+
+        // Malísima implementación, se debería filtrar y luego ordenar, 
+        // al revés es un desperdicio
 
         if (auditorias && userLevel != 0 && respuestas) {
             // console.log("0", this.state.filter, respuestas)
@@ -67,9 +123,9 @@ class DashboardAuditorias extends Component {
             // console.log("3", alreadyDone)
 
             filteredAuditorias = (this.state.filter === 2) ? (
-                auditorias && auditorias.filter(aud => alreadyDone.includes(aud.id))
+                orderedAudit && orderedAudit.filter(aud => alreadyDone.includes(aud.id))
             ) : (
-                auditorias && auditorias.filter(aud => !alreadyDone.includes(aud.id))
+                orderedAudit && orderedAudit.filter(aud => !alreadyDone.includes(aud.id))
             );
 
             filteredAuditorias = filteredAuditorias.filter(aud => aud.minCategory >= userLevel)
@@ -78,7 +134,12 @@ class DashboardAuditorias extends Component {
         
         const menuItems = (userLevel === 0) ? (
             <Select labelId="select-filter" id="filter" value={this.state.filter} onChange={this.handleChangeSelect}>
-                <MenuItem value={0}>{text[lang].auditorias.dashboardAuditorias.ordenar_fecha}</MenuItem>
+                <MenuItem value={7}>{text[lang].auditorias.dashboardAuditorias.fecha_inicio}</MenuItem>
+                <MenuItem value={0}>{text[lang].auditorias.dashboardAuditorias.fecha_expiracion}</MenuItem>
+                <MenuItem value={3}>{text[lang].auditorias.dashboardAuditorias.fecha_creacion}</MenuItem>
+                <MenuItem value={4}>{text[lang].auditorias.dashboardAuditorias.area}</MenuItem>
+                <MenuItem value={5}>{text[lang].auditorias.dashboardAuditorias.proceso}</MenuItem>
+                <MenuItem value={6}>{text[lang].auditorias.dashboardAuditorias.auditor}</MenuItem>
                 <MenuItem value={1}>{text[lang].auditorias.dashboardAuditorias.agrupar_areas}</MenuItem>
             </Select>
         ) : (
@@ -90,6 +151,7 @@ class DashboardAuditorias extends Component {
         // const botonReturn = (userLevel === 0) ? (
         //     <div className="dashboard-extra-space">{text[lang].return}</div>
         // ): null;
+
 
         if (filteredAuditorias) {
             return (
@@ -112,6 +174,7 @@ class DashboardAuditorias extends Component {
                             userLevel={userLevel}
                             alreadyDone={(this.state.filter === 2)}
                             lang={lang}
+                            uid={auth.uid}
                         />
                     </div>
                 </div>

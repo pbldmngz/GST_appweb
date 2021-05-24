@@ -13,6 +13,7 @@
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
     "firebase": "^8.3.2",
+    "generate-password": "^1.6.0",
     "moment": "^2.29.1",
     "plotly": "^1.0.6",
     "plotly.js": "^1.58.4",
