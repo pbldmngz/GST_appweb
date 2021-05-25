@@ -9,10 +9,9 @@ import Volver from '../util/Volver'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import { createProceso } from "../../store/actions/procesoActions";
 import { createArea } from "../../store/actions/areaActions";
 
-class AreaProceso extends Component {
+class Area extends Component {
 
     state = {
 		proceso: "",
@@ -26,21 +25,8 @@ class AreaProceso extends Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		
-		const tipo = this.props.match.params.tipo
-		// console.log(this.state)
-		// this.props.createAuditoria({
-		// 	auditoria: this.state.auditoria,
-		// 	auditor: this.state.auditor,
-		// });
-		if (tipo === "area") {
-			this.props.createArea(this.state)
-		} else {
-			this.props.createProceso({
-				proceso: this.state.proceso,
-			})
-		}
+		this.props.createArea(this.state)
 		
-
 		this.props.history.push("/profile"); //Esto se cambiará según el contexto
 	};
 
@@ -96,7 +82,7 @@ class AreaProceso extends Component {
 
 		if (userLevel != 0) return <Redirect to="/" />;
 
-		const tipo = this.props.match.params.tipo
+		// const tipo = this.props.match.params.tipo
 
 		// console.log(this.props)
 		return (
@@ -108,7 +94,7 @@ class AreaProceso extends Component {
 					<div className="titulo">
 						<h2 className="">
 							{/* {text[lang].auditorias.crearAuditoria.crear_auditoria} */}
-							{bText[lang].area_proceso.crear} {(tipo === "area") ? bText[lang].area_proceso.area : bText[lang].area_proceso.proceso}
+							{bText[lang].area_proceso.crear} {bText[lang].area_proceso.area}
 						</h2>
 					</div>
 				</div>
@@ -121,75 +107,67 @@ class AreaProceso extends Component {
                                 <div className="input-field">
                                     <input
                                         type="text"
-                                        id={tipo}
-                                        placeholder={(tipo === "area") ? bText[lang].area_proceso.Area : bText[lang].area_proceso.Proceso}
+                                        id="area"
+                                        placeholder={bText[lang].area_proceso.Area}
                                         onChange={this.handleChange}
                                     />
                                 </div>
 								
-								{(tipo === "area") ? (
-									<div className="limit-width">
-											{/* <span className="center-box">
-												{bText[lang].area_proceso.proceso_corresponde}
-											</span> */}
-											<Select
-												labelId="select-filter"
-												id="urgencia"
-												value={this.state.urgencia}
-												onChange={this.handleChangeSelectUrgencia}
-												// style={{width: `${100}%`}}
-												className="this-is-also-input"
-												displayEmpty
-												disableUnderline
-												// placeholder={<p>bText[lang].area_proceso.proceso_corresponde</p>}
-											>
-												<MenuItem value="" disabled>
-													<div className="placeholder-color">
-														{bText[lang].area_proceso.urgencia}
-													</div>
-												</MenuItem>
-												
-												<MenuItem value={0}>{bText[lang].area_proceso.regular}</MenuItem>
-												<MenuItem value={1}>{bText[lang].area_proceso.media}</MenuItem>
-												<MenuItem value={2}>{bText[lang].area_proceso.prioridad}</MenuItem>
-												<MenuItem value={3}>{bText[lang].area_proceso.alta_prioridad}</MenuItem>
-											</Select>
-										</div>
-								) : null}
-
-								{(tipo === "area") ? (
-
+								<div className="limit-width">
+									{/* <span className="center-box">
+										{bText[lang].area_proceso.proceso_corresponde}
+									</span> */}
+									<Select
+										labelId="select-filter"
+										id="urgencia"
+										value={this.state.urgencia}
+										onChange={this.handleChangeSelectUrgencia}
+										// style={{width: `${100}%`}}
+										className="this-is-also-input"
+										displayEmpty
+										disableUnderline
+										// placeholder={<p>bText[lang].area_proceso.proceso_corresponde</p>}
+									>
+										<MenuItem value="" disabled>
+											<div className="placeholder-color">
+												{bText[lang].area_proceso.urgencia}
+											</div>
+										</MenuItem>
 										
-										<div className="limit-width">
-											{/* <span className="center-box">
-												{bText[lang].area_proceso.proceso_corresponde}
-											</span> */}
-											<Select
-												labelId="select-filter"
-												id="filter"
-												value={this.state.proceso}
-												onChange={this.handleChangeSelectProceso}
-												// style={{width: `${100}%`}}
-												className="this-is-also-input"
-												displayEmpty
-												disableUnderline
-												// placeholder={<p>bText[lang].area_proceso.proceso_corresponde</p>}
-											>
-												<MenuItem value="" disabled>
-													<div className="placeholder-color">
-														{bText[lang].area_proceso.proceso_corresponde}
-													</div>
-												</MenuItem>
-												{procesos && procesos.map(p => {
-													return <MenuItem className="text-color" key={p.id} value={p.id}>{p.proceso}</MenuItem>
-												})}
-												{/* <MenuItem value={"english"}>English</MenuItem>
-												<MenuItem value={"spanish"}>Español</MenuItem> */}
-											</Select>
-										</div>
-										
+										<MenuItem value={0}>{bText[lang].area_proceso.regular}</MenuItem>
+										<MenuItem value={1}>{bText[lang].area_proceso.media}</MenuItem>
+										<MenuItem value={2}>{bText[lang].area_proceso.prioridad}</MenuItem>
+										<MenuItem value={3}>{bText[lang].area_proceso.alta_prioridad}</MenuItem>
+									</Select>
+								</div>
 
-								) : null}
+								<div className="limit-width">
+									{/* <span className="center-box">
+										{bText[lang].area_proceso.proceso_corresponde}
+									</span> */}
+									<Select
+										labelId="select-filter"
+										id="filter"
+										value={this.state.proceso}
+										onChange={this.handleChangeSelectProceso}
+										// style={{width: `${100}%`}}
+										className="this-is-also-input"
+										displayEmpty
+										disableUnderline
+										// placeholder={<p>bText[lang].area_proceso.proceso_corresponde</p>}
+									>
+										<MenuItem value="" disabled>
+											<div className="placeholder-color">
+												{bText[lang].area_proceso.proceso_corresponde}
+											</div>
+										</MenuItem>
+										{procesos && procesos.map(p => {
+											return <MenuItem className="text-color" key={p.id} value={p.id}>{p.proceso}</MenuItem>
+										})}
+										{/* <MenuItem value={"english"}>English</MenuItem>
+										<MenuItem value={"spanish"}>Español</MenuItem> */}
+									</Select>
+								</div>
                             </div>
                         </form>
                     </div>
@@ -229,7 +207,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchtoProps = (dispatch) => {
 	return {
-		createProceso: (proceso) => dispatch(createProceso(proceso)),
+		// createProceso: (proceso) => dispatch(createProceso(proceso)),
 		createArea: (area) => dispatch(createArea(area)),
 	};
 };
@@ -237,6 +215,6 @@ const mapDispatchtoProps = (dispatch) => {
 export default compose(
 	connect(mapStateToProps, mapDispatchtoProps),
 	firestoreConnect([{ collection: "procesos" }])
-)(AreaProceso);
+)(Area);
 
 // export default connect(mapStateToProps, mapDispatchtoProps)(AreaProceso)

@@ -6,13 +6,16 @@ import CambiarIdioma from '../util/CambiarIdioma'
 import TarjetaAgregarAuditoria from './TarjetaAgregarAuditoria'
 
 export default function Auditorias(props) {
-    const { userLevel, auditorias, alreadyDone, lang, uid } = props
+    const { userLevel, auditorias, alreadyDone, lang, uid, users } = props
     var { path } = require('../../config/config');
     const text = require('../../config/language');
 
     const refLink = (userLevel === 0) ? path.detalles_preguntas_auditoria : path.responder_auditoria;
 
-    const pertinent = (userLevel !== 0) ? auditorias.filter(a => a.auditor === uid) : auditorias;
+    const pertinent = (userLevel !== 0) ? auditorias.filter(a => a.auditor.includes(uid)) : auditorias;
+
+    // auditorias.filter(a => a.auditor.includes(uid))
+    // console.log(auditorias)
 
     return (
     <div>
@@ -30,6 +33,7 @@ export default function Auditorias(props) {
                                 userLevel={userLevel}
                                 alreadyDone={alreadyDone}
                                 lang={lang}
+                                users={users}
                             />
                         </div>
                     )

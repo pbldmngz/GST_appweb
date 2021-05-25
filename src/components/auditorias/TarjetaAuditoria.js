@@ -36,10 +36,12 @@ class TarjetaAuditoria extends Component {
 
 		const { auditoria, userLevel, alreadyDone, lang, users, areas, procesos } = this.props;
 
+		// console.log(lang, users, areas, procesos)
 		if (!lang) return null;
 		if (!users) return null;
 		if (!areas) return null;
 		if (!procesos) return null;
+		// console.log(users)
 
 		const bText = require("../../config/language");
 		// if (!lang) return null;
@@ -47,7 +49,15 @@ class TarjetaAuditoria extends Component {
 		var color = "white";
 		var text = "";
 
-		const findUser = users.find(e => e.id === auditoria.auditor)
+		// console.log([...users])
+
+		const findUser = [...auditoria.auditor].map(u => {
+			// console.log("This is U: ", u)
+			// console.log("This is users: ", users)
+			return users.find(e => e.id === u)
+		})
+		// console.log("This is what findUsers returns: ", findUser)
+
 		const findArea = areas.find(e => e.id === auditoria.area)
 		const findProceso = procesos.find(e => e.id === auditoria.proceso)
 
@@ -76,10 +86,6 @@ class TarjetaAuditoria extends Component {
 
 		var checkDate = new Date();
 		var fecha_fin = auditoria.fecha_fin.toDate().addDays(0);
-
-
-
-		
 
 		var style = {};
 
@@ -173,7 +179,9 @@ class TarjetaAuditoria extends Component {
 
 				</div>
 
-				{bText[lang].auditorias.tarjetaAuditoria.auditor}: {findUser ? findUser.lastName + ", " + findUser.firstName : null}
+				{bText[lang].auditorias.tarjetaAuditoria.auditor}: {findUser && findUser.map(u => {
+					return u ? (u.lastName + ", " + u.firstName) : "";
+				})}
 				
 				<p>{findArea && findProceso ? findProceso.proceso + ", " + findArea.area : null}</p>
 
@@ -226,7 +234,7 @@ const mapStateToProps = (state) => {
 		lang: state.firebase.profile.lang,
 		areas: state.firestore.ordered.areas,
 		procesos: state.firestore.ordered.procesos,
-		users: state.firestore.ordered.users,
+		// users: state.firestore.ordered.users,
 	};
 };
 
@@ -241,5 +249,5 @@ const mapDispatchtoProps = (dispatch) => {
 
 export default compose(
 	connect(mapStateToProps, mapDispatchtoProps),
-	firestoreConnect([{ collection: "areas" }, { collection: "procesos" }, { collection: "users" }])
+	firestoreConnect([{ collection: "areas" }, { collection: "procesos" }])
 )(TarjetaAuditoria);

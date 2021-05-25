@@ -164,7 +164,7 @@ class ResponderAuditoria extends Component {
     // console.log("estas son las preguntas", this.state.preguntas)
 
     return (
-      <div className="container">
+      <div className="">
         <div className="test">
           {/* {pregID && pregID.map(pregunta => { 
                         console.log(pregunta)
@@ -192,9 +192,9 @@ class ResponderAuditoria extends Component {
             {this.state.preguntas &&
               this.state.preguntas.map((pregunta) => {
                 return (
-                  <div className="extra-margin tarjeta-pregunta" key={pregunta.id}>
+                  <div className="form-1" key={pregunta.id}>
                     {/* card x-depth-0 para ver los limites fácilmente*/}
-                    <FormControl className="width100" component="fieldset">
+                    {/* <FormControl className="width100" component="fieldset"> */}
                       {/* {console.log("antes de que truene, esto es pregunta", pregunta)} */}
                       <FormLabel
                         className="legend-pregunta grey-text text-darken-3"
@@ -234,14 +234,14 @@ class ResponderAuditoria extends Component {
                           />
                         </RadioGroup>
                       </div>
-                    </FormControl>
+                    {/* </FormControl> */}
                   </div>
                 );
               })}
             <div className="center-box">
               <button
                 id="Enviar"
-                className="btn blue lighten-1 z-depth-0 big-button"
+                className="aceptar"
               >
                 {text[lang].auditorias.responderAuditoria.enviar}
               </button>

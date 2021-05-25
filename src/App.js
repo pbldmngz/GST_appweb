@@ -18,7 +18,8 @@ import Profile from './components/util/Profile';
 import EditarAuditoria from './components/auditorias/EditarAuditoria';
 import MainProceso from './components/auditorias/MainProceso';
 import Areas from './components/auditorias/Areas';
-import AreaProceso from './components/areas&procesos/AreaProceso'
+import Area from './components/areas&procesos/Area'
+import Proceso from './components/areas&procesos/Proceso'
 
 
 class App extends Component {
@@ -47,7 +48,8 @@ class App extends Component {
             <Route path={path.detalles_pregunta_auditoria_redirect} component={DetallesPreguntaIndividual} />
             <Route path={path.change_password} component={ChangePassword} />
             <Route path={path.editar_auditoria_redirect} component={EditarAuditoria} />
-            <Route path="/crear-area-proceso/:tipo" component={AreaProceso} />
+            <Route path="/crear-area" component={Area} />
+            <Route path="/crear-proceso" component={Proceso} />
           </Switch>
         </div>
       </BrowserRouter>

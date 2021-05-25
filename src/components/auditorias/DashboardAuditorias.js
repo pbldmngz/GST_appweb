@@ -30,7 +30,7 @@ class DashboardAuditorias extends Component {
     render() {
         // console.log(this.props)
         
-        const { auditorias, respuestas, auth, userLevel, lang } = this.props
+        const { auditorias, respuestas, auth, userLevel, lang, users } = this.props
         const text = require('../../config/language');
         
 
@@ -128,7 +128,7 @@ class DashboardAuditorias extends Component {
                 orderedAudit && orderedAudit.filter(aud => !alreadyDone.includes(aud.id))
             );
 
-            filteredAuditorias = filteredAuditorias.filter(aud => aud.minCategory >= userLevel)
+            // filteredAuditorias = filteredAuditorias.filter(aud => aud.minCategory >= userLevel)
         }
         var { path, pathName } = require('../../config/config');
         
@@ -175,6 +175,7 @@ class DashboardAuditorias extends Component {
                             alreadyDone={(this.state.filter === 2)}
                             lang={lang}
                             uid={auth.uid}
+                            users={users}
                         />
                     </div>
                 </div>
@@ -194,6 +195,7 @@ const mapStateToProps = (state) => {
     return {
         auditorias: state.firestore.ordered.auditorias,
         respuestas: state.firestore.ordered.respuestas,
+        users: state.firestore.ordered.users,
         lang: state.firebase.profile.lang,
         auth: state.firebase.auth,
         userLevel: state.firebase.profile.userLevel
@@ -202,5 +204,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps),
-    firestoreConnect([{ collection: "auditorias", orderBy: ["fecha_fin", "asc"]}, {collection:"respuestas"}])
+    firestoreConnect([{ collection: "auditorias", orderBy: ["fecha_fin", "asc"]}, {collection:"respuestas"}, {collection:"users"}])
 )(DashboardAuditorias)

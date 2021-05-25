@@ -35,7 +35,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 class CrearAuditoria extends Component {
 	state = {
 		auditoria: "",
-		auditor: "",
+		auditor: ["", "", "", ""],
 		area: "",
 		proceso: "",
 		fecha_inicio: new Date(),
@@ -72,19 +72,12 @@ class CrearAuditoria extends Component {
 		// console.log(this.state)
 		this.props.createAuditoria({
 			auditoria: this.state.auditoria,
-			auditor: this.state.auditor,
+			auditor: this.state.auditor.filter(a => a !== ""),
 			area: this.state.area,
 			proceso: this.state.proceso,
 			fecha_inicio: this.state.fecha_inicio,
 			fecha_fin: this.state.fecha_fin,
-			preguntas: this.state.preguntas.map((pre) => {
-				return pre.id;
-			}),
-			minCategory: Math.max(
-				...this.state.preguntas.map((pre) => {
-					return pre.category;
-				})
-			),
+			preguntas: this.props.procesos.find(p => p.id === this.state.proceso).preguntas,
 			password: password,
 		});
 
@@ -121,7 +114,7 @@ class CrearAuditoria extends Component {
 	};
 	Seguro = (e) => {
 		// console.log(this.cantSend())
-		if (this.cantSend()) return null;
+		// if (this.cantSend()) return null;
 		// console.log(e)
 		e.preventDefault();
 		Swal.fire({
@@ -156,9 +149,33 @@ class CrearAuditoria extends Component {
 	};
 
 	handleChangeSelectAuditor = (e) => {
-		// console.log("This is E", e)
+		console.log("This is E", e.target)
+
+		var newAuditor = [...this.state.auditor]
+
+		switch (e.target.name) {
+			case "auditor1":
+				newAuditor[0] = e.target.value;
+				break;
+
+			case "auditor2":
+				newAuditor[1] = e.target.value;
+				break;
+
+			case "auditor3":
+				newAuditor[2] = e.target.value;
+				break;
+
+			case "auditor4":
+				newAuditor[3] = e.target.value;
+				break;
+			
+			default:
+				break
+		}
+
 		this.setState({
-			auditor: e.target.value,
+			auditor: newAuditor,
 		});
 	};
 
@@ -187,6 +204,28 @@ class CrearAuditoria extends Component {
 
 		if (userLevel != 0) return <Redirect to="/" />;
 
+		if (!users) return null;
+
+		// console.log("CrearAuditoriaUsers", users)
+
+		const filtUsers = this.sortByKey([...users], "lastName").filter(u => u.userLevel !== 0)
+
+		var auditorCount = (this.state.area !== "") ? ([...areas].find(a => a.id === this.state.area)).urgencia : 0;
+
+		switch (auditorCount) {
+			case 2:
+				auditorCount = [1, 2, 3];
+				break;
+			case 3:
+				auditorCount = [1, 2, 3, 4];
+				break;
+			default:
+				auditorCount = [1, 2];
+				break;
+		}
+
+		const layerName = ["Admin", "A", "B", "C", "D"]
+
 		// console.log(this.state.preguntas)
 		return (
 			<div className="">
@@ -207,35 +246,8 @@ class CrearAuditoria extends Component {
 							<form className="" onSubmit={this.Seguro}>
 								
 								<div className="form-2">
+									
 									<div className="limit-width">
-										{/* <span className="center-box">
-											{bText[lang].area_proceso.proceso_corresponde}
-										</span> */}
-										<Select
-											labelId="select-filter"
-											id="auditor"
-											value={this.state.auditor}
-											onChange={this.handleChangeSelectAuditor}
-											// style={{width: `${100}%`}}
-											className="this-is-also-input"
-											displayEmpty
-											disableUnderline
-											// placeholder={<p>bText[lang].area_proceso.proceso_corresponde</p>}
-										>
-											<MenuItem value="" disabled>
-												<div className="placeholder-color">
-													{text[lang].auditorias.crearAuditoria.auditor}
-												</div>
-											</MenuItem>
-											{users && this.sortByKey([...users], "lastName").filter(u => u.userLevel !== 0).map(a => {
-												return <MenuItem className="text-color" key={a.id} value={a.id}>{a.lastName}, {a.firstName}</MenuItem>
-											})}
-										</Select>
-									</div>
-									<div className="limit-width">
-										{/* <span className="center-box">
-											{bText[lang].area_proceso.proceso_corresponde}
-										</span> */}
 										<Select
 											labelId="select-filter"
 											id="proceso"
@@ -257,6 +269,8 @@ class CrearAuditoria extends Component {
 											})}
 										</Select>
 									</div>
+
+
 									<div className="limit-width">
 										{/* <span className="center-box">
 											{bText[lang].area_proceso.proceso_corresponde}
@@ -270,6 +284,7 @@ class CrearAuditoria extends Component {
 											className="this-is-also-input"
 											displayEmpty
 											disableUnderline
+											disabled={this.state.proceso === ""}
 											// placeholder={<p>bText[lang].area_proceso.proceso_corresponde</p>}
 										>
 											<MenuItem value="" disabled>
@@ -277,11 +292,44 @@ class CrearAuditoria extends Component {
 													{text[lang].auditorias.crearAuditoria.area}
 												</div>
 											</MenuItem>
-											{areas && this.sortByKey([...areas], "area").map(a => {
+											{areas && this.sortByKey([...areas], "area").filter(a => a.proceso === this.state.proceso).map(a => {
 												return <MenuItem className="text-color" key={a.id} value={a.id}>{a.area}</MenuItem>
 											})}
 										</Select>
 									</div>
+
+									{/* {Aquí empieza lo nuevo} */}
+									{this.state.area !== "" ? (
+										auditorCount && auditorCount.map(layer => {
+											return (<div key={layer} className="limit-width">
+														{/* {console.log(auditorCount)}
+														{} */}
+														<Select
+															labelId="select-filter"
+															name={"auditor" + layer.toString()}
+															value={this.state.auditor[layer-1]}
+															onChange={this.handleChangeSelectAuditor}
+															// style={{width: `${100}%`}}
+															className="this-is-also-input"
+															displayEmpty
+															disableUnderline
+															// placeholder={<p>bText[lang].area_proceso.proceso_corresponde</p>}
+														>
+															<MenuItem value="" disabled>
+																<div className="placeholder-color">
+																	{text[lang].auditorias.crearAuditoria.auditor} - {layerName[layer]}
+																</div>
+															</MenuItem>
+															{filtUsers && filtUsers.filter(u => u.userLevel === layer).map(a => {
+																return <MenuItem className="text-color" key={a.id} value={a.id}>{a.lastName}, {a.firstName}</MenuItem>
+															})}
+														</Select>
+													</div>)
+										})
+									) : (null)}
+									
+
+									{/* {Aquí empieza lo nuevo} */}
 									<div className="date-container">
 
 										<span className="fecha">
@@ -324,87 +372,7 @@ class CrearAuditoria extends Component {
 							</form>
 						</div>
 					</div>
-					<div className="">
-						<div className="">
-							<div className="margin-bottom">
-								{this.state.preguntas &&
-									this.state.preguntas.map((pregunta, index) => {
-										return (
-											<div className="form-1 overwrite-margin" key={index}>
-												<div className="nueva-pregunta">
-													<div className="nueva-pregunta-index">
-														{index + 1}.
-													</div>
 
-													<div className="nueva-pregunta-main">
-														{pregunta[lang]}
-													</div>
-
-													<div
-														className="nueva-pregunta-delete"
-														onClick={() => {
-															this.handleDelete(pregunta.id);
-														}}
-													>
-														<FontAwesomeIcon icon={faTrashAlt} />
-													</div>
-												</div>
-											</div>
-										);
-									})}
-							</div>
-							
-							<Dialog
-								open={this.state.openB}
-								onClose={this.handleClose}
-								aria-labelledby="form-dialog-title"
-								TransitionComponent={Transition}
-							>
-								<DialogTitle id="form-dialog-title">
-									{text[lang].auditorias.crearAuditoria.seleccionar_pregunta}
-								</DialogTitle>
-								<DialogContent>
-									<DialogContentText>
-										{text[lang].auditorias.crearAuditoria.text1}
-										<Link
-											to="/crear-pregunta"
-											target="_blank"
-											rel="noopener noreferrer"
-											className="red-text"
-										>
-											{text[lang].auditorias.crearAuditoria.text2}
-										</Link>
-										{text[lang].auditorias.crearAuditoria.text3}
-									</DialogContentText>
-									<Autocomplete
-										id="valueB"
-										name="valueB"
-										options={this.props.preguntas}
-										onChange={this.handleChangeAutocomplete}
-										getOptionLabel={(option) => option[lang]}
-										renderInput={(params) => (
-											<TextField
-												{...params}
-												label="Preguntas"
-												variant="outlined"
-											/>
-										)}
-									/>
-								</DialogContent>
-								<DialogActions>
-									<Button onClick={this.handleCloseSave} color="primary">
-										{text[lang].auditorias.crearAuditoria.agregar}
-									</Button>
-									<Button onClick={this.handleClose} color="secondary">
-										{text[lang].auditorias.crearAuditoria.cancelar}
-									</Button>
-								</DialogActions>
-							</Dialog>
-						</div>
-					</div>
-				</div>
-				<div className="footer-single">
-					<button className="add-question" onClick={this.handleClickOpen}>Agregar pregunta</button>
 				</div>
 				
 				<div>

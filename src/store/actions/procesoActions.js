@@ -4,6 +4,9 @@ export const createProceso = (proceso) => {
         const firestore = getFirestore();
         const profile = getState().firebase.profile;
         const authorId = getState().firebase.auth.uid;
+        
+        console.log("Pasa por actionProceso", proceso)
+
         firestore.collection('procesos').add({
             ...proceso,
             authorFirstName: profile.firstName,

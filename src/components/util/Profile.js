@@ -50,11 +50,11 @@ class Profile extends Component {
                                         </Link>
                                         <Link
                                             className="form-1 overwrite-margin center-box default-height" 
-                                            to="/crear-area-proceso/area">{bText[lang].area_proceso.crear_area}
+                                            to="/crear-area">{bText[lang].area_proceso.crear_area}
                                         </Link>
                                         <Link
                                             className="form-1 overwrite-margin center-box default-height" 
-                                            to="/crear-area-proceso/proceso">{bText[lang].area_proceso.crear_proceso}
+                                            to="/crear-proceso">{bText[lang].area_proceso.crear_proceso}
                                         </Link>
                                 </div>
                                 
