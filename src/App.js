@@ -20,6 +20,7 @@ import MainProceso from './components/auditorias/MainProceso';
 import Areas from './components/auditorias/Areas';
 import Area from './components/areas&procesos/Area'
 import Proceso from './components/areas&procesos/Proceso'
+import DashboardProcesos from './components/areas&procesos/DashboardProcesos'
 
 
 class App extends Component {
@@ -32,8 +33,8 @@ class App extends Component {
           <Navbar />
           <Switch>
             <Route exact path={path.auditorias} component={DashboardAuditorias}/>
-            <Route path={path.mainproceso} component={MainProceso}/>
-            <Route path={path.areas} component={Areas}/>
+            {/* <Route path={path.mainproceso} component={MainProceso}/>
+            <Route path={path.areas} component={Areas}/> */}
             <Route path={path.auditoria} component={DetallesAuditoria} />
             <Route path={path.profile} component={Profile} />
             <Route path={path.sign_in} component={SignIn} />
@@ -49,7 +50,9 @@ class App extends Component {
             <Route path={path.change_password} component={ChangePassword} />
             <Route path={path.editar_auditoria_redirect} component={EditarAuditoria} />
             <Route path="/crear-area" component={Area} />
-            <Route path="/crear-proceso" component={Proceso} />
+            <Route exact path="/crear-proceso" component={Proceso} />
+            <Route path="/procesos" component={DashboardProcesos} />
+            <Route path="/crear-proceso/:id" component={Proceso} />
           </Switch>
         </div>
       </BrowserRouter>

@@ -23,7 +23,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
 
-import { createProceso } from "../../store/actions/procesoActions";
+import { createProceso, getProceso, editProceso } from "../../store/actions/procesoActions";
 // import { createArea } from "../../store/actions/areaActions";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -46,11 +46,10 @@ class Proceso extends Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 
-		// console.log("Pasa por es submit", this.state)
+		const id = this.props.match.params.id
 
-		this.props.createProceso({
+		const proceso = {
 			proceso: this.state.proceso,
-			// Hacer lo mismo que en crear auditorias
 			preguntas: this.state.preguntas.map((pre) => {
 				return pre.id;
 			}),
@@ -59,10 +58,20 @@ class Proceso extends Component {
 					return pre.category;
 				})
 			),
-		})
+		}
+		
+		if (!id) {
+			this.props.createProceso(proceso)
+		} else {
+			console.log("Si llegamos a esto", id, proceso)
+			this.props.editProceso(id, proceso)
+		}
+		// console.log("Pasa por es submit", this.state)
+
+		
 		
 
-		this.props.history.push("/profile"); //Esto se cambiará según el contexto
+		this.props.history.push("/procesos"); //Esto se cambiará según el contexto
 	};
 
 	handleChange = (e) => {
@@ -101,7 +110,7 @@ class Proceso extends Component {
 	};
 
 	handleCancel = () => {
-		this.props.history.push("/");
+		this.props.history.push("/procesos");
 	};
 	handleDelete = (id) => {
 		const newPreguntas = this.state.preguntas.filter(
@@ -150,10 +159,27 @@ class Proceso extends Component {
 		});
 	};
 
+	componentDidMount() {
+		const id = this.props.match.params.id
+		
+		if (!id) return null;
+
+		this.props.getProceso(id).then((res) => {
+			this.setState({
+				preguntas: res.preguntas.map(id => {
+					return this.props.preguntas.find(pre => pre.id === id)
+				}),
+				proceso: res.proceso,
+			})
+		})
+	}
+
     render() {
 		var { path, pathName } = require("../../config/config");
 		const bText = require("../../config/language");
 		const { auth, userLevel, lang, procesos } = this.props;
+
+		const layerName = ["Admin", "D", "C", "B", "A"]
 
 		if (!auth.uid) return <Redirect to="/signin" />;
 
@@ -162,16 +188,17 @@ class Proceso extends Component {
 		if (userLevel != 0) return <Redirect to="/" />;
 
 		// console.log(this.props)
+		// console.log(this.state)
 		return (
 			<div className="">
 				<div className="padre-titulo mobile">
 					<div className="titulo destroy-on-mobile">
-						<Volver where="/profile"/>
+						<Volver where="/procesos"/>
 					</div>
 					<div className="titulo">
 						<h2 className="">
 							{/* {text[lang].auditorias.crearAuditoria.crear_auditoria} */}
-							{bText[lang].area_proceso.crear} {bText[lang].area_proceso.proceso}
+							{!this.props.match.params.id ? bText[lang].area_proceso.crear : "Editar##"} {bText[lang].area_proceso.proceso}
 						</h2>
 					</div>
 				</div>
@@ -185,6 +212,7 @@ class Proceso extends Component {
                                     <input
                                         type="text"
                                         id="proceso"
+										value={this.state.proceso}
                                         placeholder={bText[lang].area_proceso.Proceso}
                                         onChange={this.handleChange}
                                     />
@@ -206,12 +234,18 @@ class Proceso extends Component {
 													{index + 1}.
 												</div>
 
+												
+
 												<div className="nueva-pregunta-main">
 													{pregunta[lang]}
 												</div>
 
+												<div className="nueva-pregunta-layer">
+													{layerName[pregunta.category]}
+												</div>
+
 												<div
-													className="nueva-pregunta-delete"
+													className="nueva-pregunta-delete hover-cursor"
 													onClick={() => {
 														this.handleDelete(pregunta.id);
 													}}
@@ -313,6 +347,8 @@ const mapStateToProps = (state) => {
 const mapDispatchtoProps = (dispatch) => {
 	return {
 		createProceso: (proceso) => dispatch(createProceso(proceso)),
+		getProceso: (id) => dispatch(getProceso(id)),
+		editProceso: (id, proceso) => dispatch(editProceso(id, proceso)),
 		// createArea: (area) => dispatch(createArea(area)),
 	};
 };

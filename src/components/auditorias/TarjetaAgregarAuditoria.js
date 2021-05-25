@@ -5,9 +5,14 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
-const TarjetaAgregarAuditoria = () => {
+const TarjetaAgregarAuditoria = (props) => {
+
+	const { where } = props
+
+	const whereToGo = where ? where : "/crear-auditoria";
+
 	return (
-		<Link to="/crear-auditoria" className="tarjeta-auditoría center-box">
+		<Link to={whereToGo} className="tarjeta-auditoría center-box">
 			<div className="add-symbol">
 				<FontAwesomeIcon size='5x' icon={faPlus} />
 			</div>

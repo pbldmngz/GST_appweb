@@ -224,7 +224,7 @@ class CrearAuditoria extends Component {
 				break;
 		}
 
-		const layerName = ["Admin", "A", "B", "C", "D"]
+		const layerName = ["Admin", "D", "C", "B", "A"]
 
 		// console.log(this.state.preguntas)
 		return (

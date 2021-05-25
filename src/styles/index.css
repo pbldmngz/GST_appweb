@@ -1088,6 +1088,22 @@ input{
   align-items: center;
 }
 
+.nueva-pregunta-layer {
+  /* background-color: #002D73; */
+  border: 2px solid #002D73;
+  color: #002D73;
+  font-weight: bold;
+  width: 5%;
+  /* text-align: center; */
+  margin-right: 10px;
+  /* color: #D0D3D4; */
+  border-radius: 5px;
+
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}
+
 .nueva-pregunta-delete {
   /* background-color: blueviolet; */
   width: 5%;
@@ -1099,7 +1115,7 @@ input{
 
 .nueva-pregunta-main {
   /* background-color: brown; */
-  width: 90%;
+  width: 85%;
 }
 
 .margin-bottom {
