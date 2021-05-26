@@ -40,6 +40,7 @@ class DashboardAuditorias extends Component {
         // console.log("userLevel: ", userLevel)
         // console.log("respuestas", respuestas)
         // if (!lang) return null;
+        // console.log("Calling from DashboardAuditorias", this.props)
 
 
         // ---> Con esto los usuarios no ven las que ya respondieron <---
@@ -56,8 +57,21 @@ class DashboardAuditorias extends Component {
                 return ((x < y) ? -1 : ((x > y) ? 1 : 0));
             });
         }
+
+        var whatAuditorias = auditorias ? [...auditorias] : []
+
+        console.log(this.props.match.params)
+
+        if (this.props.match.params.proceso && this.props.match.params.proceso !== " ") {
+            // console.log("nope")
+            whatAuditorias = whatAuditorias.filter(a => a.proceso === this.props.match.params.proceso)
+        }
+
+        if (this.props.match.params.area) {
+            whatAuditorias = whatAuditorias.filter(a => a.area === this.props.match.params.area)
+        }
     
-        var orderedAudit = auditorias ? [...auditorias] : [];
+        var orderedAudit = whatAuditorias ? [...whatAuditorias] : [];
 
         var filter_value = "fecha_fin";
 
@@ -151,14 +165,17 @@ class DashboardAuditorias extends Component {
         // const botonReturn = (userLevel === 0) ? (
         //     <div className="dashboard-extra-space">{text[lang].return}</div>
         // ): null;
-
+        const whereToGo = this.props.match.params.proceso ? "/areas/" + this.props.match.params.proceso : "/";
 
         if (filteredAuditorias) {
             return (
                 <div className="padre-padre-titulo">
                     <div className="padre-titulo mobile">
                         <div className="titulo destroy-on-mobile">
-                            <Volver/>
+                            {(this.props.match.params.proceso) ? (
+                                <Volver where={whereToGo} />
+                            ) : (null)}
+                            
                         </div>
                         <div className="titulo">
                             <h2>{text[lang].auditorias.dashboardAuditorias.auditorias}</h2>
@@ -176,6 +193,7 @@ class DashboardAuditorias extends Component {
                             lang={lang}
                             uid={auth.uid}
                             users={users}
+                            hasTrace={(this.props.match.params.proceso) ? this.props.match.params : null}
                         />
                     </div>
                 </div>

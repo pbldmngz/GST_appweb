@@ -6,6 +6,7 @@ lang.spanish = {
     cargando: "Cargando...",
     area_proceso: {
         crear: "Crear",
+        editar: "Editar",
         area: "área",
         Area: "Área",
         proceso: "proceso",
@@ -18,13 +19,18 @@ lang.spanish = {
         media: "Prioridad media",
         prioridad: "Prioritario",
         alta_prioridad: "Alta prioridad",
+        crear_area: "Guardar",
+        crear_proceso: "Guardar",
+        agregar_pregunta: "Agregar pregunta",
+        procesos: "Procesos",
+        areas: "Áreas",
     },
     auditorias: {
         auditorias: {
             nada: "Parece que todo ha estado calmado últimamente",
         },
         crearAuditoria: {
-            crear_auditoria: "Crear auditoria",
+            crear_auditoria: "Asignar auditoria",
             editar_auditoria: "Editar auditoria",
             nombre_auditoria: "Nombre de la auditoria",
             auditor: "Auditor",
@@ -38,7 +44,7 @@ lang.spanish = {
             text1: "Busca y selecciona las preguntas que desees añadir o ",
             text2: " crea una pregunta nueva, ",
             text3: "una vez creada la podrás seleccionar en esta lista.",
-            crear: "Crear",
+            crear: "Asignar",
             editar: "Guardar",
         },
         dashboardAuditorias: {
@@ -169,8 +175,11 @@ lang.english = {
     cargando: "Loading...",
     area_proceso: {
         crear: "Create",
+        editar: "Edit",
         area: "area",
         Area: "Area",
+        procesos: "Processes",
+        areas: "Areas",
         proceso: "process",
         Proceso: "Process",
         urgencia: "Priority",
@@ -181,13 +190,17 @@ lang.english = {
         media: "Medium priority",
         prioridad: "Priority",
         alta_prioridad: "High priority",
+        crear_area: "Save",
+        crear_proceso: "Save",
+        agregar_pregunta: "Add question",
+
     },
     auditorias: {
         auditorias: {
             nada: "It seems that everything has been calm lately",
         },
         crearAuditoria: {
-            crear_auditoria: "Create new audit",
+            crear_auditoria: "Assign audit",
             editar_auditoria: "Edit",
             nombre_auditoria: "Audit name",
             auditor: "Auditor",
@@ -201,7 +214,7 @@ lang.english = {
             text1: "Search and select the question you wish to add, or ",
             text2: " create a new question, ",
             text3: "once created, you will find it within this list.",
-            crear: "Create",
+            crear: "Assign",
             editar: "Save",
         },
         dashboardAuditorias: {

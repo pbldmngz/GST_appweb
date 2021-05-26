@@ -48,13 +48,17 @@ class Profile extends Component {
                                             className="form-1 overwrite-margin center-box default-height" 
                                             to={path.preguntas}>{bText[lang].opciones.preguntas}
                                         </Link>
-                                        <Link
+                                        {/* <Link
                                             className="form-1 overwrite-margin center-box default-height" 
                                             to="/crear-area">{bText[lang].area_proceso.crear_area}
-                                        </Link>
+                                        </Link> */}
                                         <Link
                                             className="form-1 overwrite-margin center-box default-height" 
                                             to="/procesos">Procesos##
+                                        </Link>
+                                        <Link
+                                            className="form-1 overwrite-margin center-box default-height"
+                                            to="/areas">Areas##
                                         </Link>
                                 </div>
                                 

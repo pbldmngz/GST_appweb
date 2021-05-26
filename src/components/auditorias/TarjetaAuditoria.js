@@ -122,7 +122,7 @@ class TarjetaAuditoria extends Component {
 			userLevel == 0 ? (
 				<div className="button-group">
 					{graphOrWarn}
-					<Link to={path.editar_auditoria + "/" + auditoria.id}>
+					<Link to={path.crear_auditoria + "/" + auditoria.id}>
 						<div className="boton extra-margin-botones">
 							<FontAwesomeIcon icon={faEdit} />
 						</div>
@@ -180,8 +180,8 @@ class TarjetaAuditoria extends Component {
 				</div>
 
 				{bText[lang].auditorias.tarjetaAuditoria.auditor}: {findUser && findUser.map(u => {
-					return u ? (u.lastName + ", " + u.firstName) : "";
-				})}
+					return u ? (u.firstName[0] + ". " + u.lastName) : "";
+				}).join(" & ")}
 				
 				<p>{findArea && findProceso ? findProceso.proceso + ", " + findArea.area : null}</p>
 

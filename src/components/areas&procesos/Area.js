@@ -19,15 +19,18 @@ class Area extends Component {
 	};
 
 	handleCancel = () => {
-		this.props.history.push("/profile");
+		const whereToGo = (this.props.match.params.proceso) ? "/areas/" + this.props.match.params.proceso : "/profile";
+
+		this.props.history.push(whereToGo);
 	};
 
 	handleSubmit = (e) => {
 		e.preventDefault();
+		const whereToGo = (this.props.match.params.proceso) ? "/areas/" + this.props.match.params.proceso : "/profile";
 		
 		this.props.createArea(this.state)
 		
-		this.props.history.push("/profile"); //Esto se cambiará según el contexto
+		this.props.history.push(whereToGo); //Esto se cambiará según el contexto
 	};
 
 	handleChange = (e) => {
@@ -71,6 +74,14 @@ class Area extends Component {
 		});
 	};
 
+	componentDidMount() {
+		if (this.props.match.params.proceso) {
+			this.setState({
+				proceso: this.props.match.params.proceso,
+			})
+		}
+	}
+
     render() {
 		var { path, pathName } = require("../../config/config");
 		const bText = require("../../config/language");
@@ -84,12 +95,15 @@ class Area extends Component {
 
 		// const tipo = this.props.match.params.tipo
 
-		// console.log(this.props)
+		console.log(this.props.match)
+
+		const whereToGo = (this.props.match.params.proceso) ? "/areas/" + this.props.match.params.proceso : "/profile";
+
 		return (
 			<div className="">
 				<div className="padre-titulo mobile">
 					<div className="titulo destroy-on-mobile">
-						<Volver where="/profile"/>
+						<Volver where={whereToGo}/>
 					</div>
 					<div className="titulo">
 						<h2 className="">
@@ -183,7 +197,7 @@ class Area extends Component {
 						</div>
 						<div className="center-box">
 							<button className="aceptar" onClick={this.Seguro}>
-								{bText[lang].auditorias.crearAuditoria.crear}
+								{bText[lang].area_proceso.crear_area}
 							</button>
 						</div>
 					</div>

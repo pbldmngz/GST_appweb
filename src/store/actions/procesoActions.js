@@ -5,7 +5,7 @@ export const createProceso = (proceso) => {
         const profile = getState().firebase.profile;
         const authorId = getState().firebase.auth.uid;
         
-        console.log("Pasa por actionProceso", proceso)
+        // console.log("Pasa por actionProceso", proceso)
 
         firestore.collection('procesos').add({
             ...proceso,
@@ -28,7 +28,7 @@ export const editProceso = (id, proceso) => {
         const profile = getState().firebase.profile;
         const authorId = getState().firebase.auth.uid;
 
-        console.log("Llegamos tan lejos?")
+        // console.log("Llegamos tan lejos?")
 
         firestore.collection("procesos").doc(id).update({
             ...proceso,

@@ -6,7 +6,7 @@ import CambiarIdioma from '../util/CambiarIdioma'
 import TarjetaAgregarAuditoria from './TarjetaAgregarAuditoria'
 
 export default function Auditorias(props) {
-    const { userLevel, auditorias, alreadyDone, lang, uid, users } = props
+    const { userLevel, auditorias, alreadyDone, lang, uid, users, hasTrace } = props
     var { path } = require('../../config/config');
     const text = require('../../config/language');
 
@@ -22,7 +22,7 @@ export default function Auditorias(props) {
         {(pertinent && pertinent.length !== 0) || (userLevel === 0) ? (
             <div className="arroz-chino">
             {/* Esto es muy mejorable */}
-                {(userLevel === 0) ? <TarjetaAgregarAuditoria/> : null}
+                {(userLevel === 0) ? <TarjetaAgregarAuditoria hasTrace={hasTrace}/> : null}
 
                 {pertinent && pertinent.map(auditoria => {
 

@@ -198,7 +198,7 @@ class Proceso extends Component {
 					<div className="titulo">
 						<h2 className="">
 							{/* {text[lang].auditorias.crearAuditoria.crear_auditoria} */}
-							{!this.props.match.params.id ? bText[lang].area_proceso.crear : "Editar##"} {bText[lang].area_proceso.proceso}
+							{!this.props.match.params.id ? bText[lang].area_proceso.crear : bText[lang].area_proceso.editar} {bText[lang].area_proceso.proceso}
 						</h2>
 					</div>
 				</div>
@@ -309,7 +309,7 @@ class Proceso extends Component {
 
 
 				<div className="footer-single">
-					<button className="add-question" onClick={this.handleClickOpen}>Agregar pregunta##</button>
+					<button className="add-question" onClick={this.handleClickOpen}>{bText[lang].area_proceso.agregar_pregunta}</button>
 				</div>
 
 				<div>
@@ -321,7 +321,7 @@ class Proceso extends Component {
 						</div>
 						<div className="center-box">
 							<button className="aceptar" onClick={this.Seguro}>
-								{bText[lang].auditorias.crearAuditoria.crear}
+								{bText[lang].area_proceso.crear_proceso}
 							</button>
 						</div>
 					</div>

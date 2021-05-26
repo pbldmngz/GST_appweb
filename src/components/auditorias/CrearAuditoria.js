@@ -1,5 +1,10 @@
 import React, { Component, useState } from "react";
-import { createAuditoria } from "../../store/actions/auditoriaActions";
+// import { createAuditoria } from "../../store/actions/auditoriaActions";
+import {
+	createAuditoria,
+	editAuditoria,
+	getAuditoria,
+} from "../../store/actions/auditoriaActions";
 import { NavLink, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
@@ -60,17 +65,10 @@ class CrearAuditoria extends Component {
 	};
 	handleSubmit = (e) => {
 		e.preventDefault();
-		var generator = require('generate-password');
 
-		var password = generator.generate({
-			length: 8,
-			numbers: true,
-			uppercase: false,
-			lowercase: false,
-		});
+		const id = this.props.match.params.id;
 
-		// console.log(this.state)
-		this.props.createAuditoria({
+		var toSend = {
 			auditoria: this.state.auditoria,
 			auditor: this.state.auditor.filter(a => a !== ""),
 			area: this.state.area,
@@ -78,10 +76,30 @@ class CrearAuditoria extends Component {
 			fecha_inicio: this.state.fecha_inicio,
 			fecha_fin: this.state.fecha_fin,
 			preguntas: this.props.procesos.find(p => p.id === this.state.proceso).preguntas,
-			password: password,
-		});
+			// password: password,
+		}
 
-		this.props.history.push("/"); //Esto se cambiará según el contexto
+		if (!id) {
+			var generator = require('generate-password');
+
+			var password = generator.generate({
+				length: 8,
+				numbers: true,
+				uppercase: false,
+				lowercase: false,
+			});
+
+			toSend.password = password
+			// console.log(this.state)
+			this.props.createAuditoria(toSend);
+		} else {
+			toSend.password = this.state.password;
+
+			this.props.editAuditoria(id, toSend);
+		}
+		const whereToGo = (this.props.match.params.proceso) ? ("/auditorias/" + this.props.match.params.proceso + "/" + this.props.match.params.area) : "/";
+		
+		this.props.history.push(whereToGo); //Esto se cambiará según el contexto
 	};
 
 	handleClickOpen = () => {
@@ -90,7 +108,9 @@ class CrearAuditoria extends Component {
 		});
 	};
 	handleCancel = () => {
-		this.props.history.push("/");
+		const whereToGo = (this.props.match.params.proceso) ? ("/auditorias/" + this.props.match.params.proceso + "/" + this.props.match.params.area) : "/";
+
+		this.props.history.push(whereToGo);
 	};
 	handleDelete = (id) => {
 		const newPreguntas = this.state.preguntas.filter(
@@ -193,6 +213,44 @@ class CrearAuditoria extends Component {
 		return !(this.state.preguntas && (this.state.preguntas.length >= 5) && (this.state.preguntas.length <= 15));
 	}
 
+	componentDidMount() {
+
+		if (this.props.match.params.proceso && this.props.match.params.proceso !== " ") {
+			this.setState({
+				proceso: this.props.match.params.proceso,
+				area: this.props.match.params.area,
+			})
+		} else if (this.props.match.params.area) {
+			this.setState({
+				area: this.props.match.params.area,
+			})
+		}
+
+		const id = this.props.match.params.id;
+
+		if (id) {
+			this.props.getAuditoria(id).then((res) => {
+				// console.log("RES is working", res)
+				this.setState({
+					auditoria: res.auditoria,
+					auditor: res.auditor,
+					area: res.area,
+					proceso: res.proceso,
+					fecha_inicio: res.fecha_inicio.toDate(),
+					fecha_fin: res.fecha_fin.toDate(),
+					preguntas: res.preguntas.map((pre) => {
+						return this.props.preguntas.filter((fil) => fil.id === pre)[0];
+					}),
+					password: res.password,
+				});
+				// console.log("This is Res", res)
+			});
+		}
+		
+		// console.log("Falta que el texto de los inputs se cambie a lo del state", this.state)
+		//Checa el state en la consola, no sale nada
+	}
+
 	render() {
 		var { path, pathName } = require("../../config/config");
 		const text = require("../../config/language");
@@ -206,11 +264,12 @@ class CrearAuditoria extends Component {
 
 		if (!users) return null;
 
-		// console.log("CrearAuditoriaUsers", users)
+		// console.log("PropsMatch", this.props.match.params)
+		
 
 		const filtUsers = this.sortByKey([...users], "lastName").filter(u => u.userLevel !== 0)
 
-		var auditorCount = (this.state.area !== "") ? ([...areas].find(a => a.id === this.state.area)).urgencia : 0;
+		var auditorCount = ((this.state.area !== "" && areas) && areas.includes(this.state.area)) ? ([...areas].find(a => a.id === this.state.area)).urgencia : 0;
 
 		switch (auditorCount) {
 			case 2:
@@ -226,12 +285,14 @@ class CrearAuditoria extends Component {
 
 		const layerName = ["Admin", "D", "C", "B", "A"]
 
+		const whereToGo = (this.props.match.params.proceso) ? ("/auditorias/" + this.props.match.params.proceso + "/" + this.props.match.params.area) : "/";
+
 		// console.log(this.state.preguntas)
 		return (
 			<div className="">
 				<div className="padre-titulo mobile">
 					<div className="titulo destroy-on-mobile">
-						<Volver />
+						<Volver where={whereToGo}/>
 					</div>
 					<div className="titulo">
 						<h2 className="">
@@ -278,7 +339,7 @@ class CrearAuditoria extends Component {
 										<Select
 											labelId="select-filter"
 											id="area"
-											value={this.state.area}
+											value={this.state.area ? this.state.area : ""}
 											onChange={this.handleChangeSelectArea}
 											// style={{width: `${100}%`}}
 											className="this-is-also-input"
@@ -307,7 +368,7 @@ class CrearAuditoria extends Component {
 														<Select
 															labelId="select-filter"
 															name={"auditor" + layer.toString()}
-															value={this.state.auditor[layer-1]}
+															value={this.state.auditor[layer - 1] ? this.state.auditor[layer - 1]: ""}
 															onChange={this.handleChangeSelectAuditor}
 															// style={{width: `${100}%`}}
 															className="this-is-also-input"
@@ -413,6 +474,8 @@ const mapStateToProps = (state) => {
 const mapDispatchtoProps = (dispatch) => {
 	return {
 		createAuditoria: (auditoria) => dispatch(createAuditoria(auditoria)),
+		editAuditoria: (id, auditoria) => dispatch(editAuditoria(id, auditoria)),
+		getAuditoria: (id) => dispatch(getAuditoria(id)),
 	};
 };
 

@@ -7,9 +7,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const TarjetaAgregarAuditoria = (props) => {
 
-	const { where } = props
+	const { where, hasTrace } = props
 
-	const whereToGo = where ? where : "/crear-auditoria";
+	var whereToGo = where ? where : "/crear-auditoria";
+
+	if (hasTrace) {
+		whereToGo = "/crear-auditoria-props/" + hasTrace.proceso + "/" + hasTrace.area
+	}
 
 	return (
 		<Link to={whereToGo} className="tarjeta-auditoría center-box">

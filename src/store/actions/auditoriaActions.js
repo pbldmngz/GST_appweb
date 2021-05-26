@@ -29,6 +29,8 @@ export const editAuditoria = (id, auditoria) => {
         const profile = getState().firebase.profile;
         const authorId = getState().firebase.auth.uid;
 
+        console.log("This is what I get: ", id, auditoria)
+
         firestore.collection("auditorias").doc(id).update({
             ...auditoria,
             updatedAt: new Date(),
