@@ -8,8 +8,15 @@ import { compose } from "redux";
 import TarjetaAgregarAuditoria from '../auditorias/TarjetaAgregarAuditoria'
 import Volver from '../util/Volver'
 
+import { faTrashAlt, faEdit, faChartBar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Swal from "sweetalert2";
+
+import { deleteProceso } from "../../store/actions/procesoActions";
+
 
 class DashboardProcesos extends Component {
+
     render() {
 
         const {procesos, userLevel, lang, auth} = this.props
@@ -36,13 +43,39 @@ class DashboardProcesos extends Component {
                     <TarjetaAgregarAuditoria where="/crear-proceso"/>
                     {procesos && procesos.map(pro => {
                         return (
-                            <Link 
-                                to={"/areas/" + pro.id} 
-                                className="tarjeta-auditoría center-box"
+                            <div
+                                className="tarjeta-auditoría"
                                 key={pro.id}
                             >
-                                {pro.proceso.toUpperCase()}
-                            </Link>
+                                <Link to={"/areas/" + pro.id}  className="tarjeta-proceso-half1">
+                                    {pro.proceso.toUpperCase()}
+                                </Link>
+                                <div className="tarjeta-auditoría-half2">
+                                    <Link to={"/crear-proceso/" + pro.id} className="button">
+                                        <FontAwesomeIcon icon={faEdit} />
+                                    </Link>
+                                    <div className="button hover-cursor" onClick={() => {
+                                        Swal.fire({
+                                            title: "Do you want to save the changes?",
+                                            showDenyButton: true,
+                                            showConfirmButton: true,
+                                            denyButtonText: "Don't save",
+                                            confirmButtonText: "Save",
+                                        }).then((result) => {
+                                            //  Read more about isConfirmed, isDenied below
+                                            if (result.isConfirmed) {
+                                                this.props.deleteProceso(pro.id);
+                                                Swal.fire("Saved!", "", "success");
+                                            } else if (result.isDenied) {
+                                                Swal.fire("Changes are not saved", "", "info");
+                                            }
+                                        });
+                                        //props.deletePregunta(pregunta.id)
+                                    }}>
+                                        <FontAwesomeIcon icon={faTrashAlt} />
+                                    </div>
+                                </div>
+                            </div>
                         )
                     })}
                 </div>
@@ -61,7 +94,13 @@ const mapStateToProps = (state) => {
 	};
 };
 
+const mapDispatchtoProps = (dispatch) => {
+    return {
+        deleteProceso: (id) => dispatch(deleteProceso(id)),
+    };
+};
+
 export default compose(
-	connect(mapStateToProps),
+	connect(mapStateToProps, mapDispatchtoProps),
 	firestoreConnect([{ collection: "procesos" }])
 )(DashboardProcesos);

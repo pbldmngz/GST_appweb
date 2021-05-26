@@ -166,6 +166,8 @@ lang.spanish = {
         cambiar_contrasena: "Cambiar contraseña",
         registrar_auditor: "Registrar nuevo auditor",
         preguntas: "Preguntas",
+        procesos: "Procesos",
+        areas: "Áreas",
     }
 }
 
@@ -336,6 +338,8 @@ lang.english = {
         cambiar_contrasena: "Change password",
         registrar_auditor: "Register new auditor",
         preguntas: "Questions",
+        procesos: "Processes",
+        areas: "Areas",
     }
 }
 

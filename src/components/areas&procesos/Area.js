@@ -9,26 +9,39 @@ import Volver from '../util/Volver'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import { createArea } from "../../store/actions/areaActions";
+import { createArea, editArea, getArea } from "../../store/actions/areaActions";
 
 class Area extends Component {
 
     state = {
 		proceso: "",
 		urgencia: "",
+		area: "",
 	};
 
 	handleCancel = () => {
-		const whereToGo = (this.props.match.params.proceso) ? "/areas/" + this.props.match.params.proceso : "/profile";
+		var whereToGo = (this.props.match.params.proceso) ? "/areas/" + this.props.match.params.proceso : "/profile";
+
+		const id = this.props.match.params.id
+
+		whereToGo = (id) ? "/areas/" + this.state.proceso : whereToGo;
 
 		this.props.history.push(whereToGo);
 	};
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		const whereToGo = (this.props.match.params.proceso) ? "/areas/" + this.props.match.params.proceso : "/profile";
-		
-		this.props.createArea(this.state)
+		var whereToGo = (this.props.match.params.proceso) ? "/areas/" + this.props.match.params.proceso : "/profile";
+				
+		const id = this.props.match.params.id
+
+		whereToGo = (id) ? "/areas/" + this.state.proceso : whereToGo;
+
+		if (!id) {
+			this.props.createArea(this.state)
+		} else {
+			this.props.editArea(id, this.state)
+		}
 		
 		this.props.history.push(whereToGo); //Esto se cambiará según el contexto
 	};
@@ -79,6 +92,15 @@ class Area extends Component {
 			this.setState({
 				proceso: this.props.match.params.proceso,
 			})
+		} else {
+			const id = this.props.match.params.id
+
+			if (!id) return null;
+
+			this.props.getArea(id).then((res) => {
+				// console.log(res)
+				this.setState({...res})
+			})
 		}
 	}
 
@@ -95,7 +117,7 @@ class Area extends Component {
 
 		// const tipo = this.props.match.params.tipo
 
-		console.log(this.props.match)
+		// console.log(this.props.match)
 
 		const whereToGo = (this.props.match.params.proceso) ? "/areas/" + this.props.match.params.proceso : "/profile";
 
@@ -122,6 +144,7 @@ class Area extends Component {
                                     <input
                                         type="text"
                                         id="area"
+										value={this.state.area}
                                         placeholder={bText[lang].area_proceso.Area}
                                         onChange={this.handleChange}
                                     />
@@ -223,6 +246,8 @@ const mapDispatchtoProps = (dispatch) => {
 	return {
 		// createProceso: (proceso) => dispatch(createProceso(proceso)),
 		createArea: (area) => dispatch(createArea(area)),
+		editArea: (id, area) => dispatch(editArea(id, area)),
+		getArea: (id) => dispatch(getArea(id)),
 	};
 };
 

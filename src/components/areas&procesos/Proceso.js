@@ -63,7 +63,7 @@ class Proceso extends Component {
 		if (!id) {
 			this.props.createProceso(proceso)
 		} else {
-			console.log("Si llegamos a esto", id, proceso)
+			// console.log("Si llegamos a esto", id, proceso)
 			this.props.editProceso(id, proceso)
 		}
 		// console.log("Pasa por es submit", this.state)

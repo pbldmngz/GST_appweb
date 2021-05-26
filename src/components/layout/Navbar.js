@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 
 import {signOut} from '../../store/actions/authActions'
 
-import { faUser, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faSignOutAlt, faCog } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
@@ -25,7 +25,7 @@ const Navbar = (props) => {
                 <div className="titulo">
                     <div className="perfil">
                         <Link to={path.profile} className="center-box">
-                            <FontAwesomeIcon icon={faUser} />
+                            <FontAwesomeIcon icon={faCog} />
                         </Link>
                     </div>
                 </div>

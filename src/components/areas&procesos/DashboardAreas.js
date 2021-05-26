@@ -8,6 +8,12 @@ import { compose } from "redux";
 import TarjetaAgregarAuditoria from '../auditorias/TarjetaAgregarAuditoria'
 import Volver from '../util/Volver'
 
+import { faTrashAlt, faEdit, faChartBar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Swal from "sweetalert2";
+
+import { deleteArea } from "../../store/actions/areaActions";
+
 
 class DashboardAreas extends Component {
     render() {
@@ -47,13 +53,38 @@ class DashboardAreas extends Component {
                     <TarjetaAgregarAuditoria where={createWProps}/>
                     {avalAreas && avalAreas.map(area => {
                         return (
-                            <Link 
-                                to={"/auditorias/" + (procesoFilt ? procesoFilt + "/": " /") + area.id}
-                                className="tarjeta-auditoría center-box"
+                            <div
+                                className="tarjeta-auditoría"
                                 key={area.id}
                             >
-                                {area.area}
-                            </Link>
+                                <Link to={"/auditorias/" + (procesoFilt ? procesoFilt + "/" : " /") + area.id} className="tarjeta-proceso-half1">
+                                    {area.area}
+                                </Link>
+                                <div className="tarjeta-auditoría-half2">
+                                    <Link to={"/crear-area/" + area.id} className="button">
+                                        <FontAwesomeIcon icon={faEdit} />
+                                    </Link>
+                                    <div className="button hover-cursor" onClick={() => {
+                                        Swal.fire({
+                                            title: "Do you want to save the changes?",
+                                            showDenyButton: true,
+                                            showConfirmButton: true,
+                                            denyButtonText: "Don't save",
+                                            confirmButtonText: "Save",
+                                        }).then((result) => {
+                                            //  Read more about isConfirmed, isDenied below
+                                            if (result.isConfirmed) {
+                                                this.props.deleteArea(area.id);
+                                                Swal.fire("Saved!", "", "success");
+                                            } else if (result.isDenied) {
+                                                Swal.fire("Changes are not saved", "", "info");
+                                            }
+                                        });
+                                    }}>
+                                        <FontAwesomeIcon icon={faTrashAlt} />
+                                    </div>
+                                </div>
+                            </div>
                         )
                     })}
                 </div>
@@ -73,7 +104,13 @@ const mapStateToProps = (state) => {
 	};
 };
 
+const mapDispatchtoProps = (dispatch) => {
+    return {
+        deleteArea: (id) => dispatch(deleteArea(id)),
+    };
+};
+
 export default compose(
-	connect(mapStateToProps),
+	connect(mapStateToProps, mapDispatchtoProps),
 	firestoreConnect([{ collection: "areas" }])
 )(DashboardAreas);

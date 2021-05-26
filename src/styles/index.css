@@ -674,6 +674,16 @@ h2{
   padding-top: 10px;
 }
 
+.tarjeta-proceso-half1 {
+  /* background-color: crimson; */
+  display: flex;
+  width: 93%;
+  padding-top: 10px;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10%;
+}
+
 .tarjeta-auditoría-half2 {
   /* background-color: cyan; */
   /* color: blue; */
@@ -1096,6 +1106,7 @@ input{
   width: 5%;
   /* text-align: center; */
   margin-right: 10px;
+  margin-left: 10px;
   /* color: #D0D3D4; */
   border-radius: 5px;
 
