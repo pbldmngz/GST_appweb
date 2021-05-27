@@ -31,23 +31,22 @@ class Profile extends Component {
 
                     <div className="">
                         <div className="">
-                            <div className="form-1 overwrite-margin center-box default-height">
-                                {bText[lang].opciones.idioma + ":"} <CambiarIdioma/>
-                            </div>
-                            <Link
-                                className="form-1 overwrite-margin center-box default-height" 
-                                to={path.change_password}>{bText[lang].opciones.cambiar_contrasena}
-                            </Link>
+                            
                             {(userLevel === 0) ? (
-                                <div>
+                                <div className="extra-margin">
                                         <Link
                                             className="form-1 overwrite-margin center-box default-height"
-                                            to={path.sign_up}>{bText[lang].opciones.registrar_auditor}
+                                            to="/procesos">{bText[lang].opciones.procesos}
                                         </Link>
 
                                         <Link
-                                            className="form-1 overwrite-margin center-box default-height" 
+                                            className="form-1 overwrite-margin center-box default-height"
                                             to={path.preguntas}>{bText[lang].opciones.preguntas}
+                                        </Link>
+                                        
+                                        <Link
+                                            className="form-1 overwrite-margin center-box default-height"
+                                            to={path.sign_up}>{bText[lang].opciones.registrar_auditor}
                                         </Link>
 
                                         {/* <Link
@@ -55,18 +54,24 @@ class Profile extends Component {
                                             to="/crear-area">{bText[lang].area_proceso.crear_area}
                                         </Link> */}
 
-                                        <Link
-                                            className="form-1 overwrite-margin center-box default-height" 
-                                        to="/procesos">{bText[lang].opciones.procesos}
-                                        </Link>
+                                        
 
-                                        <Link
+                                        {/* <Link
                                             className="form-1 overwrite-margin center-box default-height"
                                         to="/areas">{bText[lang].opciones.areas}
-                                        </Link>
+                                        </Link> */}
                                 </div>
                                 
                             ) : null}
+
+                            <Link
+                                className="form-1 overwrite-margin center-box default-height"
+                                to={path.change_password}>{bText[lang].opciones.cambiar_contrasena}
+                            </Link>
+
+                            <div className="form-1 overwrite-margin center-box default-height">
+                                {bText[lang].opciones.idioma + ":"} <CambiarIdioma />
+                            </div>
                         </div>
                     </div>
                 </div>

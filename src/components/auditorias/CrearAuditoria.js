@@ -269,17 +269,28 @@ class CrearAuditoria extends Component {
 
 		const filtUsers = this.sortByKey([...users], "lastName").filter(u => u.userLevel !== 0)
 
-		var auditorCount = ((this.state.area !== "" && areas) && areas.includes(this.state.area)) ? ([...areas].find(a => a.id === this.state.area)).urgencia : 0;
+		// console.log("1:", [...areas].map((ar) => { return ar.id }).includes(this.state.area), areas, this.state.area)
 
+		const temp1 = [...areas].find(a => a.id === this.state.area)
+
+
+
+		// console.log("2", temp1 ? temp1.urgencia : 0)
+
+		var auditorCount = ((this.state.area !== "" && areas) && [...areas].map((ar) => { return ar.id }).includes(this.state.area)) ? (temp1 ? temp1.urgencia : 0) : 0;
+		
+		// console.log("AC:", auditorCount)
+		
+		
 		switch (auditorCount) {
 			case 2:
-				auditorCount = [1, 2, 3];
+				auditorCount = [2, 3, 4];
 				break;
 			case 3:
 				auditorCount = [1, 2, 3, 4];
 				break;
 			default:
-				auditorCount = [1, 2];
+				auditorCount = [3, 4];
 				break;
 		}
 
@@ -360,6 +371,7 @@ class CrearAuditoria extends Component {
 									</div>
 
 									{/* {Aquí empieza lo nuevo} */}
+									{console.log(auditorCount)}
 									{this.state.area !== "" ? (
 										auditorCount && auditorCount.map(layer => {
 											return (<div key={layer} className="limit-width">

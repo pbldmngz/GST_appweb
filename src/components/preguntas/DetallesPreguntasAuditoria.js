@@ -59,8 +59,8 @@ class DetallesPreguntasAuditoria extends Component {
                         </h2>
                     </div>
                 </div>
-                <div className="form-1 white">
-                    <div className="form-2">
+                <div className="">
+                    <div className="">
                         {this.state.preguntas && this.state.preguntas.map(pregunta => {
                             return (
                                 <div className="" key={pregunta.id}>

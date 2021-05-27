@@ -22,6 +22,7 @@ import Area from './components/areas&procesos/Area'
 import Proceso from './components/areas&procesos/Proceso'
 import DashboardProcesos from './components/areas&procesos/DashboardProcesos'
 import DashboardAreas from './components/areas&procesos/DashboardAreas'
+import SelectorHerramientas from './components/herramientas/SelectorHerramientas';
 
 
 class App extends Component {
@@ -33,6 +34,7 @@ class App extends Component {
         <div className="App">
           <Navbar />
           <Switch>
+            <Route path="/herramientas" component={SelectorHerramientas} />
             <Route exact path={path.auditorias} component={DashboardAuditorias} />
             <Route exact path={"/auditorias/:proceso/:area"} component={DashboardAuditorias} />
             {/* <Route path={path.mainproceso} component={MainProceso}/>

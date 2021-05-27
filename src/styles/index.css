@@ -436,7 +436,7 @@ h2{
   /* width: 100%; */
 
   padding: 1vw;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
   /* width: 70vw; */
   display: flex;
 
@@ -725,6 +725,19 @@ h2{
   /* width: 100%; */
   /* background-color: crimson; */
   /* width: 100%; */
+}
+
+.justify-text {
+  text-align: justify;
+}
+
+.only2row {
+  grid-template-columns: repeat(2, 1fr) !important;
+  width: 100%;
+}
+
+@media (max-width: 1000px) {
+  .only2row { grid-template-columns: repeat(1, 1fr) !important;}
 }
 
 @media (min-width: 100px) {
@@ -1168,3 +1181,48 @@ input{
   height: 10vh;
 }
 
+/* .detalles-main {
+  width: 50%;
+} */
+
+.enable-overflow {
+  /* height: 300px; */
+  /* overflow-x: hidden;
+  overflow-y: scroll; */
+  padding-right: 10px;
+}
+
+.new-class {
+  padding: 15px;
+}
+
+.max-width {
+  width: 100%;
+}
+
+.card-title {
+  color: black !important;
+}
+
+.align-center-bot {
+  display: flex;
+  align-content: center;
+  justify-content:center;
+  background-color: #ec407a;
+  height: 10%;
+}
+
+.new-class-2 {
+  height: 90%;
+}
+
+.new-class-3 {
+  display: flex;
+  align-content: center;
+  justify-content:center;
+  height: 30%;
+}
+
+.new-parent {
+  display:block;
+}

@@ -13,6 +13,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 
+import PieChart from '../util/gráficas/PieChart';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -35,7 +37,7 @@ const DetallesPregunta = (props) => {
         setOpen(false);
     };
 
-    const count = {
+    var count = {
         yes: 0,
         no: 0
     }
@@ -47,6 +49,17 @@ const DetallesPregunta = (props) => {
             count.no += 1;
         }
     });
+
+    count = [
+        { id: "no", label: "no", value: count["no"] },
+        { id: "yes", label: "yes", value: count["yes"] }
+    ]
+
+    const actualText = ((count[0]["value"] + count[1]["value"]) !== 0) ? (
+        Math.round((count[0]["value"]/(count[0]["value"] + count[1]["value"]))*100)
+    ) : (0);
+
+    console.log("--->", count)
 
     const justificaciones = pregunta.respuestas.map(pregunta => {
         return (
@@ -61,6 +74,14 @@ const DetallesPregunta = (props) => {
         4: "D",
     }
 
+    const reaction = (lang) ? ([
+        bText[lang].preguntas.crearPregunta.fix,
+        bText[lang].preguntas.crearPregunta.contramedidas_temporales,
+        bText[lang].preguntas.crearPregunta.parar_produccion,
+    ]) : ([
+        "###", "###", "###",
+    ]);
+
     // console.log("Esto son la respuestas:", justificaciones)
     // const pregunta = {}
     // const preguntaRespuestas = [] //Array de diccionarios
@@ -68,22 +89,29 @@ const DetallesPregunta = (props) => {
     // { console.log("login pregunta --> DePre", pregunta) }
     if (pregunta.createdAt) {
         return (
-            <div className="container">
-                <div className="detalles-pregunta">
-                    <div className="input-field">
-                        {/* {console.log("This is pregunta", pregunta)} */}
-                        <span className="card-title">{pregunta[lang]}</span>
-                        <p><b>{bText[lang].preguntas.detallesPregunta.descripcion}: </b>{pregunta.description}</p>
-                        <p><b>{bText[lang].preguntas.detallesPregunta.categoria}: </b>{categoria[pregunta.category]}</p>
-                        <p><b>{bText[lang].preguntas.detallesPregunta.plan_reaccion}: </b>{pregunta.reaction_plan}</p>
-                        <p><b>{bText[lang].preguntas.detallesPregunta.creado_por}: </b>{pregunta.createdBy}</p>
-                        <p><b>{bText[lang].preguntas.detallesPregunta.creado}: </b>{moment(pregunta.createdAt.toDate()).fromNow()}</p>
-                    </div>
-                    <div className="footer-single">
-                        <PreguntaGrafica count={count} />
-                        <div className="">
-                            <button className="aceptar responder" onClick={handleClickOpen}>{bText[lang].preguntas.detallesPregunta.ver_respuestas}</button>
+            <div className="new-class">
+                <div className="tarjeta-pregunta">
+                    <div className="arroz-chino only2row">
+                        <div className="justify-text new-class new-class-2">
+                            {/* {console.log("This is pregunta", pregunta)} */}
+                            <p className="card-title"><b>{pregunta[lang]}</b></p>
+                            <p className="card-title"><b>{bText[lang].preguntas.detallesPregunta.descripcion}: </b>{pregunta.description}</p>
+                            <p className="card-title"><b>{bText[lang].preguntas.detallesPregunta.categoria}: </b>{categoria[pregunta.category]}</p>
+                            <p className="card-title"><b>{bText[lang].preguntas.detallesPregunta.plan_reaccion}: </b>{reaction[pregunta.reaction_plan]}</p>
+                            <p className="card-title"><b>{bText[lang].preguntas.detallesPregunta.creado_por}: </b>{pregunta.createdBy}</p>
+                            <p className="card-title"><b>{bText[lang].preguntas.detallesPregunta.creado}: </b>{moment(pregunta.createdAt.toDate()).fromNow()}</p>
                         </div>
+                        <div className="new-parent red">
+                            <div className="footer-single new-class">
+                                <PieChart data={count ? count : []} radius={0.5} innerText={actualText + "%"}/>
+                            </div>
+                            <div className="new-class-3 blue">
+
+                                    <button className="aceptar responder" onClick={handleClickOpen}>{bText[lang].preguntas.detallesPregunta.ver_respuestas}</button>
+
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
 

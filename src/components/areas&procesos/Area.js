@@ -253,7 +253,7 @@ const mapDispatchtoProps = (dispatch) => {
 
 export default compose(
 	connect(mapStateToProps, mapDispatchtoProps),
-	firestoreConnect([{ collection: "procesos" }])
+	firestoreConnect([{ collection: "procesos" }, { collection: "areas" }])
 )(Area);
 
 // export default connect(mapStateToProps, mapDispatchtoProps)(AreaProceso)
