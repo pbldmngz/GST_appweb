@@ -2,6 +2,7 @@ import React, { Component, useState } from "react";
 import {
   createAuditoria,
   preguntasAuditoria,
+  getAuditoria,
 } from "../../store/actions/auditoriaActions";
 import { respuestaPregunta } from "../../store/actions/preguntaActions";
 import { connect } from "react-redux";
@@ -28,6 +29,7 @@ class ResponderAuditoria extends Component {
   state = {
     preguntas: [],
     auditoria: "",
+    area: "",
     _mounted: false,
   };
   handleChange = (e) => {
@@ -65,7 +67,7 @@ class ResponderAuditoria extends Component {
     var results = [];
     for (let ks of keys) {
       //ks es la ID
-      var dict = { pregunta: ks, auditoria: this.props.match.params.id };
+      var dict = { pregunta: ks, auditoria: this.props.match.params.id, area: this.state.area };
       dict["auditoria_pregunta"] = this.props.match.params.id + "_" + ks;
       // var id, just, resp;
       for (let k of key) {
@@ -103,6 +105,12 @@ class ResponderAuditoria extends Component {
     // this.setState({
     //     auditoria: id,
     // })
+
+    this.props.getAuditoria(id).then((res) => {
+      this.setState({
+        area: res.area,
+      })
+    })
 
     this.props.preguntasAuditoria({ id: id }).then((res) => {
       this.setState(
@@ -192,7 +200,7 @@ class ResponderAuditoria extends Component {
             {this.state.preguntas &&
               this.state.preguntas.map((pregunta) => {
                 return (
-                  <div className="form-1" key={pregunta.id}>
+                  <div className="form-1 extra-padding-form" key={pregunta.id}>
                     {/* card x-depth-0 para ver los limites fácilmente*/}
                     {/* <FormControl className="width100" component="fieldset"> */}
                       {/* {console.log("antes de que truene, esto es pregunta", pregunta)} */}
@@ -202,19 +210,11 @@ class ResponderAuditoria extends Component {
                       >
                         <h3>{pregunta[lang]}</h3>
                       </FormLabel>
-                      <div className="campos">
-                        <TextField
-                          label={
-                            text[lang].auditorias.responderAuditoria
-                              .justificacion
-                          }
-                          className="date label70"
-                          name={"just-" + pregunta.id}
-                          onChange={this.handleChange}
-                        />
+                      <div className="campos extra-margin">
+                        
                         {/* {console.log("Este es un intento: ", "radio-" + pregunta.id)} */}
                         <RadioGroup
-                          className="radio-group date"
+                          className="radio-group"
                           row
                           aria-label="gender"
                           name={"resp-" + pregunta.id}
@@ -233,6 +233,23 @@ class ResponderAuditoria extends Component {
                             label={text[lang].auditorias.responderAuditoria.no}
                           />
                         </RadioGroup>
+
+                        {(this.state["resp-" + pregunta.id]) ? (
+                          ((this.state["resp-" + pregunta.id]) === "No") ? (
+                            <TextField
+                              label={
+                                text[lang].auditorias.responderAuditoria
+                                  .justificacion
+                              }
+                              className="label70"
+                              name={"just-" + pregunta.id}
+                              onChange={this.handleChange}
+                            />
+                          ) : null
+                          
+                        ) : null}
+
+                        
                       </div>
                     {/* </FormControl> */}
                   </div>
@@ -276,6 +293,7 @@ const mapDispatchtoProps = (dispatch) => {
     createAuditoria: (auditoria) => dispatch(createAuditoria(auditoria)),
     preguntasAuditoria: (auditoria) => dispatch(preguntasAuditoria(auditoria)),
     respuestaPregunta: (pregunta) => dispatch(respuestaPregunta(pregunta)),
+    getAuditoria: (id) => dispatch(getAuditoria(id)),
   };
 };
 

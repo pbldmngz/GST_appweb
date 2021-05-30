@@ -16,7 +16,7 @@ const SignedInLinks = (props) => {
             {/* <li><NavLink to={path.sign_up} className="">{pathName.sign_up}</NavLink></li> */}
             <li><a onClick={() => {
                 props.signOut();
-                // props.history.push("/")
+                props.history.push("/signin")
             }}>Log Out</a></li>
         </ul>
     )

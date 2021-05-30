@@ -92,20 +92,20 @@ const DetallesPregunta = (props) => {
             <div className="new-class">
                 <div className="tarjeta-pregunta">
                     <div className="arroz-chino only2row">
-                        <div className="justify-text new-class new-class-2">
+                        <div className="new-class new-class-2">
                             {/* {console.log("This is pregunta", pregunta)} */}
                             <p className="card-title"><b>{pregunta[lang]}</b></p>
-                            <p className="card-title"><b>{bText[lang].preguntas.detallesPregunta.descripcion}: </b>{pregunta.description}</p>
+                            <p className="card-title justify-text "><b>{bText[lang].preguntas.detallesPregunta.descripcion}: </b>{pregunta.description}</p>
                             <p className="card-title"><b>{bText[lang].preguntas.detallesPregunta.categoria}: </b>{categoria[pregunta.category]}</p>
                             <p className="card-title"><b>{bText[lang].preguntas.detallesPregunta.plan_reaccion}: </b>{reaction[pregunta.reaction_plan]}</p>
-                            <p className="card-title"><b>{bText[lang].preguntas.detallesPregunta.creado_por}: </b>{pregunta.createdBy}</p>
-                            <p className="card-title"><b>{bText[lang].preguntas.detallesPregunta.creado}: </b>{moment(pregunta.createdAt.toDate()).fromNow()}</p>
+                            {/* <p className="card-title"><b>{bText[lang].preguntas.detallesPregunta.creado_por}: </b>{pregunta.createdBy}</p>
+                            <p className="card-title"><b>{bText[lang].preguntas.detallesPregunta.creado}: </b>{moment(pregunta.createdAt.toDate()).fromNow()}</p> */}
                         </div>
-                        <div className="new-parent red">
-                            <div className="footer-single new-class">
+                        <div className="new-parent">
+                            <div className="graph-align">
                                 <PieChart data={count ? count : []} radius={0.5} innerText={actualText + "%"}/>
                             </div>
-                            <div className="new-class-3 blue">
+                            <div className="new-class-3">
 
                                     <button className="aceptar responder" onClick={handleClickOpen}>{bText[lang].preguntas.detallesPregunta.ver_respuestas}</button>
 

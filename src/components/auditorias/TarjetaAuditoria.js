@@ -179,13 +179,29 @@ class TarjetaAuditoria extends Component {
 
 				</div>
 
-				{bText[lang].auditorias.tarjetaAuditoria.auditor}: {findUser && findUser.map(u => {
-					return u ? (u.firstName[0] + ". " + u.lastName) : "";
-				}).join(" & ")}
-				
-				<p>{findArea && findProceso ? findProceso.proceso + ", " + findArea.area : null}</p>
+				{(userLevel === 0) ? (
+					<div>
+						{ bText[lang].auditorias.tarjetaAuditoria.auditor}: { findUser && findUser.map(u => {
+							return u ? (u.firstName[0] + ". " + u.lastName) : "";
+						}).join(" & ")}
+					</div>
+				) : null}
+
+				{(userLevel !== 0) ? (
+					findArea && findProceso ? findProceso.proceso + ", " + findArea.area : null
+				) : (
+					<p>{findArea && findProceso ? findProceso.proceso + ", " + findArea.area : null}</p>
+				)}
 
 				{date}
+
+				{(userLevel !== 0) ? (
+					<p>Assigned by: {auditoria.createdBy}, {moment(auditoria.createdAt.toDate()).fromNow()}</p>
+				) : null}
+				
+				{/* <p>{findArea && findProceso ? findProceso.proceso + ", " + findArea.area : null}</p> */}
+
+				
 			</div>
 		);
 

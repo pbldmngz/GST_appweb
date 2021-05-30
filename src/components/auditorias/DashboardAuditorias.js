@@ -80,6 +80,9 @@ class DashboardAuditorias extends Component {
                 filter_value = "fecha_fin";
                 // console.log(filter_value)
                 break;
+            case 1:
+                this.props.history.push("/procesos")
+                break;
             case 3:
                 filter_value = "createdAt";
                 // console.log(filter_value)

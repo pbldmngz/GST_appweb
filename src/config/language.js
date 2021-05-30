@@ -49,7 +49,7 @@ lang.spanish = {
         },
         dashboardAuditorias: {
             ordenar_fecha: "Ordenar por fecha",
-            agrupar_areas: "Agrupar por áreas",
+            agrupar_areas: "Ir a la vista de procesos",
             mostrar_realizados: "Mostrar realizados",
             fecha_inicio: "Fecha de inicio",
             fecha_expiracion: "Fecha de expiración",
@@ -221,7 +221,7 @@ lang.english = {
         },
         dashboardAuditorias: {
             ordenar_fecha: "Order by date",
-            agrupar_areas: "Group by areas",
+            agrupar_areas: "Go to the Process view",
             mostrar_realizados: "Show already done",
             fecha_inicio: "Start date",
             fecha_expiracion: "Due date",

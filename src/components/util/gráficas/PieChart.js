@@ -48,7 +48,7 @@ const PieChart = (props) => {
     }
 
     return (
-        <div style={{ height: "30vh", paddingTop: "10px" }}>
+        <div style={{ height: "100%" }}>
             <ResponsivePie
                 data={data}
                 keys={["label"]}
@@ -56,7 +56,7 @@ const PieChart = (props) => {
                 // valueFormat={format}
                 
                 // colors={['#97e3d5', '#61cdbb', '#f47560', '#e25c3b']}
-                colors={(!colors) ? ['#A93226', '#A9CCE3'] : getColor}
+                colors={(!colors) ? ['#002D73', '#A9CCE3'] : getColor}
                 // borderColor="#000000"
                 arcLabelsTextColor="white"
                 innerRadius={innerRadius}
@@ -79,7 +79,7 @@ const PieChart = (props) => {
                 //     }
                 // ]}
                 // margin={{bottom: 25,}}
-                // enableArcLabels={false}
+                enableArcLabels={false}
                 // arcLabel={d => `${Math.round((d.value/total())*10000)/100}%`}
                 arcLabel={d => `${format(d.value)}`}
                 enableArcLinkLabels={false}
