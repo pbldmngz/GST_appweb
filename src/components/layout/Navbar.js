@@ -1,22 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import SignedInLinks from './SignedInLinks'
-import SignedOutLinks from './SignedOutLinks'
 import {connect} from 'react-redux'
 import { NavLink } from 'react-router-dom';
 
 import {signOut} from '../../store/actions/authActions'
 
-import { faUser, faSignOutAlt, faCog } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt, faCog } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import {directions} from "../../config/config"
 
 
 //<div className=""> ==> <div className="container"> to center
 const Navbar = (props) => {
-    var { path } = require('../../config/config');
-    const {auth, profile} = props
-    const links = auth.uid ? <SignedInLinks /> : <SignedOutLinks />;
-    const initials = auth.uid ? profile.initials : "GST";
+    var { path } = directions
+    const {auth} = props
 
     return (
         auth.uid ? (
@@ -41,6 +39,7 @@ const Navbar = (props) => {
                 <div className="titulo">
                     <div className="imout hover-cursor" onClick={() => {
                         props.signOut();
+                        props.history.push("/signin")
                     }}>
                         <FontAwesomeIcon icon={faSignOutAlt} />
                     </div>
@@ -50,20 +49,6 @@ const Navbar = (props) => {
     )
 }
 
-{/* <nav className="navbar">
-            <ul>
-                        
-                <div className="navbar-links">
-                    <div className="navbar-list">
-                        
-                        
-
-                        <div className="options"><li>{links}</li></div>
-
-                    </div>
-                </div>
-            </ul>
-        </nav> */}
 
 const mapStateToProps = (state) => {
     return {

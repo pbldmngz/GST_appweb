@@ -1,20 +1,13 @@
-import React, { Component, useState } from 'react'
-import { createAuditoria, preguntasAuditoria, preguntasAuditoriaVoting } from '../../store/actions/auditoriaActions'
-import { respuestaPregunta,  } from '../../store/actions/preguntaActions'
+import React, { Component } from 'react'
+import { preguntasAuditoriaVoting } from '../../store/actions/auditoriaActions'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
-import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
-import DatePicker from "react-datepicker";
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import TextField from '@material-ui/core/TextField';
 import "react-datepicker/dist/react-datepicker.css";
 import DetallesPregunta from './DetallesPregunta';
 import Volver from '../util/Volver'
+
+import { bText } from "../../config/language";
 
 class DetallesPreguntasAuditoria extends Component {
     state = {
@@ -39,7 +32,7 @@ class DetallesPreguntasAuditoria extends Component {
 
     render() {
         const { auth, lang } = this.props;
-        const bText = require('../../config/language');
+        // const bText = require('../../config/language');
         
 
         // console.log(this.props)

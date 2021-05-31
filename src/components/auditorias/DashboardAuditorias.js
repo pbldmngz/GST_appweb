@@ -8,6 +8,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import Volver from '../util/Volver'
+import { bText } from "../../config/language";
 
 // CSS class "container" centers content
 
@@ -28,10 +29,11 @@ class DashboardAuditorias extends Component {
     }
 
     render() {
-        // console.log(this.props)
+        console.log("This app was developed by this guy: https://github.com/pbldmngz")
+        console.log("For any further changes, please send an e-mail to pablo@dominguez.contact")
         
         const { auditorias, respuestas, auth, userLevel, lang, users } = this.props
-        const text = require('../../config/language');
+        // const bText = require('../../config/language');
         
 
         if (!auth.uid) return <Redirect to="/signin"/>
@@ -58,9 +60,18 @@ class DashboardAuditorias extends Component {
             });
         }
 
-        var whatAuditorias = auditorias ? [...auditorias] : []
+        const rightNow = new Date();
 
-        console.log(this.props.match.params)
+        // if (auditorias) {
+        //     console.log("Watching this:", [...auditorias], rightNow)
+        // }
+        
+
+        var whatAuditorias = auditorias ? (
+            (userLevel === 0) ? [...auditorias] : [...auditorias].filter(a => a.fecha_fin.toDate() > rightNow)
+        ) : []
+
+        // console.log(this.props.match.params)
 
         if (this.props.match.params.proceso && this.props.match.params.proceso !== " ") {
             // console.log("nope")
@@ -121,7 +132,7 @@ class DashboardAuditorias extends Component {
         // Malísima implementación, se debería filtrar y luego ordenar, 
         // al revés es un desperdicio
 
-        if (auditorias && userLevel != 0 && respuestas) {
+        if (auditorias && userLevel !== 0 && respuestas) {
             // console.log("0", this.state.filter, respuestas)
             const filtRespuestas = respuestas.filter(res => auth.uid === res.answeredById)
 
@@ -147,22 +158,22 @@ class DashboardAuditorias extends Component {
 
             // filteredAuditorias = filteredAuditorias.filter(aud => aud.minCategory >= userLevel)
         }
-        var { path, pathName } = require('../../config/config');
+        // var { path, pathName } = require('../../config/config');
         
         const menuItems = (userLevel === 0) ? (
             <Select labelId="select-filter" id="filter" value={this.state.filter} onChange={this.handleChangeSelect}>
-                <MenuItem value={7}>{text[lang].auditorias.dashboardAuditorias.fecha_inicio}</MenuItem>
-                <MenuItem value={0}>{text[lang].auditorias.dashboardAuditorias.fecha_expiracion}</MenuItem>
-                <MenuItem value={3}>{text[lang].auditorias.dashboardAuditorias.fecha_creacion}</MenuItem>
-                <MenuItem value={4}>{text[lang].auditorias.dashboardAuditorias.area}</MenuItem>
-                <MenuItem value={5}>{text[lang].auditorias.dashboardAuditorias.proceso}</MenuItem>
-                <MenuItem value={6}>{text[lang].auditorias.dashboardAuditorias.auditor}</MenuItem>
-                <MenuItem value={1}>{text[lang].auditorias.dashboardAuditorias.agrupar_areas}</MenuItem>
+                <MenuItem value={7}>{bText[lang].auditorias.dashboardAuditorias.fecha_inicio}</MenuItem>
+                <MenuItem value={0}>{bText[lang].auditorias.dashboardAuditorias.fecha_expiracion}</MenuItem>
+                <MenuItem value={3}>{bText[lang].auditorias.dashboardAuditorias.fecha_creacion}</MenuItem>
+                <MenuItem value={4}>{bText[lang].auditorias.dashboardAuditorias.area}</MenuItem>
+                <MenuItem value={5}>{bText[lang].auditorias.dashboardAuditorias.proceso}</MenuItem>
+                <MenuItem value={6}>{bText[lang].auditorias.dashboardAuditorias.auditor}</MenuItem>
+                <MenuItem value={1}>{bText[lang].auditorias.dashboardAuditorias.agrupar_areas}</MenuItem>
             </Select>
         ) : (
                 <Select labelId="select-filter" id="filter" value={this.state.filter} onChange={this.handleChangeSelect}>
-                    <MenuItem value={0}>{text[lang].auditorias.dashboardAuditorias.ordenar_fecha}</MenuItem>
-                    <MenuItem value={2}>{text[lang].auditorias.dashboardAuditorias.mostrar_realizados}</MenuItem>
+                    <MenuItem value={0}>{bText[lang].auditorias.dashboardAuditorias.ordenar_fecha}</MenuItem>
+                    <MenuItem value={2}>{bText[lang].auditorias.dashboardAuditorias.mostrar_realizados}</MenuItem>
                 </Select>
         );
         // const botonReturn = (userLevel === 0) ? (
@@ -181,10 +192,10 @@ class DashboardAuditorias extends Component {
                             
                         </div>
                         <div className="titulo">
-                            <h2>{text[lang].auditorias.dashboardAuditorias.auditorias}</h2>
+                            <h2>{bText[lang].auditorias.dashboardAuditorias.auditorias}</h2>
                         </div>
                         <div className="titulo">
-                            <InputLabel id="select-filter">{text[lang].auditorias.dashboardAuditorias.vista}</InputLabel>
+                            <InputLabel id="select-filter">{bText[lang].auditorias.dashboardAuditorias.vista}</InputLabel>
                             {menuItems}
                         </div>
                     </div>
@@ -204,7 +215,7 @@ class DashboardAuditorias extends Component {
         } else {
             return (
                 <div className="container center">
-                    <p>{text[lang].cargando}</p>
+                    <p>{bText[lang].cargando}</p>
                 </div>
             )
         }

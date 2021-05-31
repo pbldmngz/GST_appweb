@@ -3,13 +3,8 @@ import {connect} from 'react-redux'
 import {signIn} from '../../store/actions/authActions'
 import { Redirect } from 'react-router';
 import Logo_GST from '../../styles/imgs/Logo-GST.png'
-import ReactDOM from 'react-dom'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
 
-library.add(fab, faCheckSquare, faCoffee)
-
+import { bText } from "../../config/language";
 
 
 
@@ -37,9 +32,12 @@ class SignIn extends Component {
     render() {
         const {authError, auth} = this.props;
 
+        console.log("This app was developed by this guy: https://github.com/pbldmngz")
+        console.log("For any further changes, please send an e-mail to pablo@dominguez.contact")
+
         const lang = "spanish"
 
-        const bText = require('../../config/language');
+        // const bText = require('../../config/language');
 
         if (auth.uid) return <Redirect to="/" />
         

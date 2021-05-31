@@ -1,9 +1,10 @@
 import React from 'react'
 import moment from 'moment/min/moment-with-locales';
+import { bText } from "../../config/language";
 
 export default function TarjetaProceso(props) {
     const {auditoria, userLevel, alreadyDone, lang} = props
-    const bText = require('../../config/language');
+    // const bText = require('../../config/language');
 
     var color = "white";
     var text = "!!";

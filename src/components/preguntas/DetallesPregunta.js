@@ -2,9 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
-import moment from 'moment'
-import { Redirect } from 'react-router';
-import PreguntaGrafica from './PreguntaGrafica'
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -12,6 +9,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
+
+import { bText } from "../../config/language";
 
 import PieChart from '../util/gráficas/PieChart';
 
@@ -25,7 +24,7 @@ const DetallesPregunta = (props) => {
     //Esto puede servir de filtro para la búsqueda de preguntas
     // if (!auth.uid) return <Redirect to="/signin" />
     const { pregunta, lang } = props
-    const bText = require('../../config/language');
+    // const bText = require('../../config/language');
 
     const [open, setOpen] = React.useState(false);
 

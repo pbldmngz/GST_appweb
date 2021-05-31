@@ -1,14 +1,10 @@
 import React from 'react'
 import TarjetaPregunta from './TarjetaPregunta'
-import { Link, NavLink } from 'react-router-dom'
-import CambiarIdioma from '../util/CambiarIdioma'
-import Volver from '../util/Volver'
-
 import TarjetaAgregarPregunta from './TarjetaAgregarPregunta'
 
 export default function Preguntas(props) {
-    var { path, pathName } = require('../../config/config');
-    const text = require('../../config/language');
+    // var { path, pathName } = require('../../config/config');
+    // const text = require('../../config/language');
 
     const { preguntas, editPregunta, deletePregunta, userLevel, lang } = props
 
@@ -32,7 +28,7 @@ export default function Preguntas(props) {
 
             <TarjetaAgregarPregunta/>
 
-            {preguntas && preguntas.map(pregunta => {
+            {preguntas && sortedPreguntas.map(pregunta => {
                 return (
                     <div key={pregunta.id}>
                         <TarjetaPregunta

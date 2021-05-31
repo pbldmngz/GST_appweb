@@ -6,9 +6,9 @@ import { compose } from 'redux'
 import { Redirect } from 'react-router'
 import { deletePregunta, editPregunta } from '../../store/actions/preguntaActions'
 
-import { Link, NavLink } from 'react-router-dom'
-import CambiarIdioma from '../util/CambiarIdioma'
 import Volver from '../util/Volver'
+
+import { bText } from "../../config/language";
 // CSS class "container" centers content
 
 // Para cuando se esté creado una auditoría debería 
@@ -20,12 +20,11 @@ import Volver from '../util/Volver'
 class DashboardPreguntas extends Component {
     render() {
         const { preguntas, auth, userLevel, lang } = this.props
-        var { path, pathName } = require('../../config/config');
         // console.log(userLevel)
-        const bText = require("../../config/language");
+        // const bText = require("../../config/language");
 
         if (!auth.uid) return <Redirect to="/signin" />
-        if (userLevel != 0) return <Redirect to="/" />
+        if (userLevel !== 0) return <Redirect to="/" />
 
         if (!lang) return null;
 

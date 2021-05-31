@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class SelectorHerramientas extends Component {
     render() {

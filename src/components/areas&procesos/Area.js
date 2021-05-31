@@ -11,6 +11,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import { createArea, editArea, getArea } from "../../store/actions/areaActions";
 
+import {bText} from "../../config/language";
+// import { directions } from "../../config/config"
+
 class Area extends Component {
 
     state = {
@@ -105,15 +108,15 @@ class Area extends Component {
 	}
 
     render() {
-		var { path, pathName } = require("../../config/config");
-		const bText = require("../../config/language");
+		// var { path, pathName } = require("../../config/config");
+		// const bText = require();
 		const { auth, userLevel, lang, procesos } = this.props;
 
 		if (!auth.uid) return <Redirect to="/signin" />;
 
 		if (!lang) return null;
 
-		if (userLevel != 0) return <Redirect to="/" />;
+		if (userLevel !== 0) return <Redirect to="/" />;
 
 		// const tipo = this.props.match.params.tipo
 

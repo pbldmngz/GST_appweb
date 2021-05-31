@@ -5,9 +5,11 @@ import {compose} from 'redux'
 import moment from 'moment'
 import { Redirect } from 'react-router';
 
+import { bText } from "../../config/language";
+
 const DetallesAuditoria = (props) => {
     const {auditoria, auth, lang} = props
-    const text = require('../../config/language');
+    // const bText = require('../../config/language');
     if (!lang) return null;
     // Se tienen que generar las preguntas en base al arr[] de ID's, 
     // esto debería estar en auditoria.preguntas
@@ -23,13 +25,13 @@ const DetallesAuditoria = (props) => {
                     <div className="card x-depth-0" key={auditoria.id}>
                         <div className="card-content grey-text text-darken-3">
                             <span className="card-title">{auditoria.auditoria}</span>
-                            <p>{text[lang].auditorias.detallesAuditoria.auditor}: {auditoria.auditor}</p>
-                            <p>{text[lang].auditorias.detallesAuditoria.descripcion}: {auditoria.description}</p>
-                            <p>{text[lang].auditorias.detallesAuditoria.plan_reaccion}: {auditoria.reaction_plan}</p>
-                            <p>{text[lang].auditorias.detallesAuditoria.creada_por}: {auditoria.createdBy}, {moment(auditoria.createdAt.toDate()).locale(text[lang].locale).fromNow()}</p>
-                            <p>{text[lang].auditorias.detallesAuditoria.fecha_inicio}: {moment(auditoria.fecha_inicio.toDate()).locale(text[lang].locale).fromNow()}</p>
-                            <p>{text[lang].auditorias.detallesAuditoria.fecha_finalizacion}: {moment(auditoria.fecha_fin.toDate()).locale(text[lang].locale).fromNow()}</p>
-                            <p>{text[lang].auditorias.detallesAuditoria.preguntas}</p>
+                            <p>{bText[lang].auditorias.detallesAuditoria.auditor}: {auditoria.auditor}</p>
+                            <p>{bText[lang].auditorias.detallesAuditoria.descripcion}: {auditoria.description}</p>
+                            <p>{bText[lang].auditorias.detallesAuditoria.plan_reaccion}: {auditoria.reaction_plan}</p>
+                            <p>{bText[lang].auditorias.detallesAuditoria.creada_por}: {auditoria.createdBy}, {moment(auditoria.createdAt.toDate()).locale(bText[lang].locale).fromNow()}</p>
+                            <p>{bText[lang].auditorias.detallesAuditoria.fecha_inicio}: {moment(auditoria.fecha_inicio.toDate()).locale(bText[lang].locale).fromNow()}</p>
+                            <p>{bText[lang].auditorias.detallesAuditoria.fecha_finalizacion}: {moment(auditoria.fecha_fin.toDate()).locale(bText[lang].locale).fromNow()}</p>
+                            <p>{bText[lang].auditorias.detallesAuditoria.preguntas}</p>
                         </div>
                     </div>
                 </div>
@@ -38,8 +40,8 @@ const DetallesAuditoria = (props) => {
     } else {
         return (
             <div className="container center">
-            {console.log("cargando", text, lang)}
-                {(text[lang]) ? <p>{text[lang].cargando}</p> : null}
+            {console.log("cargando", bText, lang)}
+                {(bText[lang]) ? <p>{bText[lang].cargando}</p> : null}
             </div>
         )
     }

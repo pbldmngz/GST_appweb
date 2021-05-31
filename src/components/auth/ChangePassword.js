@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux'
 import firebase from 'firebase'
-import { timeSaturday } from 'plotly.js-basic-dist';
 import Volver from '../util/Volver'
+
+import { bText } from "../../config/language";
+
+import Swal from "sweetalert2";
 
 require('firebase/auth')
 
@@ -19,6 +22,8 @@ class ChangePassword extends Component {
         // Y no olvides el CSV
         // https://www.npmjs.com/package/react-csv-reader
         // https://www.npmjs.com/package/react-csv
+        const bText = require("../../config/language");
+        const { lang } = this.props
 
         this.reauthenticate(currentPassword)
             .then(() => {
@@ -26,6 +31,7 @@ class ChangePassword extends Component {
                 user.updatePassword(newPassword).then(() => {
                     console.log("Password updated!");
                     this.props.history.push('/')
+                    Swal.fire(bText[lang].swal.saved)
                 }).catch((error) => {
                     console.log(error);
                 });
@@ -48,7 +54,7 @@ class ChangePassword extends Component {
         });
     }
     handleChange = (e) => {
-        console.log(e)
+        // console.log(e)
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -83,7 +89,7 @@ class ChangePassword extends Component {
     render() {
 
         const { auth, lang } = this.props
-        const bText = require('../../config/language');
+        // const bText = require('../../config/language');
         if (!auth.uid) return <Redirect to="/signin" />
 
         if (!lang) return null;

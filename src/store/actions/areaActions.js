@@ -44,9 +44,6 @@ export const editArea = (id, area) => {
 export const deleteArea = (id) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         const firestore = getFirestore();
-        const profile = getState().firebase.profile;
-        const authorId = getState().firebase.auth.uid;
-
         firestore.collection("areas").doc(id).delete()
     }
 }

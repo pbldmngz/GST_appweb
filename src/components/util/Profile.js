@@ -3,15 +3,18 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Redirect } from 'react-router'
 
+import { directions } from "../../config/config"
+import { bText } from "../../config/language";
+
 import CambiarIdioma from './CambiarIdioma'
 import Volver from '../util/Volver'
 
 
 class Profile extends Component {
     render() {
-        const {profile, userLevel, lang, auth} = this.props
-        const bText = require("../../config/language");
-        var { path } = require('../../config/config');
+        const {userLevel, lang, auth} = this.props
+        // const bText = require("../../config/language");
+        const { path } = directions
         // console.log("This is profile:", profile)
         if (!auth.uid) return <Redirect to="/signin"/>
 
@@ -83,7 +86,7 @@ class Profile extends Component {
 const mapStateToProps = (state) => {
     //console.log(state)
     return {
-        profile: state.firebase.profile,
+        // profile: state.firebase.profile,
         lang: state.firebase.profile.lang,
         userLevel: state.firebase.profile.userLevel,
         auth: state.firebase.auth,

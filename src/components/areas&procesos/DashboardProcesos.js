@@ -1,18 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 
 import TarjetaAgregarAuditoria from '../auditorias/TarjetaAgregarAuditoria'
 import Volver from '../util/Volver'
 
-import { faTrashAlt, faEdit, faChartBar } from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Swal from "sweetalert2";
 
 import { deleteProceso } from "../../store/actions/procesoActions";
+
+import { bText } from "../../config/language";
 
 
 class DashboardProcesos extends Component {
@@ -21,7 +23,7 @@ class DashboardProcesos extends Component {
 
         const {procesos, userLevel, lang, auth} = this.props
 
-        const bText = require("../../config/language");
+        // const bText = require("../../config/language");
 
         if (!auth.uid) return <Redirect to="signin"/>
 
@@ -56,18 +58,18 @@ class DashboardProcesos extends Component {
                                     </Link>
                                     <div className="button hover-cursor" onClick={() => {
                                         Swal.fire({
-                                            title: "Do you want to save the changes?",
+                                            title: bText[lang].swal.title,
                                             showDenyButton: true,
                                             showConfirmButton: true,
-                                            denyButtonText: "Don't save",
-                                            confirmButtonText: "Save",
+                                            denyButtonText: bText[lang].swal.cancel,
+                                            confirmButtonText: bText[lang].swal.save,
                                         }).then((result) => {
                                             //  Read more about isConfirmed, isDenied below
                                             if (result.isConfirmed) {
                                                 this.props.deleteProceso(pro.id);
-                                                Swal.fire("Saved!", "", "success");
+                                                Swal.fire(bText[lang].swal.saved, "", "success");
                                             } else if (result.isDenied) {
-                                                Swal.fire("Changes are not saved", "", "info");
+                                                Swal.fire(bText[lang].swal.not_saved, "", "info");
                                             }
                                         });
                                         //props.deletePregunta(pregunta.id)

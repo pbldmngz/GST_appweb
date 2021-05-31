@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -14,12 +14,15 @@ import Slide from '@material-ui/core/Slide';
 import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { directions } from "../../config/config"
+import { bText } from "../../config/language";
+
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function TarjetaPregunta(props) {
-	var { path, pathName } = require("../../config/config");
+	var { path } = directions
 	// Se tienen que añadir:
 	// - Añadir botones para borrar/editar una pregunta, con un "¿estás seguro?"
 	// Pueden hacerlo haciendo unos divs | ----- | - | flex, no soy el experto
@@ -27,13 +30,13 @@ export default function TarjetaPregunta(props) {
 
 	// if (!lang) return null;
 
-	const bText = require("../../config/language");
+	// const bText = require("../../config/language");
 
 	// console.log("userLevel on tarjeta", userLevel)
 
 	// En cierto modo, ni siquiera tiene caso esto, los usuarios normales no llegarían aquí
 	const botones =
-		userLevel == 0 ? (
+		userLevel === 0 ? (
 			<div className="button-group">
 				<Link to={path.editar_pregunta + "/" + pregunta.id}>
 					<div className="boton">

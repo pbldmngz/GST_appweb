@@ -2,13 +2,11 @@ import React, { Component } from 'react'
 
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import Swal from "sweetalert2";
 import Volver from '../util/Volver'
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -22,8 +20,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
-
 import { createProceso, getProceso, editProceso } from "../../store/actions/procesoActions";
+import { bText } from "../../config/language";
 // import { createArea } from "../../store/actions/areaActions";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -139,22 +137,26 @@ class Proceso extends Component {
 	};
 
 	Seguro = (e) => {
+		// const bText = require("../../config/language");
+		const { lang } = this.props
+		// console.log(this.cantSend())
+		// if (this.cantSend()) return null;
 		if (this.cantSend()) return null;
 		// console.log(e)
 		e.preventDefault();
 		Swal.fire({
-			title: "Do you want to save the changes?",
+			title: bText[lang].swal.title,
 			showDenyButton: true,
-			showCancelButton: false,
-			confirmButtonText: "Save",
-			denyButtonText: "Don't save",
+			showConfirmButton: true,
+			denyButtonText: bText[lang].swal.cancel,
+			confirmButtonText: bText[lang].swal.save,
 		}).then((result) => {
 			//  Read more about isConfirmed, isDenied below
 			if (result.isConfirmed) {
 				this.handleSubmit(e);
-				Swal.fire("Saved!", "", "success");
+				Swal.fire(bText[lang].swal.saved, "", "success");
 			} else if (result.isDenied) {
-				Swal.fire("Changes are not saved", "", "info");
+				Swal.fire(bText[lang].swal.not_saved, "", "info");
 			}
 		});
 	};
@@ -175,9 +177,8 @@ class Proceso extends Component {
 	}
 
     render() {
-		var { path, pathName } = require("../../config/config");
-		const bText = require("../../config/language");
-		const { auth, userLevel, lang, procesos } = this.props;
+		// const bText = require("../../config/language");
+		const { auth, userLevel, lang } = this.props;
 
 		const layerName = ["Admin", "D", "C", "B", "A"]
 
@@ -185,7 +186,7 @@ class Proceso extends Component {
 
 		if (!lang) return null;
 
-		if (userLevel != 0) return <Redirect to="/" />;
+		if (userLevel !== 0) return <Redirect to="/" />;
 
 		// console.log(this.props)
 		// console.log(this.state)

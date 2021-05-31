@@ -5,18 +5,49 @@ import {
 	deleteAuditoria,
 	editAuditoria,
 } from "../../store/actions/auditoriaActions";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import PopUp from "../util/PopUp";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 
-import { faTrashAlt, faEdit, faChartBar } from "@fortawesome/free-solid-svg-icons";
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import Slide from '@material-ui/core/Slide';
+
+import { faTrashAlt, faEdit, faChartBar, faQrcode } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { bText } from "../../config/language";
+import { directions } from "../../config/config"
+
+import QRCode from 'qrcode.react';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+	return <Slide direction="up" ref={ref} {...props} />;
+});
+
 class TarjetaAuditoria extends Component {
+
+	state = {
+		open: false,
+	}
+
+	handleClickOpen = () => {
+		this.setState({
+			open: true,
+		})
+	};
+
+	handleClose = () => {
+		this.setState({
+			open: false,
+		})
+	};
+
 	render() {
-		var { path, pathName } = require("../../config/config");
+		var { path } = directions
 
 		// console.log("Those are props", props)
 		// Si las tarjetas no tienen las mismas "líneas" de contenido
@@ -43,7 +74,7 @@ class TarjetaAuditoria extends Component {
 		if (!procesos) return null;
 		// console.log(users)
 
-		const bText = require("../../config/language");
+		// const bText = require("../../config/language");
 		// if (!lang) return null;
 
 		var color = "white";
@@ -84,8 +115,8 @@ class TarjetaAuditoria extends Component {
 			}
 		}
 
-		var checkDate = new Date();
-		var fecha_fin = auditoria.fecha_fin.toDate().addDays(0);
+		// var checkDate = new Date();
+		// var fecha_fin = auditoria.fecha_fin.toDate().addDays(0);
 
 		var style = {};
 
@@ -95,10 +126,10 @@ class TarjetaAuditoria extends Component {
 			style = { backgroundColor: "#D5D8DC" };
 		}
 		// <div className="a"></div>
-		const refLink =
-			userLevel === 0
-				? path.detalles_preguntas_auditoria
-				: path.responder_auditoria;
+		// const refLink =
+		// 	userLevel === 0
+		// 		? path.detalles_preguntas_auditoria
+		// 		: path.responder_auditoria;
 
 		const graphOrWarn =
 			userLevel === 0 ? (
@@ -119,9 +150,12 @@ class TarjetaAuditoria extends Component {
 			);
 
 		const botones =
-			userLevel == 0 ? (
+			(userLevel === 0) ? (
 				<div className="button-group">
 					{graphOrWarn}
+					<div className="boton extra-margin-botones" onClick={this.handleClickOpen}>
+						<FontAwesomeIcon icon={faQrcode} />
+					</div>
 					<Link to={path.crear_auditoria + "/" + auditoria.id}>
 						<div className="boton extra-margin-botones">
 							<FontAwesomeIcon icon={faEdit} />
@@ -133,18 +167,18 @@ class TarjetaAuditoria extends Component {
 							/*<PopUp></PopUp>
 								  this.props.deleteAuditoria(auditoria.id)*/
 							Swal.fire({
-								title: "Do you want to save the changes?",
+								title: bText[lang].swal.title,
 								showDenyButton: true,
-								showCancelButton: false,
-								denyButtonText: "Don't save",
-								confirmButtonText: "Save",
+								showConfirmButton: true,
+								denyButtonText: bText[lang].swal.cancel,
+								confirmButtonText: bText[lang].swal.save,
 							}).then((result) => {
 								//  Read more about isConfirmed, isDenied below
 								if (result.isConfirmed) {
 									this.props.deleteAuditoria(auditoria.id);
-									Swal.fire("Saved!", "", "success");
+									Swal.fire(bText[lang].swal.saved, "", "success");
 								} else if (result.isDenied) {
-									Swal.fire("Changes are not saved", "", "info");
+									Swal.fire(bText[lang].swal.not_saved, "", "info");
 								}
 							});
 							//props.deletePregunta(pregunta.id)
@@ -196,7 +230,7 @@ class TarjetaAuditoria extends Component {
 				{date}
 
 				{(userLevel !== 0) ? (
-					<p>Assigned by: {auditoria.createdBy}, {moment(auditoria.createdAt.toDate()).fromNow()}</p>
+					<p>{bText[lang].auditorias.tarjetaAuditoria.assignedBy}: {auditoria.createdBy}, {moment(auditoria.createdAt.toDate()).fromNow()}</p>
 				) : null}
 				
 				{/* <p>{findArea && findProceso ? findProceso.proceso + ", " + findArea.area : null}</p> */}
@@ -205,11 +239,33 @@ class TarjetaAuditoria extends Component {
 			</div>
 		);
 
-		const linked = alreadyDone ? (
-			content
-		) : (
-			<Link to={refLink + "/" + auditoria.id}>{content}</Link>
-		);
+		// const linked = alreadyDone ? (
+		// 	content
+		// ) : (
+		// 	<Link to={refLink + "/" + auditoria.id}>{content}</Link>
+		// );
+
+		const dialog = (
+			<Dialog
+				open={this.state.open}
+				TransitionComponent={Transition}
+				onClose={this.handleClose}
+				aria-labelledby="alert-dialog-slide-title"
+				aria-describedby="alert-dialog-slide-description"
+			>
+				<DialogContent className="center-box">
+					{/* Working1 */}
+					{/* {console.log("Pass:", auditoria.password)} */}
+					<QRCode value={auditoria.password}/>
+					{/* Working2 */}
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={this.handleClose} color="primary">
+						{bText[lang].aceptar}
+					</Button>
+				</DialogActions>
+			</Dialog>
+		)
 
 
 		const contentParent = (userLevel === 0) ? (
@@ -217,13 +273,14 @@ class TarjetaAuditoria extends Component {
 				<div className="tarjeta-auditoría-half1">
 					{content}
 					{/* <p>{findArea && findProceso ? findProceso.proceso + ", " + findArea.area : null}</p> */}
-					<p>{bText[lang].auditorias.tarjetaAuditoria.password}: {auditoria.password}</p>
+					{/* <p>{bText[lang].auditorias.tarjetaAuditoria.password}: {auditoria.password}</p> */}
 					{/* <p>CreatedAt: {moment(auditoria.createdAt.toDate()).fromNow()}</p> */}
 					
 				</div>
 				<div className="tarjeta-auditoría-half2">
 					{botones}
 				</div>
+				{dialog}
 			</div>
 		) : (
 			<Link 
@@ -237,6 +294,7 @@ class TarjetaAuditoria extends Component {
 				<div className="tarjeta-auditoría-half2">
 					{botones}
 				</div>
+				{dialog}
 			</Link>
 		);
 

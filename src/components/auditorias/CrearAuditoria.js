@@ -1,25 +1,15 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 // import { createAuditoria } from "../../store/actions/auditoriaActions";
 import {
 	createAuditoria,
 	editAuditoria,
 	getAuditoria,
 } from "../../store/actions/auditoriaActions";
-import { NavLink, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
 import DatePicker from "react-datepicker";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import Slide from "@material-ui/core/Slide";
 import Swal from "sweetalert2";
 import Volver from '../util/Volver'
 import Select from '@material-ui/core/Select';
@@ -28,14 +18,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import "react-datepicker/dist/react-datepicker.css";
 
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import DatepickerInput from '../util/DatepickerInput'
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-	return <Slide direction="up" ref={ref} {...props} />;
-});
+import { bText } from "../../config/language";
+
 
 class CrearAuditoria extends Component {
 	state = {
@@ -133,26 +119,30 @@ class CrearAuditoria extends Component {
 		}));
 	};
 	Seguro = (e) => {
+		// const bText = require("../../config/language");
+		const {lang} = this.props
 		// console.log(this.cantSend())
 		// if (this.cantSend()) return null;
 		// console.log(e)
 		e.preventDefault();
 		Swal.fire({
-			title: "Do you want to save the changes?",
+			title: bText[lang].swal.title,
 			showDenyButton: true,
-			showCancelButton: false,
-			confirmButtonText: "Save",
-			denyButtonText: "Don't save",
+			showConfirmButton: true,
+			denyButtonText: bText[lang].swal.cancel,
+			confirmButtonText: bText[lang].swal.save,
 		}).then((result) => {
 			//  Read more about isConfirmed, isDenied below
 			if (result.isConfirmed) {
 				this.handleSubmit(e);
-				Swal.fire("Saved!", "", "success");
+				Swal.fire(bText[lang].swal.saved, "", "success");
 			} else if (result.isDenied) {
-				Swal.fire("Changes are not saved", "", "info");
+				Swal.fire(bText[lang].swal.not_saved, "", "info");
 			}
 		});
 	};
+
+	
 
 	handleChangeSelectProceso = (e) => {
 		// console.log("This is E", e)
@@ -252,15 +242,15 @@ class CrearAuditoria extends Component {
 	}
 
 	render() {
-		var { path, pathName } = require("../../config/config");
-		const text = require("../../config/language");
+		// var { path, pathName } = require("../../config/config");
+		// const bText = require("../../config/language");
 		const { auth, userLevel, lang, procesos, areas, users } = this.props;
 
 		if (!auth.uid) return <Redirect to="/signin" />;
 
 		if (!lang) return null;
 
-		if (userLevel != 0) return <Redirect to="/" />;
+		if (userLevel !== 0) return <Redirect to="/" />;
 
 		if (!users) return null;
 
@@ -307,7 +297,7 @@ class CrearAuditoria extends Component {
 					</div>
 					<div className="titulo">
 						<h2 className="">
-							{text[lang].auditorias.crearAuditoria.crear_auditoria}
+							{bText[lang].auditorias.crearAuditoria.crear_auditoria}
 						</h2>
 					</div>
 				</div>
@@ -333,7 +323,7 @@ class CrearAuditoria extends Component {
 										>
 											<MenuItem value="" disabled>
 												<div className="placeholder-color">
-													{text[lang].auditorias.crearAuditoria.proceso}
+													{bText[lang].auditorias.crearAuditoria.proceso}
 												</div>
 											</MenuItem>
 											{procesos && this.sortByKey([...procesos], "proceso").map(p => {
@@ -361,7 +351,7 @@ class CrearAuditoria extends Component {
 										>
 											<MenuItem value="" disabled>
 												<div className="placeholder-color">
-													{text[lang].auditorias.crearAuditoria.area}
+													{bText[lang].auditorias.crearAuditoria.area}
 												</div>
 											</MenuItem>
 											{areas && this.sortByKey([...areas], "area").filter(a => a.proceso === this.state.proceso).map(a => {
@@ -390,7 +380,7 @@ class CrearAuditoria extends Component {
 														>
 															<MenuItem value="" disabled>
 																<div className="placeholder-color">
-																	{text[lang].auditorias.crearAuditoria.auditor} - {layerName[layer]}
+																	{bText[lang].auditorias.crearAuditoria.auditor} - {layerName[layer]}
 																</div>
 															</MenuItem>
 															{filtUsers && filtUsers.filter(u => u.userLevel === layer).map(a => {
@@ -406,7 +396,7 @@ class CrearAuditoria extends Component {
 									<div className="date-container">
 
 										<span className="fecha">
-											{text[lang].auditorias.crearAuditoria.inicia_el}
+											{bText[lang].auditorias.crearAuditoria.inicia_el}
 										</span>
 										<div className="datePicker-container">
 											<DatePicker
@@ -423,7 +413,7 @@ class CrearAuditoria extends Component {
 										</div>
 
 										<span className="fecha">
-											{text[lang].auditorias.crearAuditoria.termina_el}
+											{bText[lang].auditorias.crearAuditoria.termina_el}
 											{/* {console.log(text[lang].auditorias.crearAuditoria.termina_el)} */}
 										</span>
 										<div className="datePicker-container">
@@ -453,12 +443,12 @@ class CrearAuditoria extends Component {
 					<div className="footer">
 						<div className="center-box">
 							<button className="cancelar" onClick={this.handleCancel}>
-								{text[lang].auditorias.crearAuditoria.cancelar}
+								{bText[lang].auditorias.crearAuditoria.cancelar}
 							</button>
 						</div>
 						<div className="center-box">
 							<button className="aceptar" onClick={this.Seguro}>
-								{text[lang].auditorias.crearAuditoria.crear}
+								{bText[lang].auditorias.crearAuditoria.crear}
 							</button>
 						</div>
 					</div>

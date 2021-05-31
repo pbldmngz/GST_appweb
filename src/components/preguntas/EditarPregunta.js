@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import { editPregunta, getPregunta } from "../../store/actions/preguntaActions";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
@@ -7,6 +7,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import Swal from "sweetalert2";
 import Volver from '../util/Volver'
+
+import { bText } from "../../config/language";
 
 class EditarPregunta extends Component {
   state = {
@@ -82,7 +84,7 @@ class EditarPregunta extends Component {
   render() {
     // console.log(this.state)
     const { auth, lang } = this.props;
-    const bText = require("../../config/language");
+    // const bText = require("../../config/language");
 
     if (!auth.uid) return <Redirect to="/signin" />;
     if (!lang) return null;

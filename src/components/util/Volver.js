@@ -1,5 +1,6 @@
 import { withRouter } from "react-router";
 import { connect } from 'react-redux'
+import { bText } from "../../config/language";
 
 import React, { Component } from 'react'
 
@@ -15,7 +16,7 @@ class Volver extends Component {
 
     render() {
         const {lang} = this.props
-        const text = require('../../config/language');
+        // const bText = require('../../config/language');
 
 
         return lang ? (
@@ -23,7 +24,7 @@ class Volver extends Component {
                 className="return" 
                 onClick={() => {this.move()}}
             >
-                {text[lang].return}
+                {bText[lang].return}
             </button>
         ) : null
     }

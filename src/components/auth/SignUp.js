@@ -5,9 +5,9 @@ import { signUp } from '../../store/actions/authActions'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
-import Logo_GST from '../../styles/imgs/Logo-GST.png'
 import Volver from '../util/Volver'
 import Swal from "sweetalert2";
+import { bText } from "../../config/language";
 
 class SignUp extends Component {
     state = {
@@ -65,7 +65,7 @@ class SignUp extends Component {
         if (!auth.uid) return <Redirect to="/" />
         if (userLevel && userLevel !==0) return <Redirect to="/" />
 
-        const bText = require('../../config/language');
+        // const bText = require('../../config/language');
 
         if (!lang) return null;
 
