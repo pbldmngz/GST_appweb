@@ -20,7 +20,7 @@ import Volver from '../util/Volver'
 import { bText } from "../../config/language";
 
 //Esta madre no sirve, adáptenlo
-import QrReader from 'react-qr-scanner'
+import QrReader from 'modern-react-qr-reader'
 import "react-datepicker/dist/react-datepicker.css";
 
 class ResponderAuditoria extends Component {
@@ -163,9 +163,10 @@ class ResponderAuditoria extends Component {
   };
 
   handleScan(data) {
+    // console.log("HandleScan", data)
     if (data !== null) {
       this.setState({
-        password: data.text,
+        password: data,
       })
     }
     
@@ -175,7 +176,7 @@ class ResponderAuditoria extends Component {
   }
 
   render() {
-    const { auth, proceed, lang } = this.props;
+    const { auth, proceed, lang, userLevel } = this.props;
     // const bText = require("../../config/language");
 
     // console.log("Status", this.state)
@@ -198,6 +199,12 @@ class ResponderAuditoria extends Component {
 
     //Esto ya sirve pero se buclea
     // const id = this.props.match.params.id
+
+    const react_plan = {
+      0: bText[lang].preguntas.crearPregunta.fix,
+      1: bText[lang].preguntas.crearPregunta.contramedidas_temporales,
+      2: bText[lang].preguntas.crearPregunta.parar_produccion,
+    }
 
     // const pregID = this.props.preguntasAuditoria({ id: id }).then((res) => {
     //     this.setState({
@@ -232,11 +239,11 @@ class ResponderAuditoria extends Component {
           
           <center>
             <QrReader
-              delay={this.state.delay}
-              style={previewStyle}
+              delay={300}
+              facingMode={"environment"}
               onError={this.handleError}
               onScan={this.handleScan}
-              facingMode={"rear"}
+              style={{ width: '100%' }}
             />
           </center>
           
@@ -272,7 +279,7 @@ class ResponderAuditoria extends Component {
 
             {/* Ponganle una animación al height para que en el momento que cargue vaya de 0% a 100%*/}
             {this.state.preguntas &&
-              this.state.preguntas.map((pregunta) => {
+              this.state.preguntas.filter(p => p.category >= userLevel).map((pregunta, index) => {
                 return (
                   <div className="form-1 extra-padding-form" key={pregunta.id}>
                     {/* card x-depth-0 para ver los limites fácilmente*/}
@@ -282,7 +289,8 @@ class ResponderAuditoria extends Component {
                         className="legend-pregunta grey-text text-darken-3"
                         component="legend"
                       >
-                        <h3>{pregunta[lang]}</h3>
+                        <h3>{index + 1}. {pregunta[lang]}</h3>
+                      <p className="justify-text">{pregunta.description}</p>
                       </FormLabel>
                       <div className="campos extra-margin">
                         
@@ -310,15 +318,19 @@ class ResponderAuditoria extends Component {
 
                         {(this.state["resp-" + pregunta.id]) ? (
                           ((this.state["resp-" + pregunta.id]) === "No") ? (
-                            <TextField
-                              label={
-                                bText[lang].auditorias.responderAuditoria
-                                  .justificacion
-                              }
-                              className="label70"
-                              name={"just-" + pregunta.id}
-                              onChange={this.handleChange}
-                            />
+                            <div>
+                            <center>{bText[lang].preguntas.detallesPregunta.plan_reaccion}: <b>{react_plan[pregunta.reaction_plan]}</b></center>
+                              <TextField
+                                label={
+                                  bText[lang].auditorias.responderAuditoria
+                                    .justificacion
+                                }
+                                className="label70"
+                                name={"just-" + pregunta.id}
+                                onChange={this.handleChange}
+                              />
+                            </div>
+                            
                           ) : null
                           
                         ) : null}
@@ -359,6 +371,7 @@ const mapStateToProps = (state, ownProps) => {
         ? false
         : true,
     preguntas: state.firestore.ordered.preguntas,
+    userLevel: state.firebase.profile.userLevel,
   };
 };
 

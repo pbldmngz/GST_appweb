@@ -32,7 +32,7 @@ export const bText = {
             crear_proceso: "Guardar",
             agregar_pregunta: "Agregar pregunta",
             procesos: "Procesos",
-            areas: "Áreas",
+            areas: "Áreas de trabajo",
             grafica_global: "Gráfica global",
         },
         auditorias: {
@@ -40,7 +40,7 @@ export const bText = {
                 nada: "Parece que todo ha estado calmado últimamente",
             },
             crearAuditoria: {
-                crear_auditoria: "Asignar auditoria",
+                crear_auditoria: "Asignar LPA",
                 editar_auditoria: "Editar auditoria",
                 nombre_auditoria: "Nombre de la auditoria",
                 auditor: "Auditor",
@@ -68,7 +68,7 @@ export const bText = {
                 proceso: "Proceso",
                 auditor: "Auditor",
                 vista: "Vista",
-                auditorias: "Auditorias",
+                auditorias: "Auditorías Programadas",
             },
             detallesAuditoria: {
                 auditor: "Auditor",
@@ -145,10 +145,10 @@ export const bText = {
                 parar_produccion: "Parar la producción",
             },
             dashboardPreguntas: {
-                creacion_preguntas: "Creación de preguntas",
+                creacion_preguntas: "Elementos de Verificación LPA",
             },
             detallesPregunta: {
-                descripcion: "Descripción",
+                descripcion: "Propósito",
                 categoria: "Capa",
                 plan_reaccion: "Plan de reacción",
                 creado_por: "Creado por",
@@ -202,7 +202,7 @@ export const bText = {
             area: "area",
             Area: "Area",
             procesos: "Processes",
-            areas: "Areas",
+            areas: "Work area",
             proceso: "process",
             Proceso: "Process",
             urgencia: "Priority",
@@ -223,7 +223,7 @@ export const bText = {
                 nada: "It seems that everything has been calm lately",
             },
             crearAuditoria: {
-                crear_auditoria: "Assign audit",
+                crear_auditoria: "Assign LPA",
                 editar_auditoria: "Edit",
                 nombre_auditoria: "Audit name",
                 auditor: "Auditor",
@@ -251,7 +251,7 @@ export const bText = {
                 proceso: "Process",
                 auditor: "Auditor",
                 vista: "View",
-                auditorias: "Audits",
+                auditorias: "Scheduled Audits",
             },
             detallesAuditoria: {
                 auditor: "Auditor",
@@ -328,10 +328,10 @@ export const bText = {
                 parar_produccion: "Stop production",
             },
             dashboardPreguntas: {
-                creacion_preguntas: "Question creator",
+                creacion_preguntas: "LPA Check Items",
             },
             detallesPregunta: {
-                descripcion: "Description",
+                descripcion: "Purpose",
                 categoria: "Layer",
                 plan_reaccion: "Reaction plan",
                 creado_por: "Created by",

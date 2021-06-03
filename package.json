@@ -16,6 +16,7 @@
     "@testing-library/user-event": "^12.8.3",
     "firebase": "^8.3.2",
     "generate-password": "^1.6.0",
+    "modern-react-qr-reader": "^1.0.12",
     "moment": "^2.29.1",
     "plotly": "^1.0.6",
     "plotly.js": "^1.58.4",
@@ -59,5 +60,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "lint": "^0.7.0"
   }
 }

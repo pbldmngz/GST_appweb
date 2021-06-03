@@ -82,7 +82,7 @@ class DashboardAreas extends Component {
 
         const {areas, userLevel, lang, auth} = this.props
 
-        if (!auth.uid) return <Redirect to="signin"/>
+        if (!auth.uid) return <Redirect to="/signin"/>
 
         if (userLevel !== 0) return <Redirect to="/"/>
 

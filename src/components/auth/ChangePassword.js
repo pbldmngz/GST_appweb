@@ -22,7 +22,7 @@ class ChangePassword extends Component {
         // Y no olvides el CSV
         // https://www.npmjs.com/package/react-csv-reader
         // https://www.npmjs.com/package/react-csv
-        const bText = require("../../config/language");
+        // const bText = require("../../config/language");
         const { lang } = this.props
 
         this.reauthenticate(currentPassword)

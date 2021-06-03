@@ -230,7 +230,7 @@ const mapStateToProps = (state) => {
         users: state.firestore.ordered.users,
         lang: state.firebase.profile.lang,
         auth: state.firebase.auth,
-        userLevel: state.firebase.profile.userLevel
+        userLevel: state.firebase.profile.userLevel,
     }
 }
 

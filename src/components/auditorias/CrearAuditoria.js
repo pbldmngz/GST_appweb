@@ -273,8 +273,14 @@ class CrearAuditoria extends Component {
 		
 		
 		switch (auditorCount) {
-			case 2:
+			case 0:
+				auditorCount = [3, 4];
+				break;
+			case 1:
 				auditorCount = [2, 3, 4];
+				break;
+			case 2:
+				auditorCount = [1, 2, 3, 4];
 				break;
 			case 3:
 				auditorCount = [1, 2, 3, 4];
