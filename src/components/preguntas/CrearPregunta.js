@@ -39,11 +39,18 @@ class CrearPregunta extends Component {
 		this.props.history.push("/preguntas");
 	};
 
+	cantSend = () => {
+		return (this.state.description === "" || this.state.reaction_plan === "" || this.state.english === "" || this.state.spanish === "")
+	}
+
 	Seguro = (e) => {
 
 		const { lang } = this.props
 
+		if (this.cantSend()) return null;
+
 		e.preventDefault();
+		
 		Swal.fire({
 			title: bText[lang].swal.title,
 			showDenyButton: true,

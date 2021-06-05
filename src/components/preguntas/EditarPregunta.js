@@ -10,6 +10,7 @@ import Volver from '../util/Volver'
 
 import { bText } from "../../config/language";
 
+
 class EditarPregunta extends Component {
 
 	state = {
@@ -38,7 +39,7 @@ class EditarPregunta extends Component {
 		this.props.history.push("/preguntas"); //Esto se cambiará según el contexto
 	};
 
-	UNSAFE_componentWillMount() {
+	componentDidMount() {
 		const id = this.props.match.params.id;
 		this.props.getPregunta(id).then((res) => {
 			this.setState({
@@ -51,9 +52,15 @@ class EditarPregunta extends Component {
 		});
 	}
 
+	cantSend = () => {
+		return (this.state.description === "" || this.state.reaction_plan === "" || this.state.english === "" || this.state.spanish === "")
+	}
+
 	Seguro = (e) => {
 
-		const { lang } = this.props
+		const { lang } = this.props;
+
+		if (this.cantSend()) return null;
 
 		e.preventDefault();
 

@@ -32,12 +32,10 @@ exports.createUser = functions.https.onCall((data, context) => {
 
 
 exports.changeLang = functions.https.onCall((data, context) => {
-    console.log("Esta madre funciona?", data)
 
     return admin.firestore().collection('users').doc(data.uid).update({
         lang: data.idioma,
     }).then(res => {
-        // console.log("This is res", res)
         return res
     }).catch(err => {
         console.log("Error:", err)

@@ -39,9 +39,15 @@ class SignUp extends Component {
         this.props.history.push("/profile")
     }
 
+    cantSend = () => {
+        return ( this.state.email === "" || this.state.password === "" || this.state.firstName === "" || this.state.lastName === "" )
+    }
+
     Seguro = (e) => {
 
         const { lang } = this.props
+
+        if (this.cantSend()) return null;
 
         e.preventDefault();
 

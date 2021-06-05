@@ -15,7 +15,7 @@ export default function Preguntas(props) {
         });
     }
 
-    const sortedPreguntas = sortByKey([...preguntas], "createdAt")
+    const sortedPreguntas = sortByKey([...preguntas], "createdAt").reverse();
 
     return (
         <div className="">

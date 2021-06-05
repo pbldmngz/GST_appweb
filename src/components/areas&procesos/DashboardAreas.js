@@ -54,6 +54,7 @@ class DashboardAreas extends Component {
     };
 
     preguntaChart = (area) => {
+
         var count = {
             yes: 0,
             no: 0,
@@ -93,7 +94,6 @@ class DashboardAreas extends Component {
         const whereToGo = (procesoFilt) ? "/procesos" : "/profile";
 
         const createWProps = (procesoFilt) ? ("/crear-area-props/" + procesoFilt): ("/crear-area");
-
 
         return (
             <div className="padre-padre-titulo">

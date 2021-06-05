@@ -31,14 +31,34 @@ class DashboardAuditorias extends Component {
         console.log("This app was developed by this guy: https://github.com/pbldmngz")
         console.log("For any further changes, please send an e-mail to pablo@dominguez.contact")
         
-        const { auditorias, respuestas, auth, userLevel, lang, users } = this.props
+        const { auditorias, respuestas, auth, userLevel, lang, users, areas, procesos } = this.props
 
         if (!auth.uid) return <Redirect to="/signin"/>
-        if (!lang) return null;
+        if ( !lang || !users || !areas || !procesos ) return null;
 
-        const sortByKey = (array, key) => {
+        const sortByKey = (filt, array, key) => {
             return array.sort(function (a, b) {
-                var x = a[key].toString(); var y = b[key].toString();
+
+                var x = a[key].toString();
+                var y = b[key].toString();
+
+                if (filt === 4) {
+                    x = areas.find(ax => ax.id === a[key]);
+                    y = areas.find(ax => ax.id === b[key]);
+                }
+                else if (filt === 5) {
+                    x = procesos.find(ax => ax.id === a[key]);
+                    y = procesos.find(ax => ax.id === b[key]);
+                }
+                else if (filt === 6) {
+                    x = users.find(ax => ax.id === a[key]);
+                    y = users.find(ax => ax.id === b[key]);
+                } 
+                else {
+                    x = a[key].toString();
+                    y = b[key].toString();
+                }
+
                 return ((x < y) ? -1 : ((x > y) ? 1 : 0));
             });
         }
@@ -88,18 +108,17 @@ class DashboardAuditorias extends Component {
                 break;
         }
     
-        orderedAudit = sortByKey(orderedAudit, filter_value)
-        
+        orderedAudit = sortByKey(this.state.filter, orderedAudit, filter_value);
 
         var filteredAuditorias = orderedAudit;
 
-        if (this.state.filter === 3) {
-            filteredAuditorias = filteredAuditorias.reverse()
+        if (this.state.filter !== 0) {
+            filteredAuditorias = filteredAuditorias.reverse();
         }
 
         if (auditorias && userLevel !== 0 && respuestas) {
 
-            const filtRespuestas = respuestas.filter(res => auth.uid === res.answeredById)
+            const filtRespuestas = respuestas.filter(res => auth.uid === res.answeredById);
             
             var filtID = {}
             for (let fA in filtRespuestas){
@@ -123,7 +142,6 @@ class DashboardAuditorias extends Component {
                 <MenuItem value={3}>{bText[lang].auditorias.dashboardAuditorias.fecha_creacion}</MenuItem>
                 <MenuItem value={4}>{bText[lang].auditorias.dashboardAuditorias.area}</MenuItem>
                 <MenuItem value={5}>{bText[lang].auditorias.dashboardAuditorias.proceso}</MenuItem>
-                <MenuItem value={6}>{bText[lang].auditorias.dashboardAuditorias.auditor}</MenuItem>
                 <MenuItem value={1}>{bText[lang].auditorias.dashboardAuditorias.agrupar_areas}</MenuItem>
             </Select>
         ) : (
@@ -181,6 +199,8 @@ const mapStateToProps = (state) => {
         auditorias: state.firestore.ordered.auditorias,
         respuestas: state.firestore.ordered.respuestas,
         users: state.firestore.ordered.users,
+        areas: state.firestore.ordered.areas,
+        procesos: state.firestore.ordered.procesos,
         lang: state.firebase.profile.lang,
         auth: state.firebase.auth,
         userLevel: state.firebase.profile.userLevel,
@@ -189,5 +209,10 @@ const mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps),
-    firestoreConnect([{ collection: "auditorias", orderBy: ["fecha_fin", "asc"]}, {collection:"respuestas"}, {collection:"users"}])
+    firestoreConnect([
+        { collection: "auditorias", orderBy: ["fecha_fin", "asc"]}, 
+        { collection: "respuestas" },
+        { collection: "areas" },
+        { collection: "procesos" },
+        { collection: "users" }])
 )(DashboardAuditorias)
