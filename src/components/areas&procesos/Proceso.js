@@ -135,6 +135,7 @@ class Proceso extends Component {
 		if (this.cantSend()) return null;
 
 		e.preventDefault();
+		
 		Swal.fire({
 			title: bText[lang].swal.title,
 			showDenyButton: true,
@@ -142,7 +143,6 @@ class Proceso extends Component {
 			denyButtonText: bText[lang].swal.cancel,
 			confirmButtonText: bText[lang].swal.save,
 		}).then((result) => {
-			//  Read more about isConfirmed, isDenied below
 			if (result.isConfirmed) {
 				this.handleSubmit(e);
 				Swal.fire(bText[lang].swal.saved, "", "success");

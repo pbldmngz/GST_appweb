@@ -99,7 +99,9 @@ class TarjetaAuditoria extends Component {
 
 		var style = {};
 
-		if (alreadyDone) {
+		const rightNow = new Date();
+
+		if (alreadyDone || auditoria.fecha_fin.toDate() < rightNow) {
 			color = "grey";
 			text = "D";
 			style = { backgroundColor: "#D5D8DC" };
@@ -168,8 +170,6 @@ class TarjetaAuditoria extends Component {
 			</p>
 		) : null;
 		
-		
-
 		const content = (
 			<div className="">
 				<div className="">

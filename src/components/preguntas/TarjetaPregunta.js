@@ -122,57 +122,46 @@ export default function TarjetaPregunta(props) {
 				aria-labelledby="alert-dialog-slide-title"
 				aria-describedby="alert-dialog-slide-description"
 			>
-				<DialogTitle id="alert-dialog-slide-title">{"Justificaciones a esta pregunta####"}</DialogTitle>
+
+				<DialogTitle id="alert-dialog-slide-title">{pregunta.english}</DialogTitle>
+
 				<DialogContent className="dialog-content">
+
 					<DialogContentText>
-					{pregunta.english}###
-					</DialogContentText>
-					<DialogContentText>
-						<span className="dialog-span">
-							Descripción: 
-						</span>
 						<p className="dialog-p">
-							{pregunta.description}###EEEEEEEEEEEEEEEEEEEEEEE##########
+							<b>{bText[lang].preguntas.detallesPregunta.descripcion}: </b>{pregunta.description}
 						</p>
 					</DialogContentText>
+
 					<DialogContentText>
-						<span className="dialog-span">
-							Capa:
-						</span>
 						<p className="dialog-p">
-							{categoria[pregunta.category]}
+							<b>{bText[lang].preguntas.detallesPregunta.categoria}: </b>{categoria[pregunta.category]}
 						</p>
 					</DialogContentText>
+
 					<DialogContentText>
-						<span className="dialog-span">
-							Plan de reacción: 
-						</span>
 						<p className="dialog-p">
-							{pregunta.reaction_plan}
+							<b>{bText[lang].preguntas.detallesPregunta.plan_reaccion}: </b>{react_plan[pregunta.reaction_plan]}
 						</p>
 					</DialogContentText>
+
 					<DialogContentText>
-						<span className="dialog-span">
-							Creado por:
-						</span>
 						<p className="dialog-p">
-							{pregunta.createdBy}
+							<b>{bText[lang].preguntas.detallesPregunta.creado_por}: </b>{pregunta.createdBy}
 						</p>
 					</DialogContentText>
+
 					<DialogContentText>
-						<span className="dialog-span">
-							Creado:
-						</span>
 						<p className="dialog-p">
-							{moment(pregunta.createdAt.toDate()).fromNow()}
+							<b>{bText[lang].preguntas.detallesPregunta.creado}: </b>{moment(pregunta.createdAt.toDate()).fromNow()}
 						</p>
 					</DialogContentText>
+
 				</DialogContent>
 				
-
 				<DialogActions>
 					<Button onClick={handleClose} color="primary">
-						Aceptar###
+						{bText[lang].aceptar}
             		</Button>
 				</DialogActions>
 			</Dialog>

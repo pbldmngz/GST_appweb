@@ -41,21 +41,24 @@ class SignUp extends Component {
 
     Seguro = (e) => {
 
-		e.preventDefault();
-		Swal.fire({
-			title: "Do you want to save the changes?",
-			showDenyButton: true,
-			showCancelButton: false,
-			confirmButtonText: "Save",
-			denyButtonText: "Don't save",
-		}).then((result) => {
-			if (result.isConfirmed) {
-				this.handleSubmit(e);
-				Swal.fire("Saved!", "", "success");
-			} else if (result.isDenied) {
-				Swal.fire("Changes are not saved", "", "info");
-			}
-		});
+        const { lang } = this.props
+
+        e.preventDefault();
+
+        Swal.fire({
+            title: bText[lang].swal.title,
+            showDenyButton: true,
+            showConfirmButton: true,
+            denyButtonText: bText[lang].swal.cancel,
+            confirmButtonText: bText[lang].swal.save,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.handleSubmit(e);
+                Swal.fire(bText[lang].swal.saved, "", "success");
+            } else if (result.isDenied) {
+                Swal.fire(bText[lang].swal.not_saved, "", "info");
+            }
+        });
 	};
 
     render() {

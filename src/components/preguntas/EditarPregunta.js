@@ -52,19 +52,23 @@ class EditarPregunta extends Component {
 	}
 
 	Seguro = (e) => {
+
+		const { lang } = this.props
+
 		e.preventDefault();
+
 		Swal.fire({
-			title: "Do you want to save the changes?",
+			title: bText[lang].swal.title,
 			showDenyButton: true,
-			showCancelButton: false,
-			confirmButtonText: "Save",
-			denyButtonText: "Don't save",
+			showConfirmButton: true,
+			denyButtonText: bText[lang].swal.cancel,
+			confirmButtonText: bText[lang].swal.save,
 		}).then((result) => {
 			if (result.isConfirmed) {
 				this.handleSubmit(e);
-				Swal.fire("Saved!", "", "success");
+				Swal.fire(bText[lang].swal.saved, "", "success");
 			} else if (result.isDenied) {
-				Swal.fire("Changes are not saved", "", "info");
+				Swal.fire(bText[lang].swal.not_saved, "", "info");
 			}
 		});
 	};

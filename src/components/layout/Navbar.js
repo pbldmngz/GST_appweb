@@ -19,10 +19,15 @@ const Navbar = (props) => {
         auth.uid ? (
             <div className="padre-titulo nav">
                 <div className="titulo">
-                    <div className="perfil">
-                        <Link to={path.profile} className="center-box">
-                            <FontAwesomeIcon icon={faCog} />
-                        </Link>
+                    <div className="imout hover-cursor" onClick={() => {
+
+                        props.signOut();
+                        if (props.history) {
+                            props.history.push("/signin")
+                        }
+
+                    }}>
+                        <FontAwesomeIcon icon={faSignOutAlt} />
                     </div>
                 </div>
 
@@ -35,15 +40,10 @@ const Navbar = (props) => {
                 </div>
                 
                 <div className="titulo">
-                    <div className="imout hover-cursor" onClick={() => {
-
-                        props.signOut();
-                        if (props.history) {
-                            props.history.push("/signin")
-                        }
-                        
-                    }}>
-                        <FontAwesomeIcon icon={faSignOutAlt} />
+                    <div className="perfil">
+                        <Link to={path.profile} className="center-box">
+                            <FontAwesomeIcon icon={faCog} />
+                        </Link>
                     </div>
                 </div>
             </div>

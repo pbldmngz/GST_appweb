@@ -132,7 +132,6 @@ const DetallesPregunta = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        // pregunta: pregunta,
         auth: state.firebase.auth,
         lang: state.firebase.profile.lang,
     }
