@@ -11,11 +11,13 @@ import Volver from '../util/Volver'
 
 
 class Profile extends Component {
+
     render() {
+
         const {userLevel, lang, auth} = this.props
-        // const bText = require("../../config/language");
+
         const { path } = directions
-        // console.log("This is profile:", profile)
+
         if (!auth.uid) return <Redirect to="/signin"/>
 
         if (!lang) return null;
@@ -37,32 +39,20 @@ class Profile extends Component {
                             
                             {(userLevel === 0) ? (
                                 <div className="extra-margin">
-                                        <Link
-                                            className="form-1 overwrite-margin center-box default-height"
-                                            to="/procesos">{bText[lang].opciones.procesos}
-                                        </Link>
+                                    <Link
+                                        className="form-1 overwrite-margin center-box default-height"
+                                        to="/procesos">{bText[lang].opciones.procesos}
+                                    </Link>
 
-                                        <Link
-                                            className="form-1 overwrite-margin center-box default-height"
-                                            to={path.preguntas}>{bText[lang].opciones.preguntas}
-                                        </Link>
-                                        
-                                        <Link
-                                            className="form-1 overwrite-margin center-box default-height"
-                                            to={path.sign_up}>{bText[lang].opciones.registrar_auditor}
-                                        </Link>
-
-                                        {/* <Link
-                                            className="form-1 overwrite-margin center-box default-height" 
-                                            to="/crear-area">{bText[lang].area_proceso.crear_area}
-                                        </Link> */}
-
-                                        
-
-                                        {/* <Link
-                                            className="form-1 overwrite-margin center-box default-height"
-                                        to="/areas">{bText[lang].opciones.areas}
-                                        </Link> */}
+                                    <Link
+                                        className="form-1 overwrite-margin center-box default-height"
+                                        to={path.preguntas}>{bText[lang].opciones.preguntas}
+                                    </Link>
+                                    
+                                    <Link
+                                        className="form-1 overwrite-margin center-box default-height"
+                                        to={path.sign_up}>{bText[lang].opciones.registrar_auditor}
+                                    </Link>
                                 </div>
                                 
                             ) : null}
@@ -84,9 +74,7 @@ class Profile extends Component {
 }
 
 const mapStateToProps = (state) => {
-    //console.log(state)
     return {
-        // profile: state.firebase.profile,
         lang: state.firebase.profile.lang,
         userLevel: state.firebase.profile.userLevel,
         auth: state.firebase.auth,

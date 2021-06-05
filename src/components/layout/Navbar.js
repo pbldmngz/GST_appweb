@@ -11,7 +11,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {directions} from "../../config/config"
 
 
-//<div className=""> ==> <div className="container"> to center
 const Navbar = (props) => {
     var { path } = directions
     const {auth} = props
@@ -19,7 +18,6 @@ const Navbar = (props) => {
     return (
         auth.uid ? (
             <div className="padre-titulo nav">
-            {/* <ul> */}
                 <div className="titulo">
                     <div className="perfil">
                         <Link to={path.profile} className="center-box">
@@ -38,8 +36,12 @@ const Navbar = (props) => {
                 
                 <div className="titulo">
                     <div className="imout hover-cursor" onClick={() => {
+
                         props.signOut();
-                        props.history.push("/signin")
+                        if (props.history) {
+                            props.history.push("/signin")
+                        }
+                        
                     }}>
                         <FontAwesomeIcon icon={faSignOutAlt} />
                     </div>
@@ -48,7 +50,6 @@ const Navbar = (props) => {
         ) : null
     )
 }
-
 
 const mapStateToProps = (state) => {
     return {

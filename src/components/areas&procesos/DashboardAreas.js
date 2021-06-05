@@ -59,8 +59,6 @@ class DashboardAreas extends Component {
             no: 0,
         }
 
-        console.log("Respuestas:", this.props)
-
         this.props.respuestas.filter(p => p.area === area).forEach(res => {
             if (res.respuesta === "Sí") {
                 count.yes += 1;
@@ -88,21 +86,13 @@ class DashboardAreas extends Component {
 
         if (!lang) return null;
 
-        // console.log(this.props.match.params.proceso)
-
         const procesoFilt = this.props.match.params.proceso
 
         const avalAreas = (areas) ? ((areas && procesoFilt) ? [...areas].filter(a => a.proceso === procesoFilt) : [...areas]) : [];
 
         const whereToGo = (procesoFilt) ? "/procesos" : "/profile";
 
-        // console.log(this.props.match.url)
         const createWProps = (procesoFilt) ? ("/crear-area-props/" + procesoFilt): ("/crear-area");
-
-
-
-        
-
 
 
         return (
@@ -116,10 +106,8 @@ class DashboardAreas extends Component {
                     </div>
                 </div>
                 <div className="arroz-chino">
+
                     <TarjetaAgregarAuditoria where={createWProps}/>
-                    {/* <div className="graph-align">
-                        <PieChart data={this.state.count} radius={0.5} innerText={this.state.actualText + "%"} />
-                    </div> */}
                     
                     {avalAreas && avalAreas.map(area => {
                         return (
@@ -172,9 +160,9 @@ class DashboardAreas extends Component {
                 >
                     <DialogTitle id="alert-dialog-slide-title" className="popup-title">{bText[lang].area_proceso.grafica_global}</DialogTitle>
                     <DialogContent className="graph-align-popup">
-                        {/* Working1 */}
+
                         <PieChart data={this.state.count} radius={0.5} innerText={this.state.actualText + "%"} />
-                        {/* Working2 */}
+
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} color="primary">
@@ -193,7 +181,6 @@ const mapStateToProps = (state) => {
 		auth: state.firebase.auth,
 		userLevel: state.firebase.profile.userLevel,
 		lang: state.firebase.profile.lang,
-		// procesos: state.firestore.ordered.procesos,
         areas: state.firestore.ordered.areas,
         respuestas: state.firestore.ordered.respuestas,
 	};

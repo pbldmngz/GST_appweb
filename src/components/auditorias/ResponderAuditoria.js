@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+
 import {
   createAuditoria,
   preguntasAuditoria,
   getAuditoria,
 } from "../../store/actions/auditoriaActions";
+
 import { respuestaPregunta } from "../../store/actions/preguntaActions";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
@@ -16,23 +18,14 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import TextField from "@material-ui/core/TextField";
 import Swal from "sweetalert2";
 import Volver from '../util/Volver'
-//import DatePicker from 'react-datepicker/dist/react-datepicker'
+
 import { bText } from "../../config/language";
 
-//Esta madre no sirve, adáptenlo
 import QrReader from 'modern-react-qr-reader'
 import "react-datepicker/dist/react-datepicker.css";
 
-class ResponderAuditoria extends Component {
 
-  // state = {
-  //   password: "<NOPASS>",
-  //   pass:"",
-  //   preguntas: [],
-  //   auditoria: "",
-  //   area: "",
-  //   _mounted: false,
-  // };
+class ResponderAuditoria extends Component {
 
   constructor(props) {
     super(props)
@@ -51,27 +44,22 @@ class ResponderAuditoria extends Component {
   }
 
   handleChange = (e) => {
-    // console.log("this is E", e)
 
     this.setState({
       [e.target.name]: e.target.value,
     });
   };
   handleSubmit = (e) => {
+
     e.preventDefault();
     const key = Object.keys(this.state);
-    // console.log(key)
 
-    // Quiero crear un arr de objetos tal que así:
-    // [{id: ###, justification:######, respuesta:##}]
-
-    //const keyCeption = key
     const validKN = ["just-", "resp-"];
     var keys = {};
 
     for (let k of key) {
       var header_base = k.substring(5, 25);
-      // console.log(header.length)
+
       if (header_base.length === 20) {
         keys[header_base] = true;
       }
@@ -80,16 +68,14 @@ class ResponderAuditoria extends Component {
     keys = Object.keys(keys);
     var results = [];
     for (let ks of keys) {
-      //ks es la ID
+
       var dict = { pregunta: ks, auditoria: this.props.match.params.id, area: this.state.area };
       dict["auditoria_pregunta"] = this.props.match.params.id + "_" + ks;
-      // var id, just, resp;
+
       for (let k of key) {
         var header = k.substring(0, 5);
         var cont = k.substring(5, 25);
-        // Esto es para poder hacer búsquedas, firebase es moleto para filtrar
-        // console.log("pre-if", validKN.includes(header), header)
-        // console.log("pre-if-2", cont === ks, cont, ks)
+
         if (validKN.includes(header) && cont === ks) {
           if (header === "just-") {
             dict["justificacion"] = this.state[k];
@@ -97,28 +83,17 @@ class ResponderAuditoria extends Component {
             dict["respuesta"] = this.state[k];
           }
 
-          // console.log("this is dict-header", dict[header])
         }
       }
       results.push(dict);
     }
 
-    // console.log(results)
-
-    // if (validKN.includes(header)) {
-
-    // }
-    // console.log("Props:", this.props)
     this.props.respuestaPregunta(results);
-    this.props.history.push("/"); //Esto se cambiará según el contexto
+    this.props.history.push("/");
   };
   componentDidMount() {
-    console.log("Mounted!");
-    // this._ismounted = true
+
     const id = this.props.match.params.id;
-    // this.setState({
-    //     auditoria: id,
-    // })
 
     this.props.getAuditoria(id).then((res) => {
       this.setState({
@@ -133,17 +108,14 @@ class ResponderAuditoria extends Component {
           preguntas: res.filter((r) => r),
           auditoria: id,
           _mounted: true,
-        },
-        console.log("Updated!")
+        }
       );
     });
   }
   Seguro = (e) => {
-    // const bText = require("../../config/language");
+
     const { lang } = this.props
-    // console.log(this.cantSend())
-    // if (this.cantSend()) return null;
-    // console.log(e)
+
     e.preventDefault();
     Swal.fire({
       title: bText[lang].swal.title,
@@ -152,7 +124,6 @@ class ResponderAuditoria extends Component {
       denyButtonText: bText[lang].swal.cancel,
       confirmButtonText: bText[lang].swal.save,
     }).then((result) => {
-      //  Read more about isConfirmed, isDenied below
       if (result.isConfirmed) {
         this.handleSubmit(e);
         Swal.fire(bText[lang].swal.saved, "", "success");
@@ -163,42 +134,25 @@ class ResponderAuditoria extends Component {
   };
 
   handleScan(data) {
-    // console.log("HandleScan", data)
+
     if (data !== null) {
       this.setState({
         password: data,
       })
     }
-    
   }
   handleError(err) {
     console.error(err)
   }
 
   render() {
-    const { auth, proceed, lang, userLevel } = this.props;
-    // const bText = require("../../config/language");
 
-    // console.log("Status", this.state)
-    // console.log(this.props)
+    const { auth, proceed, lang, userLevel } = this.props;
+
     if (!auth.uid) return <Redirect to="/signin" />;
     if (!lang) return null;
     
-    // console.log("Mounted?", this.state._mounted, "Proceed?", !proceed)
     if (this.state._mounted && !proceed) return <Redirect to="/" />;
-
-    // console.log("Password: ", this.state.password)
-    // console.log("Pass: ", this.state.pass)
-
-    //Se tiene que buscar preguntas por ID,
-    // estas ID están en auditorias.preguntas en un array
-
-    // const pregID = preguntasID.preguntas
-    // console.log(pregID)
-    //const pre = this.props.preguntasAuditoria({ id: id })
-
-    //Esto ya sirve pero se buclea
-    // const id = this.props.match.params.id
 
     const react_plan = {
       0: bText[lang].preguntas.crearPregunta.fix,
@@ -206,22 +160,7 @@ class ResponderAuditoria extends Component {
       2: bText[lang].preguntas.crearPregunta.parar_produccion,
     }
 
-    // const pregID = this.props.preguntasAuditoria({ id: id }).then((res) => {
-    //     this.setState({
-    //         preguntas: res
-    //     })
-    // })
-    // console.log("estas son las preguntas", this.state.preguntas)
     if (this.state.pass !== this.state.password) {
-      // const previewStyle = {
-      //   height: 150,
-      //   width: 250,
-      // }
-
-      const previewStyle = {
-        // height: 173,
-        width: "90%",
-      }
 
       return (
         <div>
@@ -254,11 +193,6 @@ class ResponderAuditoria extends Component {
 
     return (
       <div className="">
-        <div className="test">
-          {/* {pregID && pregID.map(pregunta => { 
-                        console.log(pregunta)
-                        return <p>{pregunta}</p>})} */}
-        </div>
         <div className="card x-depth-0">
           <div className="padre-titulo mobile">
             <div className="titulo destroy-on-mobile">
@@ -274,17 +208,11 @@ class ResponderAuditoria extends Component {
 
           <form className="white section" onSubmit={this.Seguro}>
             
-            {/* Esto se puede convertir a un operador ? : para que muestre un cargando o algo así */}
-            {/* {console.log("esto es preguntaSSS", this.state.preguntas)} */}
-
-            {/* Ponganle una animación al height para que en el momento que cargue vaya de 0% a 100%*/}
             {this.state.preguntas &&
               this.state.preguntas.filter(p => p.category >= userLevel).map((pregunta, index) => {
                 return (
                   <div className="form-1 extra-padding-form" key={pregunta.id}>
-                    {/* card x-depth-0 para ver los limites fácilmente*/}
-                    {/* <FormControl className="width100" component="fieldset"> */}
-                      {/* {console.log("antes de que truene, esto es pregunta", pregunta)} */}
+
                       <FormLabel
                         className="legend-pregunta grey-text text-darken-3"
                         component="legend"
@@ -294,7 +222,6 @@ class ResponderAuditoria extends Component {
                       </FormLabel>
                       <div className="campos extra-margin">
                         
-                        {/* {console.log("Este es un intento: ", "radio-" + pregunta.id)} */}
                         <RadioGroup
                           className="radio-group"
                           row
@@ -335,9 +262,7 @@ class ResponderAuditoria extends Component {
                           
                         ) : null}
 
-                        
                       </div>
-                    {/* </FormControl> */}
                   </div>
                 );
               })}

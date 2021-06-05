@@ -13,7 +13,6 @@ class PopUp extends Component {
       confirmButtonText: "Save",
       denyButtonText: "Don't save",
     }).then((result) => {
-      //  Read more about isConfirmed, isDenied below
       if (result.isConfirmed) {
         this.handleClick.bind(this);
         Swal.fire("Saved!", "", "success");

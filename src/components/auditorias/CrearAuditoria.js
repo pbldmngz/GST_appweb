@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-// import { createAuditoria } from "../../store/actions/auditoriaActions";
+
 import {
 	createAuditoria,
 	editAuditoria,
 	getAuditoria,
 } from "../../store/actions/auditoriaActions";
+
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
 import DatePicker from "react-datepicker";
@@ -14,7 +15,6 @@ import Swal from "sweetalert2";
 import Volver from '../util/Volver'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-//import DatePicker from 'react-datepicker/dist/react-datepicker'
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -24,6 +24,7 @@ import { bText } from "../../config/language";
 
 
 class CrearAuditoria extends Component {
+
 	state = {
 		auditoria: "",
 		auditor: ["", "", "", ""],
@@ -36,19 +37,21 @@ class CrearAuditoria extends Component {
 		valueB: "",
 		password: "",
 	};
+
 	handleChange = (e) => {
-		// console.log("This is E", e)
+
 		this.setState({
 			[e.target.id]: e.target.value,
 		});
 	};
+
 	handleChangeAutocomplete = (e, newValue) => {
-		// console.log("This is E and nV", e, newValue)
-		//Tengo que conseguir el ID
+
 		this.setState({
 			valueB: newValue,
 		});
 	};
+
 	handleSubmit = (e) => {
 		e.preventDefault();
 
@@ -62,7 +65,6 @@ class CrearAuditoria extends Component {
 			fecha_inicio: this.state.fecha_inicio,
 			fecha_fin: this.state.fecha_fin,
 			preguntas: this.props.procesos.find(p => p.id === this.state.proceso).preguntas,
-			// password: password,
 		}
 
 		if (!id) {
@@ -76,16 +78,16 @@ class CrearAuditoria extends Component {
 			});
 
 			toSend.password = password
-			// console.log(this.state)
 			this.props.createAuditoria(toSend);
 		} else {
 			toSend.password = this.state.password;
 
 			this.props.editAuditoria(id, toSend);
 		}
+
 		const whereToGo = (this.props.match.params.proceso) ? ("/auditorias/" + this.props.match.params.proceso + "/" + this.props.match.params.area) : "/";
 		
-		this.props.history.push(whereToGo); //Esto se cambiará según el contexto
+		this.props.history.push(whereToGo);
 	};
 
 	handleClickOpen = () => {
@@ -112,18 +114,14 @@ class CrearAuditoria extends Component {
 		});
 	};
 	handleCloseSave = (e) => {
-		// console.log("Y aquí debo de sacar una forma de registrar una pregunta nueva", e)
 		this.setState((prevState) => ({
 			openB: false,
 			preguntas: [...new Set([...prevState.preguntas, this.state.valueB])],
 		}));
 	};
 	Seguro = (e) => {
-		// const bText = require("../../config/language");
 		const {lang} = this.props
-		// console.log(this.cantSend())
-		// if (this.cantSend()) return null;
-		// console.log(e)
+		if (this.cantSend()) return null;
 		e.preventDefault();
 		Swal.fire({
 			title: bText[lang].swal.title,
@@ -142,25 +140,19 @@ class CrearAuditoria extends Component {
 		});
 	};
 
-	
-
 	handleChangeSelectProceso = (e) => {
-		// console.log("This is E", e)
 		this.setState({
 			proceso: e.target.value,
 		});
 	};
 
 	handleChangeSelectArea = (e) => {
-		// console.log("This is E", e)
 		this.setState({
 			area: e.target.value,
 		});
 	};
 
 	handleChangeSelectAuditor = (e) => {
-		console.log("This is E", e.target)
-
 		var newAuditor = [...this.state.auditor]
 
 		switch (e.target.name) {
@@ -200,7 +192,7 @@ class CrearAuditoria extends Component {
 	}
 
 	cantSend = () => {
-		return !(this.state.preguntas && (this.state.preguntas.length >= 5) && (this.state.preguntas.length <= 15));
+		return !((this.state.area !== "") && (this.state.proceso !== "") && (this.state.auditor.filter(a => a !== "").length))
 	}
 
 	componentDidMount() {
@@ -220,7 +212,6 @@ class CrearAuditoria extends Component {
 
 		if (id) {
 			this.props.getAuditoria(id).then((res) => {
-				// console.log("RES is working", res)
 				this.setState({
 					auditoria: res.auditoria,
 					auditor: res.auditor,
@@ -233,17 +224,11 @@ class CrearAuditoria extends Component {
 					}),
 					password: res.password,
 				});
-				// console.log("This is Res", res)
 			});
 		}
-		
-		// console.log("Falta que el texto de los inputs se cambie a lo del state", this.state)
-		//Checa el state en la consola, no sale nada
 	}
 
 	render() {
-		// var { path, pathName } = require("../../config/config");
-		// const bText = require("../../config/language");
 		const { auth, userLevel, lang, procesos, areas, users } = this.props;
 
 		if (!auth.uid) return <Redirect to="/signin" />;
@@ -253,25 +238,13 @@ class CrearAuditoria extends Component {
 		if (userLevel !== 0) return <Redirect to="/" />;
 
 		if (!users) return null;
-
-		// console.log("PropsMatch", this.props.match.params)
 		
-
 		const filtUsers = this.sortByKey([...users], "lastName").filter(u => u.userLevel !== 0)
-
-		// console.log("1:", [...areas].map((ar) => { return ar.id }).includes(this.state.area), areas, this.state.area)
 
 		const temp1 = [...areas].find(a => a.id === this.state.area)
 
-
-
-		// console.log("2", temp1 ? temp1.urgencia : 0)
-
 		var auditorCount = ((this.state.area !== "" && areas) && [...areas].map((ar) => { return ar.id }).includes(this.state.area)) ? (temp1 ? temp1.urgencia : 0) : 0;
-		
-		// console.log("AC:", auditorCount)
-		
-		
+
 		switch (auditorCount) {
 			case 0:
 				auditorCount = [3, 4];
@@ -294,7 +267,6 @@ class CrearAuditoria extends Component {
 
 		const whereToGo = (this.props.match.params.proceso) ? ("/auditorias/" + this.props.match.params.proceso + "/" + this.props.match.params.area) : "/";
 
-		// console.log(this.state.preguntas)
 		return (
 			<div className="">
 				<div className="padre-titulo mobile">
@@ -321,11 +293,9 @@ class CrearAuditoria extends Component {
 											id="proceso"
 											value={this.state.proceso}
 											onChange={this.handleChangeSelectProceso}
-											// style={{width: `${100}%`}}
 											className="this-is-also-input"
 											displayEmpty
 											disableUnderline
-											// placeholder={<p>bText[lang].area_proceso.proceso_corresponde</p>}
 										>
 											<MenuItem value="" disabled>
 												<div className="placeholder-color">
@@ -340,20 +310,15 @@ class CrearAuditoria extends Component {
 
 
 									<div className="limit-width">
-										{/* <span className="center-box">
-											{bText[lang].area_proceso.proceso_corresponde}
-										</span> */}
 										<Select
 											labelId="select-filter"
 											id="area"
 											value={this.state.area ? this.state.area : ""}
 											onChange={this.handleChangeSelectArea}
-											// style={{width: `${100}%`}}
 											className="this-is-also-input"
 											displayEmpty
 											disableUnderline
 											disabled={this.state.proceso === ""}
-											// placeholder={<p>bText[lang].area_proceso.proceso_corresponde</p>}
 										>
 											<MenuItem value="" disabled>
 												<div className="placeholder-color">
@@ -366,23 +331,18 @@ class CrearAuditoria extends Component {
 										</Select>
 									</div>
 
-									{/* {Aquí empieza lo nuevo} */}
-									{console.log(auditorCount)}
 									{this.state.area !== "" ? (
 										auditorCount && auditorCount.map(layer => {
 											return (<div key={layer} className="limit-width">
-														{/* {console.log(auditorCount)}
-														{} */}
+
 														<Select
 															labelId="select-filter"
 															name={"auditor" + layer.toString()}
 															value={this.state.auditor[layer - 1] ? this.state.auditor[layer - 1]: ""}
 															onChange={this.handleChangeSelectAuditor}
-															// style={{width: `${100}%`}}
 															className="this-is-also-input"
 															displayEmpty
 															disableUnderline
-															// placeholder={<p>bText[lang].area_proceso.proceso_corresponde</p>}
 														>
 															<MenuItem value="" disabled>
 																<div className="placeholder-color">
@@ -397,8 +357,6 @@ class CrearAuditoria extends Component {
 										})
 									) : (null)}
 									
-
-									{/* {Aquí empieza lo nuevo} */}
 									<div className="date-container">
 
 										<span className="fecha">
@@ -420,7 +378,6 @@ class CrearAuditoria extends Component {
 
 										<span className="fecha">
 											{bText[lang].auditorias.crearAuditoria.termina_el}
-											{/* {console.log(text[lang].auditorias.crearAuditoria.termina_el)} */}
 										</span>
 										<div className="datePicker-container">
 											<DatePicker

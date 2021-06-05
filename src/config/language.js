@@ -72,7 +72,7 @@ export const bText = {
             },
             detallesAuditoria: {
                 auditor: "Auditor",
-                descripcion: "Descripción",
+                descripcion: "Propósito",
                 plan_reaccion: "Plan de reacción",
                 creada_por: "Creada por",
                 fecha_inicio: "Fecha de inicio",
@@ -134,7 +134,7 @@ export const bText = {
             crearPregunta: {
                 crear_pregunta: "Crear pregunta",
                 pregunta: "Pregunta",
-                descripcion: "Descripción",
+                descripcion: "Propósito",
                 plan_reaccion: "Plan de reacción",
                 categoria: "Capa",
                 crear: "Crear",
@@ -255,7 +255,7 @@ export const bText = {
             },
             detallesAuditoria: {
                 auditor: "Auditor",
-                descripcion: "Description",
+                descripcion: "Purpose",
                 plan_reaccion: "Reaction plan",
                 creada_por: "Created by",
                 fecha_inicio: "Start date",
@@ -318,7 +318,7 @@ export const bText = {
                 crear_pregunta: "Create question",
                 editar_pregunta: "Edit question",
                 pregunta: "Question",
-                descripcion: "Description",
+                descripcion: "Purpose",
                 plan_reaccion: "Reaction plan",
                 categoria: "Layer",
                 crear: "Create",

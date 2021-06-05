@@ -1,6 +1,4 @@
-const initState = {
-    
-}
+const initState = {}
 
 const auditoriaReducer = (state = initState, action) => {
     switch (action.type) {

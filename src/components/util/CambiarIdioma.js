@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import { connect } from 'react-redux'
 import { withRouter } from "react-router";
 
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+
 import { editIdioma } from '../../store/actions/idiomaActions'
 
+
 class CambiarIdioma extends Component {
-    // const {lang} = props
+
     state = {
         lang: this.props.lang
     }
@@ -20,7 +22,7 @@ class CambiarIdioma extends Component {
     };
 
     render() {
-        // console.log(this.props)
+
         return (
             <Select
                 labelId="select-filter"
@@ -37,7 +39,6 @@ class CambiarIdioma extends Component {
 }
 
 const mapStateToProps = (state) => {
-    //console.log(state)
     return {
         lang: state.firebase.profile.lang,
         auth: state.firebase.auth

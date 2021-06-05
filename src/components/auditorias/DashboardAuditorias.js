@@ -10,15 +10,14 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Volver from '../util/Volver'
 import { bText } from "../../config/language";
 
-// CSS class "container" centers content
 
 class DashboardAuditorias extends Component {
+
     state = {
         filter: 0
     }
 
     handleChangeSelect = (e) => {
-        // console.log(e)
         this.setState({
             filter: e.target.value
         })
@@ -33,28 +32,12 @@ class DashboardAuditorias extends Component {
         console.log("For any further changes, please send an e-mail to pablo@dominguez.contact")
         
         const { auditorias, respuestas, auth, userLevel, lang, users } = this.props
-        // const bText = require('../../config/language');
-        
 
         if (!auth.uid) return <Redirect to="/signin"/>
         if (!lang) return null;
-        // if (userLevel != 0) return <Redirect to="/" />
-        // console.log("userLevel: ", userLevel)
-        // console.log("respuestas", respuestas)
-        // if (!lang) return null;
-        // console.log("Calling from DashboardAuditorias", this.props)
-
-
-        // ---> Con esto los usuarios no ven las que ya respondieron <---
-        // Se podría mejorar mandando un prop de que ya está resuelta
-        // hacia la tarjeta, pero se me hace mucha bronca porque luego se tendrían
-        // Que mandar al fondo. En todo caso puedo hacer una vista de auditorias YA HECHAS
 
         const sortByKey = (array, key) => {
             return array.sort(function (a, b) {
-                //Check if they are timestamp
-
-
                 var x = a[key].toString(); var y = b[key].toString();
                 return ((x < y) ? -1 : ((x > y) ? 1 : 0));
             });
@@ -62,19 +45,11 @@ class DashboardAuditorias extends Component {
 
         const rightNow = new Date();
 
-        // if (auditorias) {
-        //     console.log("Watching this:", [...auditorias], rightNow)
-        // }
-        
-
         var whatAuditorias = auditorias ? (
             (userLevel === 0) ? [...auditorias] : [...auditorias].filter(a => a.fecha_fin.toDate() > rightNow)
         ) : []
 
-        // console.log(this.props.match.params)
-
         if (this.props.match.params.proceso && this.props.match.params.proceso !== " ") {
-            // console.log("nope")
             whatAuditorias = whatAuditorias.filter(a => a.proceso === this.props.match.params.proceso)
         }
 
@@ -89,34 +64,27 @@ class DashboardAuditorias extends Component {
         switch (this.state.filter) {
             case 0:
                 filter_value = "fecha_fin";
-                // console.log(filter_value)
                 break;
             case 1:
                 this.props.history.push("/procesos")
                 break;
             case 3:
                 filter_value = "createdAt";
-                // console.log(filter_value)
                 break;
             case 4:
                 filter_value = "area";
-                // console.log(filter_value)
                 break;
             case 5:
                 filter_value = "proceso";
-                // console.log(filter_value)
                 break;
             case 6:
                 filter_value = "auditor";
-                // console.log(filter_value)
                 break;
             case 7:
                 filter_value = "fecha_inicio";
-                // console.log(filter_value)
                 break;
             default:
                 filter_value = "fecha_fin";
-                // console.log(filter_value)
                 break;
         }
     
@@ -129,26 +97,16 @@ class DashboardAuditorias extends Component {
             filteredAuditorias = filteredAuditorias.reverse()
         }
 
-        // Malísima implementación, se debería filtrar y luego ordenar, 
-        // al revés es un desperdicio
-
         if (auditorias && userLevel !== 0 && respuestas) {
-            // console.log("0", this.state.filter, respuestas)
-            const filtRespuestas = respuestas.filter(res => auth.uid === res.answeredById)
 
-            // console.log("After Filter", this.state.filter, filtRespuestas)
+            const filtRespuestas = respuestas.filter(res => auth.uid === res.answeredById)
             
             var filtID = {}
             for (let fA in filtRespuestas){
-                // console.log("fA", filtRespuestas[fA])
                 filtID[filtRespuestas[fA].auditoria] = true
             }
-            
-            // console.log("2", filtID)
 
             const alreadyDone = Object.keys(filtID)
-
-            // console.log("3", alreadyDone)
 
             filteredAuditorias = (this.state.filter === 2) ? (
                 orderedAudit && orderedAudit.filter(aud => alreadyDone.includes(aud.id))
@@ -156,9 +114,7 @@ class DashboardAuditorias extends Component {
                 orderedAudit && orderedAudit.filter(aud => !alreadyDone.includes(aud.id))
             );
 
-            // filteredAuditorias = filteredAuditorias.filter(aud => aud.minCategory >= userLevel)
         }
-        // var { path, pathName } = require('../../config/config');
         
         const menuItems = (userLevel === 0) ? (
             <Select labelId="select-filter" id="filter" value={this.state.filter} onChange={this.handleChangeSelect}>
@@ -176,9 +132,7 @@ class DashboardAuditorias extends Component {
                     <MenuItem value={2}>{bText[lang].auditorias.dashboardAuditorias.mostrar_realizados}</MenuItem>
                 </Select>
         );
-        // const botonReturn = (userLevel === 0) ? (
-        //     <div className="dashboard-extra-space">{text[lang].return}</div>
-        // ): null;
+
         const whereToGo = this.props.match.params.proceso ? "/areas/" + this.props.match.params.proceso : "/";
 
         if (filteredAuditorias) {
@@ -223,7 +177,6 @@ class DashboardAuditorias extends Component {
 }
 
 const mapStateToProps = (state) => {
-    // console.log("Status", state)
     return {
         auditorias: state.firestore.ordered.auditorias,
         respuestas: state.firestore.ordered.respuestas,

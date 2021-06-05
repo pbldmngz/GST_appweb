@@ -12,7 +12,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { createArea, editArea, getArea } from "../../store/actions/areaActions";
 
 import {bText} from "../../config/language";
-// import { directions } from "../../config/config"
+
 
 class Area extends Component {
 
@@ -46,32 +46,34 @@ class Area extends Component {
 			this.props.editArea(id, this.state)
 		}
 		
-		this.props.history.push(whereToGo); //Esto se cambiará según el contexto
+		this.props.history.push(whereToGo);
 	};
 
 	handleChange = (e) => {
-		// console.log("This is E", e)
 		this.setState({
 			[e.target.id]: e.target.value,
 		});
 	};
 
 	handleChangeSelectProceso = (e) => {
-		// console.log("This is E", e)
 		this.setState({
 			proceso: e.target.value,
 		});
 	};
 
 	handleChangeSelectUrgencia = (e) => {
-		// console.log("This is E", e)
 		this.setState({
 			urgencia: e.target.value,
 		});
 	};
 
+	cantSend = () => {
+		return !((this.state.area !== "") && (this.state.proceso !== "") && (this.state.urgencia !== ""))
+	}
+
 	Seguro = (e) => {
-		// console.log(e)
+		if (this.cantSend()) return null;
+
 		e.preventDefault();
 		Swal.fire({
 			title: "Do you want to save the changes?",
@@ -101,15 +103,13 @@ class Area extends Component {
 			if (!id) return null;
 
 			this.props.getArea(id).then((res) => {
-				// console.log(res)
 				this.setState({...res})
 			})
 		}
 	}
 
     render() {
-		// var { path, pathName } = require("../../config/config");
-		// const bText = require();
+
 		const { auth, userLevel, lang, procesos } = this.props;
 
 		if (!auth.uid) return <Redirect to="/signin" />;
@@ -117,10 +117,6 @@ class Area extends Component {
 		if (!lang) return null;
 
 		if (userLevel !== 0) return <Redirect to="/" />;
-
-		// const tipo = this.props.match.params.tipo
-
-		// console.log(this.props.match)
 
 		const whereToGo = (this.props.match.params.proceso) ? "/areas/" + this.props.match.params.proceso : "/profile";
 
@@ -132,7 +128,6 @@ class Area extends Component {
 					</div>
 					<div className="titulo">
 						<h2 className="">
-							{/* {text[lang].auditorias.crearAuditoria.crear_auditoria} */}
 							{bText[lang].area_proceso.crear} {bText[lang].area_proceso.area}
 						</h2>
 					</div>
@@ -154,19 +149,15 @@ class Area extends Component {
                                 </div>
 								
 								<div className="limit-width">
-									{/* <span className="center-box">
-										{bText[lang].area_proceso.proceso_corresponde}
-									</span> */}
+
 									<Select
 										labelId="select-filter"
 										id="urgencia"
 										value={this.state.urgencia}
 										onChange={this.handleChangeSelectUrgencia}
-										// style={{width: `${100}%`}}
 										className="this-is-also-input"
 										displayEmpty
 										disableUnderline
-										// placeholder={<p>bText[lang].area_proceso.proceso_corresponde</p>}
 									>
 										<MenuItem value="" disabled>
 											<div className="placeholder-color">
@@ -182,19 +173,14 @@ class Area extends Component {
 								</div>
 
 								<div className="limit-width">
-									{/* <span className="center-box">
-										{bText[lang].area_proceso.proceso_corresponde}
-									</span> */}
 									<Select
 										labelId="select-filter"
 										id="filter"
 										value={this.state.proceso}
 										onChange={this.handleChangeSelectProceso}
-										// style={{width: `${100}%`}}
 										className="this-is-also-input"
 										displayEmpty
 										disableUnderline
-										// placeholder={<p>bText[lang].area_proceso.proceso_corresponde</p>}
 									>
 										<MenuItem value="" disabled>
 											<div className="placeholder-color">
@@ -204,8 +190,6 @@ class Area extends Component {
 										{procesos && procesos.map(p => {
 											return <MenuItem className="text-color" key={p.id} value={p.id}>{p.proceso}</MenuItem>
 										})}
-										{/* <MenuItem value={"english"}>English</MenuItem>
-										<MenuItem value={"spanish"}>Español</MenuItem> */}
 									</Select>
 								</div>
                             </div>
@@ -247,7 +231,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchtoProps = (dispatch) => {
 	return {
-		// createProceso: (proceso) => dispatch(createProceso(proceso)),
 		createArea: (area) => dispatch(createArea(area)),
 		editArea: (id, area) => dispatch(editArea(id, area)),
 		getArea: (id) => dispatch(getArea(id)),
@@ -258,5 +241,3 @@ export default compose(
 	connect(mapStateToProps, mapDispatchtoProps),
 	firestoreConnect([{ collection: "procesos" }, { collection: "areas" }])
 )(Area);
-
-// export default connect(mapStateToProps, mapDispatchtoProps)(AreaProceso)

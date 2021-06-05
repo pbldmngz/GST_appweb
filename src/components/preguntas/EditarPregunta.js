@@ -11,91 +11,83 @@ import Volver from '../util/Volver'
 import { bText } from "../../config/language";
 
 class EditarPregunta extends Component {
-  state = {
-    category: 4,
-    description: "",
-    reaction_plan: "",
-    english: "",
-    spanish: "",
-  };
-  handleChange = (e) => {
-    this.setState({
-      [e.target.id]: e.target.value,
-    });
-  };
-  handleChangeSelect = (e) => {
-    // console.log(e)
-    this.setState({
-      category: e.target.value,
-    });
-  };
-  handleSubmit = (e) => {
-    e.preventDefault();
-    // console.log("se supone que se envió", this.state)
-    this.props.editPregunta(this.props.match.params.id, this.state);
-    this.props.history.push("/preguntas"); //Esto se cambiará según el contexto
-  };
 
-  UNSAFE_componentWillMount() {
-    const id = this.props.match.params.id;
-    this.props.getPregunta(id).then((res) => {
-      // console.log("RES is working", res)
-      this.setState({
-        category: res.category,
-        description: res.description,
-        reaction_plan: res.reaction_plan,
-        english: res.english,
-        spanish: res.spanish,
-      });
-      // console.log("This is Res", res)
-    });
-    // console.log("Falta que el texto de los inputs se cambie a lo del state", this.state)
-    //Checa el state en la consola, no sale nada
-  }
-  Seguro = (e) => {
-    // console.log(e)
-    e.preventDefault();
-    Swal.fire({
-      title: "Do you want to save the changes?",
-      showDenyButton: true,
-      showCancelButton: false,
-      confirmButtonText: "Save",
-      denyButtonText: "Don't save",
-    }).then((result) => {
-      //  Read more about isConfirmed, isDenied below
-      if (result.isConfirmed) {
-        this.handleSubmit(e);
-        Swal.fire("Saved!", "", "success");
-      } else if (result.isDenied) {
-        Swal.fire("Changes are not saved", "", "info");
-      }
-    });
-  };
+	state = {
+		category: 4,
+		description: "",
+		reaction_plan: "",
+		english: "",
+		spanish: "",
+	};
 
-  
+	handleChange = (e) => {
+		this.setState({
+			[e.target.id]: e.target.value,
+		});
+	};
+
+	handleChangeSelect = (e) => {
+		this.setState({
+			category: e.target.value,
+		});
+	};
+
+	handleSubmit = (e) => {
+		e.preventDefault();
+		this.props.editPregunta(this.props.match.params.id, this.state);
+		this.props.history.push("/preguntas"); //Esto se cambiará según el contexto
+	};
+
+	UNSAFE_componentWillMount() {
+		const id = this.props.match.params.id;
+		this.props.getPregunta(id).then((res) => {
+			this.setState({
+				category: res.category,
+				description: res.description,
+				reaction_plan: res.reaction_plan,
+				english: res.english,
+				spanish: res.spanish,
+			});
+		});
+	}
+
+	Seguro = (e) => {
+		e.preventDefault();
+		Swal.fire({
+			title: "Do you want to save the changes?",
+			showDenyButton: true,
+			showCancelButton: false,
+			confirmButtonText: "Save",
+			denyButtonText: "Don't save",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				this.handleSubmit(e);
+				Swal.fire("Saved!", "", "success");
+			} else if (result.isDenied) {
+				Swal.fire("Changes are not saved", "", "info");
+			}
+		});
+	};
+
 	handleChangeSelectRP = (e) => {
-		// console.log("This is E", e)
+
 		this.setState({
 			reaction_plan: e.target.value,
 		});
 	};
 
+	render() {
 
-  render() {
-    // console.log(this.state)
-    const { auth, lang } = this.props;
-    // const bText = require("../../config/language");
+		const { auth, lang } = this.props;
 
-    if (!auth.uid) return <Redirect to="/signin" />;
-    if (!lang) return null;
+		if (!auth.uid) return <Redirect to="/signin" />;
+		if (!lang) return null;
 
-    
-
-    return (
-      <div>
+		return (
+			<div>
 				<div className="padre-titulo mobile">
 					<div className="titulo destroy-on-mobile">
-						<Volver where="/preguntas"/>
+						<Volver where="/preguntas" />
 					</div>
 					<div className="titulo">
 						<h2 className="titulo">
@@ -110,30 +102,30 @@ class EditarPregunta extends Component {
 							<div className="form-2">
 								<div className="input-field">
 									<input
-                    type="text"
-                    id="english"
-                    value={this.state.english}
-                    placeholder={bText[lang].preguntas.crearPregunta.crear_pregunta + " [EN]"}
-                    onChange={this.handleChange}
-                  />
+										type="text"
+										id="english"
+										value={this.state.english}
+										placeholder={bText[lang].preguntas.crearPregunta.crear_pregunta + " [EN]"}
+										onChange={this.handleChange}
+									/>
 								</div>
 								<div className="input-field">
 									<input
-                    type="text"
-                    id="spanish"
-                    value={this.state.spanish}
-                    placeholder={bText[lang].preguntas.crearPregunta.crear_pregunta + " [ES]"}
-                    onChange={this.handleChange}
-                  />
+										type="text"
+										id="spanish"
+										value={this.state.spanish}
+										placeholder={bText[lang].preguntas.crearPregunta.crear_pregunta + " [ES]"}
+										onChange={this.handleChange}
+									/>
 								</div>
 								<div className="input-field">
 									<input
-                    type="text"
-                    id="description"
-                    value={this.state.description}
-                    placeholder={bText[lang].preguntas.crearPregunta.descripcion}
-                    onChange={this.handleChange}
-                  />
+										type="text"
+										id="description"
+										value={this.state.description}
+										placeholder={bText[lang].preguntas.crearPregunta.descripcion}
+										onChange={this.handleChange}
+									/>
 								</div>
 								<div className="limit-width">
 									<Select
@@ -150,7 +142,7 @@ class EditarPregunta extends Component {
 												{bText[lang].preguntas.crearPregunta.plan_reaccion}
 											</div>
 										</MenuItem>
-										
+
 										<MenuItem value={0}>{bText[lang].preguntas.crearPregunta.fix}</MenuItem>
 										<MenuItem value={1}>{bText[lang].preguntas.crearPregunta.contramedidas_temporales}</MenuItem>
 										<MenuItem value={2}>{bText[lang].preguntas.crearPregunta.parar_produccion}</MenuItem>
@@ -166,17 +158,17 @@ class EditarPregunta extends Component {
 											id="level"
 											value={this.state.category}
 											onChange={this.handleChangeSelect}
-											style={{width: `${100}px`}}
+											style={{ width: `${100}px` }}
 										>
 											<MenuItem value={4}>A</MenuItem>
-                      <MenuItem value={3}>B</MenuItem>
-                      <MenuItem value={2}>C</MenuItem>
-                      <MenuItem value={1}>D</MenuItem>
+											<MenuItem value={3}>B</MenuItem>
+											<MenuItem value={2}>C</MenuItem>
+											<MenuItem value={1}>D</MenuItem>
 										</Select>
 									</div>
 								</div>
 							</div>
-							
+
 						</form>
 					</div>
 				</div>
@@ -186,22 +178,22 @@ class EditarPregunta extends Component {
 					</button>
 				</div>
 			</div>
-    );
-  }
+		);
+	}
 }
 
 const mapStateToProps = (state) => {
-  return {
-    auth: state.firebase.auth,
-    lang: state.firebase.profile.lang,
-  };
+	return {
+		auth: state.firebase.auth,
+		lang: state.firebase.profile.lang,
+	};
 };
 
 const mapDispatchtoProps = (dispatch) => {
-  return {
-    editPregunta: (id, pregunta) => dispatch(editPregunta(id, pregunta)),
-    getPregunta: (id) => dispatch(getPregunta(id)),
-  };
+	return {
+		editPregunta: (id, pregunta) => dispatch(editPregunta(id, pregunta)),
+		getPregunta: (id) => dispatch(getPregunta(id)),
+	};
 };
 
 export default connect(mapStateToProps, mapDispatchtoProps)(EditarPregunta);

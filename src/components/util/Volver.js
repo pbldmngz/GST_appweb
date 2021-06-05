@@ -16,8 +16,6 @@ class Volver extends Component {
 
     render() {
         const {lang} = this.props
-        // const bText = require('../../config/language');
-
 
         return lang ? (
             <button 

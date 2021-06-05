@@ -1,11 +1,9 @@
-
 export const createProceso = (proceso) => {
     return (dispatch, getState, { getFirestore }) => {
+
         const firestore = getFirestore();
         const profile = getState().firebase.profile;
         const authorId = getState().firebase.auth.uid;
-        
-        // console.log("Pasa por actionProceso", proceso)
 
         firestore.collection('procesos').add({
             ...proceso,
@@ -24,11 +22,10 @@ export const createProceso = (proceso) => {
 
 export const editProceso = (id, proceso) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
+
         const firestore = getFirestore();
         const profile = getState().firebase.profile;
         const authorId = getState().firebase.auth.uid;
-
-        // console.log("Llegamos tan lejos?")
 
         firestore.collection("procesos").doc(id).update({
             ...proceso,
@@ -47,6 +44,7 @@ export const editProceso = (id, proceso) => {
 
 export const deleteProceso = (id) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
+
         const firestore = getFirestore();
         firestore.collection("procesos").doc(id).delete()
     }
@@ -54,15 +52,14 @@ export const deleteProceso = (id) => {
 
 export const getProceso = (id) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
+
         const firestore = getFirestore();
 
         var docRef = firestore.collection("procesos").doc(id);
 
         return docRef.get()
             .then((doc) => {
-                // console.log("did I get passes .then")
                 if (doc.exists) {
-                    //console.log("this: ", doc.data())
                     return doc.data()
                 }
             }).catch((err) => {

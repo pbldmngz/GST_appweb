@@ -1,29 +1,23 @@
-// import functions from '';
-const functions = require("firebase-functions");
-const admin = require("firebase-admin");
-
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
-exports.changeLang = (uid, lang) => {
-    return admin.firestore().collection("users").doc(uid).set({
-        lang: lang,
-    }, { merge: true }).then(doc => console.log("Language changed!"))
-}
 
-exports.createUser = (userLevel, newUser) => {
+exports.createUser = functions.https.onCall((data, context) => {
+
+    const { newUser, userLevel } = data
+
     if (userLevel === 0) {
-        admin
+        return admin
             .auth()
             .createUser({
-                email: user.email,
-                password: 'secretPassword',
+                email: newUser.email,
+                password: newUser.password,
             })
             .then((userRecord) => {
-                // See the UserRecord reference doc for the contents of userRecord.
                 admin.firestore().collection("users").doc(userRecord.uid).set({
                     firstName: newUser.firstName,
                     lastName: newUser.lastName,
-                    initials: newUser.firstName[0] + newUser.lastName[0],
                     userLevel: newUser.level,
                     lang: newUser.lang,
                 })
@@ -33,4 +27,20 @@ exports.createUser = (userLevel, newUser) => {
                 console.log('Error creating new user:', error);
             });
     }
-}
+
+})
+
+
+exports.changeLang = functions.https.onCall((data, context) => {
+    console.log("Esta madre funciona?", data)
+
+    return admin.firestore().collection('users').doc(data.uid).update({
+        lang: data.idioma,
+    }).then(res => {
+        // console.log("This is res", res)
+        return res
+    }).catch(err => {
+        console.log("Error:", err)
+    })
+
+})

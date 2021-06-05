@@ -1,15 +1,13 @@
 export const editIdioma = (uid, idioma) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
-        const firestore = getFirestore();
-        // console.log("UID-IDIOMA:", uid, idioma)
+        
+        const firebase = getFirebase();
 
-        firestore.collection("users").doc(uid).update({
-            lang: idioma
-        }).then(() => {
-            dispatch({ type: "EDIT_IDIOMA" }, idioma)
-        }).catch((err) => {
-            dispatch({ type: "EDIT_IDIOMA_ERROR" }, err)
-        })
+        const changeLang = firebase.functions().httpsCallable('changeLang');
+
+        changeLang({uid, idioma}).then((res) => {
+            console.log("Idioma cambiado:", idioma)
+        });
 
     }
 }

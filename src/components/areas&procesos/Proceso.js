@@ -22,7 +22,6 @@ import TextField from "@material-ui/core/TextField";
 
 import { createProceso, getProceso, editProceso } from "../../store/actions/procesoActions";
 import { bText } from "../../config/language";
-// import { createArea } from "../../store/actions/areaActions";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
@@ -61,41 +60,31 @@ class Proceso extends Component {
 		if (!id) {
 			this.props.createProceso(proceso)
 		} else {
-			// console.log("Si llegamos a esto", id, proceso)
 			this.props.editProceso(id, proceso)
 		}
-		// console.log("Pasa por es submit", this.state)
 
-		
-		
-
-		this.props.history.push("/procesos"); //Esto se cambiará según el contexto
+		this.props.history.push("/procesos");
 	};
 
 	handleChange = (e) => {
-		// console.log("This is E", e)
 		this.setState({
 			[e.target.id]: e.target.value,
 		});
 	};
 
 	handleChangeSelectProceso = (e) => {
-		// console.log("This is E", e)
 		this.setState({
 			proceso: e.target.value,
 		});
 	};
 
 	handleChangeAutocomplete = (e, newValue) => {
-		// console.log("This is E and nV", e, newValue)
-		//Tengo que conseguir el ID
 		this.setState({
 			valueB: newValue,
 		});
 	};
 
 	handleChangeSelectUrgencia = (e) => {
-		// console.log("This is E", e)
 		this.setState({
 			urgencia: e.target.value,
 		});
@@ -125,24 +114,26 @@ class Proceso extends Component {
 	};
 
 	cantSend = () => {
-		return !(this.state.preguntas && (this.state.preguntas.length >= 5) && (this.state.preguntas.length <= 15));
+		const isBlank = this.state.proceso === "";
+		return !(this.state.preguntas && (this.state.preguntas.length >= 5) && (this.state.preguntas.length <= 15) && !isBlank);
 	}
 
 	handleCloseSave = (e) => {
-		// console.log("Y aquí debo de sacar una forma de registrar una pregunta nueva", e)
+
 		this.setState((prevState) => ({
 			openB: false,
 			preguntas: [...new Set([...prevState.preguntas, this.state.valueB])],
+			valueB: "",
 		}));
+
 	};
 
 	Seguro = (e) => {
-		// const bText = require("../../config/language");
+
 		const { lang } = this.props
-		// console.log(this.cantSend())
-		// if (this.cantSend()) return null;
+
 		if (this.cantSend()) return null;
-		// console.log(e)
+
 		e.preventDefault();
 		Swal.fire({
 			title: bText[lang].swal.title,
@@ -177,7 +168,7 @@ class Proceso extends Component {
 	}
 
     render() {
-		// const bText = require("../../config/language");
+
 		const { auth, userLevel, lang } = this.props;
 
 		const layerName = ["Admin", "D", "C", "B", "A"]
@@ -188,8 +179,6 @@ class Proceso extends Component {
 
 		if (userLevel !== 0) return <Redirect to="/" />;
 
-		// console.log(this.props)
-		// console.log(this.state)
 		return (
 			<div className="">
 				<div className="padre-titulo mobile">
@@ -198,7 +187,6 @@ class Proceso extends Component {
 					</div>
 					<div className="titulo">
 						<h2 className="">
-							{/* {text[lang].auditorias.crearAuditoria.crear_auditoria} */}
 							{!this.props.match.params.id ? bText[lang].area_proceso.crear : bText[lang].area_proceso.editar} {bText[lang].area_proceso.proceso}
 						</h2>
 					</div>
@@ -297,7 +285,7 @@ class Proceso extends Component {
 								/>
 							</DialogContent>
 							<DialogActions>
-								<Button onClick={this.handleCloseSave} color="primary">
+								<Button onClick={this.handleCloseSave} disabled={this.state.valueB === ""} color="primary">
 									{bText[lang].auditorias.crearAuditoria.agregar}
 								</Button>
 								<Button onClick={this.handleClose} color="secondary">
@@ -350,7 +338,6 @@ const mapDispatchtoProps = (dispatch) => {
 		createProceso: (proceso) => dispatch(createProceso(proceso)),
 		getProceso: (id) => dispatch(getProceso(id)),
 		editProceso: (id, proceso) => dispatch(editProceso(id, proceso)),
-		// createArea: (area) => dispatch(createArea(area)),
 	};
 };
 
@@ -358,5 +345,3 @@ export default compose(
 	connect(mapStateToProps, mapDispatchtoProps),
 	firestoreConnect([{ collection: "procesos" }, { collection: "preguntas" }])
 )(Proceso);
-
-// export default connect(mapStateToProps, mapDispatchtoProps)(AreaProceso)

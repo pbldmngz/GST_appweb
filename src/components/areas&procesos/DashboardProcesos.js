@@ -23,8 +23,6 @@ class DashboardProcesos extends Component {
 
         const {procesos, userLevel, lang, auth} = this.props
 
-        // const bText = require("../../config/language");
-
         if (!auth.uid) return <Redirect to="signin"/>
 
         if (userLevel !== 0) return <Redirect to="/"/>
@@ -42,7 +40,9 @@ class DashboardProcesos extends Component {
                     </div>
                 </div>
                 <div className="arroz-chino">
+
                     <TarjetaAgregarAuditoria where="/crear-proceso"/>
+
                     {procesos && procesos.map(pro => {
                         return (
                             <div
@@ -64,7 +64,6 @@ class DashboardProcesos extends Component {
                                             denyButtonText: bText[lang].swal.cancel,
                                             confirmButtonText: bText[lang].swal.save,
                                         }).then((result) => {
-                                            //  Read more about isConfirmed, isDenied below
                                             if (result.isConfirmed) {
                                                 this.props.deleteProceso(pro.id);
                                                 Swal.fire(bText[lang].swal.saved, "", "success");
@@ -72,7 +71,6 @@ class DashboardProcesos extends Component {
                                                 Swal.fire(bText[lang].swal.not_saved, "", "info");
                                             }
                                         });
-                                        //props.deletePregunta(pregunta.id)
                                     }}>
                                         <FontAwesomeIcon icon={faTrashAlt} />
                                     </div>

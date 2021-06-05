@@ -1,6 +1,4 @@
-const initState = {
-
-}
+const initState = {}
 
 const preguntaReducer = (state = initState, action) => {
     switch (action.type) {

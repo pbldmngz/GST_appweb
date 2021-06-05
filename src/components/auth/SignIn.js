@@ -7,17 +7,19 @@ import Logo_GST from '../../styles/imgs/Logo-GST.png'
 import { bText } from "../../config/language";
 
 
-
 class SignIn extends Component {
+
     state = {
         email: '',
         password: ''
     }
+
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
         })
     }
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.signIn(this.state)
@@ -30,14 +32,13 @@ class SignIn extends Component {
     }
     
     render() {
+
         const {authError, auth} = this.props;
 
         console.log("This app was developed by this guy: https://github.com/pbldmngz")
         console.log("For any further changes, please send an e-mail to pablo@dominguez.contact")
 
         const lang = "spanish"
-
-        // const bText = require('../../config/language');
 
         if (auth.uid) return <Redirect to="/" />
         
@@ -46,10 +47,9 @@ class SignIn extends Component {
             <div className="">
                 <div className="padre-titulo">
                     <div className="titulo">
-                        {/* <Volver /> */}
+
                     </div>
                     <div className="titulo">
-                        {/* <h2 className="titulo">##########</h2> */}
                         <img className="logo" src={Logo_GST} alt="gst logo"></img>
                     </div>
 
@@ -58,18 +58,15 @@ class SignIn extends Component {
                 <form className="" onSubmit={this.handleSubmit}>
                     <div className="form-1 white">
                         <div className="form-2">
-                            
 
-                                <div className="input-field">
-                                    <label className="uname" htmlFor="email"></label>
-                                    <input onKeyDown={(e) => this.listenEnter(e)} type="email" id='email' placeholder={bText[lang].auth.signIn.correo} onChange={this.handleChange} />
-                                </div>
-                                <div className="input-field">
-                                    <label htmlFor="password"></label>
-                                    <input onKeyDown={(e) => this.listenEnter(e)} type="password" id='password' placeholder={bText[lang].auth.signIn.contrasena} onChange={this.handleChange} />
-                                </div>
-
-                            
+                            <div className="input-field">
+                                <label className="uname" htmlFor="email"></label>
+                                <input onKeyDown={(e) => this.listenEnter(e)} type="email" id='email' placeholder={bText[lang].auth.signIn.correo} onChange={this.handleChange} />
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="password"></label>
+                                <input onKeyDown={(e) => this.listenEnter(e)} type="password" id='password' placeholder={bText[lang].auth.signIn.contrasena} onChange={this.handleChange} />
+                            </div>
 
                         </div>
                         <div className="footer-single">

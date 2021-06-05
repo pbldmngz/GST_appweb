@@ -24,8 +24,6 @@ export const directions = {
         editar_pregunta_redirect: "/editar-pregunta/:id",
         change_password: "/change_password",
         mainproceso: "/mainproceso",
-        // pregunta_reponder: "/responder-pregunta",
-        // pregunta_reponder_redirect: "/responder-pregunta/:id"
     },
     pathName: {
         profile: "Profile",

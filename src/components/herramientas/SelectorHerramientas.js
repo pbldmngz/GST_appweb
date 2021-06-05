@@ -8,11 +8,9 @@ export default class SelectorHerramientas extends Component {
             <div>
                 <div className="padre-titulo mobile">
                     <div className="titulo destroy-on-mobile">
-                        {/* <Volver where={whereToGo} /> */}
                     </div>
                     <div className="titulo">
                         <h2 className="">
-                            {/* {text[lang].auditorias.crearAuditoria.crear_auditoria} */}
                             Herramientas##
                         </h2>
                     </div>

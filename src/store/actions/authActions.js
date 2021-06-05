@@ -1,5 +1,6 @@
 export const signIn = (credentials) => {
     return (dispatch, getState, { getFirebase }) => {
+
         const firebase = getFirebase();
 
         firebase.auth().signInWithEmailAndPassword(
@@ -16,6 +17,7 @@ export const signIn = (credentials) => {
 
 export const signOut = () => {
     return (dispatch, getState, { getFirebase }) => {
+
         const firebase = getFirebase();
 
         firebase.auth().signOut().then(() => {
@@ -26,63 +28,15 @@ export const signOut = () => {
 
 export const signUp = (newUser) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
+        
         const firebase = getFirebase();
-        const firestore = getFirestore();
+        const profile = getState().firebase.profile;
 
-        firebase.auth().createUserWithEmailAndPassword(
-            newUser.email,
-            newUser.password
-        ).then(resp => {
-            return firestore.collection('users').doc(resp.user.uid).set({
-                firstName: newUser.firstName,
-                lastName: newUser.lastName,
-                initials: newUser.firstName[0] + newUser.lastName[0],
-                userLevel: newUser.level,
-                lang: newUser.lang,
-                // Se pretende que haya Admin, A, B, C, D, E (o los necesarios)
-                // Pero por facilidades técnicas, esto se hará numéricamente
-                // Cuando ya se esté trabajando en esto puedes descomentar la userLevel
-                // Para incluír el ID del usuario en las preguntas resueltas creo que puedes 
-                // Sacarlo de .auth, no necesariamente de profile, aunque sería práctico poder sacarlo de
-                // Profile para usarlo en todos lados
+        const changeLang = firebase.functions().httpsCallable('createUser');
 
-            });
-        }).then(() => {
-            dispatch({ type: 'SIGNUP_SUCCESS' });
-        }).catch((err) => {
-            dispatch({ type: 'SIGNUP_ERROR', err });
+        changeLang({newUser: newUser, userLevel: profile.userLevel}).then((res) => {
+            console.log("Creado nuevo usuario")
         });
+
     }
 }
-
-
-// export const signUp = (newUser) => {
-//     return (dispatch, getState, { getFirebase, getFirestore }) => {
-//         const firebase = getFirebase();
-//         const firestore = getFirestore();
-
-//         firebase.auth().createUserWithEmailAndPassword(
-//             newUser.email,
-//             newUser.password
-//         ).then(resp => {
-//             return firestore.collection('users').doc(resp.user.uid).set({
-//                 firstName: newUser.firstName,
-//                 lastName: newUser.lastName,
-//                 initials: newUser.firstName[0] + newUser.lastName[0],
-//                 userLevel: newUser.level,
-//                 lang: newUser.lang,
-//                 // Se pretende que haya Admin, A, B, C, D, E (o los necesarios)
-//                 // Pero por facilidades técnicas, esto se hará numéricamente
-//                 // Cuando ya se esté trabajando en esto puedes descomentar la userLevel
-//                 // Para incluír el ID del usuario en las preguntas resueltas creo que puedes 
-//                 // Sacarlo de .auth, no necesariamente de profile, aunque sería práctico poder sacarlo de
-//                 // Profile para usarlo en todos lados
-
-//             });
-//         }).then(() => {
-//             dispatch({ type: 'SIGNUP_SUCCESS' });
-//         }).catch((err) => {
-//             dispatch({ type: 'SIGNUP_ERROR', err });
-//         });
-//     }
-// }

@@ -2,16 +2,17 @@ import React, { Component } from 'react'
 import { preguntasAuditoriaVoting } from '../../store/actions/auditoriaActions'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
-import { compose } from 'redux'
 import "react-datepicker/dist/react-datepicker.css";
 import DetallesPregunta from './DetallesPregunta';
 import Volver from '../util/Volver'
 
 import { bText } from "../../config/language";
 
+
 class DetallesPreguntasAuditoria extends Component {
+    
     state = {
-        preguntas: [], // Añadir el pCount a esto con un map
+        preguntas: [],
         auditoria: ""
     }
 
@@ -26,16 +27,11 @@ class DetallesPreguntasAuditoria extends Component {
                 preguntas: res
             })
         })
-
-
     }
 
     render() {
-        const { auth, lang } = this.props;
-        // const bText = require('../../config/language');
-        
 
-        // console.log(this.props)
+        const { auth, lang } = this.props;
 
         if (!auth.uid) return <Redirect to="/signin" />
         if (!lang) return null;
@@ -57,7 +53,6 @@ class DetallesPreguntasAuditoria extends Component {
                         {this.state.preguntas && this.state.preguntas.map(pregunta => {
                             return (
                                 <div className="" key={pregunta.id}>
-                                    {/* {console.log("login pregunta", pregunta)} */}
                                     <DetallesPregunta pregunta={pregunta} lang={lang}/>
                                 </div>
                             )
@@ -71,23 +66,16 @@ class DetallesPreguntasAuditoria extends Component {
 }
 
 const mapStateToProps = (state) => {
-    // console.log(state)
     return {
         auth: state.firebase.auth,
         lang: state.firebase.profile.lang,
-        // preguntas: state.firestore.ordered.preguntas,
     }
 }
 
 const mapDispatchtoProps = (dispatch) => {
     return {
-        // createAuditoria: (auditoria) => dispatch(createAuditoria(auditoria)),
         preguntasAuditoriaVoting: (auditoria) => dispatch(preguntasAuditoriaVoting(auditoria)),
-        // respuestaPregunta: (pregunta) => dispatch(respuestaPregunta(pregunta))
     }
 }
 
-export default compose(
-    connect(mapStateToProps, mapDispatchtoProps),
-    // firestoreConnect([{ collection: "preguntas", orderBy: ["createdAt", "asc"] }])
-)(DetallesPreguntasAuditoria)
+export default connect(mapStateToProps, mapDispatchtoProps)(DetallesPreguntasAuditoria)

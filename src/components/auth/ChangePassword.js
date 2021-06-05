@@ -8,7 +8,7 @@ import { bText } from "../../config/language";
 
 import Swal from "sweetalert2";
 
-require('firebase/auth')
+import 'firebase/auth';
 
 class ChangePassword extends Component {
 
@@ -19,10 +19,7 @@ class ChangePassword extends Component {
         return user.reauthenticateWithCredential(cred);
     }
     changePassword = (currentPassword, newPassword) => {
-        // Y no olvides el CSV
-        // https://www.npmjs.com/package/react-csv-reader
-        // https://www.npmjs.com/package/react-csv
-        // const bText = require("../../config/language");
+
         const { lang } = this.props
 
         this.reauthenticate(currentPassword)
@@ -54,7 +51,6 @@ class ChangePassword extends Component {
         });
     }
     handleChange = (e) => {
-        // console.log(e)
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -62,18 +58,15 @@ class ChangePassword extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         if (this.state.newPassword === this.state.newPasswordConfirm) {
-            // console.log("todo bien, bracias bro", this.state)
             this.changePassword(this.state.currentPassword, this.state.newPassword)
         }
         else {
-            // console.log("constraseñas no coinciden")
             this.setState({
                 authError: {
                     code: "password missmatch",
                     message: "Las contraseñas no coinciden, cámbielas y pruebe otra vez"
                 }
             })
-            // console.log("se tiró un error", this.state.authError)
         }
     }
 
@@ -89,14 +82,10 @@ class ChangePassword extends Component {
     render() {
 
         const { auth, lang } = this.props
-        // const bText = require('../../config/language');
+
         if (!auth.uid) return <Redirect to="/signin" />
 
         if (!lang) return null;
-
-        // console.log("Rednder State", this.state)
-
-
 
         return (
             <div className="">
@@ -148,8 +137,6 @@ class ChangePassword extends Component {
                     </div>
                 </div>
 
-
-
                 <div className="footer">
                     <div className="center-box">
                         <button className="cancelar" onClick={() => {
@@ -168,8 +155,6 @@ class ChangePassword extends Component {
                 <div className="footer-single">
                     {this.state.authError ? <p>{this.state.authError.message}</p> : null}
                 </div>
-
-
             </div>
         )
     }
@@ -181,6 +166,5 @@ const mapStateToProps = (state) => {
         lang: state.firebase.profile.lang,
     }
 }
-
 
 export default connect(mapStateToProps)(ChangePassword)

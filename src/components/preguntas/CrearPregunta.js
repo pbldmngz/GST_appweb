@@ -10,7 +10,9 @@ import Volver from '../util/Volver'
 
 import { bText } from "../../config/language";
 
+
 class CrearPregunta extends Component {
+
 	state = {
 		category: 4,
 		description: "",
@@ -18,29 +20,29 @@ class CrearPregunta extends Component {
 		english: "",
 		spanish: "",
 	};
+
 	handleChange = (e) => {
 		this.setState({
 			[e.target.id]: e.target.value,
 		});
 	};
+
 	handleChangeSelect = (e) => {
-		// console.log(e)
 		this.setState({
 			category: e.target.value,
 		});
 	};
+
 	handleSubmit = (e) => {
 		e.preventDefault();
-		// console.log(this.state)
 		this.props.createPregunta(this.state);
-		this.props.history.push("/preguntas"); //Esto se cambiará según el contexto
+		this.props.history.push("/preguntas");
 	};
+
 	Seguro = (e) => {
-		// const bText = require("../../config/language");
+
 		const { lang } = this.props
-		// console.log(this.cantSend())
-		// if (this.cantSend()) return null;
-		// console.log(e)
+
 		e.preventDefault();
 		Swal.fire({
 			title: bText[lang].swal.title,
@@ -49,7 +51,6 @@ class CrearPregunta extends Component {
 			denyButtonText: bText[lang].swal.cancel,
 			confirmButtonText: bText[lang].swal.save,
 		}).then((result) => {
-			//  Read more about isConfirmed, isDenied below
 			if (result.isConfirmed) {
 				this.handleSubmit(e);
 				Swal.fire(bText[lang].swal.saved, "", "success");
@@ -59,24 +60,19 @@ class CrearPregunta extends Component {
 		});
 	};
 
-
 	handleChangeSelectRP = (e) => {
-		// console.log("This is E", e)
 		this.setState({
 			reaction_plan: e.target.value,
 		});
 	};
 
-
 	render() {
+
 		const { auth, lang } = this.props;
-		// const bText = require("../../config/language");
 
 		if (!auth.uid) return <Redirect to="/signin" />;
 
 		if (!lang) return null;
-
-
 
 		return (
 			<div>
@@ -161,7 +157,6 @@ class CrearPregunta extends Component {
 }
 
 const mapStateToProps = (state) => {
-	// console.log("Status", state)
 	return {
 		auth: state.firebase.auth,
 		lang: state.firebase.profile.lang,

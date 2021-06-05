@@ -9,7 +9,9 @@ import Volver from '../util/Volver'
 import Swal from "sweetalert2";
 import { bText } from "../../config/language";
 
+
 class SignUp extends Component {
+
     state = {
         email: '',
         password: '',
@@ -18,15 +20,14 @@ class SignUp extends Component {
         level: 4,
         lang: "english",
     }
+
     handleChange = (e) => {
-        // console.log(e)
         this.setState({
             [e.target.id]: e.target.value
         })
     }
 
     handleChangeSelect = (e) => {
-        // console.log(e)
         this.setState({
             level: e.target.value
         })
@@ -39,7 +40,7 @@ class SignUp extends Component {
     }
 
     Seguro = (e) => {
-		// console.log(e)
+
 		e.preventDefault();
 		Swal.fire({
 			title: "Do you want to save the changes?",
@@ -48,7 +49,6 @@ class SignUp extends Component {
 			confirmButtonText: "Save",
 			denyButtonText: "Don't save",
 		}).then((result) => {
-			//  Read more about isConfirmed, isDenied below
 			if (result.isConfirmed) {
 				this.handleSubmit(e);
 				Swal.fire("Saved!", "", "success");
@@ -59,13 +59,11 @@ class SignUp extends Component {
 	};
 
     render() {
+
         const { auth, authError, lang, userLevel } = this.props;
         
-
         if (!auth.uid) return <Redirect to="/" />
         if (userLevel && userLevel !==0) return <Redirect to="/" />
-
-        // const bText = require('../../config/language');
 
         if (!lang) return null;
 
@@ -84,6 +82,7 @@ class SignUp extends Component {
                     <div className="form-2">
                         <form className="" onSubmit={this.Seguro}>
                             <div className="date-container">
+
                                 <div className="input-field-1-2">
                                     <label htmlFor="firstName"></label>
                                     <input
@@ -96,7 +95,7 @@ class SignUp extends Component {
                                         onChange={this.handleChange}
                                     />
                                 </div>
-                                {/* <i class="lname"></i> */}
+
                                 <div className="input-field-3-4">
                                     <label htmlFor="lastName"></label>
                                     <input
@@ -109,6 +108,7 @@ class SignUp extends Component {
                                         onChange={this.handleChange} 
                                     />
                                 </div>
+
                             </div>
                             
                             <div className="input-field">
@@ -123,6 +123,7 @@ class SignUp extends Component {
                                     onChange={this.handleChange}
                                 />
                             </div>
+
                             <div className="input-field">
                                 <label htmlFor="password"></label>
                                 <input 
@@ -135,6 +136,7 @@ class SignUp extends Component {
                                     onChange={this.handleChange} 
                                 />
                             </div>
+
                             <div className="center-box">
                                 <div className="footer-single-flex">
                                     <InputLabel id="select-level">{bText[lang].auth.signUp.capa}</InputLabel>
@@ -153,6 +155,7 @@ class SignUp extends Component {
                                     </Select>
                                 </div>
                             </div>
+
                         </form>
                     </div>
                 </div>
@@ -165,7 +168,6 @@ class SignUp extends Component {
                     {authError ? <p>{authError}</p> : null}
                 </div>
             </div>
-            
         )
     }
 }

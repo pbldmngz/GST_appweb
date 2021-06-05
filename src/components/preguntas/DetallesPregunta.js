@@ -14,17 +14,14 @@ import { bText } from "../../config/language";
 
 import PieChart from '../util/gráficas/PieChart';
 
+
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const DetallesPregunta = (props) => {
-    // const id = "igwDVTQR3LedpGldpPe8";
-    // console.log("Esto es ID", id)
-    //Esto puede servir de filtro para la búsqueda de preguntas
-    // if (!auth.uid) return <Redirect to="/signin" />
+
     const { pregunta, lang } = props
-    // const bText = require('../../config/language');
 
     const [open, setOpen] = React.useState(false);
 
@@ -58,8 +55,6 @@ const DetallesPregunta = (props) => {
         Math.round((count[0]["value"]/(count[0]["value"] + count[1]["value"]))*100)
     ) : (0);
 
-    console.log("--->", count)
-
     const justificaciones = pregunta.respuestas.map(pregunta => {
         return (
             <DialogContentText>{pregunta.justificacion}</DialogContentText>
@@ -81,33 +76,25 @@ const DetallesPregunta = (props) => {
         "###", "###", "###",
     ]);
 
-    // console.log("Esto son la respuestas:", justificaciones)
-    // const pregunta = {}
-    // const preguntaRespuestas = [] //Array de diccionarios
-    // console.log("count:", open)
-    // { console.log("login pregunta --> DePre", pregunta) }
     if (pregunta.createdAt) {
         return (
             <div className="new-class">
                 <div className="tarjeta-pregunta">
                     <div className="arroz-chino only2row">
                         <div className="new-class new-class-2">
-                            {/* {console.log("This is pregunta", pregunta)} */}
                             <p className="card-title"><b>{pregunta[lang]}</b></p>
                             <p className="card-title justify-text "><b>{bText[lang].preguntas.detallesPregunta.descripcion}: </b>{pregunta.description}</p>
                             <p className="card-title"><b>{bText[lang].preguntas.detallesPregunta.categoria}: </b>{categoria[pregunta.category]}</p>
                             <p className="card-title"><b>{bText[lang].preguntas.detallesPregunta.plan_reaccion}: </b>{reaction[pregunta.reaction_plan]}</p>
-                            {/* <p className="card-title"><b>{bText[lang].preguntas.detallesPregunta.creado_por}: </b>{pregunta.createdBy}</p>
-                            <p className="card-title"><b>{bText[lang].preguntas.detallesPregunta.creado}: </b>{moment(pregunta.createdAt.toDate()).fromNow()}</p> */}
                         </div>
                         <div className="new-parent">
                             <div className="graph-align">
                                 <PieChart data={count ? count : []} radius={0.5} innerText={actualText + "%"}/>
                             </div>
                             <div className="new-class-3">
-
-                                    <button className="aceptar responder" onClick={handleClickOpen}>{bText[lang].preguntas.detallesPregunta.ver_respuestas}</button>
-
+                                    <button className="aceptar responder" onClick={handleClickOpen}>
+                                        {bText[lang].preguntas.detallesPregunta.ver_respuestas}
+                                    </button>
                             </div>
                         </div>
                         
@@ -144,16 +131,12 @@ const DetallesPregunta = (props) => {
 }
 
 const mapStateToProps = (state) => {
-    // const id = ownProps.match.params.id;
-    // const preguntas = state.firestore.data.preguntas;
-    // const pregunta = preguntas ? preguntas[id] : null;
     return {
         // pregunta: pregunta,
         auth: state.firebase.auth,
         lang: state.firebase.profile.lang,
     }
 }
-
 
 export default compose(
     connect(mapStateToProps),

@@ -22,19 +22,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function TarjetaPregunta(props) {
+
 	var { path } = directions
-	// Se tienen que añadir:
-	// - Añadir botones para borrar/editar una pregunta, con un "¿estás seguro?"
-	// Pueden hacerlo haciendo unos divs | ----- | - | flex, no soy el experto
+
 	const { pregunta, userLevel, lang } = props;
 
-	// if (!lang) return null;
-
-	// const bText = require("../../config/language");
-
-	// console.log("userLevel on tarjeta", userLevel)
-
-	// En cierto modo, ni siquiera tiene caso esto, los usuarios normales no llegarían aquí
 	const botones =
 		userLevel === 0 ? (
 			<div className="button-group">
@@ -54,7 +46,6 @@ export default function TarjetaPregunta(props) {
 								denyButtonText: "Don't save",
 								confirmButtonText: "Save",
 							}).then((result) => {
-								//  Read more about isConfirmed, isDenied below
 								if (result.isConfirmed) {
 									props.deletePregunta(pregunta.id);
 									Swal.fire("Saved!", "", "success");
@@ -62,7 +53,6 @@ export default function TarjetaPregunta(props) {
 									Swal.fire("Changes are not saved", "", "info");
 								}
 							});
-							//props.deletePregunta(pregunta.id)
 						}}
 					>
 						<FontAwesomeIcon icon={faTrashAlt} />
@@ -71,30 +61,30 @@ export default function TarjetaPregunta(props) {
 			</div>
 		) : null;
 
-		const categoria = {
-			1: "A",
-			2: "B",
-			3: "C",
-			4: "D",
-		}
+	const categoria = {
+		1: "A",
+		2: "B",
+		3: "C",
+		4: "D",
+	}
 
-		const react_plan = {
-			0: bText[lang].preguntas.crearPregunta.fix,
-			1: bText[lang].preguntas.crearPregunta.contramedidas_temporales,
-			2: bText[lang].preguntas.crearPregunta.parar_produccion,
-		}
+	const react_plan = {
+		0: bText[lang].preguntas.crearPregunta.fix,
+		1: bText[lang].preguntas.crearPregunta.contramedidas_temporales,
+		2: bText[lang].preguntas.crearPregunta.parar_produccion,
+	}
 
-		const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = React.useState(false);
 
-		const handleClickOpen = () => {
-			setOpen(true);
-		};
+	const handleClickOpen = () => {
+		setOpen(true);
+	};
 
-		const handleClose = () => {
-			setOpen(false);
-		};
+	const handleClose = () => {
+		setOpen(false);
+	};
 
-		const maxQuestionLength = 60;
+	const maxQuestionLength = 60;
 
 	return (
 		<div className="">

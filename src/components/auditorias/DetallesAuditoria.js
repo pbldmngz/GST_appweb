@@ -8,19 +8,16 @@ import { Redirect } from 'react-router';
 import { bText } from "../../config/language";
 
 const DetallesAuditoria = (props) => {
+    
     const {auditoria, auth, lang} = props
-    // const bText = require('../../config/language');
-    if (!lang) return null;
-    // Se tienen que generar las preguntas en base al arr[] de ID's, 
-    // esto debería estar en auditoria.preguntas
 
-    //Esto puede servir de filtro para la búsqueda de preguntas
+    if (!lang) return null;
+
     if (!auth.uid) return <Redirect to="/signin" />
     
     if (auditoria) {
         return (
             <div className="container">
-                {/* {console.log("listo", text, lang)} */}
                 <div className="section">
                     <div className="card x-depth-0" key={auditoria.id}>
                         <div className="card-content grey-text text-darken-3">
@@ -40,7 +37,6 @@ const DetallesAuditoria = (props) => {
     } else {
         return (
             <div className="container center">
-            {console.log("cargando", bText, lang)}
                 {(bText[lang]) ? <p>{bText[lang].cargando}</p> : null}
             </div>
         )

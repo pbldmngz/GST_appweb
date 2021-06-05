@@ -9,19 +9,13 @@ import { deletePregunta, editPregunta } from '../../store/actions/preguntaAction
 import Volver from '../util/Volver'
 
 import { bText } from "../../config/language";
-// CSS class "container" centers content
 
-// Para cuando se esté creado una auditoría debería 
-// crear un componente para buscar la pregunta por texto
-
-// Por algún motivo, al hacer click en una pregunta 
-// no me lleva al componente específico pero si cambia el link
 
 class DashboardPreguntas extends Component {
+
     render() {
+
         const { preguntas, auth, userLevel, lang } = this.props
-        // console.log(userLevel)
-        // const bText = require("../../config/language");
 
         if (!auth.uid) return <Redirect to="/signin" />
         if (userLevel !== 0) return <Redirect to="/" />
@@ -38,11 +32,6 @@ class DashboardPreguntas extends Component {
                         <div className="titulo">
                             <h2>{bText[lang].preguntas.dashboardPreguntas.creacion_preguntas}</h2>
                         </div>
-                        {/* <div className="titulo">
-                            <NavLink to={path.crear_pregunta}>
-                                <button className="boton-arriba">New Question</button>
-                            </NavLink>
-                        </div> */}
                     </div>
                     <div className="">
                         <Preguntas 
@@ -67,7 +56,6 @@ class DashboardPreguntas extends Component {
 }
 
 const mapStateToProps = (state) => {
-    //console.log(state)
     return {
         preguntas: state.firestore.ordered.preguntas,
         auth: state.firebase.auth,
