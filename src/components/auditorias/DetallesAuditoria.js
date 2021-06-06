@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
-import moment from 'moment'
+import moment from "moment/min/moment-with-locales";
 import { Redirect } from 'react-router';
 
 import { bText } from "../../config/language";
@@ -14,6 +14,8 @@ const DetallesAuditoria = (props) => {
     if (!lang) return null;
 
     if (!auth.uid) return <Redirect to="/signin" />
+
+    moment.locale(bText[lang].locale);
     
     if (auditoria) {
         return (

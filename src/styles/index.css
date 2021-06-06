@@ -1080,6 +1080,10 @@ input{
   font-weight: bold;
 }
 
+.dialog-strong {
+  color: black !important;
+}
+
 .dialog-p {
   font-weight: lighter;
 }

@@ -62,10 +62,10 @@ const DetallesPregunta = (props) => {
     })
 
     const categoria = {
-        1: "A",
-        2: "B",
-        3: "C",
-        4: "D",
+        1: "D",
+        2: "C",
+        3: "B",
+        4: "A",
     }
 
     const reaction = (lang) ? ([
@@ -108,7 +108,7 @@ const DetallesPregunta = (props) => {
                     aria-labelledby="alert-dialog-slide-title"
                     aria-describedby="alert-dialog-slide-description"
                 >
-                    <DialogTitle id="alert-dialog-slide-title">{"Justificaciones a esta pregunta"}</DialogTitle>
+                    <DialogTitle id="alert-dialog-slide-title">{bText[lang].preguntas.detallesPregunta.ver_respuestas}</DialogTitle>
                     <DialogContent>
                         {justificaciones}
                     </DialogContent>

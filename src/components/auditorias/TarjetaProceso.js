@@ -28,7 +28,7 @@ export default function TarjetaProceso(props) {
         </div>
     );
 
-    moment.locale(bText[lang].locale)
+    moment.locale(bText[lang].locale);
 
     const date = auditoria.fecha_fin ? <p className="grey-text">{bText[lang].auditorias.tarjetaAuditoria.fecha_limite}: {moment(auditoria.fecha_fin.toDate()).fromNow()}</p> : null
     

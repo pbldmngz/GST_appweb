@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+import moment from "moment/min/moment-with-locales";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -86,6 +86,8 @@ export default function TarjetaPregunta(props) {
 
 	const maxQuestionLength = 60;
 
+	moment.locale(bText[lang].locale);
+
 	return (
 		<div className="">
 			<div className="tarjeta-pregunta" key={pregunta.id}>
@@ -127,34 +129,24 @@ export default function TarjetaPregunta(props) {
 
 				<DialogContent className="dialog-content">
 
-					<DialogContentText>
-						<p className="dialog-p">
-							<b>{bText[lang].preguntas.detallesPregunta.descripcion}: </b>{pregunta.description}
-						</p>
+					<DialogContentText className="dialog-strong">
+						<b>{bText[lang].preguntas.detallesPregunta.descripcion}: </b>{pregunta.description}
 					</DialogContentText>
 
-					<DialogContentText>
-						<p className="dialog-p">
-							<b>{bText[lang].preguntas.detallesPregunta.categoria}: </b>{categoria[pregunta.category]}
-						</p>
+					<DialogContentText className="dialog-strong">
+						<b>{bText[lang].preguntas.detallesPregunta.categoria}: </b>{categoria[pregunta.category]}
 					</DialogContentText>
 
-					<DialogContentText>
-						<p className="dialog-p">
-							<b>{bText[lang].preguntas.detallesPregunta.plan_reaccion}: </b>{react_plan[pregunta.reaction_plan]}
-						</p>
+					<DialogContentText className="dialog-strong">
+						<b>{bText[lang].preguntas.detallesPregunta.plan_reaccion}: </b>{react_plan[pregunta.reaction_plan]}
 					</DialogContentText>
 
-					<DialogContentText>
-						<p className="dialog-p">
-							<b>{bText[lang].preguntas.detallesPregunta.creado_por}: </b>{pregunta.createdBy}
-						</p>
+					<DialogContentText className="dialog-strong">
+						<b>{bText[lang].preguntas.detallesPregunta.creado_por}: </b>{pregunta.createdBy}
 					</DialogContentText>
 
-					<DialogContentText>
-						<p className="dialog-p">
-							<b>{bText[lang].preguntas.detallesPregunta.creado}: </b>{moment(pregunta.createdAt.toDate()).fromNow()}
-						</p>
+					<DialogContentText className="dialog-strong">
+						<b>{bText[lang].preguntas.detallesPregunta.creado}: </b>{moment(pregunta.createdAt.toDate()).fromNow()}
 					</DialogContentText>
 
 				</DialogContent>
